@@ -1,0 +1,59 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  customer_id: MyString
+  first_name: MyString
+  last_name: MyString
+  class: MyString
+  room: MyString
+  building: MyString
+  address1: MyString
+  address2: MyString
+  city: MyString
+  county: MyString
+  phone: MyString
+  email: MyString
+  password: MyString
+  credit_card: MyString
+  credit_card_type_id: 
+  card_exp_mo: 
+  card_exp_yr: 
+  billing_address: MyString
+  billing_city: MyString
+  billing_region: MyString
+  billing_postal_code: MyString
+  billing_country: MyString
+  shipping_address: MyString
+  shipping_city: MyString
+  shipping_region: MyString
+  shipping_postal_code: MyString
+  shipping_country: MyString
+
+two:
+  customer_id: MyString
+  first_name: MyString
+  last_name: MyString
+  class: MyString
+  room: MyString
+  building: MyString
+  address1: MyString
+  address2: MyString
+  city: MyString
+  county: MyString
+  phone: MyString
+  email: MyString
+  password: MyString
+  credit_card: MyString
+  credit_card_type_id: 
+  card_exp_mo: 
+  card_exp_yr: 
+  billing_address: MyString
+  billing_city: MyString
+  billing_region: MyString
+  billing_postal_code: MyString
+  billing_country: MyString
+  shipping_address: MyString
+  shipping_city: MyString
+  shipping_region: MyString
+  shipping_postal_code: MyString
+  shipping_country: MyString

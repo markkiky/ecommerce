@@ -1,0 +1,2 @@
+json.extract! customer, :id, :customer_id, :first_name, :last_name, :class, :room, :building, :address1, :address2, :city, :county, :phone, :email, :password, :credit_card, :credit_card_type_id, :card_exp_mo, :card_exp_yr, :billing_address, :billing_city, :billing_region, :billing_postal_code, :billing_country, :shipping_address, :shipping_city, :shipping_region, :shipping_postal_code, :shipping_country, :created_at, :updated_at
+json.url customer_url(customer, format: :json)
