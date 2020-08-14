@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  devise_for :admins
+
+  devise_for :admins , :controllers => { :registrations => 'registrations'}, :path => "/admins", :path_names => { :sign_in => "login"}
   resources :order_items
   resources :orders
   resources :categories
