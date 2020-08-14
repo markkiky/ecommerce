@@ -8,12 +8,14 @@ Rails.application.routes.draw do
   # devise_for :customers
   resources :customers
   resources :homes
-  devise_for :customers
+  devise_for :customers, :path => "users"
   root "homes#index"
   delete '/logout', to: 'sessions#destroy'
+  
+  get '/users', to: "devise/registrations#new"
 
-
-  get '/admin/dashboard', to: "admins#dashboard"
+  get '/admin/dashboard', to: "admins#dashboard", as: :admin_dashboard
+  
   # Twitter path
   get '/auth/:provider/callback', to: 'sessions#create'
 
