@@ -10,7 +10,6 @@
     <meta name="author" content="pixelstrap">
     <link rel="icon" href="../resources/images/dashboard/favicon.png" type="image/x-icon">
     <link rel="shortcut icon" href="../resources/images/dashboard/favicon.png" type="image/x-icon">
-    <title>Multikart - Premium Admin Template</title>
 
     <!-- Google font-->
     <link href="https://fonts.googleapis.com/css?family=Work+Sans:100,200,300,400,500,600,700,800,900" rel="stylesheet">
@@ -38,8 +37,6 @@
     <link rel="stylesheet" type="text/css" href="../resources/css/admin.css">
 </head>
 
-<body>
-
 <!-- page-wrapper Start-->
 <div class="page-wrapper">
 
@@ -47,7 +44,7 @@
     <div class="page-main-header">
         <div class="main-header-right row">
             <div class="main-header-left d-lg-none">
-                <div class="logo-wrapper"><a href="index.html"><img class="blur-up lazyloaded" src="../resources/images/dashboard/multikart-logo.png" alt=""></a></div>
+                <div class="logo-wrapper"><%= image_tag "full-color.png", :class => "blur-up lazyloaded", :width => "179px", :height => "34px", :alt => "logo" %></div>
             </div>
             <div class="mobile-sidebar">
                 <div class="media-body text-right switch-sm">
@@ -65,7 +62,8 @@
                     </li>
                     <li><a class="text-dark" href="#!" onclick="javascript:toggleFullScreen()"><i data-feather="maximize-2"></i></a></li>
                     <li class="onhover-dropdown"><a class="txt-dark" href="#">
-                        <h6>EN</h6></a>
+                            <h6>EN</h6>
+                        </a>
                         <ul class="language-dropdown onhover-show-div p-20">
                             <li><a href="#" data-lng="en"><i class="flag-icon flag-icon-is"></i> English</a></li>
                             <li><a href="#" data-lng="es"><i class="flag-icon flag-icon-um"></i> Spanish</a></li>
@@ -113,7 +111,7 @@
                             <li><a href="#"><i data-feather="mail"></i>Inbox</a></li>
                             <li><a href="#"><i data-feather="lock"></i>Lock Screen</a></li>
                             <li><a href="#"><i data-feather="settings"></i>Settings</a></li>
-                            <li><a href="#"><i data-feather="log-out"></i>Logout</a></li>
+                            <li><%= link_to destroy_admin_session_path, method: :delete do %> <i data-feather="log-out"></i>Logout<% end %></li>
                         </ul>
                     </li>
                 </ul>
@@ -129,7 +127,7 @@
         <!-- Page Sidebar Start-->
         <div class="page-sidebar">
             <div class="main-header-left d-none d-lg-block">
-                <div class="logo-wrapper"><a href="index.html"><img class="blur-up lazyloaded" src="../resources/images/dashboard/multikart-logo.png" alt=""></a></div>
+                <div class="logo-wrapper"><%= image_tag  "full-color.png", :class => "blur-up lazyloaded", :width => "179px", :height => "34px", :alt => "logo" %></div>
             </div>
             <div class="sidebar custom-scrollbar">
                 <div class="sidebar-user text-center">
@@ -212,12 +210,12 @@
                         </ul>
                     </li>
                     <li><a class="sidebar-header" href="reports.html"><i data-feather="bar-chart"></i><span>Reports</span></a></li>
-                    <li><a class="sidebar-header" href=""><i data-feather="settings" ></i><span>Settings</span><i class="fa fa-angle-right pull-right"></i></a>
+                    <li><a class="sidebar-header" href=""><i data-feather="settings"></i><span>Settings</span><i class="fa fa-angle-right pull-right"></i></a>
                         <ul class="sidebar-submenu">
                             <li><a href="profile.html"><i class="fa fa-circle"></i>Profile</a></li>
                         </ul>
                     </li>
-<li><a class="sidebar-header" href="invoice.html"><i data-feather="archive"></i><span>Invoice</span></a>
+                    <li><a class="sidebar-header" href="invoice.html"><i data-feather="archive"></i><span>Invoice</span></a>
                     </li>
                     <li><a class="sidebar-header" href="login.html"><i data-feather="log-in"></i><span>Login</span></a>
                     </li>
@@ -429,44 +427,44 @@
                                 <div class="user-status table-responsive latest-order-table">
                                     <table class="table table-bordernone">
                                         <thead>
-                                        <tr>
-                                            <th scope="col">Order ID</th>
-                                            <th scope="col">Order Total</th>
-                                            <th scope="col">Payment Method</th>
-                                            <th scope="col">Status</th>
-                                        </tr>
+                                            <tr>
+                                                <th scope="col">Order ID</th>
+                                                <th scope="col">Order Total</th>
+                                                <th scope="col">Payment Method</th>
+                                                <th scope="col">Status</th>
+                                            </tr>
                                         </thead>
                                         <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td class="digits">$120.00</td>
-                                            <td class="font-danger">Bank Transfers</td>
-                                            <td class="digits">On Way</td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td class="digits">$90.00</td>
-                                            <td class="font-secondary">Ewallets</td>
-                                            <td class="digits">Delivered</td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td class="digits">$240.00</td>
-                                            <td class="font-warning">Cash</td>
-                                            <td class="digits">Delivered</td>
-                                        </tr>
-                                        <tr>
-                                            <td>4</td>
-                                            <td class="digits">$120.00</td>
-                                            <td class="font-primary">Direct Deposit</td>
-                                            <td class="digits">$6523</td>
-                                        </tr>
-                                        <tr>
-                                            <td>5</td>
-                                            <td class="digits">$50.00</td>
-                                            <td class="font-primary">Bank Transfers</td>
-                                            <td class="digits">Delivered</td>
-                                        </tr>
+                                            <tr>
+                                                <td>1</td>
+                                                <td class="digits">$120.00</td>
+                                                <td class="font-danger">Bank Transfers</td>
+                                                <td class="digits">On Way</td>
+                                            </tr>
+                                            <tr>
+                                                <td>2</td>
+                                                <td class="digits">$90.00</td>
+                                                <td class="font-secondary">Ewallets</td>
+                                                <td class="digits">Delivered</td>
+                                            </tr>
+                                            <tr>
+                                                <td>3</td>
+                                                <td class="digits">$240.00</td>
+                                                <td class="font-warning">Cash</td>
+                                                <td class="digits">Delivered</td>
+                                            </tr>
+                                            <tr>
+                                                <td>4</td>
+                                                <td class="digits">$120.00</td>
+                                                <td class="font-primary">Direct Deposit</td>
+                                                <td class="digits">$6523</td>
+                                            </tr>
+                                            <tr>
+                                                <td>5</td>
+                                                <td class="digits">$50.00</td>
+                                                <td class="font-primary">Bank Transfers</td>
+                                                <td class="digits">Delivered</td>
+                                            </tr>
                                         </tbody>
                                     </table>
                                     <a href="order.html" class="btn btn-primary">View All Orders</a>
@@ -708,56 +706,56 @@
                                 <div class="user-status table-responsive products-table">
                                     <table class="table table-bordernone mb-0">
                                         <thead>
-                                        <tr>
-                                            <th scope="col">Details</th>
-                                            <th scope="col">Quantity</th>
-                                            <th scope="col">Status</th>
-                                            <th scope="col">Price</th>
-                                        </tr>
+                                            <tr>
+                                                <th scope="col">Details</th>
+                                                <th scope="col">Quantity</th>
+                                                <th scope="col">Status</th>
+                                                <th scope="col">Price</th>
+                                            </tr>
                                         </thead>
                                         <tbody>
-                                        <tr>
-                                            <td>Simply dummy text of the printing</td>
-                                            <td class="digits">1</td>
-                                            <td class="font-primary">Pending</td>
-                                            <td class="digits">$6523</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Long established</td>
-                                            <td class="digits">5</td>
-                                            <td class="font-secondary">Cancle</td>
-                                            <td class="digits">$6523</td>
-                                        </tr>
-                                        <tr>
-                                            <td>sometimes by accident</td>
-                                            <td class="digits">10</td>
-                                            <td class="font-secondary">Cancle</td>
-                                            <td class="digits">$6523</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Classical Latin literature</td>
-                                            <td class="digits">9</td>
-                                            <td class="font-primary">Return</td>
-                                            <td class="digits">$6523</td>
-                                        </tr>
-                                        <tr>
-                                            <td>keep the site on the Internet</td>
-                                            <td class="digits">8</td>
-                                            <td class="font-primary">Pending</td>
-                                            <td class="digits">$6523</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Molestiae consequatur</td>
-                                            <td class="digits">3</td>
-                                            <td class="font-secondary">Cancle</td>
-                                            <td class="digits">$6523</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Pain can procure</td>
-                                            <td class="digits">8</td>
-                                            <td class="font-primary">Return</td>
-                                            <td class="digits">$6523</td>
-                                        </tr>
+                                            <tr>
+                                                <td>Simply dummy text of the printing</td>
+                                                <td class="digits">1</td>
+                                                <td class="font-primary">Pending</td>
+                                                <td class="digits">$6523</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Long established</td>
+                                                <td class="digits">5</td>
+                                                <td class="font-secondary">Cancle</td>
+                                                <td class="digits">$6523</td>
+                                            </tr>
+                                            <tr>
+                                                <td>sometimes by accident</td>
+                                                <td class="digits">10</td>
+                                                <td class="font-secondary">Cancle</td>
+                                                <td class="digits">$6523</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Classical Latin literature</td>
+                                                <td class="digits">9</td>
+                                                <td class="font-primary">Return</td>
+                                                <td class="digits">$6523</td>
+                                            </tr>
+                                            <tr>
+                                                <td>keep the site on the Internet</td>
+                                                <td class="digits">8</td>
+                                                <td class="font-primary">Pending</td>
+                                                <td class="digits">$6523</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Molestiae consequatur</td>
+                                                <td class="digits">3</td>
+                                                <td class="font-secondary">Cancle</td>
+                                                <td class="digits">$6523</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Pain can procure</td>
+                                                <td class="digits">8</td>
+                                                <td class="font-primary">Return</td>
+                                                <td class="digits">$6523</td>
+                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>
@@ -844,104 +842,104 @@
                                 <div class="user-status table-responsive products-table">
                                     <table class="table table-bordernone mb-0">
                                         <thead>
-                                        <tr>
-                                            <th scope="col">Name</th>
-                                            <th scope="col">Designation</th>
-                                            <th scope="col">Skill Level</th>
-                                            <th scope="col">Experience</th>
-                                        </tr>
+                                            <tr>
+                                                <th scope="col">Name</th>
+                                                <th scope="col">Designation</th>
+                                                <th scope="col">Skill Level</th>
+                                                <th scope="col">Experience</th>
+                                            </tr>
                                         </thead>
                                         <tbody>
-                                        <tr>
-                                            <td class="bd-t-none u-s-tb">
-                                                <div class="align-middle image-sm-size"><img class="img-radius align-top m-r-15 rounded-circle blur-up lazyloaded" src="../resources/images/dashboard/user2.jpg" alt="" data-original-title="" title="">
-                                                    <div class="d-inline-block">
-                                                        <h6>John Deo <span class="text-muted digits">(14+ Online)</span></h6>
+                                            <tr>
+                                                <td class="bd-t-none u-s-tb">
+                                                    <div class="align-middle image-sm-size"><img class="img-radius align-top m-r-15 rounded-circle blur-up lazyloaded" src="../resources/images/dashboard/user2.jpg" alt="" data-original-title="" title="">
+                                                        <div class="d-inline-block">
+                                                            <h6>John Deo <span class="text-muted digits">(14+ Online)</span></h6>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </td>
-                                            <td>Designer</td>
-                                            <td>
-                                                <div class="progress-showcase">
-                                                    <div class="progress" style="height: 8px;">
-                                                        <div class="progress-bar bg-primary" role="progressbar" style="width: 30%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                                </td>
+                                                <td>Designer</td>
+                                                <td>
+                                                    <div class="progress-showcase">
+                                                        <div class="progress" style="height: 8px;">
+                                                            <div class="progress-bar bg-primary" role="progressbar" style="width: 30%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </td>
-                                            <td class="digits">2 Year</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="bd-t-none u-s-tb">
-                                                <div class="align-middle image-sm-size"><img class="img-radius align-top m-r-15 rounded-circle blur-up lazyloaded" src="../resources/images/dashboard/user1.jpg" alt="" data-original-title="" title="">
-                                                    <div class="d-inline-block">
-                                                        <h6>Holio Mako <span class="text-muted digits">(250+ Online)</span></h6>
+                                                </td>
+                                                <td class="digits">2 Year</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="bd-t-none u-s-tb">
+                                                    <div class="align-middle image-sm-size"><img class="img-radius align-top m-r-15 rounded-circle blur-up lazyloaded" src="../resources/images/dashboard/user1.jpg" alt="" data-original-title="" title="">
+                                                        <div class="d-inline-block">
+                                                            <h6>Holio Mako <span class="text-muted digits">(250+ Online)</span></h6>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </td>
-                                            <td>Developer</td>
-                                            <td>
-                                                <div class="progress-showcase">
-                                                    <div class="progress" style="height: 8px;">
-                                                        <div class="progress-bar bg-secondary" role="progressbar" style="width: 70%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                                </td>
+                                                <td>Developer</td>
+                                                <td>
+                                                    <div class="progress-showcase">
+                                                        <div class="progress" style="height: 8px;">
+                                                            <div class="progress-bar bg-secondary" role="progressbar" style="width: 70%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </td>
-                                            <td class="digits">3 Year</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="bd-t-none u-s-tb">
-                                                <div class="align-middle image-sm-size"><img class="img-radius align-top m-r-15 rounded-circle blur-up lazyloaded" src="../resources/images/dashboard/man.png" alt="" data-original-title="" title="">
-                                                    <div class="d-inline-block">
-                                                        <h6>Mohsib lara<span class="text-muted digits">(99+ Online)</span></h6>
+                                                </td>
+                                                <td class="digits">3 Year</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="bd-t-none u-s-tb">
+                                                    <div class="align-middle image-sm-size"><img class="img-radius align-top m-r-15 rounded-circle blur-up lazyloaded" src="../resources/images/dashboard/man.png" alt="" data-original-title="" title="">
+                                                        <div class="d-inline-block">
+                                                            <h6>Mohsib lara<span class="text-muted digits">(99+ Online)</span></h6>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </td>
-                                            <td>Tester</td>
-                                            <td>
-                                                <div class="progress-showcase">
-                                                    <div class="progress" style="height: 8px;">
-                                                        <div class="progress-bar bg-primary" role="progressbar" style="width: 60%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                                </td>
+                                                <td>Tester</td>
+                                                <td>
+                                                    <div class="progress-showcase">
+                                                        <div class="progress" style="height: 8px;">
+                                                            <div class="progress-bar bg-primary" role="progressbar" style="width: 60%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </td>
-                                            <td class="digits">5 Month</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="bd-t-none u-s-tb">
-                                                <div class="align-middle image-sm-size"><img class="img-radius align-top m-r-15 rounded-circle blur-up lazyloaded" src="../resources/images/dashboard/user.png" alt="" data-original-title="" title="">
-                                                    <div class="d-inline-block">
-                                                        <h6>Hileri Soli <span class="text-muted digits">(150+ Online)</span></h6>
+                                                </td>
+                                                <td class="digits">5 Month</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="bd-t-none u-s-tb">
+                                                    <div class="align-middle image-sm-size"><img class="img-radius align-top m-r-15 rounded-circle blur-up lazyloaded" src="../resources/images/dashboard/user.png" alt="" data-original-title="" title="">
+                                                        <div class="d-inline-block">
+                                                            <h6>Hileri Soli <span class="text-muted digits">(150+ Online)</span></h6>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </td>
-                                            <td>Designer</td>
-                                            <td>
-                                                <div class="progress-showcase">
-                                                    <div class="progress" style="height: 8px;">
-                                                        <div class="progress-bar bg-secondary" role="progressbar" style="width: 30%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                                </td>
+                                                <td>Designer</td>
+                                                <td>
+                                                    <div class="progress-showcase">
+                                                        <div class="progress" style="height: 8px;">
+                                                            <div class="progress-bar bg-secondary" role="progressbar" style="width: 30%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </td>
-                                            <td class="digits">3 Month</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="bd-t-none u-s-tb">
-                                                <div class="align-middle image-sm-size"><img class="img-radius align-top m-r-15 rounded-circle blur-up lazyloaded" src="../resources/images/dashboard/designer.jpg" alt="" data-original-title="" title="">
-                                                    <div class="d-inline-block">
-                                                        <h6>Pusiz bia <span class="text-muted digits">(14+ Online)</span></h6>
+                                                </td>
+                                                <td class="digits">3 Month</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="bd-t-none u-s-tb">
+                                                    <div class="align-middle image-sm-size"><img class="img-radius align-top m-r-15 rounded-circle blur-up lazyloaded" src="../resources/images/dashboard/designer.jpg" alt="" data-original-title="" title="">
+                                                        <div class="d-inline-block">
+                                                            <h6>Pusiz bia <span class="text-muted digits">(14+ Online)</span></h6>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </td>
-                                            <td>Designer</td>
-                                            <td>
-                                                <div class="progress-showcase">
-                                                    <div class="progress" style="height: 8px;">
-                                                        <div class="progress-bar bg-primary" role="progressbar" style="width: 90%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                                </td>
+                                                <td>Designer</td>
+                                                <td>
+                                                    <div class="progress-showcase">
+                                                        <div class="progress" style="height: 8px;">
+                                                            <div class="progress-bar bg-primary" role="progressbar" style="width: 90%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </td>
-                                            <td class="digits">5 Year</td>
-                                        </tr>
+                                                </td>
+                                                <td class="digits">5 Year</td>
+                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>
@@ -1336,6 +1334,3 @@
 
 <!--script admin-->
 <script src="../resources/js/admin-script.js"></script>
-
-</body>
-</html>

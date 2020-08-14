@@ -14,8 +14,13 @@ Rails.application.routes.draw do
   
   get '/users', to: "devise/registrations#new"
 
+<<<<<<< Updated upstream
   get '/admin/dashboard', to: "admins#dashboard", as: :admin_dashboard
   
+=======
+
+  get '/admin/dashboard', to: "admins#dashboard", as: :admin_dashboard
+>>>>>>> Stashed changes
   # Twitter path
   get '/auth/:provider/callback', to: 'sessions#create'
 
