@@ -1,0 +1,147 @@
+<%= form_with(model: product, local: true) do |form| %>
+  <% if product.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(product.errors.count, "error") %> prohibited this product from being saved:</h2>
+
+      <ul>
+        <% product.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :product_id %>
+    <%= form.text_field :product_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :sku %>
+    <%= form.text_field :sku %>
+  </div>
+
+  <div class="field">
+    <%= form.label :id_sku %>
+    <%= form.text_field :id_sku %>
+  </div>
+
+  <div class="field">
+    <%= form.label :vendor_product_id %>
+    <%= form.text_field :vendor_product_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :product_name %>
+    <%= form.text_field :product_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :product_description %>
+    <%= form.text_area :product_description %>
+  </div>
+
+  <div class="field">
+    <%= form.label :supplier_id %>
+    <%= form.text_field :supplier_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :category_id %>
+    <%= form.text_field :category_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :quantity_per_unit %>
+    <%= form.text_field :quantity_per_unit %>
+  </div>
+
+  <div class="field">
+    <%= form.label :price %>
+    <%= form.text_field :price %>
+  </div>
+
+  <div class="field">
+    <%= form.label :unit_price %>
+    <%= form.text_field :unit_price %>
+  </div>
+
+  <div class="field">
+    <%= form.label :msrp %>
+    <%= form.text_field :msrp %>
+  </div>
+
+  <div class="field">
+    <%= form.label :available_size %>
+    <%= form.text_field :available_size %>
+  </div>
+
+  <div class="field">
+    <%= form.label :available_colors %>
+    <%= form.text_field :available_colors %>
+  </div>
+
+  <div class="field">
+    <%= form.label :size %>
+    <%= form.text_field :size %>
+  </div>
+
+  <div class="field">
+    <%= form.label :color %>
+    <%= form.text_field :color %>
+  </div>
+
+  <div class="field">
+    <%= form.label :discount %>
+    <%= form.text_field :discount %>
+  </div>
+
+  <div class="field">
+    <%= form.label :unit_weight %>
+    <%= form.text_field :unit_weight %>
+  </div>
+
+  <div class="field">
+    <%= form.label :units_in_stock %>
+    <%= form.text_field :units_in_stock %>
+  </div>
+
+  <div class="field">
+    <%= form.label :units_on_order %>
+    <%= form.text_field :units_on_order %>
+  </div>
+
+  <div class="field">
+    <%= form.label :reorder_level %>
+    <%= form.text_field :reorder_level %>
+  </div>
+
+  <div class="field">
+    <%= form.label :product_available %>
+    <%= form.text_field :product_available %>
+  </div>
+
+  <div class="field">
+    <%= form.label :discount_available %>
+    <%= form.text_field :discount_available %>
+  </div>
+
+  <div class="field">
+    <%= form.label :current_order %>
+    <%= form.text_field :current_order %>
+  </div>
+
+  <div class="field">
+    <%= form.label :note %>
+    <%= form.text_field :note %>
+  </div>
+
+  <div class="field">
+    <%= form.label :ranking %>
+    <%= form.text_field :ranking %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

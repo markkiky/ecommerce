@@ -1,0 +1,33 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  order_id: MyString
+  product_id: MyString
+  order_number: MyString
+  price: 9.99
+  quantity: 1
+  discount: MyString
+  total: 9.99
+  id_sku: MyString
+  size: MyString
+  color: MyString
+  fulfilled: false
+  ship_date: 2020-08-14 13:09:52
+  order_item_id: MyString
+  bill_date: 2020-08-14 13:09:52
+
+two:
+  order_id: MyString
+  product_id: MyString
+  order_number: MyString
+  price: 9.99
+  quantity: 1
+  discount: MyString
+  total: 9.99
+  id_sku: MyString
+  size: MyString
+  color: MyString
+  fulfilled: false
+  ship_date: 2020-08-14 13:09:52
+  order_item_id: MyString
+  bill_date: 2020-08-14 13:09:52

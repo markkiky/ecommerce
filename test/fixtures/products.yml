@@ -1,0 +1,57 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  product_id: MyString
+  sku: MyString
+  id_sku: MyString
+  vendor_product_id: MyString
+  product_name: MyString
+  product_description: MyText
+  supplier_id: MyString
+  category_id: MyString
+  quantity_per_unit: MyString
+  price: 9.99
+  unit_price: 9.99
+  msrp: MyString
+  available_size: MyString
+  available_colors: MyString
+  size: MyString
+  color: MyString
+  discount: MyString
+  unit_weight: MyString
+  units_in_stock: MyString
+  units_on_order: MyString
+  reorder_level: MyString
+  product_available: MyString
+  discount_available: MyString
+  current_order: MyString
+  note: MyString
+  ranking: MyString
+
+two:
+  product_id: MyString
+  sku: MyString
+  id_sku: MyString
+  vendor_product_id: MyString
+  product_name: MyString
+  product_description: MyText
+  supplier_id: MyString
+  category_id: MyString
+  quantity_per_unit: MyString
+  price: 9.99
+  unit_price: 9.99
+  msrp: MyString
+  available_size: MyString
+  available_colors: MyString
+  size: MyString
+  color: MyString
+  discount: MyString
+  unit_weight: MyString
+  units_in_stock: MyString
+  units_on_order: MyString
+  reorder_level: MyString
+  product_available: MyString
+  discount_available: MyString
+  current_order: MyString
+  note: MyString
+  ranking: MyString

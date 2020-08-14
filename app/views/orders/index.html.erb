@@ -1,0 +1,63 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Orders</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Order</th>
+      <th>Customer</th>
+      <th>Order total</th>
+      <th>Order number</th>
+      <th>Payment</th>
+      <th>Order date</th>
+      <th>Ship date</th>
+      <th>Required date</th>
+      <th>Shipper date</th>
+      <th>Freight</th>
+      <th>Sales tax</th>
+      <th>Timestamp</th>
+      <th>Transact status</th>
+      <th>Err loc</th>
+      <th>Err msg</th>
+      <th>Fulfilled</th>
+      <th>Deleted</th>
+      <th>Paid</th>
+      <th>Payment date</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @orders.each do |order| %>
+      <tr>
+        <td><%= order.order_id %></td>
+        <td><%= order.customer_id %></td>
+        <td><%= order.order_total %></td>
+        <td><%= order.order_number %></td>
+        <td><%= order.payment_id %></td>
+        <td><%= order.order_date %></td>
+        <td><%= order.ship_date %></td>
+        <td><%= order.required_date %></td>
+        <td><%= order.shipper_date %></td>
+        <td><%= order.freight %></td>
+        <td><%= order.sales_tax %></td>
+        <td><%= order.timestamp %></td>
+        <td><%= order.transact_status %></td>
+        <td><%= order.err_loc %></td>
+        <td><%= order.err_msg %></td>
+        <td><%= order.fulfilled %></td>
+        <td><%= order.deleted %></td>
+        <td><%= order.paid %></td>
+        <td><%= order.payment_date %></td>
+        <td><%= link_to 'Show', order %></td>
+        <td><%= link_to 'Edit', edit_order_path(order) %></td>
+        <td><%= link_to 'Destroy', order, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Order', new_order_path %>

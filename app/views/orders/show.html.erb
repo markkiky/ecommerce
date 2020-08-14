@@ -1,0 +1,99 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Order:</strong>
+  <%= @order.order_id %>
+</p>
+
+<p>
+  <strong>Customer:</strong>
+  <%= @order.customer_id %>
+</p>
+
+<p>
+  <strong>Order total:</strong>
+  <%= @order.order_total %>
+</p>
+
+<p>
+  <strong>Order number:</strong>
+  <%= @order.order_number %>
+</p>
+
+<p>
+  <strong>Payment:</strong>
+  <%= @order.payment_id %>
+</p>
+
+<p>
+  <strong>Order date:</strong>
+  <%= @order.order_date %>
+</p>
+
+<p>
+  <strong>Ship date:</strong>
+  <%= @order.ship_date %>
+</p>
+
+<p>
+  <strong>Required date:</strong>
+  <%= @order.required_date %>
+</p>
+
+<p>
+  <strong>Shipper date:</strong>
+  <%= @order.shipper_date %>
+</p>
+
+<p>
+  <strong>Freight:</strong>
+  <%= @order.freight %>
+</p>
+
+<p>
+  <strong>Sales tax:</strong>
+  <%= @order.sales_tax %>
+</p>
+
+<p>
+  <strong>Timestamp:</strong>
+  <%= @order.timestamp %>
+</p>
+
+<p>
+  <strong>Transact status:</strong>
+  <%= @order.transact_status %>
+</p>
+
+<p>
+  <strong>Err loc:</strong>
+  <%= @order.err_loc %>
+</p>
+
+<p>
+  <strong>Err msg:</strong>
+  <%= @order.err_msg %>
+</p>
+
+<p>
+  <strong>Fulfilled:</strong>
+  <%= @order.fulfilled %>
+</p>
+
+<p>
+  <strong>Deleted:</strong>
+  <%= @order.deleted %>
+</p>
+
+<p>
+  <strong>Paid:</strong>
+  <%= @order.paid %>
+</p>
+
+<p>
+  <strong>Payment date:</strong>
+  <%= @order.payment_date %>
+</p>
+
+<%= link_to 'Edit', edit_order_path(@order) %> |
+<%= link_to 'Back', orders_path %>

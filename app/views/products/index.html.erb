@@ -1,0 +1,77 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Products</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Product</th>
+      <th>Sku</th>
+      <th>Id sku</th>
+      <th>Vendor product</th>
+      <th>Product name</th>
+      <th>Product description</th>
+      <th>Supplier</th>
+      <th>Category</th>
+      <th>Quantity per unit</th>
+      <th>Price</th>
+      <th>Unit price</th>
+      <th>Msrp</th>
+      <th>Available size</th>
+      <th>Available colors</th>
+      <th>Size</th>
+      <th>Color</th>
+      <th>Discount</th>
+      <th>Unit weight</th>
+      <th>Units in stock</th>
+      <th>Units on order</th>
+      <th>Reorder level</th>
+      <th>Product available</th>
+      <th>Discount available</th>
+      <th>Current order</th>
+      <th>Note</th>
+      <th>Ranking</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @products.each do |product| %>
+      <tr>
+        <td><%= product.product_id %></td>
+        <td><%= product.sku %></td>
+        <td><%= product.id_sku %></td>
+        <td><%= product.vendor_product_id %></td>
+        <td><%= product.product_name %></td>
+        <td><%= product.product_description %></td>
+        <td><%= product.supplier_id %></td>
+        <td><%= product.category_id %></td>
+        <td><%= product.quantity_per_unit %></td>
+        <td><%= product.price %></td>
+        <td><%= product.unit_price %></td>
+        <td><%= product.msrp %></td>
+        <td><%= product.available_size %></td>
+        <td><%= product.available_colors %></td>
+        <td><%= product.size %></td>
+        <td><%= product.color %></td>
+        <td><%= product.discount %></td>
+        <td><%= product.unit_weight %></td>
+        <td><%= product.units_in_stock %></td>
+        <td><%= product.units_on_order %></td>
+        <td><%= product.reorder_level %></td>
+        <td><%= product.product_available %></td>
+        <td><%= product.discount_available %></td>
+        <td><%= product.current_order %></td>
+        <td><%= product.note %></td>
+        <td><%= product.ranking %></td>
+        <td><%= link_to 'Show', product %></td>
+        <td><%= link_to 'Edit', edit_product_path(product) %></td>
+        <td><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Product', new_product_path %>

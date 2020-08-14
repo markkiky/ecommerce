@@ -1,0 +1,112 @@
+<%= form_with(model: order, local: true) do |form| %>
+  <% if order.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(order.errors.count, "error") %> prohibited this order from being saved:</h2>
+
+      <ul>
+        <% order.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :order_id %>
+    <%= form.text_field :order_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :customer_id %>
+    <%= form.text_field :customer_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :order_total %>
+    <%= form.text_field :order_total %>
+  </div>
+
+  <div class="field">
+    <%= form.label :order_number %>
+    <%= form.text_field :order_number %>
+  </div>
+
+  <div class="field">
+    <%= form.label :payment_id %>
+    <%= form.text_field :payment_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :order_date %>
+    <%= form.datetime_select :order_date %>
+  </div>
+
+  <div class="field">
+    <%= form.label :ship_date %>
+    <%= form.datetime_select :ship_date %>
+  </div>
+
+  <div class="field">
+    <%= form.label :required_date %>
+    <%= form.datetime_select :required_date %>
+  </div>
+
+  <div class="field">
+    <%= form.label :shipper_date %>
+    <%= form.datetime_select :shipper_date %>
+  </div>
+
+  <div class="field">
+    <%= form.label :freight %>
+    <%= form.text_field :freight %>
+  </div>
+
+  <div class="field">
+    <%= form.label :sales_tax %>
+    <%= form.text_field :sales_tax %>
+  </div>
+
+  <div class="field">
+    <%= form.label :timestamp %>
+    <%= form.datetime_select :timestamp %>
+  </div>
+
+  <div class="field">
+    <%= form.label :transact_status %>
+    <%= form.text_field :transact_status %>
+  </div>
+
+  <div class="field">
+    <%= form.label :err_loc %>
+    <%= form.text_field :err_loc %>
+  </div>
+
+  <div class="field">
+    <%= form.label :err_msg %>
+    <%= form.text_field :err_msg %>
+  </div>
+
+  <div class="field">
+    <%= form.label :fulfilled %>
+    <%= form.check_box :fulfilled %>
+  </div>
+
+  <div class="field">
+    <%= form.label :deleted %>
+    <%= form.check_box :deleted %>
+  </div>
+
+  <div class="field">
+    <%= form.label :paid %>
+    <%= form.check_box :paid %>
+  </div>
+
+  <div class="field">
+    <%= form.label :payment_date %>
+    <%= form.datetime_select :payment_date %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
