@@ -13862,11 +13862,7 @@ body.dark {
   letter-spacing: 0.07em; }
 
 .pixelstrap a:hover {
-  color: blue;
-  color: blue;
-  background-color: red;
-
-}
+  color: var(--theme-deafult); }
 
 .pixelstrap a.disabled {
   color: #ffd8d4; }
@@ -14395,13 +14391,9 @@ body.dark {
   .pixelstrap .full-mega-menu.layout-3 {
     width: 1079px !important; }
   .pixelstrap a {
-    font-size: 14px; 
-    
-  }
+    font-size: 14px; }
     .pixelstrap a:hover, .pixelstrap a:active {
-      font-size: 14px; 
-      
-    } }
+      font-size: 14px; } }
 
 @media (max-width: 1199px) {
   .mega-box .link-section .demo ul li a span img {

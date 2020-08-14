@@ -1,5 +1,19 @@
+
+
+
+
+
 Rails.application.config.middleware.use OmniAuth::Builder do
-    provider :twitter, ENV['4PMy1LPaAW4MeTlM4waws7iPT'], ENV['3NrruiiHohfUggjtpIz3tXVExTkyw6Ygz77nAZ9nfH5wKNUK3s']
+    # provider :twitter, ENV['TWITTER_KEY'], ENV['TWITTER_SECRET']
+    provider :twitter,  ENV['TWITTER_KEY'],ENV['TWITTER_SECRET'],
+    {
+      :secure_image_url => 'true',
+      :image_size => 'original',
+      :authorize_params => {
+        :force_login => 'true',
+        :lang => 'pt'
+      }
+    }
 end
 
 # bearer token : "AAAAAAAAAAAAAAAAAAAAAF8xGwEAAAAA4N2zHQHdolzZA5HQThTssZh%2BJd8%3D5XzLdaGJMG0XyfXUMKu0fcXLBlYxNE4hTEToRK9OGj3NIEAGTH"
