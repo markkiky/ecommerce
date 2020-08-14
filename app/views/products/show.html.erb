@@ -192,18 +192,33 @@
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="product-slick">
-                                    <div><img src="../resources/images/pro3/1.jpg" alt="" class="img-fluid blur-up lazyload image_zoom_cls-0"></div>
+                                    <!--<div><img src="../resources/images/pro3/1.jpg" alt="" class="img-fluid blur-up lazyload image_zoom_cls-0"></div>
                                     <div><img src="../resources/images/pro3/2.jpg" alt="" class="img-fluid blur-up lazyload image_zoom_cls-1"></div>
                                     <div><img src="../resources/images/pro3/27.jpg" alt="" class="img-fluid blur-up lazyload image_zoom_cls-2"></div>
-                                    <div><img src="../resources/images/pro3/27.jpg" alt="" class="img-fluid blur-up lazyload image_zoom_cls-3"></div>
+                                    <div><img src="../resources/images/pro3/27.jpg" alt="" class="img-fluid blur-up lazyload image_zoom_cls-3"></div>-->
+                                    <% (0...@product.images.count).each do | image |%>
+                                            <%= image_tag(@product.images[image], class: "img-fluid blur-up lazyload image_zoom_cls-0") %>
+                                    <% end %>
+                                    <% (0...@product.images.count).each do | image |%>
+                                            <%= image_tag(@product.images[image], class: "img-fluid blur-up lazyload image_zoom_cls-1") %>
+                                    <% end %>
+                                    <% (0...@product.images.count).each do | image |%>
+                                            <%= image_tag(@product.images[image], class: "img-fluid blur-up lazyload image_zoom_cls-2") %>
+                                    <% end %>
+                                    <% (0...@product.images.count).each do | image |%>
+                                            <%= image_tag(@product.images[image], class: "img-fluid blur-up lazyload image_zoom_cls-3") %>
+                                    <% end %>
                                 </div>
                                 <div class="row">
                                     <div class="col-12 p-0">
                                         <div class="slider-nav">
-                                            <div><img src="../resources/images/pro3/1.jpg" alt="" class="img-fluid blur-up lazyload"></div>
+                                            <% (0...@product.images.count).each do | image |%>
+                                            <%= image_tag(@product.images[image], class: "img-fluid blur-up lazyload") %>
+                                            <% end %>
+                                            <!--<div><img src="../resources/images/pro3/1.jpg" alt="" class="img-fluid blur-up lazyload"></div>
                                             <div><img src="../resources/images/pro3/2.jpg" alt="" class="img-fluid blur-up lazyload"></div>
                                             <div><img src="../resources/images/pro3/27.jpg" alt="" class="img-fluid blur-up lazyload"></div>
-                                            <div><img src="../resources/images/pro3/27.jpg" alt="" class="img-fluid blur-up lazyload"></div>
+                                            <div><img src="../resources/images/pro3/27.jpg" alt="" class="img-fluid blur-up lazyload"></div>-->
                                         </div>
                                     </div>
                                 </div>
@@ -846,3 +861,6 @@
 
 <%= link_to 'Edit', edit_product_path(@product) %> |
 <%= link_to 'Back', products_path %>
+<% (0...@product.images.count).each do | image |%>
+<%= image_tag(@product.images[image]) %>
+<% end %>
