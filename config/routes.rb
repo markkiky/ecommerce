@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   # devise_for :customers
   resources :customers
   resources :homes
-  devise_for :customers, :controllers => { :registrations => 'devise/registrations' }, :path => '/users' , :path_names => { :sign_in => 'sign_in', :sign_up => 'sign_up', :sign_out => 'sign_out', :password => '/', :confirmation => 'verification' }
+  devise_for :customers
   root "homes#index"
   delete '/logout', to: 'sessions#destroy'
 
