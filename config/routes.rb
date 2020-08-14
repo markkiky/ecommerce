@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  devise_for :admins , :controllers => { :registrations => 'registrations'}, :path => "/admins", :path_names => { :sign_in => "login"}
+  devise_for :admins 
   resources :order_items
   resources :orders
   resources :categories
@@ -12,6 +12,8 @@ Rails.application.routes.draw do
   root "homes#index"
   delete '/logout', to: 'sessions#destroy'
 
+
+  get '/admin/dashboard', to: "admins#dashboard"
   # Twitter path
   get '/auth/:provider/callback', to: 'sessions#create'
 
