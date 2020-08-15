@@ -1,15 +1,17 @@
 Rails.application.routes.draw do
+  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  root "homes#index"
 
   devise_for :admins 
-  resources :order_items
+ 
   resources :orders
   resources :categories
   resources :products
+
   # devise_for :customers
   resources :customers
   resources :homes
   devise_for :customers, :path => "users"
-  root "homes#index"
   delete '/logout', to: 'sessions#destroy'
   
   get '/users', to: "devise/registrations#new"
@@ -19,5 +21,10 @@ Rails.application.routes.draw do
   # Twitter path
   get '/auth/:provider/callback', to: 'sessions#create'
 
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  #cart routes 
+  get '/cart', to: 'order_items#index'
+  resources :order_items, path: '/cart/items'
+  get '/cart/checkout', to: 'orders#new', as: :checkout
+  patch '/cart/checkout', to: 'orders#create'
+
 end

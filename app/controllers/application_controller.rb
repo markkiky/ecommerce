@@ -1,6 +1,13 @@
 class ApplicationController < ActionController::Base
 
   
+
+  def current_cart
+    @current_cart ||= ShoppingCart.new(token: cart_token)
+  end
+
+  helper_method :current_cart
+  
         def after_sign_in_path_for(resource)
           if admin_signed_in?
             admin_dashboard_path
@@ -16,4 +23,12 @@ class ApplicationController < ActionController::Base
     end
 
     helper_method :current_user
+
+  def cart_token
+    return @cart_token unless @cart_token.nil?
+
+    session[:cart_token] ||= SecureRandom.hex(8)
+    @cart_token = session[:cart_token]
+  end
+
 end
