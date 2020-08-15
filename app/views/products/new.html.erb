@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -174,9 +173,9 @@
         <!-- Page Sidebar Ends-->
 
         <!-- Right sidebar Start-->
-        
+
         <!-- Right sidebar Ends-->
-     <div class="page-body">
+        <div class="page-body">
 
             <!-- Container-fluid starts-->
             <div class="container-fluid">
@@ -220,64 +219,76 @@
                                                 </div>
                                                 <div class="col-xl-3 xl-50 col-sm-6 col-3">
                                                     <ul class="file-upload-product">
-                                                        <li><div class="box-input-file"><%= form.file_field :images, multiple: true, class: "upload" %><i class="fa fa-plus"></i></div></li>
-                                                        <li><div class="box-input-file"><%= form.file_field :images, multiple: true, class: "upload" %><i class="fa fa-plus"></i></div></li>
-                                                        <li><div class="box-input-file"><%= form.file_field :images, multiple: true, class: "upload" %><i class="fa fa-plus"></i></div></li>
-                                                        <li><div class="box-input-file"><%= form.file_field :images, multiple: true, class: "upload" %><i class="fa fa-plus"></i></div></li>
-                                                        <li><div class="box-input-file"><%= form.file_field :images, multiple: true, class: "upload" %><i class="fa fa-plus"></i></div></li>
-                                                        <li><div class="box-input-file"><%= form.file_field :images, multiple: true, class: "upload" %><i class="fa fa-plus"></i></div></li>
+                                                        <li>
+                                                            <div class="box-input-file"><%= form.file_field :images, multiple: true, class: "upload" %><i class="fa fa-plus"></i></div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="box-input-file"><%= form.file_field :images, multiple: true, class: "upload" %><i class="fa fa-plus"></i></div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="box-input-file"><%= form.file_field :images, multiple: true, class: "upload" %><i class="fa fa-plus"></i></div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="box-input-file"><%= form.file_field :images, multiple: true, class: "upload" %><i class="fa fa-plus"></i></div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="box-input-file"><%= form.file_field :images, multiple: true, class: "upload" %><i class="fa fa-plus"></i></div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="box-input-file"><%= form.file_field :images, multiple: true, class: "upload" %><i class="fa fa-plus"></i></div>
+                                                        </li>
                                                     </ul>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-xl-7">
-                                    <br>
-                                            <div class="form">
-                                                <div class="form-group mb-3 row">
-                                                    <label> <%= form.label "Product Name :", class: "col-xl col-sm-4 mb-0" %></label>
-                                                    <%= form.text_field :product_name, class: "form-control col-xl-8 col-sm-7" %>
-                                                </div>
-                                                <div class="form-group mb-3 row">
-                                                    <label> <%= form.label "Price :", class: "col-xl col-sm-4 mb-0" %> </label>
-                                                    <%= form.number_field :price, class: "form-control col-xl-8 col-sm-7"  %>
-                                                </div>
-                                                <div class="form-group mb-3 row">
-                                                    <label for="validationCustomUsername" class="col-xl-3 col-sm-4 mb-0">Product Code :</label>
-                                                    <input class="form-control col-xl-8 col-sm-7" id="validationCustomUsername" type="text" required="">
-                                                    <div class="invalid-feedback offset-sm-4 offset-xl-3">Please choose Valid Code.</div>
-                                                </div>
+                                        <br>
+                                        <div class="form">
+                                            <div class="form-group mb-3 row">
+                                                <label> <%= form.label "Product Name :", class: "col-xl col-sm-4 mb-0" %></label>
+                                                <%= form.text_field :product_name, class: "form-control col-xl-8 col-sm-7" %>
                                             </div>
-                                            <div class="form">
-                                                <div class="form-group row">
-                                                    <label for="exampleFormControlSelect1" class="col-xl-3 col-sm-4 mb-0">Select Size :</label>
-                                                    <select class="form-control digits col-xl-8 col-sm-7" id="exampleFormControlSelect1">
-                                                        <option>Small</option>
-                                                        <option>Medium</option>
-                                                        <option>Large</option>
-                                                        <option>Extra Large</option>
-                                                    </select>
-                                                </div>
-                                                <div class="form-group row">
-                                                    <label class="col-xl-3 col-sm-4 mb-0">Total Products :</label>
-                                                    <fieldset class="qty-box col-xl-9 col-xl-8 col-sm-7 pl-0">
-                                                        <div class="input-group">
-                                                            <input class="touchspin" type="text" value="1">
-                                                        </div>
-                                                    </fieldset>
-                                                </div>
-                                                <div class="form-group row">
-                                                    <label class="col-xl-3 col-sm-4">Add Description :</label>
-                                                    <div class="col-xl-8 col-sm-7 pl-0 description-sm">
-                                                        <!--<textarea id="editor1" name="editor1" cols="10" rows="4"></textarea>-->
-                                                        <%= form.text_area :product_description, :cols => 10, :rows => 4, id: "editor1" %>
-
+                                            <div class="form-group mb-3 row">
+                                                <label> <%= form.label "Price :", class: "col-xl col-sm-4 mb-0" %> </label>
+                                                <%= form.number_field :price, class: "form-control col-xl-8 col-sm-7"  %>
+                                            </div>
+                                            <div class="form-group mb-3 row">
+                                                <label for="validationCustomUsername" class="col-xl-3 col-sm-4 mb-0">Product Code :</label>
+                                                <input class="form-control col-xl-8 col-sm-7" id="validationCustomUsername" type="text" required="">
+                                                <div class="invalid-feedback offset-sm-4 offset-xl-3">Please choose Valid Code.</div>
+                                            </div>
+                                        </div>
+                                        <div class="form">
+                                            <div class="form-group row">
+                                                <label for="exampleFormControlSelect1" class="col-xl-3 col-sm-4 mb-0">Select Size :</label>
+                                                <select class="form-control digits col-xl-8 col-sm-7" id="exampleFormControlSelect1">
+                                                    <option>Small</option>
+                                                    <option>Medium</option>
+                                                    <option>Large</option>
+                                                    <option>Extra Large</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-xl-3 col-sm-4 mb-0">Total Products :</label>
+                                                <fieldset class="qty-box col-xl-9 col-xl-8 col-sm-7 pl-0">
+                                                    <div class="input-group">
+                                                        <input class="touchspin" type="text" value="1">
                                                     </div>
+                                                </fieldset>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-xl-3 col-sm-4">Add Description :</label>
+                                                <div class="col-xl-8 col-sm-7 pl-0 description-sm">
+                                                    <!--<textarea id="editor1" name="editor1" cols="10" rows="4"></textarea>-->
+                                                    <%= form.text_area :product_description, :cols => 10, :rows => 4, id: "editor1" %>
+
                                                 </div>
                                             </div>
-                                            <div class="offset-xl-3 offset-sm-4">
-                                                <%= form.submit "Add", class: "btn btn-primary" %>
-                                            </div>
+                                        </div>
+                                        <div class="offset-xl-3 offset-sm-4">
+                                            <%= form.submit "Add", class: "btn btn-primary" %>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -354,4 +365,5 @@
 <script src="../resources/js/admin-script.js"></script>
 
 </body>
+
 </html>
