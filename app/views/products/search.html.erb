@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="multikart">
+    <meta name="keywords" content="multikart">
+    <meta name="author" content="multikart">
+    <link rel="icon" href="../resources/images/favicon/1.png" type="image/x-icon">
+    <link rel="shortcut icon" href="../resources/images/favicon/1.png" type="image/x-icon">
+
+    <!--Google font-->
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900" rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" type="text/css" href="../resources/css/fontawesome.css">
+
+    <!--Slick slider css-->
+    <link rel="stylesheet" type="text/css" href="../resources/css/slick.css">
+    <link rel="stylesheet" type="text/css" href="../resources/css/slick-theme.css">
+
+    <!-- Animate icon -->
+    <link rel="stylesheet" type="text/css" href="../resources/css/animate.css">
+
+    <!-- Themify icon -->
+    <link rel="stylesheet" type="text/css" href="../resources/css/themify-icons.css">
+
+    <!-- Bootstrap css -->
+    <link rel="stylesheet" type="text/css" href="../resources/css/bootstrap.css">
+
+    <!-- Theme css -->
+    <link rel="stylesheet" type="text/css" href="../resources/css/color1.css" media="screen" id="color">
+
+</head>
+
+<body>
+
+
+    <!-- header start -->
+    <%= render "layouts/header" %>
+    <!-- header end -->
+
+
+    <!-- breadcrumb start -->
+    <div class="breadcrumb-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="page-title">
+                        <h2>search</h2>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <nav aria-label="breadcrumb" class="theme-breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                            <li class="breadcrumb-item active">search</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- breadcrumb End -->
+
+
+
+    <!-- product section start -->
+    <section class="section-b-space ratio_asos">
+        <div class="container">
+            <% if @products.count == 0 %>
+            <br> <br> <br> <br>
+            <div style="text-align:center;">
+                <h3> No results found for "<%= params[:q] %>" </h3>
+                <p> Please make sure your words are spelled correctly or use less or different keywords.</p>
+            </div>
+            <br> <br> <br> <br>
+            <% else %>
+            <br>
+            <h2 style="text-align:center;"> Search Results </h2>
+            <br> <br>
+            <div class="row search-product">
+            <% @products.each do |prod| %>
+                <div class="col-xl-2 col-md-4 col-sm-6">
+                    <div class="product-box">
+                        <div class="img-wrapper">
+                            <div class="front">
+                                <a href="<%= prod.id %>"><img src="../resources/images/pro3/33.jpg" class="img-fluid blur-up lazyload bg-img" alt=""></a>
+                            </div>
+                            <div class="back">
+                                <a href="/products/<%= prod.id %>"><img src="../resources/images/pro3/34.jpg" class="img-fluid blur-up lazyload bg-img" alt=""></a>
+                            </div>
+                        <div class="product-detail">
+                            <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
+                            <a href="product-page(no-sidebar).html">
+                                <h6><%= prod.product_name %></h6>
+                            </a>
+                            <h4><%= number_to_currency(prod.price, :unit => ' KES ') %></h4>
+                            <ul class="color-variant">
+                                <li class="bg-light0"></li>
+                                <li class="bg-light1"></li>
+                                <li class="bg-light2"></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <% end %>
+            <% end %>
+        </div>
+    </section>
+    <!-- product section end -->
+
+
+    <!-- footer start -->
+    <%= render "layouts/footer" %>
+    <!-- footer end -->
+
+
+
+
+    <!-- latest jquery-->
+    <script src="../resources/js/jquery-3.3.1.min.js"></script>
+
+    <!-- menu js-->
+    <script src="../resources/js/menu.js"></script>
+
+    <!-- lazyload js-->
+    <script src="../resources/js/lazysizes.min.js"></script>
+
+    <!-- popper js-->
+    <script src="../resources/js/popper.min.js"></script>
+
+    <!-- slick js-->
+    <script src="../resources/js/slick.js"></script>
+
+    <!-- Bootstrap js-->
+    <script src="../resources/js/bootstrap.js"></script>
+
+    <!-- Bootstrap Notification js-->
+    <script src="../resources/js/bootstrap-notify.min.js"></script>
+
+    <!-- Theme js-->
+    <script src="../resources/js/script.js"></script>
+
+    <script>
+        function openSearch() {
+            document.getElementById("search-overlay").style.display = "block";
+        }
+
+        function closeSearch() {
+            document.getElementById("search-overlay").style.display = "none";
+        }
+    </script>
+</body>
+
+</html>

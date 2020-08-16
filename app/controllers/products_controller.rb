@@ -13,6 +13,14 @@ class ProductsController < ApplicationController
    end 
  end 
 
+ def search 
+  if params[:q].blank?  
+      redirect_to(root_path, alert: "Search Field Empty!") and return  
+    else    
+      @products = Product.where("product_name LIKE ? OR product_description LIKE ?", "%" + params[:q] + "%", "%" + params[:q] + "%")
+    end 
+end
+
   # GET /products/1
   # GET /products/1.json
   def show
