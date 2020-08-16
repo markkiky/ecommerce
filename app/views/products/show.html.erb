@@ -1,4 +1,5 @@
 <%= render "layouts/header" %>
+<%= render "layouts/loader" %>
 <!-- breadcrumb start -->
 <div class="breadcrumb-section">
     <div class="container">
@@ -36,15 +37,13 @@
                             </span>
                         </div>
                         <div class="collection-collapse-block border-0 open">
-                            <h3 class="collapse-block-title">brand</h3>
+                            <h3 class="collapse-block-title">categories</h3>
                             <div class="collection-collapse-block-content">
                                 <div class="collection-brand-filter">
                                     <ul class="category-list">
-                                        <li><a href="#">clothing</a></li>
-                                        <li><a href="#">bags</a></li>
-                                        <li><a href="#">footwear</a></li>
-                                        <li><a href="#">watches</a></li>
-                                        <li><a href="#">accessories</a></li>
+                                        <% Category.all.reverse.each do | category | %>
+                                        <li><a href="#"><%= category.category_name %></a></li>
+                                        <% end %>
                                     </ul>
                                 </div>
                             </div>
@@ -121,62 +120,30 @@
                         <h5 class="title-border">new product</h5>
                         <div class="offer-slider slide-1">
                             <div>
+                            <% Product.all.limit(3).reverse.each do | product | %>
                                 <div class="media">
                                     <a href=""><img class="img-fluid blur-up lazyload" src="../resources/images/pro/1.jpg" alt=""></a>
                                     <div class="media-body align-self-center">
                                         <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div><a href="product-page(no-sidebar).html">
-                                            <h6>Slim Fit Cotton Shirt</h6>
+                                            <h6><%= product.product_name %></h6>
                                         </a>
-                                        <h4>$500.00</h4>
+                                        <h4><%= number_to_currency(@product.price, :unit => ' KES ') %></h4>
                                     </div>
                                 </div>
-                                <div class="media">
-                                    <a href=""><img class="img-fluid blur-up lazyload" src="../resources/images/pro/1.jpg" alt=""></a>
-                                    <div class="media-body align-self-center">
-                                        <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div><a href="product-page(no-sidebar).html">
-                                            <h6>Slim Fit Cotton Shirt</h6>
-                                        </a>
-                                        <h4>$500.00</h4>
-                                    </div>
-                                </div>
-                                <div class="media">
-                                    <a href=""><img class="img-fluid blur-up lazyload" src="../resources/images/pro/1.jpg" alt=""></a>
-                                    <div class="media-body align-self-center">
-                                        <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div><a href="product-page(no-sidebar).html">
-                                            <h6>Slim Fit Cotton Shirt</h6>
-                                        </a>
-                                        <h4>$500.00</h4>
-                                    </div>
-                                </div>
+                            <% end %>
                             </div>
                             <div>
+                             <% Product.all.limit(3).reverse.each do | product | %>
                                 <div class="media">
                                     <a href=""><img class="img-fluid blur-up lazyload" src="../resources/images/pro/1.jpg" alt=""></a>
                                     <div class="media-body align-self-center">
                                         <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div><a href="product-page(no-sidebar).html">
-                                            <h6>Slim Fit Cotton Shirt</h6>
+                                            <h6><%= product.product_name %></h6>
                                         </a>
-                                        <h4>$500.00</h4>
+                                        <h4><%= number_to_currency(@product.price, :unit => ' KES ') %></h4>
                                     </div>
                                 </div>
-                                <div class="media">
-                                    <a href=""><img class="img-fluid blur-up lazyload" src="../resources/images/pro/1.jpg" alt=""></a>
-                                    <div class="media-body align-self-center">
-                                        <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div><a href="product-page(no-sidebar).html">
-                                            <h6>Slim Fit Cotton Shirt</h6>
-                                        </a>
-                                        <h4>$500.00</h4>
-                                    </div>
-                                </div>
-                                <div class="media">
-                                    <a href=""><img class="img-fluid blur-up lazyload" src="../resources/images/pro/1.jpg" alt=""></a>
-                                    <div class="media-body align-self-center">
-                                        <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div><a href="product-page(no-sidebar).html">
-                                            <h6>Slim Fit Cotton Shirt</h6>
-                                        </a>
-                                        <h4>$500.00</h4>
-                                    </div>
-                                </div>
+                            <% end %>
                             </div>
                         </div>
                     </div>
@@ -283,7 +250,7 @@
                                                 <li><a href="#"><i class="fa fa-rss"></i></a></li>
                                             </ul>
                                             <form class="d-inline-block">
-                                                <button class="wishlist-btn"><i class="fa fa-heart"></i><span class="title-font">Add To WishList</span></button>
+                                                <!--<button class="wishlist-btn"><i class="fa fa-heart"></i><span class="title-font">Add To WishList</span></button>-->
                                             </form>
                                         </div>
                                     </div>
@@ -301,43 +268,19 @@
                                     <li class="nav-item"><a class="nav-link" id="profile-top-tab" data-toggle="tab" href="#top-profile" role="tab" aria-selected="false"><i class="icofont icofont-man-in-glasses"></i>Details</a>
                                         <div class="material-border"></div>
                                     </li>
-                                    <li class="nav-item"><a class="nav-link" id="contact-top-tab" data-toggle="tab" href="#top-contact" role="tab" aria-selected="false"><i class="icofont icofont-contacts"></i>Video</a>
+                                    <!--<li class="nav-item"><a class="nav-link" id="contact-top-tab" data-toggle="tab" href="#top-contact" role="tab" aria-selected="false"><i class="icofont icofont-contacts"></i>Video</a>
                                         <div class="material-border"></div>
-                                    </li>
+                                    </li>-->
                                     <li class="nav-item"><a class="nav-link" id="review-top-tab" data-toggle="tab" href="#top-review" role="tab" aria-selected="false"><i class="icofont icofont-contacts"></i>Write Review</a>
                                         <div class="material-border"></div>
                                     </li>
                                 </ul>
                                 <div class="tab-content nav-material" id="top-tabContent">
                                     <div class="tab-pane fade show active" id="top-home" role="tabpanel" aria-labelledby="top-home-tab">
-                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting
-                                            industry. Lorem Ipsum has been the industry's standard dummy text ever
-                                            since the 1500s, when an unknown printer took a galley of type and
-                                            scrambled it to make a type specimen book. It has survived not only five
-                                            centuries, but also the leap into electronic typesetting, remaining
-                                            essentially unchanged. It was popularised in the 1960s with the release
-                                            of Letraset sheets containing Lorem Ipsum passages, and more recently
-                                            with desktop publishing software like Aldus PageMaker including versions
-                                            of Lorem Ipsum. Lorem Ipsum is simply dummy text of the printing and
-                                            typesetting industry. Lorem Ipsum has been the industry's standard dummy
-                                            text ever since the 1500s, when an unknown printer took a galley of type
-                                            and scrambled it to make a type specimen book. It has survived not only
-                                            five centuries, but also the leap into electronic typesetting, remaining
-                                            essentially unchanged. It was popularised in the 1960s with the release
-                                            of Letraset sheets containing Lorem Ipsum passages, and more recently
-                                            with desktop publishing software like Aldus PageMaker including versions
-                                            of Lorem Ipsum.</p>
+                                        <p><%= @product.product_description %></p>
                                     </div>
                                     <div class="tab-pane fade" id="top-profile" role="tabpanel" aria-labelledby="profile-top-tab">
-                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting
-                                            industry. Lorem Ipsum has been the industry's standard dummy text ever
-                                            since the 1500s, when an unknown printer took a galley of type and
-                                            scrambled it to make a type specimen book. It has survived not only five
-                                            centuries, but also the leap into electronic typesetting, remaining
-                                            essentially unchanged. It was popularised in the 1960s with the release
-                                            of Letraset sheets containing Lorem Ipsum passages, and more recently
-                                            with desktop publishing software like Aldus PageMaker including versions
-                                            of Lorem Ipsum.</p>
+                                        <p><%= @product.product_description %></p>
                                         <div class="single-product-tables">
                                             <table>
                                                 <tbody>
@@ -429,6 +372,7 @@
             </div>
         </div>
         <div class="row search-product">
+            <% Product.all.limit(6).each do | product | %>
             <div class="col-xl-2 col-md-4 col-sm-6">
                 <div class="product-box">
                     <div class="img-wrapper">
@@ -439,14 +383,20 @@
                             <a href="#"><img src="../resources/images/pro3/34.jpg" class="img-fluid blur-up lazyload bg-img" alt=""></a>
                         </div>
                         <div class="cart-info cart-wrap">
-                            <button data-toggle="modal" data-target="#addtocart" title="Add to cart"><i class="ti-shopping-cart"></i></button> <a href="javascript:void(0)" title="Add to Wishlist"><i class="ti-heart" aria-hidden="true"></i></a> <a href="#" data-toggle="modal" data-target="#quick-view" title="Quick View"><i class="ti-search" aria-hidden="true"></i></a> <a href="compare.html" title="Compare"><i class="ti-reload" aria-hidden="true"></i></a></div>
+                            <%= form_tag order_items_path, remote: true do %>
+                            <%= hidden_field_tag :product_id, product.id %>
+                            <%= hidden_field_tag :quantity, 1 %>
+                            <!--<button data-toggle="modal" data-target="#addtocart" title="Add to cart"><i class="ti-shopping-cart"></i></button>-->
+                            <%= button_to  order_items_path(:product_id => product.id), {'data-toggle' => 'modal', 'data-target' => '#addtocart', :title => 'Add to cart'} do %> <i class="ti-shopping-cart"></i> <% end %>
+                            <% end %>
+                        </div>
                     </div>
                     <div class="product-detail">
                         <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
                         <a href="product-page(no-sidebar).html">
-                            <h6>Slim Fit Cotton Shirt</h6>
+                            <h6><%= product.product_name %></h6>
                         </a>
-                        <h4>$500.00</h4>
+                        <h4><%= number_to_currency(product.price, :unit => ' KES ') %></h4>
                         <ul class="color-variant">
                             <li class="bg-light0"></li>
                             <li class="bg-light1"></li>
@@ -455,136 +405,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xl-2 col-md-4 col-sm-6">
-                <div class="product-box">
-                    <div class="img-wrapper">
-                        <div class="front">
-                            <a href="#"><img src="../resources/images/pro3/1.jpg" class="img-fluid blur-up lazyload bg-img" alt=""></a>
-                        </div>
-                        <div class="back">
-                            <a href="#"><img src="../resources/images/pro3/2.jpg" class="img-fluid blur-up lazyload bg-img" alt=""></a>
-                        </div>
-                        <div class="cart-info cart-wrap">
-                            <button data-toggle="modal" data-target="#addtocart" title="Add to cart"><i class="ti-shopping-cart"></i></button> <a href="javascript:void(0)" title="Add to Wishlist"><i class="ti-heart" aria-hidden="true"></i></a> <a href="#" data-toggle="modal" data-target="#quick-view" title="Quick View"><i class="ti-search" aria-hidden="true"></i></a> <a href="compare.html" title="Compare"><i class="ti-reload" aria-hidden="true"></i></a></div>
-                    </div>
-                    <div class="product-detail">
-                        <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
-                        <a href="product-page(no-sidebar).html">
-                            <h6>Slim Fit Cotton Shirt</h6>
-                        </a>
-                        <h4>$500.00</h4>
-                        <ul class="color-variant">
-                            <li class="bg-light0"></li>
-                            <li class="bg-light1"></li>
-                            <li class="bg-light2"></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-2 col-md-4 col-sm-6">
-                <div class="product-box">
-                    <div class="img-wrapper">
-                        <div class="front">
-                            <a href="#"><img src="../resources/images/pro3/27.jpg" class="img-fluid blur-up lazyload bg-img" alt=""></a>
-                        </div>
-                        <div class="back">
-                            <a href="#"><img src="../resources/images/pro3/28.jpg" class="img-fluid blur-up lazyload bg-img" alt=""></a>
-                        </div>
-                        <div class="cart-info cart-wrap">
-                            <button data-toggle="modal" data-target="#addtocart" title="Add to cart"><i class="ti-shopping-cart"></i></button> <a href="javascript:void(0)" title="Add to Wishlist"><i class="ti-heart" aria-hidden="true"></i></a> <a href="#" data-toggle="modal" data-target="#quick-view" title="Quick View"><i class="ti-search" aria-hidden="true"></i></a> <a href="compare.html" title="Compare"><i class="ti-reload" aria-hidden="true"></i></a></div>
-                    </div>
-                    <div class="product-detail">
-                        <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
-                        <a href="product-page(no-sidebar).html">
-                            <h6>Slim Fit Cotton Shirt</h6>
-                        </a>
-                        <h4>$500.00</h4>
-                        <ul class="color-variant">
-                            <li class="bg-light0"></li>
-                            <li class="bg-light1"></li>
-                            <li class="bg-light2"></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-2 col-md-4 col-sm-6">
-                <div class="product-box">
-                    <div class="img-wrapper">
-                        <div class="front">
-                            <a href="#"><img src="../resources/images/pro3/35.jpg" class="img-fluid blur-up lazyload bg-img" alt=""></a>
-                        </div>
-                        <div class="back">
-                            <a href="#"><img src="../resources/images/pro3/36.jpg" class="img-fluid blur-up lazyload bg-img" alt=""></a>
-                        </div>
-                        <div class="cart-info cart-wrap">
-                            <button data-toggle="modal" data-target="#addtocart" title="Add to cart"><i class="ti-shopping-cart"></i></button> <a href="javascript:void(0)" title="Add to Wishlist"><i class="ti-heart" aria-hidden="true"></i></a> <a href="#" data-toggle="modal" data-target="#quick-view" title="Quick View"><i class="ti-search" aria-hidden="true"></i></a> <a href="compare.html" title="Compare"><i class="ti-reload" aria-hidden="true"></i></a></div>
-                    </div>
-                    <div class="product-detail">
-                        <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
-                        <a href="product-page(no-sidebar).html">
-                            <h6>Slim Fit Cotton Shirt</h6>
-                        </a>
-                        <h4>$500.00</h4>
-                        <ul class="color-variant">
-                            <li class="bg-light0"></li>
-                            <li class="bg-light1"></li>
-                            <li class="bg-light2"></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-2 col-md-4 col-sm-6">
-                <div class="product-box">
-                    <div class="img-wrapper">
-                        <div class="front">
-                            <a href="#"><img src="../resources/images/pro3/2.jpg" class="img-fluid blur-up lazyload bg-img" alt=""></a>
-                        </div>
-                        <div class="back">
-                            <a href="#"><img src="../resources/images/pro3/1.jpg" class="img-fluid blur-up lazyload bg-img" alt=""></a>
-                        </div>
-                        <div class="cart-info cart-wrap">
-                            <button data-toggle="modal" data-target="#addtocart" title="Add to cart"><i class="ti-shopping-cart"></i></button> <a href="javascript:void(0)" title="Add to Wishlist"><i class="ti-heart" aria-hidden="true"></i></a> <a href="#" data-toggle="modal" data-target="#quick-view" title="Quick View"><i class="ti-search" aria-hidden="true"></i></a> <a href="compare.html" title="Compare"><i class="ti-reload" aria-hidden="true"></i></a></div>
-                    </div>
-                    <div class="product-detail">
-                        <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
-                        <a href="product-page(no-sidebar).html">
-                            <h6>Slim Fit Cotton Shirt</h6>
-                        </a>
-                        <h4>$500.00</h4>
-                        <ul class="color-variant">
-                            <li class="bg-light0"></li>
-                            <li class="bg-light1"></li>
-                            <li class="bg-light2"></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-2 col-md-4 col-sm-6">
-                <div class="product-box">
-                    <div class="img-wrapper">
-                        <div class="front">
-                            <a href="#"><img src="../resources/images/pro3/28.jpg" class="img-fluid blur-up lazyload bg-img" alt=""></a>
-                        </div>
-                        <div class="back">
-                            <a href="#"><img src="../resources/images/pro3/27.jpg" class="img-fluid blur-up lazyload bg-img" alt=""></a>
-                        </div>
-                        <div class="cart-info cart-wrap">
-                            <button data-toggle="modal" data-target="#addtocart" title="Add to cart"><i class="ti-shopping-cart"></i></button> <a href="javascript:void(0)" title="Add to Wishlist"><i class="ti-heart" aria-hidden="true"></i></a> <a href="#" data-toggle="modal" data-target="#quick-view" title="Quick View"><i class="ti-search" aria-hidden="true"></i></a> <a href="compare.html" title="Compare"><i class="ti-reload" aria-hidden="true"></i></a></div>
-                    </div>
-                    <div class="product-detail">
-                        <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
-                        <a href="product-page(no-sidebar).html">
-                            <h6>Slim Fit Cotton Shirt</h6>
-                        </a>
-                        <h4>$500.00</h4>
-                        <ul class="color-variant">
-                            <li class="bg-light0"></li>
-                            <li class="bg-light1"></li>
-                            <li class="bg-light2"></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+        <% end %>
         </div>
     </div>
 </section>
@@ -594,11 +415,6 @@
 <!-- footer start -->
 <%= render "layouts/footer" %>
 <!-- footer end -->
-
-
-<!-- theme setting -->
-<%= render "layouts/theme_setting"%>
-<!-- theme setting -->
 
 
 <!-- Add to cart modal popup start-->
@@ -621,14 +437,14 @@
                                         <a href="#">
                                             <h6>
                                                 <i class="fa fa-check"></i>Item
-                                                <span><%= @product.product_name%></span>
+                                                <span></span>
                                                 <span> successfully added to your Cart</span>
                                             </h6>
                                         </a>
                                         <div class="buttons">
-                                            <a href="#" class="view-cart btn btn-solid">Your cart</a>
-                                            <a href="#" class="checkout btn btn-solid">Check out</a>
-                                            <a href="#" class="continue btn btn-solid">Continue shopping</a>
+                                            <a href="<%= cart_path %>" class="view-cart btn btn-solid">Your cart</a>
+                                            <a href="<%= checkout_path %>" class="checkout btn btn-solid">Check out</a>
+                                            <a href="<%= root_url %>" class="continue btn btn-solid">Continue shopping</a>
                                         </div>
 
                                         <div class="upsell_payment">

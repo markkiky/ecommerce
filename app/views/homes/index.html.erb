@@ -299,7 +299,7 @@
                     <div class="tab-content-cls">
                         <div id="tab-4" class="tab-content active default">
                             <div class="no-slider row">
-                                <% Product.all.limit(4).each do | product| %>
+                                <% Product.all.limit(4).reverse.each do | product| %>
                                 <div class="product-box">
                                     <div class="img-wrapper">
                                         <div class="front">
@@ -336,7 +336,7 @@
                         </div>
                         <div id="tab-5" class="tab-content">
                             <div class="no-slider row">
-                                <% Product.all.limit(4).each do | product| %>
+                                <% Product.all.limit(4).reverse.each do | product| %>
                                 <div class="product-box">
                                     <div class="img-wrapper">
                                         <div class="lable-block"><span class="lable3">new</span> <span class="lable4">on sale</span></div>
@@ -374,8 +374,7 @@
                         </div>
                         <div id="tab-6" class="tab-content">
                             <div class="no-slider row">
-                                <% Product.all.limit(4).each do | product| %>
-
+                                <% Product.all.limit(4).reverse.each do | product| %>
                                 <div class="product-box">
                                     <div class="img-wrapper">
                                         <div class="lable-block"><span class="lable3">new</span> <span class="lable4">on sale</span></div>
