@@ -1,5 +1,244 @@
-<h1>New Order</h1>
+<!DOCTYPE html>
+<html lang="en">
 
-<%= render 'form', order: @order %>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="multikart">
+    <meta name="keywords" content="multikart">
+    <meta name="author" content="multikart">
 
-<%= link_to 'Back', orders_path %>
+    <!--Google font-->
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900" rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" type="text/css" href="../resources/css/fontawesome.css">
+
+    <!--Slick slider css-->
+    <link rel="stylesheet" type="text/css" href="../resources/css/slick.css">
+    <link rel="stylesheet" type="text/css" href="../resources/css/slick-theme.css">
+
+    <!-- Animate icon -->
+    <link rel="stylesheet" type="text/css" href="../resources/css/animate.css">
+
+    <!-- Themify icon -->
+    <link rel="stylesheet" type="text/css" href="../resources/css/themify-icons.css">
+
+    <!-- Bootstrap css -->
+    <link rel="stylesheet" type="text/css" href="../resources/css/bootstrap.css">
+
+    <!-- Theme css -->
+    <link rel="stylesheet" type="text/css" href="../resources/css/color1.css" media="screen" id="color">
+
+</head>
+
+<body>
+
+
+    <!-- header start -->
+    <%= render "layouts/header" %>
+    <!-- header end -->
+
+    <!-- breadcrumb start -->
+    <div class="breadcrumb-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="page-title">
+                        <h2>Check-out</h2>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <nav aria-label="breadcrumb" class="theme-breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Check-out</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- breadcrumb End -->
+
+
+    <!-- section start -->
+    <section class="section-b-space">
+        <div class="container">
+            <div class="checkout-page">
+                <div class="checkout-form">
+                    <%= form_for @order, url: checkout_path do |f| %>
+                    <div class="row">
+                        <div class="col-lg-6 col-sm-12 col-xs-12">
+                            <div class="checkout-title">
+                                <h3>Billing Details</h3>
+                            </div>
+                            <div class="row check-out">
+                                <div class="form-group col-md-6 col-sm-6 col-xs-12">
+                                    <div class="field-label">First Name</div>
+                                    <!--<input type="text" name="field-name" value="" placeholder="">-->
+                                    <%= f.text_field :client_first_name, type: "text", required: true %>
+                                </div>
+                                <div class="form-group col-md-6 col-sm-6 col-xs-12">
+                                    <div class="field-label">Last Name</div>
+                                    <!--<input type="text" name="field-name" value="" placeholder="">-->
+                                    <%= f.text_field :client_last_name, type: "text", required: true %>
+                                </div>
+                                <div class="form-group col-md-6 col-sm-6 col-xs-12">
+                                    <div class="field-label">Phone Number</div>
+                                    <%= f.number_field :client_phone_number %>
+                                </div>
+                                <div class="form-group col-md-6 col-sm-6 col-xs-12">
+                                    <div class="field-label">Email Address</div>
+                                    <%= f.email_field :client_email, type: "email" %>
+                                </div>
+                                <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                                    <div class="field-label">Country</div>
+                                    <%= f.select :client_country, options_for_select(["Kenya", "Uganda", "Tanzania"]) %>
+                                </div>
+                                <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                                    <div class="field-label">Address</div>
+                                    <%= f.text_field :client_address, required: true %>
+                                </div>
+                                <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                                    <div class="field-label">Town/City</div>
+                                    <%= f.text_field :client_city, required: true, type: "text" %>
+                                </div>
+                                <div class="form-group col-md-12 col-sm-6 col-xs-12">
+                                    <div class="field-label">Postal Code</div>
+                                    <%= f.number_field :client_postal_code, required: true, type: "number" %>
+                                </div>
+                                <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <input type="checkbox" name="shipping-option" id="account-option"> &ensp;
+                                    <label for="account-option">Create An Account?</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-sm-12 col-xs-12">
+                            <div class="checkout-details">
+                                <div class="order-box">
+                                    <div class="title-box">
+                                        <div>Product <span>Total</span></div>
+                                    </div>
+                                    <% current_cart.order.items.each do |order| %>
+                                    <ul class="qty">
+                                        <li><%= order.product.product_name %> × <%= order.quantity %> <span><%= number_to_currency(order.price, unit: ' KES ')%></span></li>
+                                    <% end %>
+                                    </ul>
+                                    <ul class="sub-total">
+                                        <li>Subtotal <span class="count"><%= number_to_currency(current_cart.order_subtotal, unit: ' KES ') %></span></li>
+                                        <li>Shipping
+                                            <div class="shipping">
+                                                <div class="shopping-option">
+                                                    <input type="checkbox" name="free-shipping" id="free-shipping">
+                                                    <label for="free-shipping">Free Shipping</label>
+                                                </div>
+                                                <div class="shopping-option">
+                                                    <input type="checkbox" name="local-pickup" id="local-pickup">
+                                                    <label for="local-pickup">Local Pickup</label>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    <ul class="total">
+                                        <li>Total <span class="count"><%= number_to_currency(current_cart.order_subtotal, unit: ' KES ') %></span></li>
+                                    </ul>
+                                </div>
+                                <div class="payment-box">
+                                    <div class="upper-box">
+                                        <div class="payment-options">
+                                            <ul>
+                                                <li>
+                                                    <div class="radio-option">
+                                                        <!--<input type="radio" name="payment-group" id="payment-1" checked="checked">-->
+                                                        <%= f.radio_button :payment_method, "Mpesa", :type => "radio", :name => "order[payment_method]", :id => "payment-1", :checked => true %>
+                                                        <label for="payment-1">Mpesa<span class="small-text">Please send a check to Store
+                                                                Name, Store Street, Store Town, Store State /
+                                                                County, Store Postcode.</span></label>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="radio-option">
+                                                        <%= f.radio_button :payment_method, "Cash On Delivery", :type => "radio", :name => "order[payment_method]", :id => "payment-2"%>
+                                                        <label for="payment-2">Cash On Delivery<span class="small-text">Please send a check to Store
+                                                                Name, Store Street, Store Town, Store State /
+                                                                County, Store Postcode.</span></label>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="radio-option paypal">
+                                                        <%= f.radio_button :payment_method, "Card", :type => "radio", :name => "order[payment_method]", :id => "payment-3"%>
+                                                        <label for="payment-3">Card<span class="image"><img src="" alt=""></span></label>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="text-right">
+                                        <%= f.submit "Place Order", :class => "btn-solid btn" %>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- section end -->
+
+
+    <!-- footer start -->
+
+    <%= render "layouts/footer" %>
+
+    <!-- footer end -->
+
+
+
+
+    <!-- tap to top start -->
+    <div class="tap-top">
+        <div><i class="fa fa-angle-double-up"></i></div>
+    </div>
+    <!-- tap to top end -->
+
+
+    <!-- latest jquery-->
+    <script src="../resources/js/jquery-3.3.1.min.js"></script>
+
+    <!-- menu js-->
+    <script src="../resources/js/menu.js"></script>
+
+    <!-- lazyload js-->
+    <script src="../resources/js/lazysizes.min.js"></script>
+
+    <!-- popper js-->
+    <script src="../resources/js/popper.min.js"></script>
+
+    <!-- slick js-->
+    <script src="../resources/js/slick.js"></script>
+
+    <!-- Bootstrap js-->
+    <script src="../resources/js/bootstrap.js"></script>
+
+    <!-- Bootstrap Notification js-->
+    <script src="../resources/js/bootstrap-notify.min.js"></script>
+
+    <!-- Theme js-->
+    <script src="../resources/js/script.js"></script>
+
+    <script>
+        function openSearch() {
+            document.getElementById("search-overlay").style.display = "block";
+        }
+
+        function closeSearch() {
+            document.getElementById("search-overlay").style.display = "none";
+        }
+    </script>
+</body>
+
+</html>
