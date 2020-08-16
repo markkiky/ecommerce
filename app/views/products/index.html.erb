@@ -1,4 +1,3 @@
-<p id="notice"><%= notice %></p>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -214,10 +213,10 @@
                                             <div class="product-hover">
                                                 <ul>
                                                     <li>
-                                                        <button class="btn" type="button" data-original-title="" title=""><i class="ti-pencil-alt"></i></button>
+                                                        <%= link_to edit_product_path(product), {:class => "btn", :type => "button", :title => "", 'data-original-title' => "" } do %> <i class="ti-pencil-alt"></i> <% end %>
                                                     </li>
                                                     <li>
-                                                        <button class="btn" type="button" data-toggle="modal" data-target="#exampleModalCenter" data-original-title="" title=""><i class="ti-trash"></i></button>
+                                                        <%= link_to product, method: :delete, data: { confirm: 'Are you sure?', toggle: 'modal', target: '#exampleModalCenter', 'original-title' => "" , :class => "btn", :type => "button"} do %> <i class="ti-trash"></i> <% end %>
                                                     </li>
                                                 </ul>
                                             </div>

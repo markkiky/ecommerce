@@ -1,4 +1,3 @@
-<p id="notice"><%= notice %></p>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -215,7 +214,7 @@
                                             <div class="modal-dialog" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title f-w-600" id="exampleModalLabel">Add Physical Product</h5>
+                                                        <h5 class="modal-title f-w-600" id="exampleModalLabel">Add Category</h5>
                                                         <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
                                                     </div>
                                                     <div class="modal-body">
@@ -246,15 +245,15 @@
                                             <thead>
                                                 <tr>
                                                     <th scope="col">Category Name</th>
-
+                                                    <th> Actions </th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <% @categories.each do |category| %>
                                                 <tr>
                                                     <td><%= category.category_name %></td>
-                                                    <td><%= link_to 'Edit', edit_category_path(category) %></td>
-                                                    <td><%= link_to 'Destroy', category, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                                                    <td><%= link_to 'Edit', edit_category_path(category), :class => "btn btn-secondary" %></td>
+                                                    <td><%= link_to 'Delete', category, method: :delete, data: { confirm: 'Are you sure?'}, :class => "btn btn-primary" %></td>
                                                 </tr>
                                                 <% end %>
                                             </tbody>

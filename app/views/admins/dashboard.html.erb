@@ -132,7 +132,7 @@
                     <p>general manager.</p>
                 </div>
                 <ul class="sidebar-menu">
-                    <li><a class="sidebar-header" href="index.html"><i data-feather="home"></i><span>Dashboard</span></a></li>
+                    <li><a class="sidebar-header" href="<%= admin_dashboard_path %>"><i data-feather="home"></i><span>Dashboard</span></a></li>
                     <li><a class="sidebar-header" href="#"><i data-feather="box"></i> <span>Products</span><i class="fa fa-angle-right pull-right"></i></a>
                         <ul class="sidebar-submenu">
                             <li>
@@ -141,8 +141,10 @@
                                 </a>
                                 <ul class="sidebar-submenu">
                                     <li><%= link_to categories_path do %><i class="fa fa-circle"></i>Category<% end %></li>
-                                    <li><%= link_to products_path do %><i class="fa fa-circle"></i>Product List<% end %></li>
+                                    <li><%= link_to categories_path do %><i class="fa fa-circle"></i>Size<% end %></li>
+                                    <li><%= link_to categories_path do %><i class="fa fa-circle"></i>Color<% end %></li>
                                     <li><%= link_to new_product_path do %><i class="fa fa-circle"></i>Add Product<% end %></li>
+                                    <li><%= link_to products_path do %><i class="fa fa-circle"></i>Product List<% end %></li>     
                                 </ul>
                             </li>
                         </ul>

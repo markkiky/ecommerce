@@ -1,6 +1,8 @@
-<h1>Editing Category</h1>
+<%= form_with(model: @category, remote: true ) do |form| %>
 
-<%= render 'form', category: @category %>
+    <%= form.label :category_name %><br />
+    <%= form.text_field :category_name %>
 
-<%= link_to 'Show', @category %> |
-<%= link_to 'Back', categories_path %>
+    <%= form.submit "Update Category" %> | <%= link_to 'Back', categories_path %>
+<% end %>
+

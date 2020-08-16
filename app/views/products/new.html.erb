@@ -246,6 +246,10 @@
                                         <br>
                                         <div class="form">
                                             <div class="form-group mb-3 row">
+                                            <label for="exampleFormControlSelect1" class="col-xl-3 col-sm-4 mb-0">Select Size :</label>
+                                            <%= select_tag :category_id, options_for_select(@categories), :prompt => "Select Category", :class => "form-control digits col-xl-8 col-sm-7" %>
+                                            </div>
+                                            <div class="form-group mb-3 row">
                                                 <label> <%= form.label "Product Name :", class: "col-xl col-sm-4 mb-0" %></label>
                                                 <%= form.text_field :product_name, class: "form-control col-xl-8 col-sm-7" %>
                                             </div>

@@ -1,11 +1,17 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_admin!, only: [:new, :edit]
 
   # GET /products
   # GET /products.json
   def index
-    @products = Product.all
-  end
+    if params[:category].blank?
+      @products = Product.all.order("created_at DESC")
+   else 
+      @category_id = Category.find_by(category_name: params[:category]).id
+      @products = Product.where(:category_id => @category_id).order("created_at DESC")
+   end 
+ end 
 
   # GET /products/1
   # GET /products/1.json
@@ -14,17 +20,20 @@ class ProductsController < ApplicationController
 
   # GET /products/new
   def new
-    @product = Product.new
+    @product = current_admin.products.build
+    @categories = Category.all.map{ |c| [c.category_name, c.id] }
   end
 
   # GET /products/1/edit
   def edit
+    @categories = Category.all.map{ |c| [c.category_name, c.id] }
   end
 
   # POST /products
   # POST /products.json
   def create
-    @product = Product.new(product_params)
+    @product = current_admin.products.build(product_params)
+    @product.category_id = params[:category_id]
 
     respond_to do |format|
       if @product.save
@@ -40,6 +49,7 @@ class ProductsController < ApplicationController
   # PATCH/PUT /products/1
   # PATCH/PUT /products/1.json
   def update
+    @product.category_id = params[:category_id]
     respond_to do |format|
       if @product.update(product_params)
         format.html { redirect_to @product, notice: 'Product was successfully updated.' }
@@ -71,4 +81,4 @@ class ProductsController < ApplicationController
     def product_params
       params.require(:product).permit(:product_id, :sku, :id_sku, :vendor_product_id, :product_name, :product_description, :supplier_id, :category_id, :quantity_per_unit, :price, :unit_price, :msrp, :available_size, :available_colors, :size, :color, :discount, :unit_weight, :units_in_stock, :units_on_order, :reorder_level, :product_available, :discount_available, :current_order, :note, :ranking, images: [])
     end
-end
+  end 
