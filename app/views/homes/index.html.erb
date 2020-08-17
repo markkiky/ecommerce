@@ -5,15 +5,15 @@
     <div class="slide-1 home-slider">
         <div>
             <div class="home  text-center">
-                <img src="../resources/images/home-banner/1.jpg" alt="" class="bg-img blur-up lazyload">
+                <%= image_tag  "3-bg.jpg",:class => "bg-img blur-up lazyload" %>
                 <div class="container">
                     <div class="row">
                         <div class="col">
                             <div class="slider-contain">
                                 <div>
-                                    <h4>welcome to fashion</h4>
-                                    <h1>men fashion</h1>
-                                    <a href="#" class="btn btn-solid">shop now</a>
+                                    <h4>welcome to meloncoco</h4>
+                                    <h1>women fashion</h1>
+                                    <a href="#top_products" class="btn btn-solid">shop now</a>
                                 </div>
                             </div>
                         </div>
@@ -23,13 +23,14 @@
         </div>
         <div>
             <div class="home text-center">
-                <img src="../resources/images/home-banner/2.jpg" alt="" class="bg-img blur-up lazyload">
+                <!--<img src="../resources/images/home-banner/2.jpg" alt="" class="bg-img blur-up lazyload">-->
+                <%= image_tag  "3-bg.jpg",:class => "bg-img blur-up lazyload" %>
                 <div class="container">
                     <div class="row">
                         <div class="col">
                             <div class="slider-contain">
                                 <div>
-                                    <h4>welcome to fashion</h4>
+                                    <h4>welcome to MelonCoco</h4>
                                     <h1>women fashion</h1>
                                     <a href="#" class="btn btn-solid">shop now</a>
                                 </div>
@@ -45,7 +46,7 @@
 
 
 <!-- collection banner -->
-<section class="pb-0 ratio2_1">
+<!--<section class="pb-0 ratio2_1">
     <div class="container">
         <div class="row partition2">
             <div class="col-md-6">
@@ -80,12 +81,12 @@
             </div>
         </div>
     </div>
-</section>
+</section>-->
 <!-- collection banner end -->
 
 
 <!-- Paragraph-->
-<div class="title1 section-t-space">
+<div class="title1 section-t-space" id="top_products">
     <h4>special offer</h4>
     <h2 class="title-inner1">top products</h2>
 </div>
@@ -108,28 +109,19 @@
         <div class="row">
             <div class="col">
                 <div class="product-4 product-m no-arrow">
-                    <% Product.all.each do | product| %>
+                    <% Product.all.limit(4).each do | product| %>
                     <div class="product-box">
                         <div class="img-wrapper">
                             <div class="front">
-                                <a href="/products/ <%= product.id %>"><img src="../resources/images/pro3/27.jpg" class="img-fluid blur-up lazyload bg-img" alt=""></a>
+                                <a href="/products/ <%= product.id %>"><%= image_tag (product.images[0] if product.images.length > 0) , :class => "img-fluid blur-up lazyload bg-img" %></a>
                             </div>
                             <div class="back">
-                                <a href="/products/ <%= product.id %>"><img src="../resources/images/pro3/28.jpg" class="img-fluid blur-up lazyload bg-img" alt=""></a>
+                                <a href="/products/ <%= product.id %>"><%= image_tag (product.images[1] if product.images.length > 0) , :class => "img-fluid blur-up lazyload bg-img" %></a>
                             </div>
                             <div class="cart-info cart-wrap">
                                 <button data-toggle="modal" data-target="#addtocart" title="Add to cart">
                                     <i class="ti-shopping-cart"></i>
                                 </button>
-                                <a href="javascript:void(0)" title="Add to Wishlist">
-                                    <i class="ti-heart" aria-hidden="true"></i>
-                                </a>
-                                <a href="#" data-toggle="modal" data-target="#quick-view" title="Quick View">
-                                    <i class="ti-search" aria-hidden="true"></i>
-                                </a>
-                                <a href="compare.html" title="Compare">
-                                    <i class="ti-reload" aria-hidden="true"></i>
-                                </a>
                             </div>
                         </div>
                         <div class="product-detail">
@@ -147,19 +139,22 @@
                         </div>
 
                     </div>
+                    <% end %>
+                    <% Product.all.limit(4).each do | product| %>
+
                     <div class="product-box">
                         <div class="img-wrapper">
                             <!--<div class="lable-block"><span class="lable3">new</span> <span class="lable4">on
                                     sale</span></div>-->
                             <div class="front">
                                 <a href="/products/ <%= product.id %>">
-                                    <img src="../resources/images/pro3/1.jpg" class="img-fluid blur-up lazyload bg-img" alt=""></a>
+                                    <%= image_tag (product.images[0] if product.images.length > 0) , :class => "img-fluid blur-up lazyload bg-img" %></a>
                             </div>
                             <div class="back">
-                                <a href="/products/ <%= product.id %>"><img src="../resources/images/pro3/2.jpg" class="img-fluid blur-up lazyload bg-img" alt=""></a>
+                                <a href="/products/ <%= product.id %>"><%= image_tag (product.images[1] if product.images.length > 0) , :class => "img-fluid blur-up lazyload bg-img" %></a>
                             </div>
                             <div class="cart-info cart-wrap">
-                                <button data-toggle="modal" data-target="#addtocart" title="Add to cart"><i class="ti-shopping-cart"></i></button> <a href="javascript:void(0)" title="Add to Wishlist"><i class="ti-heart" aria-hidden="true"></i></a> <a href="#" data-toggle="modal" data-target="#quick-view" title="Quick View"><i class="ti-search" aria-hidden="true"></i></a> <a href="compare.html" title="Compare"><i class="ti-reload" aria-hidden="true"></i></a></div>
+                                <button data-toggle="modal" data-target="#addtocart" title="Add to cart"><i class="ti-shopping-cart"></i></button> </div>
                         </div>
                         <div class="product-detail">
                             <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i>
@@ -177,16 +172,20 @@
                             </ul>
                         </div>
                     </div>
+                    <% end %>
+                    <% Product.all.limit(4).each do | product| %>
+
                     <div class="product-box">
+
                         <div class="img-wrapper">
                             <div class="front">
-                                <a href="/products/ <%= product.id %>"><img src="../resources/images/pro3/33.jpg" class="img-fluid blur-up lazyload bg-img" alt=""></a>
+                                <a href="/products/ <%= product.id %>"><%= image_tag (product.images[0] if product.images.length > 0) , :class => "img-fluid blur-up lazyload bg-img" %></a>
                             </div>
                             <div class="back">
-                                <a href="/products/ <%= product.id %>"><img src="../resources/images/pro3/34.jpg" class="img-fluid blur-up lazyload bg-img" alt=""></a>
+                                <a href="/products/ <%= product.id %>"><%= image_tag (product.images[1] if product.images.length > 0) , :class => "img-fluid blur-up lazyload bg-img" %></a>
                             </div>
                             <div class="cart-info cart-wrap">
-                                <button data-toggle="modal" data-target="#addtocart" title="Add to cart"><i class="ti-shopping-cart"></i></button> <a href="javascript:void(0)" title="Add to Wishlist"><i class="ti-heart" aria-hidden="true"></i></a> <a href="#" data-toggle="modal" data-target="#quick-view" title="Quick View"><i class="ti-search" aria-hidden="true"></i></a> <a href="compare.html" title="Compare"><i class="ti-reload" aria-hidden="true"></i></a></div>
+                                <button data-toggle="modal" data-target="#addtocart" title="Add to cart"><i class="ti-shopping-cart"></i></button></div>
                         </div>
                         <div class="product-detail">
                             <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i>
@@ -202,16 +201,19 @@
                             </ul>
                         </div>
                     </div>
+                    <% end %>
+                    <% Product.all.limit(4).each do | product| %>
+
                     <div class="product-box">
                         <div class="img-wrapper">
                             <div class="front">
-                                <a href="/products/ <%= product.id %>"><img src="../resources/images/pro3/35.jpg" class="img-fluid blur-up lazyload bg-img" alt=""></a>
+                                <a href="/products/ <%= product.id %>"><%= image_tag (product.images[0] if product.images.length > 0) , :class => "img-fluid blur-up lazyload bg-img" %></a>
                             </div>
                             <div class="back">
-                                <a href="/products/ <%= product.id %>"><img src="../resources/images/pro3/36.jpg" class="img-fluid blur-up lazyload bg-img" alt=""></a>
+                                <a href="/products/ <%= product.id %>"><%= image_tag (product.images[1] if product.images.length > 0) , :class => "img-fluid blur-up lazyload bg-img" %></a>
                             </div>
                             <div class="cart-info cart-wrap">
-                                <button data-toggle="modal" data-target="#addtocart" title="Add to cart"><i class="ti-shopping-cart"></i></button> <a href="javascript:void(0)" title="Add to Wishlist"><i class="ti-heart" aria-hidden="true"></i></a> <a href="#" data-toggle="modal" data-target="#quick-view" title="Quick View"><i class="ti-search" aria-hidden="true"></i></a> <a href="compare.html" title="Compare"><i class="ti-reload" aria-hidden="true"></i></a></div>
+                                <button data-toggle="modal" data-target="#addtocart" title="Add to cart"><i class="ti-shopping-cart"></i></button></a></div>
                         </div>
                         <div class="product-detail">
                             <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i>
@@ -227,16 +229,19 @@
                             </ul>
                         </div>
                     </div>
+                    <% end %>
+                    <% Product.all.limit(4).each do | product| %>
+
                     <div class="product-box">
                         <div class="img-wrapper">
                             <div class="front">
-                                <a href="/products/ <%= product.id %>"><img src="../resources/images/pro3/33.jpg" class="img-fluid blur-up lazyload bg-img" alt=""></a>
+                                <a href="/products/ <%= product.id %>"><%= image_tag (product.images[0] if product.images.length > 0) , :class => "img-fluid blur-up lazyload bg-img" %></a>
                             </div>
                             <div class="back">
-                                <a href="/products/ <%= product.id %>"><img src="../resources/images/pro3/34.jpg" class="img-fluid blur-up lazyload bg-img" alt=""></a>
+                                <a href="/products/ <%= product.id %>"><%= image_tag (product.images[1] if product.images.length > 0) , :class => "img-fluid blur-up lazyload bg-img" %></a>
                             </div>
                             <div class="cart-info cart-wrap">
-                                <button data-toggle="modal" data-target="#addtocart" title="Add to cart"><i class="ti-shopping-cart"></i></button> <a href="javascript:void(0)" title="Add to Wishlist"><i class="ti-heart" aria-hidden="true"></i></a> <a href="#" data-toggle="modal" data-target="#quick-view" title="Quick View"><i class="ti-search" aria-hidden="true"></i></a> <a href="compare.html" title="Compare"><i class="ti-reload" aria-hidden="true"></i></a></div>
+                                <button data-toggle="modal" data-target="#addtocart" title="Add to cart"><i class="ti-shopping-cart"></i></button></div>
                         </div>
                         <div class="product-detail">
                             <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i>
@@ -303,10 +308,10 @@
                                 <div class="product-box">
                                     <div class="img-wrapper">
                                         <div class="front">
-                                            <a href="/products/ <%= product.id %>"><img src="../resources/images/pro3/27.jpg" class="img-fluid blur-up lazyload bg-img" alt=""></a>
+                                            <a href="/products/<%= product.id %>"><%= image_tag (product.images[0] if product.images.length > 0) , :class => "img-fluid blur-up lazyload bg-img" %></a>
                                         </div>
                                         <div class="back">
-                                            <a href="/products/ <%= product.id %>"><img src="../resources/images/pro3/28.jpg" class="img-fluid blur-up lazyload bg-img" alt=""></a>
+                                            <a href="/products/<%= product.id %>"><%= image_tag (product.images[1] if product.images.length > 0) , :class => "img-fluid blur-up lazyload bg-img" %></a>
                                         </div>
                                         <div class="cart-info cart-wrap">
                                             <%= form_tag order_items_path, remote: true do %>
@@ -336,15 +341,15 @@
                         </div>
                         <div id="tab-5" class="tab-content">
                             <div class="no-slider row">
-                                <% Product.all.limit(4).reverse.each do | product| %>
+                                <% Product.all.limit(4).each do | product| %>
                                 <div class="product-box">
                                     <div class="img-wrapper">
-                                        <div class="lable-block"><span class="lable3">new</span> <span class="lable4">on sale</span></div>
+                                        <div class="lable-block"></div>
                                         <div class="front">
-                                            <a href="/products/ <%= product.id %>"><img src="../resources/images/pro3/33.jpg" class="img-fluid blur-up lazyload bg-img" alt=""></a>
+                                            <a href="/products/<%= product.id %>"><%= image_tag (product.images[0] if product.images.length > 0) , :class => "img-fluid blur-up lazyload bg-img" %></a>
                                         </div>
                                         <div class="back">
-                                            <a href="/products/ <%= product.id %>"><img src="../resources/images/pro3/34.jpg" class="img-fluid blur-up lazyload bg-img" alt=""></a>
+                                            <a href="/products/<%= product.id %>"><%= image_tag (product.images[1] if product.images.length > 0) , :class => "img-fluid blur-up lazyload bg-img" %></a>
                                         </div>
                                         <div class="cart-info cart-wrap">
                                             <%= form_tag order_items_path, remote: true do %>
@@ -377,12 +382,12 @@
                                 <% Product.all.limit(4).reverse.each do | product| %>
                                 <div class="product-box">
                                     <div class="img-wrapper">
-                                        <div class="lable-block"><span class="lable3">new</span> <span class="lable4">on sale</span></div>
+                                        <div class="lable-block"></div>
                                         <div class="front">
-                                            <a href="/products/ <%= product.id %>"><img src="../resources/images/pro3/33.jpg" class="img-fluid blur-up lazyload bg-img" alt=""></a>
+                                            <a href="/products/ <%= product.id %>"><%= image_tag (product.images[0] if product.images.length > 0) , :class => "img-fluid blur-up lazyload bg-img" %>></a>
                                         </div>
                                         <div class="back">
-                                            <a href="/products/ <%= product.id %>"><img src="../resources/images/pro3/34.jpg" class="img-fluid blur-up lazyload bg-img" alt=""></a>
+                                            <a href="/products/ <%= product.id %>"><%= image_tag (product.images[1] if product.images.length > 0) , :class => "img-fluid blur-up lazyload bg-img" %></a>
                                         </div>
                                         <div class="cart-info cart-wrap">
                                             <%= form_tag order_items_path, remote: true do %>
