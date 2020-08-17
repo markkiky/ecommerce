@@ -1,6 +1,6 @@
 class CategoriesController < ApplicationController
   before_action :set_category, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_admin!, only: [:new, :edit]
+  before_action :authenticate_admin!, only: [:index, :new, :edit]
 
 
   # GET /categories
@@ -19,9 +19,6 @@ class CategoriesController < ApplicationController
     @category = current_admin.categories.build
   end
 
-  # GET /categories/1/edit
-  def edit
-  end
 
   # POST /categories
   # POST /categories.json
@@ -37,6 +34,10 @@ class CategoriesController < ApplicationController
       end
     end
   end
+
+   # GET /categories/1/edit
+   def edit
+   end
 
   # PATCH/PUT /categories/1
   # PATCH/PUT /categories/1.json

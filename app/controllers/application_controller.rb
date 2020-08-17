@@ -7,14 +7,6 @@ class ApplicationController < ActionController::Base
   end
   helper_method :current_cart
   
-  def after_sign_in_path_for(resource)
-          if admin_signed_in?
-            admin_dashboard_path
-          else
-            root_path
-          end
-        end
-    
     private
 
     def current_user
