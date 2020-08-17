@@ -85,36 +85,39 @@
                                 <div class="card-header">
                                     <h5>Manage Order</h5>
                                 </div>
+
                                 <div class="card-body order-datatable">
                                     <table class="display" id="basic-1">
                                         <thead>
                                             <tr>
                                                 <th>Order Id</th>
                                                 <th>Product</th>
-                                                <th>Payment Status</th>
-                                                <th>Payment Method</th>
-                                                <th>Order Status</th>
+                                                <th>Payment 
+                                                Status</th>
+                                                <th>Payment 
+                                                Method</th>
+                                                <th>Order 
+                                                Status</th>
                                                 <th>Date</th>
                                                 <th>Total</th>
                                             </tr>
                                         </thead>
+                                     <% @orders.each do |order| %>
                                         <tbody>
                                             <tr>
-                                                <td>#51240</td>
+                                                <td>ORD-REF-<%= order.id %></td>
                                                 <td>
                                                     <div class="d-flex">
-                                                        <img src="../resources/images/electronics/product/25.jpg" alt="" class="img-fluid img-30 mr-2 blur-up lazyloaded">
-                                                        <img src="../resources/images/electronics/product/13.jpg" alt="" class="img-fluid img-30 mr-2 blur-up lazyloaded">
-                                                        <img src="../resources/images/electronics/product/16.jpg" alt="" class="img-fluid img-30 blur-up lazyloaded">
+                                                        <%# image_tag (item.product.images[0] if item.product.images.length > 0), :class => "img-fluid img-30 mr-2 blur-up lazyloaded" %>
                                                     </div>
                                                 </td>
-                                                <td><span class="badge badge-secondary">Cash On Delivery</span></td>
-                                                <td>Paypal</td>
-                                                <td><span class="badge badge-success">Delivered</span></td>
-                                                <td>Dec 10,18</td>
-                                                <td>$54671</td>
+                                                <td><span class="badge badge-secondary"><%= order.payment_status %></span></td>
+                                                <td><%= order.payment_method %></td>
+                                                <td><span class="badge badge-success"><%= order.order_status %></span></td>
+                                                <td><%= order.created_at.strftime("%B %d, %Y") %> </td>
+                                                <td><%= number_to_currency(order.order_subtotal, :unit => 'KES ') %></td>
                                             </tr>
-                                            <tr>
+                                           <!-- <tr>
                                                 <td>#51241</td>
                                                 <td>
                                                     <div class="d-flex">
@@ -858,8 +861,9 @@
                                                 <td><span class="badge badge-primary">Shipped</span></td>
                                                 <td>Dec 19,18</td>
                                                 <td>$19.78</td>
-                                            </tr>
+                                            </tr>-->
                                         </tbody>
+                                    <% end %>
                                     </table>
                                 </div>
                             </div>
@@ -877,36 +881,37 @@
         </div>
 
     </div>
+</body>
 
-    <!-- latest jquery-->
-    <script src="../resources/js/jquery-3.3.1.min.js"></script>
+<!-- latest jquery-->
+<script src="../resources/js/jquery-3.3.1.min.js"></script>
 
-    <!-- Bootstrap js-->
-    <script src="../resources/js/popper.min.js"></script>
-    <script src="../resources/js/bootstrap.js"></script>
+<!-- Bootstrap js-->
+<script src="../resources/js/popper.min.js"></script>
+<script src="../resources/js/bootstrap.js"></script>
 
-    <!-- feather icon js-->
-    <script src="../resources/js/icons/feather-icon/feather.min.js"></script>
-    <script src="../resources/js/icons/feather-icon/feather-icon.js"></script>
+<!-- feather icon js-->
+<script src="../resources/js/icons/feather-icon/feather.min.js"></script>
+<script src="../resources/js/icons/feather-icon/feather-icon.js"></script>
 
-    <!-- Sidebar jquery-->
-    <script src="../resources/js/sidebar-menu.js"></script>
+<!-- Sidebar jquery-->
+<script src="../resources/js/sidebar-menu.js"></script>
 
-    <!-- Datatable js-->
-    <script src="../resources/js/datatables/jquery.dataTables.min.js"></script>
-    <script src="../resources/js/datatables/custom-basic.js"></script>
+<!-- Datatable js-->
+<script src="../resources/js/datatables/jquery.dataTables.min.js"></script>
+<script src="../resources/js/datatables/custom-basic.js"></script>
 
-    <!--Customizer admin-->
-    <script src="../resources/js/admin-customizer.js"></script>
+<!--Customizer admin-->
+<script src="../resources/js/admin-customizer.js"></script>
 
-    <!-- lazyload js-->
-    <script src="../resources/js/lazysizes.min.js"></script>
+<!-- lazyload js-->
+<script src="../resources/js/lazysizes.min.js"></script>
 
-    <!--right sidebar js-->
-    <script src="../resources/js/chat-menu.js"></script>
+<!--right sidebar js-->
+<script src="../resources/js/chat-menu.js"></script>
 
-    <!--script admin-->
-    <script src="../resources/js/admin-script.js"></script>
+<!--script admin-->
+<script src="../resources/js/admin-script.js"></script>
 
 </body>
 
