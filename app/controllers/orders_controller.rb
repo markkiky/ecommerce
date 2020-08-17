@@ -5,6 +5,7 @@ class OrdersController < ApplicationController
   require "json"
  
   before_action :authenticate_admin!, only: [:index, :show]
+  before_action :authenticate_customer!, only: [:new, :create]
 
   def index
     @orders = Order.all
@@ -12,10 +13,27 @@ class OrdersController < ApplicationController
 
   def new
     @order = current_cart.order
+    @customer = current_customer
   end
  
   def create
-   @order = current_cart.order
+    # check if order_cart_subtotal is empty
+    #  TO DOs
+    @order = current_cart.order
+    @order.customer_id = current_customer.id
+    
+    @customer = current_customer
+    @customer.first_name = params[:customer][:first_name]
+    @customer.last_name = params[:customer][:last_name]
+    # @customer.email = params[:customer][:email]
+    @customer.phone = params[:customer][:phone]
+    @customer.county = params[:customer][:county]
+    @customer.shipping_address = params[:customer][:shipping_address]
+    @customer.shipping_city = params[:customer][:shipping_city]
+    @customer.shipping_postal_code = params[:customer][:shipping_postal_code]
+
+
+   @customer.save!
     if @order.update_attributes(order_params.merge(order_status: 'open'))
       session[:cart_token] = nil
     else
@@ -26,7 +44,7 @@ class OrdersController < ApplicationController
       https = Net::HTTP.new(url.host, url.port);
       https.use_ssl = true
       request = Net::HTTP::Post.new(url)
-      form_data = [['TransactionType', 'CustomerPayBillOnline'],['PayBillNumber', '175555'],['Amount', @order.order_subtotal.to_i.to_s],['PhoneNumber', @order.client_phone_number],['AccountReference', 'PKX2019062'],['TransactionDesc', 'PKX201906264'],['FullNames', '- - -']]
+      form_data = [['TransactionType', 'CustomerPayBillOnline'],['PayBillNumber', '175555'],['Amount', @order.order_subtotal.to_i.to_s],['PhoneNumber', @customer.phone],['AccountReference', 'PKX2019062'],['TransactionDesc', 'PKX201906264'],['FullNames', '- - -']]
       request.set_form form_data, 'multipart/form-data'
       response = https.request(request)
       puts response.read_body

@@ -68,7 +68,7 @@
         <div class="container">
             <div class="checkout-page">
                 <div class="checkout-form">
-                    <%= form_for @order, url: checkout_path do |f| %>
+                    <%= form_for @customer, url: checkout_path do |f| %>
                     <div class="row">
                         <div class="col-lg-6 col-sm-12 col-xs-12">
                             <div class="checkout-title">
@@ -78,36 +78,36 @@
                                 <div class="form-group col-md-6 col-sm-6 col-xs-12">
                                     <div class="field-label">First Name</div>
                                     <!--<input type="text" name="field-name" value="" placeholder="">-->
-                                    <%= f.text_field :client_first_name, type: "text", required: true %>
+                                    <%= f.text_field :first_name, type: "text", required: true %>
                                 </div>
                                 <div class="form-group col-md-6 col-sm-6 col-xs-12">
                                     <div class="field-label">Last Name</div>
                                     <!--<input type="text" name="field-name" value="" placeholder="">-->
-                                    <%= f.text_field :client_last_name, type: "text", required: true %>
+                                    <%= f.text_field :last_name, type: "text", required: true %>
                                 </div>
                                 <div class="form-group col-md-6 col-sm-6 col-xs-12">
                                     <div class="field-label">Phone Number</div>
-                                    <%= f.number_field :client_phone_number %>
+                                    <%= f.number_field :phone %>
                                 </div>
                                 <div class="form-group col-md-6 col-sm-6 col-xs-12">
                                     <div class="field-label">Email Address</div>
-                                    <%= f.email_field :client_email, type: "email" %>
+                                    <%= f.email_field :email, type: "email" %>
                                 </div>
                                 <div class="form-group col-md-12 col-sm-12 col-xs-12">
                                     <div class="field-label">Country</div>
-                                    <%= f.select :client_country, options_for_select(["Kenya", "Uganda", "Tanzania"]) %>
+                                    <%= f.select :county, options_for_select(["Kenya", "Uganda", "Tanzania"]) %>
                                 </div>
                                 <div class="form-group col-md-12 col-sm-12 col-xs-12">
                                     <div class="field-label">Address</div>
-                                    <%= f.text_field :client_address, required: true %>
+                                    <%= f.text_field :shipping_address, required: true %>
                                 </div>
                                 <div class="form-group col-md-12 col-sm-12 col-xs-12">
                                     <div class="field-label">Town/City</div>
-                                    <%= f.text_field :client_city, required: true, type: "text" %>
+                                    <%= f.text_field :shipping_city, required: true, type: "text" %>
                                 </div>
                                 <div class="form-group col-md-12 col-sm-6 col-xs-12">
                                     <div class="field-label">Postal Code</div>
-                                    <%= f.number_field :client_postal_code, required: true, type: "number" %>
+                                    <%= f.number_field :shipping_postal_code, required: true, type: "number" %>
                                 </div>
                                 <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                     <input type="checkbox" name="shipping-option" id="account-option"> &ensp;
@@ -144,7 +144,8 @@
                                     <ul class="total">
                                         <li>Total <span class="count"><%= number_to_currency(current_cart.order_subtotal, unit: ' KES ') %></span></li>
                                     </ul>
-                                </div>
+                                </div>                                    
+                                <%= f.fields_for :order do |order| %>
                                 <div class="payment-box">
                                     <div class="upper-box">
                                         <div class="payment-options">
@@ -152,7 +153,7 @@
                                                 <li>
                                                     <div class="radio-option">
                                                         <!--<input type="radio" name="payment-group" id="payment-1" checked="checked">-->
-                                                        <%= f.radio_button :payment_method, "Mpesa", :type => "radio", :name => "order[payment_method]", :id => "payment-1", :checked => true %>
+                                                        <%= order.radio_button :payment_method, "Mpesa", :type => "radio", :name => "order[payment_method]", :id => "payment-1", :checked => true %>
                                                         <label for="payment-1">Mpesa<span class="small-text">Please send a check to Store
                                                                 Name, Store Street, Store Town, Store State /
                                                                 County, Store Postcode.</span></label>
@@ -160,7 +161,7 @@
                                                 </li>
                                                 <li>
                                                     <div class="radio-option">
-                                                        <%= f.radio_button :payment_method, "Cash On Delivery", :type => "radio", :name => "order[payment_method]", :id => "payment-2"%>
+                                                        <%= order.radio_button :payment_method, "Cash On Delivery", :type => "radio", :name => "order[payment_method]", :id => "payment-2"%>
                                                         <label for="payment-2">Cash On Delivery<span class="small-text">Please send a check to Store
                                                                 Name, Store Street, Store Town, Store State /
                                                                 County, Store Postcode.</span></label>
@@ -168,7 +169,7 @@
                                                 </li>
                                                 <li>
                                                     <div class="radio-option paypal">
-                                                        <%= f.radio_button :payment_method, "Card", :type => "radio", :name => "order[payment_method]", :id => "payment-3"%>
+                                                        <%= order.radio_button :payment_method, "Card", :type => "radio", :name => "order[payment_method]", :id => "payment-3"%>
                                                         <label for="payment-3">Card<span class="image"><img src="" alt=""></span></label>
                                                     </div>
                                                 </li>
@@ -179,6 +180,7 @@
                                         <%= f.submit "Place Order", :class => "btn-solid btn" %>
                                     </div>
                                 </div>
+                                <% end %>
                             </div>
                         </div>
                     </div>
