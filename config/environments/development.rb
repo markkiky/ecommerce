@@ -64,4 +64,7 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
   config.web_console.whiny_requests = false
   config.hosts << "05b020ff7b32.ngrok.io"
+  config.hosts << "lvh.me"
+  config.hosts << "97873f8687c0.ngrok.io"
+  config.hosts << "cead7967c790.ngrok.io"
 end

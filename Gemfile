@@ -16,6 +16,8 @@ gem 'puma', '~> 4.1'
 
 # Devise gems 
 gem 'devise'
+gem 'omniauth'
+gem 'omniauth-google-oauth2'
 gem 'omniauth-twitter', '~> 1.4'
 
 # Use SCSS for stylesheets
