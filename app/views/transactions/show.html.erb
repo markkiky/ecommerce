@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Transaction:</strong>
+  <%= @transaction.transaction_id %>
+</p>
+
+<p>
+  <strong>Order:</strong>
+  <%= @transaction.order_id %>
+</p>
+
+<p>
+  <strong>Callback returned:</strong>
+  <%= @transaction.callback_returned %>
+</p>
+
+<p>
+  <strong>Amount:</strong>
+  <%= @transaction.amount %>
+</p>
+
+<p>
+  <strong>Account from:</strong>
+  <%= @transaction.account_from %>
+</p>
+
+<p>
+  <strong>Transaction code:</strong>
+  <%= @transaction.transaction_code %>
+</p>
+
+<p>
+  <strong>Message:</strong>
+  <%= @transaction.message %>
+</p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @transaction.date %>
+</p>
+
+<p>
+  <strong>Payment mode:</strong>
+  <%= @transaction.payment_mode %>
+</p>
+
+<%= link_to 'Edit', edit_transaction_path(@transaction) %> |
+<%= link_to 'Back', transactions_path %>

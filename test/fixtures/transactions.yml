@@ -1,0 +1,23 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  transaction_id: 
+  order_id: MyString
+  callback_returned: MyString
+  amount: 9.99
+  account_from: MyString
+  transaction_code: MyString
+  message: MyString
+  date: 2020-08-17 17:57:42
+  payment_mode: MyString
+
+two:
+  transaction_id: 
+  order_id: MyString
+  callback_returned: MyString
+  amount: 9.99
+  account_from: MyString
+  transaction_code: MyString
+  message: MyString
+  date: 2020-08-17 17:57:42
+  payment_mode: MyString

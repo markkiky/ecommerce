@@ -1,0 +1,62 @@
+<%= form_with(model: transaction, local: true) do |form| %>
+  <% if transaction.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(transaction.errors.count, "error") %> prohibited this transaction from being saved:</h2>
+
+      <ul>
+        <% transaction.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :transaction_id %>
+    <%= form.text_field :transaction_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :order_id %>
+    <%= form.text_field :order_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :callback_returned %>
+    <%= form.text_field :callback_returned %>
+  </div>
+
+  <div class="field">
+    <%= form.label :amount %>
+    <%= form.text_field :amount %>
+  </div>
+
+  <div class="field">
+    <%= form.label :account_from %>
+    <%= form.text_field :account_from %>
+  </div>
+
+  <div class="field">
+    <%= form.label :transaction_code %>
+    <%= form.text_field :transaction_code %>
+  </div>
+
+  <div class="field">
+    <%= form.label :message %>
+    <%= form.text_field :message %>
+  </div>
+
+  <div class="field">
+    <%= form.label :date %>
+    <%= form.datetime_select :date %>
+  </div>
+
+  <div class="field">
+    <%= form.label :payment_mode %>
+    <%= form.text_field :payment_mode %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

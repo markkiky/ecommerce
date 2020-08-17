@@ -67,4 +67,5 @@ Rails.application.configure do
   config.hosts << "lvh.me"
   config.hosts << "97873f8687c0.ngrok.io"
   config.hosts << "cead7967c790.ngrok.io"
+  config.hosts << "b34c400cfa3a.ngrok.io"
 end

@@ -1,0 +1,43 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Transactions</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Transaction</th>
+      <th>Order</th>
+      <th>Callback returned</th>
+      <th>Amount</th>
+      <th>Account from</th>
+      <th>Transaction code</th>
+      <th>Message</th>
+      <th>Date</th>
+      <th>Payment mode</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @transactions.each do |transaction| %>
+      <tr>
+        <td><%= transaction.transaction_id %></td>
+        <td><%= transaction.order_id %></td>
+        <td><%= transaction.callback_returned %></td>
+        <td><%= transaction.amount %></td>
+        <td><%= transaction.account_from %></td>
+        <td><%= transaction.transaction_code %></td>
+        <td><%= transaction.message %></td>
+        <td><%= transaction.date %></td>
+        <td><%= transaction.payment_mode %></td>
+        <td><%= link_to 'Show', transaction %></td>
+        <td><%= link_to 'Edit', edit_transaction_path(transaction) %></td>
+        <td><%= link_to 'Destroy', transaction, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Transaction', new_transaction_path %>

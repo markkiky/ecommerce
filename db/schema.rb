@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_16_135730) do
+ActiveRecord::Schema.define(version: 2020_08_17_145741) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "name", null: false
@@ -209,6 +209,20 @@ ActiveRecord::Schema.define(version: 2020_08_16_135730) do
   end
 
   create_table "shopping_carts", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "transactions", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+    t.string "transaction_id"
+    t.string "order_id"
+    t.string "callback_returned"
+    t.decimal "amount", precision: 10
+    t.string "account_from"
+    t.string "transaction_code"
+    t.string "message"
+    t.datetime "date"
+    t.string "payment_mode"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
