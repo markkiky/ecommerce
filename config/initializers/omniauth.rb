@@ -14,6 +14,7 @@ Rails.application.config.middleware.use OmniAuth::Builder do
         :lang => 'pt'
       }
     }
+    provider :google_oauth2, ENV["GOOGLE_CLIENT_ID"],ENV["GOOGLE_CLIENT_SECRET"], skip_jwt: true
 end
 
 # bearer token : "AAAAAAAAAAAAAAAAAAAAAF8xGwEAAAAA4N2zHQHdolzZA5HQThTssZh%2BJd8%3D5XzLdaGJMG0XyfXUMKu0fcXLBlYxNE4hTEToRK9OGj3NIEAGTH"

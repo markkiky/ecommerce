@@ -21,7 +21,7 @@ Rails.application.routes.draw do
 
 
   # Twitter path
-  get '/auth/:provider/callback', to: 'sessions#create'
+  get '/auth/:provider/callback', to: 'sessions#omniauth'
 
   #cart routes 
   resources :order_items, path: '/cart/items'
