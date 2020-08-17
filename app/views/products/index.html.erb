@@ -209,7 +209,7 @@
                                 <div class="card-body product-box">
                                     <div class="img-wrapper">
                                         <div class="front">
-                                            <a href="#"><img src="../resources/images/pro3/34.jpg" class="img-fluid blur-up lazyload bg-img" alt=""></a>
+                                            <a href="#"><a href="/products/<%= product.id %>"><%= image_tag (product.images[0] if product.images.length > 0) , :class => "img-fluid blur-up lazyload bg-img" %></a></a>
                                             <div class="product-hover">
                                                 <ul>
                                                     <li>

@@ -120,9 +120,9 @@
                         <h5 class="title-border">new product</h5>
                         <div class="offer-slider slide-1">
                             <div>
-                            <% Product.all.limit(3).reverse.each do | product | %>
+                                <% Product.all.limit(3).reverse.each do | product | %>
                                 <div class="media">
-                                    <a href=""><img class="img-fluid blur-up lazyload" src="../resources/images/pro/1.jpg" alt=""></a>
+                                    <a href="/products/<%= product.id %>"><%= image_tag (product.images[0] if product.images.length > 0) , :class => "img-fluid blur-up lazyload" %></a>
                                     <div class="media-body align-self-center">
                                         <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div><a href="product-page(no-sidebar).html">
                                             <h6><%= product.product_name %></h6>
@@ -130,12 +130,12 @@
                                         <h4><%= number_to_currency(@product.price, :unit => ' KES ') %></h4>
                                     </div>
                                 </div>
-                            <% end %>
+                                <% end %>
                             </div>
                             <div>
-                             <% Product.all.limit(3).reverse.each do | product | %>
+                                <% Product.all.limit(3).each do | product | %>
                                 <div class="media">
-                                    <a href=""><img class="img-fluid blur-up lazyload" src="../resources/images/pro/1.jpg" alt=""></a>
+                                    <a href="/products/<%= product.id %>"><%= image_tag (product.images[0] if product.images.length > 0) , :class => "img-fluid blur-up lazyload" %></a>
                                     <div class="media-body align-self-center">
                                         <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div><a href="product-page(no-sidebar).html">
                                             <h6><%= product.product_name %></h6>
@@ -143,7 +143,7 @@
                                         <h4><%= number_to_currency(@product.price, :unit => ' KES ') %></h4>
                                     </div>
                                 </div>
-                            <% end %>
+                                <% end %>
                             </div>
                         </div>
                     </div>
@@ -233,7 +233,8 @@
                                         </div>
                                     </div>
                                     <!--<div class="product-buttons"><a href="#" data-toggle="modal" data-target="#addtocart" class="btn btn-solid">add to cart</a><a href="#" class="btn btn-solid">buy now</a></div>    -->
-                                    <div class="product-buttons"><%= button_to order_items_path(:product_id => @product.id), { :class => "btn btn-solid", 'data-toggle' => 'modal', 'data-target' => '#addtocart' } do %> add to cart <% end %></div>
+                                    <div class="product-buttons"><%= button_to order_items_path(:product_id => @product.id), { :class => "btn btn-solid", 'data-toggle' => 'modal', 'data-target' => '#addtocart' } do %> add to cart <% end %> </div>
+
                                     <% end %>
                                     <div class="border-product">
                                         <h6 class="product-title">product details</h6>
@@ -377,10 +378,10 @@
                 <div class="product-box">
                     <div class="img-wrapper">
                         <div class="front">
-                            <a href="#"><img src="../resources/images/pro3/33.jpg" class="img-fluid blur-up lazyload bg-img" alt=""></a>
+                            <a href="/products/<%= product.id %>"><%= image_tag (product.images[0] if product.images.length > 0) , :class => "img-fluid blur-up lazyload bg-img" %></a>
                         </div>
                         <div class="back">
-                            <a href="#"><img src="../resources/images/pro3/34.jpg" class="img-fluid blur-up lazyload bg-img" alt=""></a>
+                            <a href="/products/<%= product.id %>"><%= image_tag (product.images[1] if product.images.length > 0) , :class => "img-fluid blur-up lazyload bg-img" %></a>
                         </div>
                         <div class="cart-info cart-wrap">
                             <%= form_tag order_items_path, remote: true do %>
@@ -405,7 +406,7 @@
                     </div>
                 </div>
             </div>
-        <% end %>
+            <% end %>
         </div>
     </div>
 </section>
@@ -429,15 +430,17 @@
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
+                                <% current_cart.order.items.each do |item| %>
                                 <div class="media">
                                     <a href="#">
-                                        <img class="img-fluid blur-up lazyload pro-img" src="../resources/images/fashion/product/43.jpg" alt="">
+                                        <!--<img class="img-fluid blur-up lazyload pro-img" src="../resources/images/fashion/product/43.jpg" alt="">-->
+                                        <a href="/products/<%= item.product.id %>"><%= image_tag (item.product.images[0] if item.product.images.length > 0), :class => "img-fluid blur-up lazyload pro-img" %></a>
                                     </a>
                                     <div class="media-body align-self-center text-center">
                                         <a href="#">
                                             <h6>
                                                 <i class="fa fa-check"></i>Item
-                                                <span></span>
+                                                <span><%= item.product.product_name %></span>
                                                 <span> successfully added to your Cart</span>
                                             </h6>
                                         </a>
@@ -446,71 +449,9 @@
                                             <a href="<%= checkout_path %>" class="checkout btn btn-solid">Check out</a>
                                             <a href="<%= root_url %>" class="continue btn btn-solid">Continue shopping</a>
                                         </div>
-
-                                        <div class="upsell_payment">
-                                            <img src="../resources/images/payment_cart.png" class="img-fluid blur-up lazyload" alt="">
-                                        </div>
                                     </div>
                                 </div>
-                                <div class="product-section">
-                                    <div class="col-12 product-upsell text-center">
-                                        <h4>Customers who bought this item also.</h4>
-                                    </div>
-                                    <div class="row" id="upsell_product">
-                                        <div class="product-box col-sm-3 col-6">
-                                            <div class="img-wrapper">
-                                                <div class="front">
-                                                    <a href="#">
-                                                        <img src="../resources/images/fashion/product/1.jpg" class="img-fluid blur-up lazyload mb-1" alt="cotton top">
-                                                    </a>
-                                                </div>
-                                                <div class="product-detail">
-                                                    <h6><a href="#"><span>cotton top</span></a></h6>
-                                                    <h4><span>$25</span></h4>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="product-box col-sm-3 col-6">
-                                            <div class="img-wrapper">
-                                                <div class="front">
-                                                    <a href="#">
-                                                        <img src="../resources/images/fashion/product/34.jpg" class="img-fluid blur-up lazyload mb-1" alt="cotton top">
-                                                    </a>
-                                                </div>
-                                                <div class="product-detail">
-                                                    <h6><a href="#"><span>cotton top</span></a></h6>
-                                                    <h4><span>$25</span></h4>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="product-box col-sm-3 col-6">
-                                            <div class="img-wrapper">
-                                                <div class="front">
-                                                    <a href="#">
-                                                        <img src="../resources/images/fashion/product/13.jpg" class="img-fluid blur-up lazyload mb-1" alt="cotton top">
-                                                    </a>
-                                                </div>
-                                                <div class="product-detail">
-                                                    <h6><a href="#"><span>cotton top</span></a></h6>
-                                                    <h4><span>$25</span></h4>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="product-box col-sm-3 col-6">
-                                            <div class="img-wrapper">
-                                                <div class="front">
-                                                    <a href="#">
-                                                        <img src="../resources/images/fashion/product/19.jpg" class="img-fluid blur-up lazyload mb-1" alt="cotton top">
-                                                    </a>
-                                                </div>
-                                                <div class="product-detail">
-                                                    <h6><a href="#"><span>cotton top</span></a></h6>
-                                                    <h4><span>$25</span></h4>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                <% end %>
                             </div>
                         </div>
                     </div>

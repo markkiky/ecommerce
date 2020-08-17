@@ -119,9 +119,11 @@
                                 <a href="/products/ <%= product.id %>"><%= image_tag (product.images[1] if product.images.length > 0) , :class => "img-fluid blur-up lazyload bg-img" %></a>
                             </div>
                             <div class="cart-info cart-wrap">
-                                <button data-toggle="modal" data-target="#addtocart" title="Add to cart">
-                                    <i class="ti-shopping-cart"></i>
-                                </button>
+                                <%= form_tag order_items_path, remote: true do %>
+                                <%= hidden_field_tag :product_id, product.id %>
+                                <%= hidden_field_tag :quantity, 1 %>
+                                <%= button_to order_items_path(:product_id => product.id), {'data-toggle' => 'modal', 'data-target' => '#addtocart', :title => "Add to cart"} do %><i class="ti-shopping-cart"></i><% end %>
+                                <% end %>
                             </div>
                         </div>
                         <div class="product-detail">
@@ -141,7 +143,6 @@
                     </div>
                     <% end %>
                     <% Product.all.limit(4).each do | product| %>
-
                     <div class="product-box">
                         <div class="img-wrapper">
                             <!--<div class="lable-block"><span class="lable3">new</span> <span class="lable4">on
@@ -154,7 +155,12 @@
                                 <a href="/products/ <%= product.id %>"><%= image_tag (product.images[1] if product.images.length > 0) , :class => "img-fluid blur-up lazyload bg-img" %></a>
                             </div>
                             <div class="cart-info cart-wrap">
-                                <button data-toggle="modal" data-target="#addtocart" title="Add to cart"><i class="ti-shopping-cart"></i></button> </div>
+                                <%= form_tag order_items_path, remote: true do %>
+                                <%= hidden_field_tag :product_id, product.id %>
+                                <%= hidden_field_tag :quantity, 1 %>
+                                <%= button_to order_items_path(:product_id => product.id), {'data-toggle' => 'modal', 'data-target' => '#addtocart', :title => "Add to cart"} do %><i class="ti-shopping-cart"></i><% end %>
+                                <% end %>
+                            </div>
                         </div>
                         <div class="product-detail">
                             <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i>
@@ -174,9 +180,7 @@
                     </div>
                     <% end %>
                     <% Product.all.limit(4).each do | product| %>
-
                     <div class="product-box">
-
                         <div class="img-wrapper">
                             <div class="front">
                                 <a href="/products/ <%= product.id %>"><%= image_tag (product.images[0] if product.images.length > 0) , :class => "img-fluid blur-up lazyload bg-img" %></a>
@@ -185,7 +189,12 @@
                                 <a href="/products/ <%= product.id %>"><%= image_tag (product.images[1] if product.images.length > 0) , :class => "img-fluid blur-up lazyload bg-img" %></a>
                             </div>
                             <div class="cart-info cart-wrap">
-                                <button data-toggle="modal" data-target="#addtocart" title="Add to cart"><i class="ti-shopping-cart"></i></button></div>
+                                <%= form_tag order_items_path, remote: true do %>
+                                <%= hidden_field_tag :product_id, product.id %>
+                                <%= hidden_field_tag :quantity, 1 %>
+                                <%= button_to order_items_path(:product_id => product.id), {'data-toggle' => 'modal', 'data-target' => '#addtocart', :title => "Add to cart"} do %><i class="ti-shopping-cart"></i><% end %>
+                                <% end %>
+                            </div>
                         </div>
                         <div class="product-detail">
                             <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i>
@@ -203,7 +212,6 @@
                     </div>
                     <% end %>
                     <% Product.all.limit(4).each do | product| %>
-
                     <div class="product-box">
                         <div class="img-wrapper">
                             <div class="front">
@@ -212,8 +220,13 @@
                             <div class="back">
                                 <a href="/products/ <%= product.id %>"><%= image_tag (product.images[1] if product.images.length > 0) , :class => "img-fluid blur-up lazyload bg-img" %></a>
                             </div>
-                            <div class="cart-info cart-wrap">
-                                <button data-toggle="modal" data-target="#addtocart" title="Add to cart"><i class="ti-shopping-cart"></i></button></a></div>
+                        </div>
+                        <div class="cart-info cart-wrap">
+                            <%= form_tag order_items_path, remote: true do %>
+                            <%= hidden_field_tag :product_id, product.id %>
+                            <%= hidden_field_tag :quantity, 1 %>
+                            <%= button_to order_items_path(:product_id => product.id), {'data-toggle' => 'modal', 'data-target' => '#addtocart', :title => "Add to cart"} do %><i class="ti-shopping-cart"></i><% end %>
+                            <% end %>
                         </div>
                         <div class="product-detail">
                             <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i>
@@ -231,7 +244,6 @@
                     </div>
                     <% end %>
                     <% Product.all.limit(4).each do | product| %>
-
                     <div class="product-box">
                         <div class="img-wrapper">
                             <div class="front">
@@ -241,19 +253,25 @@
                                 <a href="/products/ <%= product.id %>"><%= image_tag (product.images[1] if product.images.length > 0) , :class => "img-fluid blur-up lazyload bg-img" %></a>
                             </div>
                             <div class="cart-info cart-wrap">
-                        </div>
-                        <div class="product-detail">
-                            <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i>
+                                <%= form_tag order_items_path, remote: true do %>
+                                <%= hidden_field_tag :product_id, product.id %>
+                                <%= hidden_field_tag :quantity, 1 %>
+                                <%= button_to order_items_path(:product_id => product.id), {'data-toggle' => 'modal', 'data-target' => '#addtocart', :title => "Add to cart"} do %><i class="ti-shopping-cart"></i><% end %>
+                                <% end %>
                             </div>
-                            <a href="/products/ <%= product.id %>">
-                                <h6><%= product.product_name %></h6>
-                            </a>
-                            <h4><%= number_to_currency(product.price, :unit => ' KES ') %></h4>
-                            <ul class="color-variant">
-                                <li class="bg-light0"></li>
-                                <li class="bg-light1"></li>
-                                <li class="bg-light2"></li>
-                            </ul>
+                            <div class="product-detail">
+                                <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i>
+                                </div>
+                                <a href="/products/ <%= product.id %>">
+                                    <h6><%= product.product_name %></h6>
+                                </a>
+                                <h4><%= number_to_currency(product.price, :unit => ' KES ') %></h4>
+                                <ul class="color-variant">
+                                    <li class="bg-light0"></li>
+                                    <li class="bg-light1"></li>
+                                    <li class="bg-light2"></li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                     <% end %>

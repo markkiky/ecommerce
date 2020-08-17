@@ -87,10 +87,10 @@
                     <div class="product-box">
                         <div class="img-wrapper">
                             <div class="front">
-                                <a href="<%= prod.id %>"><img src="../resources/images/pro3/33.jpg" class="img-fluid blur-up lazyload bg-img" alt=""></a>
+                                <a href="<%= prod.id %>"><%= image_tag (prod.images[0] if prod.images.length > 0) , :class => "img-fluid blur-up lazyload bg-img" %></a>
                             </div>
                             <div class="back">
-                                <a href="/products/<%= prod.id %>"><img src="../resources/images/pro3/34.jpg" class="img-fluid blur-up lazyload bg-img" alt=""></a>
+                                <a href="/products/<%= prod.id %>"><%= image_tag (prod.images[1] if prod.images.length > 0) , :class => "img-fluid blur-up lazyload bg-img" %></a>
                             </div>
                         <div class="product-detail">
                             <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
