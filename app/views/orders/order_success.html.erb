@@ -67,7 +67,9 @@
                         <h3>your order details</h3>
                         <% @order.items.each do |item| %>
                         <div class="row product-order-detail">
-                            <div class="col-3"><img src="../resources/images/pro3/1.jpg" alt="" class="img-fluid blur-up lazyload"></div>
+                            <div class="col-3">
+                            <%= image_tag (item.product.images[0] if item.product.images.length > 0), :class => "img-fluid blur-up lazyload" %>
+                            </div>
                             <div class="col-3 order_detail">
                                 <div>
                                     <h4>product name</h4>

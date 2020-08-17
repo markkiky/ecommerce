@@ -1,43 +1,139 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Transactions</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
 
-<table>
-  <thead>
-    <tr>
-      <th>Transaction</th>
-      <th>Order</th>
-      <th>Callback returned</th>
-      <th>Amount</th>
-      <th>Account from</th>
-      <th>Transaction code</th>
-      <th>Message</th>
-      <th>Date</th>
-      <th>Payment mode</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Multikart admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
+    <meta name="keywords" content="admin template, Multikart admin template, dashboard template, flat admin template, responsive admin template, web app">
+    <meta name="author" content="pixelstrap">
+    <link rel="icon" href="../resources/images/dashboard/favicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="../resources/images/dashboard/favicon.png" type="image/x-icon">
+    <title>Multikart - Premium Admin Template</title>
 
-  <tbody>
-    <% @transactions.each do |transaction| %>
-      <tr>
-        <td><%= transaction.transaction_id %></td>
-        <td><%= transaction.order_id %></td>
-        <td><%= transaction.callback_returned %></td>
-        <td><%= transaction.amount %></td>
-        <td><%= transaction.account_from %></td>
-        <td><%= transaction.transaction_code %></td>
-        <td><%= transaction.message %></td>
-        <td><%= transaction.date %></td>
-        <td><%= transaction.payment_mode %></td>
-        <td><%= link_to 'Show', transaction %></td>
-        <td><%= link_to 'Edit', edit_transaction_path(transaction) %></td>
-        <td><%= link_to 'Destroy', transaction, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+    <!-- Google font-->
+    <link href="https://fonts.googleapis.com/css?family=Work+Sans:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
-<br>
+    <!-- Font Awesome-->
+    <link rel="stylesheet" type="text/css" href="../resources/css/fontawesome.css">
 
-<%= link_to 'New Transaction', new_transaction_path %>
+    <!-- Flag icon-->
+    <link rel="stylesheet" type="text/css" href="../resources/css/flag-icon.css">
+
+    <!-- jsgrid css-->
+    <link rel="stylesheet" type="text/css" href="../resources/css/jsgrid.css">
+
+    <!-- Bootstrap css-->
+    <link rel="stylesheet" type="text/css" href="../resources/css/bootstrap.css">
+
+    <!-- App css-->
+    <link rel="stylesheet" type="text/css" href="../resources/css/admin.css">
+
+</head>
+<body>
+<!-- page-wrapper Start-->
+<div class="page-wrapper">
+
+    <!-- Page Header Start-->
+    <%= render 'layouts/admin_header' %>
+    <!-- Page Header Ends -->
+
+    <!-- Page Body Start-->
+    <div class="page-body-wrapper">
+
+        <!-- Page Sidebar Start-->
+        <%= render 'layouts/admin_sidebar' %>
+        <!-- Page Sidebar Ends-->
+
+        <!-- Right sidebar Start-->
+        <!-- Right sidebar Ends-->
+
+        <div class="page-body">
+
+            <!-- Container-fluid starts-->
+            <div class="container-fluid">
+                <div class="page-header">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="page-header-left">
+                                <h3>Transactions
+                                    <small>MelonCoco panel</small>
+                                </h3>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <ol class="breadcrumb pull-right">
+                                <li class="breadcrumb-item"><a href="index.html"><i data-feather="home"></i></a></li>
+                                <li class="breadcrumb-item">Sales</li>
+                                <li class="breadcrumb-item active">Transactions</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Container-fluid Ends-->
+
+            <!-- Container-fluid starts-->
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>Transaction Details</h5>
+                            </div>
+                            <div class="card-body">
+                                <div id="batchDelete" class="transactions"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Container-fluid Ends-->
+
+        </div>
+
+        <!-- footer start-->
+        <%= render 'layouts/admin_footer' %>
+        <!-- footer end-->
+
+    </div>
+
+</div>
+
+<!-- latest jquery-->
+<script src="../resources/js/jquery-3.3.1.min.js"></script>
+
+<!-- Bootstrap js-->
+<script src="../resources/js/popper.min.js"></script>
+<script src="../resources/js/bootstrap.js"></script>
+
+<!-- feather icon js-->
+<script src="../resources/js/icons/feather-icon/feather.min.js"></script>
+<script src="../resources/js/icons/feather-icon/feather-icon.js"></script>
+
+<!-- Sidebar jquery-->
+<script src="../resources/js/sidebar-menu.js"></script>
+
+<!-- Jsgrid js-->
+<script src="../resources/js/jsgrid/jsgrid.min.js"></script>
+<script src="../resources/js/jsgrid/griddata-transactions.js"></script>
+<script src="../resources/js/jsgrid/jsgrid-transactions.js"></script>
+
+<!--Customizer admin-->
+<script src="../resources/js/admin-customizer.js"></script>
+
+<!-- lazyload js-->
+<script src="../resources/js/lazysizes.min.js"></script>
+
+<!--right sidebar js-->
+<script src="../resources/js/chat-menu.js"></script>
+
+<!--script admin-->
+<script src="../resources/js/admin-script.js"></script>
+
+</body>
+</html>
