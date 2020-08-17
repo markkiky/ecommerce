@@ -68,7 +68,10 @@
                             </div>
                         </div>
                         <div class="brand-logo">
-                            <a href=""><%= image_tag "full-color.png", :class => "img-fluid blur-up lazyload", :alt => "logo", :width => "179px", :height => "34px" %></a>
+                        <%= link_to root_path, :class => "img-fluid blur-up lazyload", :width => "179px", :height => '34px' do %>
+                            <%= image_tag "full-color.png", :class => "img-fluid blur-up lazyload", :alt => "logo", :width => "179px", :height => "34px" %>
+                        <%end%>
+                            <a href=""><%# image_tag "full-color.png", :class => "img-fluid blur-up lazyload", :alt => "logo", :width => "179px", :height => "34px" %></a>
                         </div>
                     </div>
                     <div class="menu-right pull-right">
@@ -80,12 +83,15 @@
                                         <div class="mobile-back text-right">Back<i class="fa fa-angle-right pl-2" aria-hidden="true"></i></div>
                                     </li>
                                     <li>
-                                        <a href="#">Home</a>
+                                        
+                                        <%= link_to 'Home', root_path %>
                                     </li>
                                     <li>
                                         <a href="#">shop</a>
                                     </li>
-                                    <li><a href="contact.html">contact</a></li>
+                                    <li>
+                                        <%= link_to 'contact', contact_us_path %>
+                                    </li>
                                     <li><a href="about-page.html">about us</a></li>
                                 </ul>
                             </nav>

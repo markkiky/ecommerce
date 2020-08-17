@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   # admin routes
   devise_for :admins 
   get '/admin/dashboard', to: "admins#dashboard", as: :admin_dashboard
+  get '/contact_us/', to: 'homes#contact_us', as: :contact_us
  
   # catgory paths
   resources :categories

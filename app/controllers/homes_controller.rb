@@ -21,6 +21,10 @@ class HomesController < ApplicationController
   def edit
   end
 
+  # GET /homes/contact_us
+  def contact_us
+
+  end
   # POST /homes
   # POST /homes.json
   def create
