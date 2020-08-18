@@ -5,11 +5,13 @@ class ProductsController < ApplicationController
   # GET /products
   # GET /products.json
   def index
-    if params[:category].blank?
+    if params[:category] && params[:size] && params[:color].blank?
       @products = Product.all.order("created_at DESC")
    else 
       @category_id = Category.find_by(category_name: params[:category]).id
-      @products = Product.where(:category_id => @category_id).order("created_at DESC")
+      @size_id = Size.find_by(size_type: params[:size]).id
+      @color_id = Color.find_by(color_type: paramas[:color]).id
+      @products = Product.where(:category_id => @category_id , :size_id => @size_id , :color_id => @color_id).order("created_at DESC")
    end 
  end 
 
@@ -30,11 +32,15 @@ end
   def new
     @product = current_admin.products.build
     @categories = Category.all.map{ |c| [c.category_name, c.id] }
+    @sizes = Size.all.map{ |s| [s.size_type, s.id] }
+    @colors = Color.all.map{ |l| [l.color_type, l.id] }
   end
 
   # GET /products/1/edit
   def edit
     @categories = Category.all.map{ |c| [c.category_name, c.id] }
+    @sizes = Size.all.map{ |s| [s.size_type, s.id] }
+    @colors = Colors.all.map{ |l| [l.color_type, l.id] }
   end
 
   # POST /products
@@ -42,7 +48,8 @@ end
   def create
     @product = current_admin.products.build(product_params)
     @product.category_id = params[:category_id]
-
+    @product.size_id = params[:size_id]
+    @product.color_id = params[:color_id]
     respond_to do |format|
       if @product.save
         format.html { redirect_to @product, notice: 'Product was successfully created.' }
@@ -58,6 +65,8 @@ end
   # PATCH/PUT /products/1.json
   def update
     @product.category_id = params[:category_id]
+    @product.size_id = params[:size_id]
+    @product.color_id = params[:color_id]
     respond_to do |format|
       if @product.update(product_params)
         format.html { redirect_to @product, notice: 'Product was successfully updated.' }
@@ -87,6 +96,6 @@ end
 
     # Only allow a list of trusted parameters through.
     def product_params
-      params.require(:product).permit(:product_id, :sku, :id_sku, :vendor_product_id, :product_name, :product_description, :supplier_id, :category_id, :quantity_per_unit, :price, :unit_price, :msrp, :available_size, :available_colors, :size, :color, :discount, :unit_weight, :units_in_stock, :units_on_order, :reorder_level, :product_available, :discount_available, :current_order, :note, :ranking, images: [])
+      params.require(:product).permit(:product_id, :sku, :id_sku, :vendor_product_id, :product_name, :product_description, :supplier_id, :category_id, :quantity_per_unit, :price, :unit_price, :msrp, :available_size, :available_colors, :size, :color, :discount, :unit_weight, :units_in_stock, :units_on_order, :reorder_level, :product_available, :discount_available, :current_order, :note, :ranking, :product_code, :product_quantity, :size_id, :color_id, images: [])
     end
   end 

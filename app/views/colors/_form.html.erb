@@ -1,0 +1,22 @@
+<%= form_with scope: :color, url: colors_path, local: true do |form| %>
+<% if color.errors.any? %>
+<div id="error_explanation">
+    <h2><%= pluralize(color.errors.count, "error") %> prohibited this color from being saved:</h2>
+
+    <ul>
+        <% color.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+        <% end %>
+    </ul>
+</div>
+<% end %>
+
+<div class="field">
+    <%= form.label :color_type %>
+    <%= form.text_field :color_type %>
+</div>
+
+<div class="actions">
+    <%= form.submit %>
+</div>
+<% end %>
