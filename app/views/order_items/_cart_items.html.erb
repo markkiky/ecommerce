@@ -84,7 +84,7 @@
                         <tbody>
                             <tr>
                                 <td>
-                                    <a href="#"><img src="../resources/images/pro3/1.jpg" alt=""></a>
+                                    <a href="/products/<%= item.product.id %>"><%= image_tag item.product.images[0] if item.product.images.length > 0 %></a>
                                 </td>
                                 <td><a href="#"> <%= item.product.product_name %></a>
                                     <div class="mobile-cart-content row">
