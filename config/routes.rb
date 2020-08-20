@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   resources :transactions
+  post 'transactions/mpesa', to: 'transactions#mpesa_transcation_callback', as: :mpesa_callback
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   root "homes#index"
 
@@ -22,8 +23,10 @@ Rails.application.routes.draw do
   get '/users', to: "devise/registrations#new"
 
 
-  # Twitter path
-  get '/auth/:provider/callback', to: 'sessions#omniauth'
+  # Customers Social Logins path
+  # get 'auth/google_oauth/callback', to: 'sessions#customer_omniauth'
+  # get 'auth/admin/callback', to: 'sessions#customer_omniauth'
+  get 'auth/:provider/callback', to: 'sessions#customer_omniauth'
 
   #cart routes 
   resources :order_items, path: '/cart/items'

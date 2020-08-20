@@ -32,7 +32,7 @@ class SessionsController < ApplicationController
         redirect_to customers_path
     end
 
-    def omniauth
+    def customer_omniauth
         if auth != nil
             if auth.provider == "google_oauth2"
                 @customer = Customer.from_omniauth(auth)

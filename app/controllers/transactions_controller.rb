@@ -1,6 +1,7 @@
 class TransactionsController < ApplicationController
   before_action :set_transaction, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_admin!, only:[:index]
+  # before_action :authenticate_admin!, only:[:index]
+  skip_before_action :verify_authenticity_token
 
   # GET /transactions
   # GET /transactions.json
@@ -29,10 +30,10 @@ class TransactionsController < ApplicationController
 
     respond_to do |format|
       if @transaction.save
-        format.html { redirect_to @transaction, notice: 'Transaction was successfully created.' }
+        # format.html { redirect_to @transaction, notice: 'Transaction was successfully created.' }
         format.json { render :show, status: :created, location: @transaction }
       else
-        format.html { render :new }
+        # format.html { render :new }
         format.json { render json: @transaction.errors, status: :unprocessable_entity }
       end
     end
@@ -62,6 +63,36 @@ class TransactionsController < ApplicationController
     end
   end
 
+  # POST /transactions/mpesa
+  def mpesa_transcation_callback
+    # receive payment params
+    paybill = params[:PayBillNumber]
+    phone = params[:PhoneNumber]
+    mpesa_transaction_code = params[:MpesaReceiptNumber]
+    amount = params[:Amount]
+    account_no = params[:AccountReference]
+    transaction_description = params[:TransactionDesc]
+    name = params[:FullNames]
+    date = params[:TransTime]
+
+    callback_params = {
+      'transaction_id' => params[:PayBillNumber]
+    }
+
+    @transaction = Transaction.new(callback_params)
+
+    respond_to do |format|
+      if @transaction.save
+        # format.html { redirect_to @transaction, notice: 'Transaction was successfully created.' }
+        format.json { render :show, status: :created, location: @transaction }
+      else
+        # format.html { render :new }
+        format.json { render json: @transaction.errors, status: :unprocessable_entity }
+      end
+    end
+    
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_transaction
@@ -70,6 +101,6 @@ class TransactionsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def transaction_params
-      params.require(:transaction).permit(:transaction_id, :order_id, :callback_returned, :amount, :account_from, :transaction_code, :message, :date, :payment_mode)
+      params.permit(:transaction_id, :order_id, :callback_returned, :amount, :account_from, :transaction_code, :message, :date, :payment_mode)
     end
 end

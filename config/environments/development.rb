@@ -68,4 +68,6 @@ Rails.application.configure do
   config.hosts << "97873f8687c0.ngrok.io"
   config.hosts << "cead7967c790.ngrok.io"
   config.hosts << "b34c400cfa3a.ngrok.io"
+  config.hosts << "818a08411f67.ngrok.io"
+  config.hosts << "3eb71bf29426.ngrok.io"
 end
