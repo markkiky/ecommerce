@@ -217,10 +217,13 @@
                                         </div>
                                         <div class="size-box">
                                             <ul>
-                                                <li class="active"><a href="#">s</a></li>
+                                                <% Size.all.limit(6).each do | s | %>
+                                                <li class="active"><a><%= s.size_type %></a></li>
+                                                <% end %>
+                                                <!--<li class="active"><a href="#">s</a></li>
                                                 <li><a href="#">m</a></li>
                                                 <li><a href="#">l</a></li>
-                                                <li><a href="#">xl</a></li>
+                                                <li><a href="#">xl</a></li>-->
                                             </ul>
                                         </div>
                                         <h6 class="product-title">quantity</h6>
@@ -302,11 +305,11 @@
                                             <table>
                                                 <tbody>
                                                     <tr>
-                                                        <td>Length</td>
-                                                        <td>50 Inches</td>
+                                                        <td>Product Code:</td>
+                                                        <td><%= @product.product_code %></td>
                                                     </tr>
                                                     <tr>
-                                                        <td>Size</td>
+                                                        <td>Sizes</td>
                                                         <td>S, M, L .XXL</td>
                                                     </tr>
                                                 </tbody>

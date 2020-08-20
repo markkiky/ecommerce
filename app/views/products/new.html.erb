@@ -125,7 +125,7 @@
                                         <br>
                                         <div class="form">
                                             <div class="form-group mb-3 row">
-                                                <label for="exampleFormControlSelect1" class="col-xl-3 col-sm-4 mb-0">Select Size :</label>
+                                                <label for="exampleFormControlSelect1" class="col-xl-3 col-sm-4 mb-0">Select Category:</label>
                                                 <%= select_tag :category_id, options_for_select(@categories), :prompt => "Select Category", :class => "form-control digits col-xl-8 col-sm-7" %>
                                             </div>
                                             <div class="form-group mb-3 row">
@@ -138,25 +138,28 @@
                                             </div>
                                             <div class="form-group mb-3 row">
                                                 <label for="validationCustomUsername" class="col-xl-3 col-sm-4 mb-0">Product Code :</label>
-                                                <input class="form-control col-xl-8 col-sm-7" id="validationCustomUsername" type="text" required="">
-                                                <div class="invalid-feedback offset-sm-4 offset-xl-3">Please choose Valid Code.</div>
+                                                <!--<input class="form-control col-xl-8 col-sm-7" id="validationCustomUsername" type="text" required="">
+                                                <div class="invalid-feedback offset-sm-4 offset-xl-3">Please choose Valid Code.</div>-->
+                                                <%= form.text_field :product_code, :class => "form-control col-xl-8 col-sm-7", required: true %>
                                             </div>
                                         </div>
                                         <div class="form">
                                             <div class="form-group row">
                                                 <label for="exampleFormControlSelect1" class="col-xl-3 col-sm-4 mb-0">Select Size :</label>
-                                                <select class="form-control digits col-xl-8 col-sm-7" id="exampleFormControlSelect1">
-                                                    <option>Small</option>
-                                                    <option>Medium</option>
-                                                    <option>Large</option>
-                                                    <option>Extra Large</option>
-                                                </select>
+                                                <%= select_tag :size_id, options_for_select(@sizes), :prompt => "Select Sizes", :class => "form-control digits col-xl-8 col-sm-7" %>
+
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="exampleFormControlSelect1" class="col-xl-3 col-sm-4 mb-0">Select Color :</label>
+                                                <%= select_tag :color_id, options_for_select(@colors), :prompt => "Select Colors", :class => "form-control digits col-xl-8 col-sm-7" %>
+
                                             </div>
                                             <div class="form-group row">
                                                 <label class="col-xl-3 col-sm-4 mb-0">Total Products :</label>
                                                 <fieldset class="qty-box col-xl-9 col-xl-8 col-sm-7 pl-0">
                                                     <div class="input-group">
-                                                        <input class="touchspin" type="text" value="1">
+                                                        <!--<input class="touchspin" type="text" value="1">-->
+                                                        <%= form.number_field :product_quantity, :class => "touchspin", :value => "1" %>
                                                     </div>
                                                 </fieldset>
                                             </div>

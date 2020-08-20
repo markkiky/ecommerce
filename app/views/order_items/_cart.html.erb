@@ -1,7 +1,6 @@
 <%  current_cart.order.items.each do |item| %>
 <li>
     <div class="media">
-        <a href="/products/<%= item.product.id %>"> <%= image_tag item.product.images[0] if item.product.images.length > 0 %></a>
         <div class="media-body">
             <a href="#">
                 <h4><%= item.product.product_name %></h4>

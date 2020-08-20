@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :colors
+  resources :sizes
   resources :transactions
   post 'transactions/mpesa', to: 'transactions#mpesa_transcation_callback', as: :mpesa_callback
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

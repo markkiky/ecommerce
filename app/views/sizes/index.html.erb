@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Sizes</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Size type</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @sizes.each do |size| %>
+      <tr>
+        <td><%= size.size_type %></td>
+        <td><%= link_to 'Show', size %></td>
+        <td><%= link_to 'Edit', edit_size_path(size) %></td>
+        <td><%= link_to 'Destroy', size, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Size', new_size_path %>

@@ -5,5 +5,7 @@ class Admin < ApplicationRecord
          :recoverable, :rememberable, :validatable
          
 has_many :categories
+has_many :colors
+has_many :sizes
 has_many :products
 end
