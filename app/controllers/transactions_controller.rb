@@ -74,9 +74,18 @@ class TransactionsController < ApplicationController
     transaction_description = params[:TransactionDesc]
     name = params[:FullNames]
     date = params[:TransTime]
+    order_id = Order.where(:order_number => params[:AccountReference]).last
 
     callback_params = {
-      'transaction_id' => params[:PayBillNumber]
+      'transaction_id' => params[:PayBillNumber], 
+      'account_from' => params[:PhoneNumber],
+      'transaction_code' => params[:MpesaReceiptNumber],
+      'amount' => params[:Amount], 
+      'order_id' => order_id,
+      'message' => params[:TransactionDesc],
+      'callback_returned' => params[:FullNames],
+      'date' => params[:TransTime],
+      'payment_mode' => "MPESA"
     }
 
     @transaction = Transaction.new(callback_params)
