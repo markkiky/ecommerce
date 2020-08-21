@@ -68,7 +68,7 @@
                                             <td>TRANS REF- <%= transact.transaction_id %></td>
                                             <td><%= transact.account_from %></td>
                                             <td><%= transact.transaction_code %></td>
-                                            <td><%= number_to_currency(transact.order_subtotal, :unit => 'KES ') %></td>
+                                            <td><%= number_to_currency(transact.amount, :unit => 'KES ') %></td>
                                             <td><%= transact.payment_mode %></td>
                                             <td><%= transact.message %></td>
                                             <td><%= transact.created_at.strftime("%B %d, %Y") %> </td>
