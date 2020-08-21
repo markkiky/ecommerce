@@ -25,11 +25,14 @@ class SessionsController < ApplicationController
 
     def destroy
         
-        if current_user
-          session.delete(:user_id)
-          flash[:success] = 'See you!'
+        if current_admin != nil
+            sign_out @current_admin
+            flash[:success] = 'See you!'
+            redirect_to new_admin_session_path
+        else
+            flash[:success] = "Failed to log you out"
+            redirect_to root_path
         end
-        redirect_to customers_path
     end
 
     def customer_omniauth

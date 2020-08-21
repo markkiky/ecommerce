@@ -1,80 +1,198 @@
-<%= render "layouts/header"%>
-<p id="notice"><%= notice %></p>
+<div class="page-wrapper">
+    <%= render "layouts/admin_header"%>
+    <div class="page-body-wrapper">
+        <%= render 'layouts/admin_sidebar' %>
+        <div class="page-body">
+            <!-- Container-fluid starts-->
+            <div class="container-fluid">
+                <div class="page-header">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="page-header-left">
+                                <h3>User List
+                                    <small>Multikart Admin panel</small>
+                                </h3>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <ol class="breadcrumb pull-right">
+                                <li class="breadcrumb-item"><a href="index.html"><i data-feather="home"></i></a></li>
+                                <li class="breadcrumb-item">Users</li>
+                                <li class="breadcrumb-item active">User List</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Container-fluid Ends-->
 
-<h1>Customers</h1>
+            <!-- Container-fluid starts-->
+            <div class="container-fluid">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>User Details</h5>
+                    </div>
+                    <div class="card-body vendor-table">
+                        <table class="display" id="basic-1">
+                            <thead>
+                                <tr>
+                                    <th>Customer</th>
+                                    <th>First name</th>
+                                    <th>Last name</th>
+                                    <th>Class</th>
+                                    <th>Room</th>
+                                    <th>Building</th>
+                                    <th>Address1</th>
+                                    <th>Address2</th>
+                                    <th>City</th>
+                                    <th>County</th>
+                                    <th>Phone</th>
+                                    <th>Email</th>
+                                    <th>Password</th>
+                                    <th>Credit card</th>
+                                    <th>Credit card type</th>
+                                    <th>Card exp mo</th>
+                                    <th>Card exp yr</th>
+                                    <th>Billing address</th>
+                                    <th>Billing city</th>
+                                    <th>Billing region</th>
+                                    <th>Billing postal code</th>
+                                    <th>Billing country</th>
+                                    <th>Shipping address</th>
+                                    <th>Shipping city</th>
+                                    <th>Shipping region</th>
+                                    <th>Shipping postal code</th>
+                                    <th>Shipping country</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                             <% @customers.each do |customer| %>
+                                <tr>
+                                    
+                                    <td><%= customer.customer_id %></td>
+                                    <td><%= customer.first_name %></td>
+                                    <td><%= customer.last_name %></td>
+                                    <td><%= customer.class %></td>
+                                    <td><%= customer.room %></td>
+                                    <td><%= customer.building %></td>
+                                    <td><%= customer.address1 %></td>
+                                    <td><%= customer.address2 %></td>
+                                    <td><%= customer.city %></td>
+                                    <td><%= customer.county %></td>
+                                    <td><%= customer.phone %></td>
+                                    <td><%= customer.email %></td>
+                                    <td><%= customer.password %></td>
+                                    <td><%= customer.credit_card %></td>
+                                    <td><%= customer.credit_card_type_id %></td>
+                                    <td><%= customer.card_exp_mo %></td>
+                                    <td><%= customer.card_exp_yr %></td>
+                                    <td><%= customer.billing_address %></td>
+                                    <td><%= customer.billing_city %></td>
+                                    <td><%= customer.billing_region %></td>
+                                    <td><%= customer.billing_postal_code %></td>
+                                    <td><%= customer.billing_country %></td>
+                                    <td><%= customer.shipping_address %></td>
+                                    <td><%= customer.shipping_city %></td>
+                                    <td><%= customer.shipping_region %></td>
+                                    <td><%= customer.shipping_postal_code %></td>
+                                    <td><%= customer.shipping_country %></td>
+                                    <td>
+                                        <div>
+                                            <i class="fa fa-edit mr-2 font-success"></i>
+                                            <i class="fa fa-trash font-danger"></i>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <%end%>
+                            </tbody>
+                        </table>
+                    </div>
 
-<table>
-  <thead>
-    <tr>
-      <th>Customer</th>
-      <th>First name</th>
-      <th>Last name</th>
-      <th>Class</th>
-      <th>Room</th>
-      <th>Building</th>
-      <th>Address1</th>
-      <th>Address2</th>
-      <th>City</th>
-      <th>County</th>
-      <th>Phone</th>
-      <th>Email</th>
-      <th>Password</th>
-      <th>Credit card</th>
-      <th>Credit card type</th>
-      <th>Card exp mo</th>
-      <th>Card exp yr</th>
-      <th>Billing address</th>
-      <th>Billing city</th>
-      <th>Billing region</th>
-      <th>Billing postal code</th>
-      <th>Billing country</th>
-      <th>Shipping address</th>
-      <th>Shipping city</th>
-      <th>Shipping region</th>
-      <th>Shipping postal code</th>
-      <th>Shipping country</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+                </div>
+            </div>
+            <!-- Container-fluid Ends-->
+        </div>
+    </div>
+</div>
 
-  <tbody>
-    <% @customers.each do |customer| %>
-      <tr>
-        <td><%= customer.customer_id %></td>
-        <td><%= customer.first_name %></td>
-        <td><%= customer.last_name %></td>
-        <td><%= customer.class %></td>
-        <td><%= customer.room %></td>
-        <td><%= customer.building %></td>
-        <td><%= customer.address1 %></td>
-        <td><%= customer.address2 %></td>
-        <td><%= customer.city %></td>
-        <td><%= customer.county %></td>
-        <td><%= customer.phone %></td>
-        <td><%= customer.email %></td>
-        <td><%= customer.password %></td>
-        <td><%= customer.credit_card %></td>
-        <td><%= customer.credit_card_type_id %></td>
-        <td><%= customer.card_exp_mo %></td>
-        <td><%= customer.card_exp_yr %></td>
-        <td><%= customer.billing_address %></td>
-        <td><%= customer.billing_city %></td>
-        <td><%= customer.billing_region %></td>
-        <td><%= customer.billing_postal_code %></td>
-        <td><%= customer.billing_country %></td>
-        <td><%= customer.shipping_address %></td>
-        <td><%= customer.shipping_city %></td>
-        <td><%= customer.shipping_region %></td>
-        <td><%= customer.shipping_postal_code %></td>
-        <td><%= customer.shipping_country %></td>
-        <td><%= link_to 'Show', customer %></td>
-        <td><%= link_to 'Edit', edit_customer_path(customer) %></td>
-        <td><%= link_to 'Destroy', customer, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<div class="d-none">
+    <p id="notice"><%= notice %></p>
 
-<br>
+    <h1>Customers</h1>
 
-<%= link_to 'New Customer', new_customer_path %>
+    <table>
+        <thead>
+            <tr>
+                <th>Customer</th>
+                <th>First name</th>
+                <th>Last name</th>
+                <th>Class</th>
+                <th>Room</th>
+                <th>Building</th>
+                <th>Address1</th>
+                <th>Address2</th>
+                <th>City</th>
+                <th>County</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>Password</th>
+                <th>Credit card</th>
+                <th>Credit card type</th>
+                <th>Card exp mo</th>
+                <th>Card exp yr</th>
+                <th>Billing address</th>
+                <th>Billing city</th>
+                <th>Billing region</th>
+                <th>Billing postal code</th>
+                <th>Billing country</th>
+                <th>Shipping address</th>
+                <th>Shipping city</th>
+                <th>Shipping region</th>
+                <th>Shipping postal code</th>
+                <th>Shipping country</th>
+                <th colspan="3"></th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <% @customers.each do |customer| %>
+            <tr>
+                <td><%= customer.customer_id %></td>
+                <td><%= customer.first_name %></td>
+                <td><%= customer.last_name %></td>
+                <td><%= customer.class %></td>
+                <td><%= customer.room %></td>
+                <td><%= customer.building %></td>
+                <td><%= customer.address1 %></td>
+                <td><%= customer.address2 %></td>
+                <td><%= customer.city %></td>
+                <td><%= customer.county %></td>
+                <td><%= customer.phone %></td>
+                <td><%= customer.email %></td>
+                <td><%= customer.password %></td>
+                <td><%= customer.credit_card %></td>
+                <td><%= customer.credit_card_type_id %></td>
+                <td><%= customer.card_exp_mo %></td>
+                <td><%= customer.card_exp_yr %></td>
+                <td><%= customer.billing_address %></td>
+                <td><%= customer.billing_city %></td>
+                <td><%= customer.billing_region %></td>
+                <td><%= customer.billing_postal_code %></td>
+                <td><%= customer.billing_country %></td>
+                <td><%= customer.shipping_address %></td>
+                <td><%= customer.shipping_city %></td>
+                <td><%= customer.shipping_region %></td>
+                <td><%= customer.shipping_postal_code %></td>
+                <td><%= customer.shipping_country %></td>
+                <td><%= link_to 'Show', customer %></td>
+                <td><%= link_to 'Edit', edit_customer_path(customer) %></td>
+                <td><%= link_to 'Destroy', customer, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            </tr>
+            <% end %>
+        </tbody>
+    </table>
+
+    <br>
+
+    <%= link_to 'New Customer', new_customer_path %>
+</div>

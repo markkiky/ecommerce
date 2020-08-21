@@ -63,7 +63,11 @@
                         <li><a href="#"><i data-feather="user"></i>Edit Profile</a></li>
                         <li><a href="#"><i data-feather="mail"></i>Inbox</a></li>
                         <li><a href="#"><i data-feather="settings"></i>Settings</a></li>
-                        <li><%= link_to destroy_admin_session_path, method: :delete do %> <i data-feather="log-out"></i>Logout<% end %></li>
+                        <li>
+                            <%= link_to logout_path do %> 
+                                <i data-feather="log-out"></i>Logout
+                            <% end %>
+                        </li>
                     </ul>
                 </li>
             </ul>

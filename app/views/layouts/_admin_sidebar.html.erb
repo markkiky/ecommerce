@@ -6,8 +6,9 @@
          <div class="sidebar-user text-center">
              <div><img class="img-60 rounded-circle lazyloaded blur-up" src="../resources/images/dashboard/man.png" alt="#">
              </div>
-             <h6 class="mt-3 f-14">Admin</h6>
+             <h6 class="mt-3 f-14"><%= current_admin.email %></h6>
              <p>general manager.</p>
+             <%= console %>
          </div>
          <ul class="sidebar-menu">
              <li><a class="sidebar-header" href="<%= admin_dashboard_path %>"><i data-feather="home"></i><span>Dashboard</span></a></li>
@@ -35,7 +36,11 @@
              </li>
              <li><a class="sidebar-header" href=""><i data-feather="user-plus"></i><span>Users</span><i class="fa fa-angle-right pull-right"></i></a>
                  <ul class="sidebar-submenu">
-                     <li><a href="user-list.html"><i class="fa fa-circle"></i>User List</a></li>
+                     <li>
+                         <%= link_to customers_path do %>
+                         <i class="fa fa-circle"></i>User List</a>
+                         <%end%>
+                     </li>
                  </ul>
              </li>
              <li><a class="sidebar-header" href="reports.html"><i data-feather="bar-chart"></i><span>Reports</span></a></li>
