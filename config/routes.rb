@@ -26,7 +26,8 @@ Rails.application.routes.draw do
   # devise_for :customers
   resources :customers
   resources :homes
-  devise_for :customers, :path => "users"
+  devise_for :customers, :path => "users", controllers: { omniauth_callbacks: 'customers/omniauth' }
+
   get '/logout', to: 'sessions#destroy'
   get '/users', to: "devise/registrations#new"
 

@@ -17,8 +17,14 @@ gem 'puma', '~> 4.1'
 # Devise gems 
 gem 'devise'
 gem 'omniauth'
+# Use Omniauth Google plugin
 gem 'omniauth-google-oauth2'
-gem 'omniauth-twitter', '~> 1.4'
+# Use Omniauth Facebook plugin
+gem 'omniauth-facebook'
+# Use Omniauth Twitter plugin
+gem 'omniauth-twitter'
+# Use ActiveRecord Sessions
+gem 'activerecord-session_store', '~> 1.0'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '>= 6'
