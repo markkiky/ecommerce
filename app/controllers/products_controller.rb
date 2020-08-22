@@ -5,13 +5,11 @@ class ProductsController < ApplicationController
   # GET /products
   # GET /products.json
   def index
-    if params[:category] && params[:size] && params[:color].blank?
+    if params[:category].blank?
       @products = Product.all.order("created_at DESC")
    else 
       @category_id = Category.find_by(category_name: params[:category]).id
-      @size_id = Size.find_by(size_type: params[:size]).id
-      @color_id = Color.find_by(color_type: paramas[:color]).id
-      @products = Product.where(:category_id => @category_id , :size_id => @size_id , :color_id => @color_id).order("created_at DESC")
+      @products = Product.where(:category_id => @category_id).order("created_at DESC")
    end 
  end 
 
@@ -40,7 +38,7 @@ end
   def edit
     @categories = Category.all.map{ |c| [c.category_name, c.id] }
     @sizes = Size.all.map{ |s| [s.size_type, s.id] }
-    @colors = Colors.all.map{ |l| [l.color_type, l.id] }
+    @colors = Color.all.map{ |l| [l.color_type, l.id] }
   end
 
   # POST /products
@@ -52,7 +50,7 @@ end
     @product.color_id = params[:color_id]
     respond_to do |format|
       if @product.save
-        format.html { redirect_to @product, notice: 'Product was successfully created.' }
+        format.html { redirect_to products_path , noticep: 'Product was successfully created.' }
         format.json { render :show, status: :created, location: @product }
       else
         format.html { render :new }

@@ -127,7 +127,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <% @categories.each do |category| %>
+                                                <% @categories.reverse.each do |category| %>
                                                 <tr>
                                                     <td><%= category.category_name %></td>
                                                     <td><%= link_to 'Edit', edit_category_path(category), :class => "btn btn-secondary" %></td>
