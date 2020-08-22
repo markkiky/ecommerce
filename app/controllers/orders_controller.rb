@@ -32,48 +32,66 @@ class OrdersController < ApplicationController
     @customer.shipping_city = params[:customer][:shipping_city]
     @customer.shipping_postal_code = params[:customer][:shipping_postal_code]
 
-
-   @customer.save!
-    if @order.update_attributes(order_params.merge(order_status: 'open'))
-      session[:cart_token] = nil
+    
+    @customer.save!
+    if @order.update_attributes(order_params.merge(order_status: 'pending_payment'))
+      # session[:cart_token] = nil
+      redirect_to order_payment_path(@order.id)
     else
       render :new
     end 
-    if @order.payment_method == "Mpesa"
-      url = URI("https://payme.revenuesure.co.ke/index.php")
-      https = Net::HTTP.new(url.host, url.port);
-      https.use_ssl = true
-      request = Net::HTTP::Post.new(url)
-      form_data = [['TransactionType', 'CustomerPayBillOnline'],['PayBillNumber', '175555'],['Amount', @order.order_subtotal.to_i.to_s],['PhoneNumber', @customer.phone],['AccountReference', 'PKX2019062'],['TransactionDesc', 'PKX201906264'],['FullNames', '- - -']]
-      request.set_form form_data, 'multipart/form-data'
-      response = https.request(request)
-      puts response.read_body
-      redirect_to order_success_path
+    # if @order.payment_method == "Mpesa"
+      
 
-    elsif @order.payment_method == "Cash on Delivery"  
-        redirect_to order_success_path
-        url = URI("http://sna.co.ke/sna_api/index.php")
-       http = Net::HTTP.new(url.host, url.port);
-       request = Net::HTTP::Post.new(url)
-       form_data = [['function', 'sendMessage'],['phoneNumber', @order.client_phone_number],['message', "Hi #{@order.client_name}. Your Order Number #{@order.id} of KES #{@order.order_subtotal.to_i.to_s.reverse.gsub(/...(?=.)/,'\&,').reverse} is being processed."],['senderId', 'COVERAPP'],['username', 'MALISAFI']]
-       request.set_form form_data, 'multipart/form-data'
-       response = http.request(request)
-       puts response.read_body
+    # elsif @order.payment_method == "Cash on Delivery"  
+    #     redirect_to order_success_path
+    #     url = URI("http://sna.co.ke/sna_api/index.php")
+    #    http = Net::HTTP.new(url.host, url.port);
+    #    request = Net::HTTP::Post.new(url)
+    #    form_data = [['function', 'sendMessage'],['phoneNumber', @order.client_phone_number],['message', "Hi #{@order.client_name}. Your Order Number #{@order.id} of KES #{@order.order_subtotal.to_i.to_s.reverse.gsub(/...(?=.)/,'\&,').reverse} is being processed."],['senderId', 'COVERAPP'],['username', 'MALISAFI']]
+    #    request.set_form form_data, 'multipart/form-data'
+    #    response = http.request(request)
+    #    puts response.read_body
 
-    elsif @order.payment_method == "Card"
-      redirect_to order_success_path
-    end
+    # elsif @order.payment_method == "Card"
+    #   redirect_to order_success_path
+    # end
      
   end
 
   def show
   end
 
+  def order_payment
+    @order = Order.find(params[:id])
+    @customer = Customer.find(@order.customer_id)
+    
+  end
   def order_success
     @order = Order.last
   end 
   def destroy
     @order.destroy   
+  end
+
+  def send_push
+    
+
+    @order = Order.find(params[:id])
+    @order.order_number = "shoesX"
+    @customer = Customer.find(@order.customer_id)
+      url = URI("https://payme.revenuesure.co.ke/index.php")
+      https = Net::HTTP.new(url.host, url.port);
+      https.use_ssl = true
+      request = Net::HTTP::Post.new(url)
+      form_data = [['TransactionType', 'CustomerPayBillOnline'],['PayBillNumber', '175555'],['Amount', @order.order_subtotal.to_i.to_s],['PhoneNumber', @customer.phone],['AccountReference', @order.order_number],['TransactionDesc', @order.order_number],['FullNames', '- - -']]
+      request.set_form form_data, 'multipart/form-data'
+      response = https.request(request)
+      puts response.read_body
+      # redirect_to order_success_path
+      # respond_to do |format|
+      #   format.js
+      # end
   end
  
 

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :complete_orders
   resources :colors
   resources :sizes
   resources :transactions
@@ -16,7 +17,10 @@ Rails.application.routes.draw do
   end
   get '/admin/dashboard', to: "admins#dashboard", as: :admin_dashboards
   get '/contact_us/', to: 'homes#contact_us', as: :contact_us
- 
+
+  get 'payment/:id', to: 'orders#order_payment', as: :order_payment
+  get '/mpesa_push/:id', to: "orders#send_push", as: :send_push
+  
   # catgory paths
   resources :categories
 
