@@ -57,11 +57,9 @@
                                     <div onclick="closeNav()">
                                         <div class="sidebar-back text-left"><i class="fa fa-angle-left pr-2" aria-hidden="true"></i> Back</div>
                                     </div>
-                                    <ul id="sub-menu" class="sm pixelstrap sm-vertical">
-                                        <% Category.all.limit(4).reverse.each do | category | %>
-                                        <li class="<%= 'active' if params[:category] == category.category_name %>">
-                                            <%= link_to category.category_name, products_path(category: category.category_name) %>
-                                        </li>
+                                    <ul id="sub-menu" class="sm pixelstrap sm-vertical">                                
+                                        <% Category.all.limit(5).reverse.each do | category | %>
+                                        <li><a><%= category.category_name %></a></li>
                                         <% end %>
                                     </ul>
                                 </nav>
@@ -87,12 +85,8 @@
                                         <%= link_to 'Home', root_path %>
                                     </li>
                                     <li>
-                                        <a href="#">shop</a>
-                                    </li>
-                                    <li>
                                         <%= link_to 'contact', contact_us_path %>
                                     </li>
-                                    <li><a href="about-page.html">about us</a></li>
                                 </ul>
                             </nav>
                         </div>
