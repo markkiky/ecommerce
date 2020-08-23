@@ -34,7 +34,7 @@ class OrdersController < ApplicationController
 
     
     @customer.save!
-    if @order.update_attributes(order_params.merge(order_status: 'pending_payment'))
+    if @order.update_attributes(order_params.merge(order_status: 'pending_payment', order_number: Order.counter, order_date: Date.today()))
       # session[:cart_token] = nil
       redirect_to order_payment_path(@order.id)
     else
@@ -66,6 +66,7 @@ class OrdersController < ApplicationController
     @order = Order.find(params[:id])
     @customer = Customer.find(@order.customer_id)
     
+    
   end
   def order_success
     @order = Order.last
@@ -73,12 +74,11 @@ class OrdersController < ApplicationController
   def destroy
     @order.destroy   
   end
-
+  
   def send_push
-    
-
     @order = Order.find(params[:id])
-    @order.order_number = "shoesX"
+    byebug
+    # @order.order_number = "shoesX"
     @customer = Customer.find(@order.customer_id)
       url = URI("https://payme.revenuesure.co.ke/index.php")
       https = Net::HTTP.new(url.host, url.port);
@@ -88,6 +88,12 @@ class OrdersController < ApplicationController
       request.set_form form_data, 'multipart/form-data'
       response = https.request(request)
       puts response.read_body
+      response_json = JSON.parse(response.body)
+
+      @response = response_json['ResponseDescription']
+      
+      
+
       # redirect_to order_success_path
       # respond_to do |format|
       #   format.js
