@@ -1,40 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="description" content="multikart">
-    <meta name="keywords" content="multikart">
-    <meta name="author" content="multikart">
-
-    <!--Google font-->
-    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900" rel="stylesheet">
-
-    <!-- Icons -->
-    <link rel="stylesheet" type="text/css" href="../resources/css/fontawesome.css">
-
-    <!--Slick slider css-->
-    <link rel="stylesheet" type="text/css" href="../resources/css/slick.css">
-    <link rel="stylesheet" type="text/css" href="../resources/css/slick-theme.css">
-
-    <!-- Animate icon -->
-    <link rel="stylesheet" type="text/css" href="../resources/css/animate.css">
-
-    <!-- Themify icon -->
-    <link rel="stylesheet" type="text/css" href="../resources/css/themify-icons.css">
-
-    <!-- Bootstrap css -->
-    <link rel="stylesheet" type="text/css" href="../resources/css/bootstrap.css">
-
-    <!-- Theme css -->
-    <link rel="stylesheet" type="text/css" href="../resources/css/color1.css" media="screen" id="color">
-
-</head>
-
-<body>
-
 
     <!-- header start -->
     <%= render 'layouts/header' %>
@@ -49,7 +12,7 @@
                     <div class="success-text"><i class="fa fa-check-circle" aria-hidden="true"></i>
                         <h2>thank you</h2>
                         <p>Payment is successfully processsed and your order is on the way</p>
-                        <p>Transaction ID:267676GHERT105467</p>
+                        <p>Order ID:<%= @order.order_number %></p>
                     </div>
                 </div>
             </div>
@@ -107,18 +70,18 @@
                         <div class="col-sm-6">
                             <h4>summary</h4>
                             <ul class="order-detail">
-                                <li>order ID: ORD-REF-<%= @order.id %></li>
-                                <li>Order Date: <%= @order.created_at.strftime("%B %d, %Y")%> </li>
+                                <li>order Number: <%= @order.order_number %></li>
+                                <li>Order Date: <%= @order.order_date.strftime("%B %d, %Y")%> </li>
                                 <li>Order Total: <%= number_to_currency(@order.order_subtotal, :unit => ' KES ') %></li>
                             </ul>
                         </div>
                         <div class="col-sm-6">
                             <h4>shipping address</h4>
                             <ul class="order-detail">
-                                <li><%= @order.client_first_name %> <%= @order.client_last_name %></li>
-                                <li><%= @order.client_address %>, <%= @order.client_city %>.</li>
-                                <li><%= @order.client_country%>, <%= @order.client_postal_code %></li>
-                                <li>Contact No. <%= @order.client_phone_number %> </li>
+                                <li><%= @customer.first_name %> <%= @customer.last_name %></li>
+                                <li><%= @customer.shipping_address %>, <%= @customer.shipping_city %>.</li>
+                                <li><%= @customer.shipping_region%>, <%= @customer.shipping_postal_code %></li>
+                                <li>Contact No. <%= @customer.phone %> </li>
                             </ul>
                         </div>
                         <div class="col-sm-12 payment-mode">
@@ -154,40 +117,3 @@
     </div>
     <!-- tap to top end -->
 
-
-    <!-- latest jquery-->
-    <script src="../resources/js/jquery-3.3.1.min.js"></script>
-
-    <!-- menu js-->
-    <script src="../resources/js/menu.js"></script>
-
-    <!-- lazyload js-->
-    <script src="../resources/js/lazysizes.min.js"></script>
-
-    <!-- popper js-->
-    <script src="../resources/js/popper.min.js"></script>
-
-    <!-- slick js-->
-    <script src="../resources/js/slick.js"></script>
-
-    <!-- Bootstrap js-->
-    <script src="../resources/js/bootstrap.js"></script>
-
-    <!-- Bootstrap Notification js-->
-    <script src="../resources/js/bootstrap-notify.min.js"></script>
-
-    <!-- Theme js-->
-    <script src="../resources/js/script.js"></script>
-
-    <script>
-        function openSearch() {
-            document.getElementById("search-overlay").style.display = "block";
-        }
-
-        function closeSearch() {
-            document.getElementById("search-overlay").style.display = "none";
-        }
-    </script>
-</body>
-
-</html>

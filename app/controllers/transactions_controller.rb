@@ -118,9 +118,21 @@ class TransactionsController < ApplicationController
       balance = order.reducing_balance - amount
       order.reducing_balance = balance
     end
+
+
     
     respond_to do |format|
-      if @transaction.save && order.save
+      if @transaction.save! && order.save!
+        # broadcast mpesa payments on mpesa channel
+        # send email notification 
+        customer_id = order.customer_id.to_i
+        @customer = Customer.find(customer_id)
+        puts @customer.email
+        OrderMailer.with(customer: @customer, transaction: @transaction, order: order).order_payment.deliver_now
+        ActionCable.server.broadcast 'mpesa',
+          order_number: order.order_number,
+          payment_status: order.payment_status
+        # head :ok
         # format.html { redirect_to @transaction, notice: 'Transaction was successfully created.' }
         format.json { render :show, status: :created, location: @transaction }
       else

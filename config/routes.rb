@@ -23,7 +23,7 @@ Rails.application.routes.draw do
   
   # catgory paths
   resources :categories
-
+  mount ActionCable.server => '/cable'
   #products path
   resources :products
 
@@ -45,7 +45,7 @@ Rails.application.routes.draw do
   get '/cart', to: 'order_items#index'
   get '/cart/checkout', to: 'orders#new', as: :checkout
   patch '/cart/checkout', to: 'orders#create'
-  get '/checkout/order_success', to: 'orders#order_success', as: :order_success
+  get 'order_success/:id', to: 'orders#order_success', as: :order_success
 
   # order paths
   resources :orders

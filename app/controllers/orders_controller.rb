@@ -69,7 +69,9 @@ class OrdersController < ApplicationController
     
   end
   def order_success
-    @order = Order.last
+    @order = Order.find(params[:id])
+    customer_id = @order.customer_id.to_i
+    @customer = Customer.find(customer_id)
   end 
   def destroy
     @order.destroy   
@@ -77,7 +79,6 @@ class OrdersController < ApplicationController
   
   def send_push
     @order = Order.find(params[:id])
-    byebug
     # @order.order_number = "shoesX"
     @customer = Customer.find(@order.customer_id)
       url = URI("https://payme.revenuesure.co.ke/index.php")
