@@ -31,7 +31,9 @@ class OrdersController < ApplicationController
     @customer.shipping_address = params[:customer][:shipping_address]
     @customer.shipping_city = params[:customer][:shipping_city]
     @customer.shipping_postal_code = params[:customer][:shipping_postal_code]
-
+    @customer.delivery_option = params[:customer][:delivery_option]
+    @customer.pick_up_option = params[:customer][:pick_up_option]
+  
 
    @customer.save!
     if @order.update_attributes(order_params.merge(order_status: 'open'))
@@ -85,6 +87,6 @@ class OrdersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def order_params
-      params.require(:order).permit(:order_id, :customer_id, :order_total, :order_number, :payment_id, :order_date, :ship_date, :required_date, :shipper_date, :freight, :sales_tax, :timestamp, :transact_status, :err_loc, :err_msg, :fulfilled, :deleted, :paid, :payment_date, :client_first_name, :client_last_name, :client_phone_number, :client_email, :client_city, :client_address, :client_country, :client_postal_code, :payment_method)
+      params.require(:order).permit(:order_id, :customer_id, :order_total, :order_number, :payment_id, :order_subtotal, :order_date, :ship_date, :required_date, :shipper_date, :freight, :sales_tax, :timestamp, :transact_status, :err_loc, :err_msg, :fulfilled, :deleted, :paid, :payment_date, :client_first_name, :client_last_name, :client_phone_number, :client_email, :client_city, :client_address, :client_country, :client_postal_code, :payment_method)
     end
 end

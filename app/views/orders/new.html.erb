@@ -99,20 +99,43 @@
                                 </div>
                                 <div class="form-group col-md-12 col-sm-12 col-xs-12">
                                     <div class="field-label">Address</div>
-                                    <%= f.text_field :shipping_address, required: true %>
+                                    <%= f.text_field :shipping_address %>
                                 </div>
                                 <div class="form-group col-md-12 col-sm-12 col-xs-12">
                                     <div class="field-label">Town/City</div>
-                                    <%= f.text_field :shipping_city, required: true, type: "text" %>
+                                    <%= f.text_field :shipping_city, type: "text" %>
                                 </div>
                                 <div class="form-group col-md-12 col-sm-6 col-xs-12">
                                     <div class="field-label">Postal Code</div>
-                                    <%= f.number_field :shipping_postal_code, required: true, type: "number" %>
+                                    <%= f.number_field :shipping_postal_code, type: "number" %>
                                 </div>
-                                <!--<div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                    <input type="checkbox" name="shipping-option" id="account-option"> &ensp;
-                                    <label for="account-option">Create An Account?</label>
-                                </div>-->
+                                <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <!--<input type="checkbox" name="shipping-option" id="account-option"> --> &ensp;
+                                    <!--<%= f.check_box :shipping_option, :type => "checkbox" %>-->
+                                    <%= f.check_box :shipping_option, :id => "checkbox"  %>
+                                    <label for="account-option"> Add Shipping Address?</label>
+                                    <div id="shipping" style="display:none;">
+                                        <div class="checkout-title">
+                                            <h3>Shipping Address </h3>
+                                        </div>
+                                        <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                                            <div class="field-label">Country</div>
+                                            <%= f.select :county, options_for_select(["Kenya", "Uganda", "Tanzania"]) %>
+                                        </div>
+                                        <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                                            <div class="field-label">Address</div>
+                                            <%= f.text_field :shipping_address, required: true %>
+                                        </div>
+                                        <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                                            <div class="field-label">Town/City</div>
+                                            <%= f.text_field :shipping_city, required: true, type: "text" %>
+                                        </div>
+                                        <div class="form-group col-md-12 col-sm-6 col-xs-12">
+                                            <div class="field-label">Postal Code</div>
+                                            <%= f.number_field :shipping_postal_code, required: true, type: "number" %>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="col-lg-6 col-sm-12 col-xs-12">
@@ -124,27 +147,23 @@
                                     <% current_cart.order.items.each do |order| %>
                                     <ul class="qty">
                                         <li><%= order.product.product_name %> × <%= order.quantity %> <span><%= number_to_currency(order.price, unit: ' KES ')%></span></li>
-                                    <% end %>
+                                        <% end %>
                                     </ul>
                                     <ul class="sub-total">
                                         <li>Subtotal <span class="count"><%= number_to_currency(current_cart.order_subtotal, unit: ' KES ') %></span></li>
-                                        <li>Shipping
-                                            <div class="shipping">
-                                                <div class="shopping-option">
-                                                    <input type="checkbox" name="free-shipping" id="free-shipping">
-                                                    <label for="free-shipping">Free Shipping</label>
+                                        <li>Delivery Options: <br> <br>
+                                                <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                                                    <%= f.select :delivery_option, options_for_select(["Instore Pickup: Kshs.0", "Nairobi Area: Kshs.250"]), :id => "instore", :prompt => "Select Shipping" %>
                                                 </div>
-                                                <div class="shopping-option">
-                                                    <input type="checkbox" name="local-pickup" id="local-pickup">
-                                                    <label for="local-pickup">Local Pickup</label>
+                                                <div class="form-group col-md-12 col-sm-12 col-xs-12" >
+                                                    <%= f.select :pick_up_option, options_for_select(["Thika Road Mall", "Two Rivers Mall", "Garden City Mall"]), :id => "pickup_option", :style => "display:none;", :prompt => "Select Pickup Location" %>
                                                 </div>
-                                            </div>
                                         </li>
                                     </ul>
                                     <ul class="total">
-                                        <li>Total <span class="count"><%= number_to_currency(current_cart.order_subtotal, unit: ' KES ') %></span></li>
+                                        <li>Total <span class="count"><%= number_to_currency( @order.order_subtotal , unit: ' KES ') %></span></li>
                                     </ul>
-                                </div>                                    
+                                </div>
                                 <%= f.fields_for :order do |order| %>
                                 <div class="payment-box">
                                     <div class="upper-box">
@@ -240,6 +259,29 @@
         function closeSearch() {
             document.getElementById("search-overlay").style.display = "none";
         }
+
+
+        var checkbox = document.getElementById('checkbox');
+        var shipping_div = document.getElementById('shipping');
+        var showHiddenDiv = function() {
+            if (checkbox.checked) {
+                shipping_div.style['display'] = 'block';
+            } else {
+                shipping_div.style['display'] = 'none';
+            }
+        }
+        checkbox.onclick = showHiddenDiv;
+        showHiddenDiv();
+
+    $("#customer_delivery_option").change(function(){
+    if($(this).val() == "Instore Pickup: Kshs.0"){
+      $("#customer_pick_up_option").show();
+    }else{
+      $("#customer_pick_up_option").hide();
+    }
+
+});
+       
     </script>
 </body>
 

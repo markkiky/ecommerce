@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_24_124455) do
+ActiveRecord::Schema.define(version: 2020_08_24_172945) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "name", null: false
@@ -119,6 +119,9 @@ ActiveRecord::Schema.define(version: 2020_08_24_124455) do
     t.string "location"
     t.string "image_url"
     t.string "url"
+    t.string "shipping_option"
+    t.string "pick_up_option"
+    t.string "delivery_option"
     t.index ["email"], name: "index_customers_on_email", unique: true
     t.index ["provider", "uid"], name: "index_customers_on_provider_and_uid", unique: true
     t.index ["provider"], name: "index_customers_on_provider"
