@@ -71,4 +71,5 @@ Rails.application.configure do
   config.hosts << "818a08411f67.ngrok.io"
   config.hosts << "3eb71bf29426.ngrok.io"
   config.hosts << "f2ef59d2edbe.ngrok.io"
+  config.hosts << "betting.revenuesure.co.ke"
 end
