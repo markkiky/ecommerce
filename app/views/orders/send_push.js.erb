@@ -1,5 +1,11 @@
 var push = "Mpesa service response: ";
-alert("push sent");
+
 var push_response = "<%= @response %>";
 $("#push").html(push);
 $("#push_response").html(push_response)
+
+if (push_response == "Already Paid"){
+    $("#payment_email").removeClass('d-none');
+}else{
+     $("#check_payment").removeClass('d-none');
+}

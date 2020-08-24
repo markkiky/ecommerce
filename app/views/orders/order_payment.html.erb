@@ -82,7 +82,7 @@
                         <div class="text-right">
                             <%# order.submit "Pay Now",:id => "pay_btn", :class => "btn-solid btn" %>
 
-                            <%= link_to  send_push_path(@order, @customer),remote: true, class: "btn-solid btn", id: "check_payment", "data-toggle" => "modal", 'data-target' => '#exampleModalCenter'  do %>
+                            <%= link_to  send_push_path(@order, @customer),remote: true, class: "btn-solid btn"  do %>
                             <i class="zmdi zmdi-money "></i>
                             Pay Now
                             <%end%>
@@ -92,14 +92,20 @@
                 </div>
             </div>
 
-            <div class="col-lg-6 col-sm-12 col-xs-12">
-                <h4><B>Lipa na Mpesa<B></h4>
-                <h5>Paybill No: 17555</h5>
+            <div class="col-lg-6 col-sm-12 col-xs-12" id="mpesa_options">
+               
                 <h5>Account No: <%= @order.order_number %></h5>
                 <p id="push"></p>
                 <p id="push_response"></p>
                 <p id="payment"></p>
                 <p id="payment_response"></p>
+                <%= link_to  check_payment_path(@order.id),remote: true, class: "btn btn-success btn--icon-text text-white pr-3 ml-3 d-none", id: "check_payment"  do %>
+                <i class="zmdi zmdi-money "></i>
+                Check Payment
+                <%end%>
+                <div id="payment_email" class="mt-5 d-none">
+                    <p>Please check your Email: <%= @customer.email %></p>
+                </div>
             </div>
         </div>
     </div>
@@ -110,4 +116,3 @@
 <%= render "layouts/footer" %>
 
 <!-- footer end -->
-

@@ -20,6 +20,8 @@ Rails.application.routes.draw do
 
   get 'payment/:id', to: 'orders#order_payment', as: :order_payment
   get '/mpesa_push/:id', to: "orders#send_push", as: :send_push
+
+  get "/check_payment/:id", to: "orders#check_payment", as: :check_payment 
   
   # catgory paths
   resources :categories
@@ -38,7 +40,7 @@ Rails.application.routes.draw do
   # Customers Social Logins path
   # get 'auth/google_oauth/callback', to: 'sessions#customer_omniauth'
   # get 'auth/admin/callback', to: 'sessions#customer_omniauth'
-  get 'auth/:provider/callback', to: 'sessions#customer_omniauth'
+  get 'auth/:provider/callback', to: 'sessions#omniauth'
 
   #cart routes 
   resources :order_items, path: '/cart/items'

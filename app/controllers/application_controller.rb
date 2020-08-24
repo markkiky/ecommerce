@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-
+  require "resolv-replace"
   before_action :current_cart
 
   def current_cart
