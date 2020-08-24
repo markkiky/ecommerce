@@ -75,7 +75,7 @@ class TransactionsController < ApplicationController
     transaction_description = params[:TransactionDesc]
     name = params[:FullNames]
     date = params[:TransTime]
-    order = Order.where(:order_number => params[:AccountReference]).last
+    
 
     # Create a new transaction for the received data
     # order id for connection with orders
@@ -84,7 +84,7 @@ class TransactionsController < ApplicationController
       'account_from' => params[:PhoneNumber],
       'transaction_code' => params[:MpesaReceiptNumber],
       'amount' => params[:Amount], 
-      'order_id' => order.id,
+      'order_id' => 0,
       'message' => params[:TransactionDesc],
       'callback_returned' => params[:FullNames],
       'date' => params[:TransTime],
@@ -93,45 +93,52 @@ class TransactionsController < ApplicationController
     @transaction = Transaction.new(callback_params)
     # Update the concern Order
 
-    order.payment_date = Date.today()
-    order.transaction_id = @transaction.id
-    if order.payment_status == "Unpaid"
-      balance = order.order_subtotal - amount
-      # set the balance here in future.
-      order.reducing_balance = balance
-      if balance <= 0
-        order.payment_status = "Paid"
-        order.paid = true
-      elsif balance > 0
-        order.payment_status = 'part'
+    if Order.where(:order_number => params[:AccountReference]).exists?
+      order = Order.where(:order_number => params[:AccountReference]).last
+      order.payment_date = Date.today()
+      order.transaction_id = @transaction.id
+      if order.payment_status == "Unpaid"
+        balance = order.order_subtotal - amount
+        # set the balance here in future.
+        order.reducing_balance = balance
+        if balance <= 0
+          order.payment_status = "Paid"
+          order.paid = true
+        elsif balance > 0
+          order.payment_status = 'part'
+        end
+      elsif order.payment_status == "part"
+        balance = order.reducing_balance - amount
+        order.reducing_balance = balance
+        if balance <= 0
+          order.payment_status = "Paid"
+          order.paid = true
+        elsif balance > 0
+          order.payment_status = 'part'
+        end
+      elsif order.payment_status == "Paid"
+        balance = order.reducing_balance - amount
+        order.reducing_balance = balance
       end
-    elsif order.payment_status == "part"
-      balance = order.reducing_balance - amount
-      order.reducing_balance = balance
-      if balance <= 0
-        order.payment_status = "Paid"
-        order.paid = true
-      elsif balance > 0
-        order.payment_status = 'part'
-      end
-    elsif order.payment_status == "Paid"
-      balance = order.reducing_balance - amount
-      order.reducing_balance = balance
+      # send order received email 
+      customer_id = order.customer_id.to_i
+      @customer = Customer.find(customer_id)
+      OrderMailer.with(customer: @customer, transaction: @transaction, order: order).order_payment.deliver_now
+    else
     end
 
 
     
     respond_to do |format|
-      if @transaction.save! && order.save!
+      if @transaction.save! 
         # broadcast mpesa payments on mpesa channel
         # send email notification 
-        customer_id = order.customer_id.to_i
-        @customer = Customer.find(customer_id)
-        puts @customer.email
-        OrderMailer.with(customer: @customer, transaction: @transaction, order: order).order_payment.deliver_now
-        ActionCable.server.broadcast 'mpesa',
-          order_number: order.order_number,
-          payment_status: order.payment_status
+        
+        
+        
+        # ActionCable.server.broadcast 'mpesa',
+        #   order_number: order.order_number,
+        #   payment_status: order.payment_status
         # head :ok
         # format.html { redirect_to @transaction, notice: 'Transaction was successfully created.' }
         format.json { render :show, status: :created, location: @transaction }

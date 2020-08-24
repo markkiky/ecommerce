@@ -23,7 +23,7 @@ Rails.application.routes.draw do
   
   # catgory paths
   resources :categories
-  mount ActionCable.server => '/cable'
+  # mount ActionCable.server => '/cable'
   #products path
   resources :products
 
