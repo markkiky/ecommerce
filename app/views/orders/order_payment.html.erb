@@ -82,7 +82,7 @@
                         <div class="text-right">
                             <%# order.submit "Pay Now",:id => "pay_btn", :class => "btn-solid btn" %>
 
-                            <%= link_to  send_push_path(@order, @customer),remote: true, class: "btn-solid btn"  do %>
+                            <%= link_to  send_push_path(@order, @customer),remote: true, class: "btn-solid btn", id: "pay"  do %>
                             <i class="zmdi zmdi-money "></i>
                             Pay Now
                             <%end%>

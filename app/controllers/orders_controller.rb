@@ -79,6 +79,7 @@ class OrdersController < ApplicationController
   
   def send_push
     @order = Order.find(params[:id])
+    @id = params[:id]
     require "uri"
     require "net/http"
 
@@ -109,7 +110,8 @@ class OrdersController < ApplicationController
       puts response.read_body
       response_json = JSON.parse(response.body)
 
-      @response = response_json['ResponseDescription']
+      # @response = response_json['ResponseDescription']
+      @response = "Push Sent"
 
     else 
       @response = "Already Paid"
