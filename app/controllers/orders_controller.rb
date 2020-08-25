@@ -31,6 +31,10 @@ class OrdersController < ApplicationController
     @customer.shipping_address = params[:customer][:shipping_address]
     @customer.shipping_city = params[:customer][:shipping_city]
     @customer.shipping_postal_code = params[:customer][:shipping_postal_code]
+    @customer.billing_address = params[:customer][:billing_address]
+    @customer.billing_country = params[:customer][:billing_country]
+    @customer.billing_city = params[:customer][:billing_city]
+    @customer.billing_postal_code = params[:customer][:billing_postal_code]
     @customer.delivery_option = params[:customer][:delivery_option]
     @customer.pick_up_option = params[:customer][:pick_up_option]
   

@@ -38,15 +38,13 @@
                         </ul>
                         <ul class="sub-total">
                             <li>Subtotal <span class="count"><%= number_to_currency(@order.order_subtotal, unit: ' KES ') %></span></li>
-                            <li>Shipping
+                            <li>Delivery option:
                                 <div class="shipping">
                                     <div class="shopping-option">
-                                        <input type="checkbox" name="free-shipping" id="free-shipping">
-                                        <label for="free-shipping">Free Shipping</label>
+                                        <label for="free-shipping"><%= @customer.delivery_option %> </label>
                                     </div>
                                     <div class="shopping-option">
-                                        <input type="checkbox" name="local-pickup" id="local-pickup">
-                                        <label for="local-pickup">Local Pickup</label>
+                                        <label for="local-pickup"><%= @customer.pick_up_option %></label>
                                     </div>
                                 </div>
                             </li>

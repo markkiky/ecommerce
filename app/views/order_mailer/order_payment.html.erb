@@ -5,8 +5,6 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="../resources/images/favicon/1.png" type="image/x-icon">
-    <link rel="shortcut icon" href="../resources/images/favicon/1.png" type="image/x-icon">
     <title>Multikart | Email template </title>
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900" rel="stylesheet">
 
@@ -164,8 +162,8 @@
                                         Your Billing Address:</h5>
                                     <p
                                         style="text-align: left;font-weight: normal; font-size: 14px; color: #000000;line-height: 21px;    margin-top: 0;">
-                                        268 Cambridge Lane New Albany,<br> IN 47150268 Cambridge Lane <br>New Albany, IN
-                                        47150</p>
+                                        <%= @customer.billing_address %>,<br> <%= @customer.billing_city %> <br><%= @customer.billing_postal_code %>
+                                        </p>
                                 </td>
                             </tr>
                         </tbody>
