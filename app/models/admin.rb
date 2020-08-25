@@ -8,4 +8,6 @@ has_many :categories
 has_many :colors
 has_many :sizes
 has_many :products
+has_many :orders
+
 end

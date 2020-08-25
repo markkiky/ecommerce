@@ -1,4 +1,3 @@
-
 <!-- page-wrapper Start-->
 <div class="page-wrapper">
 
@@ -153,39 +152,17 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            <% Order.all.order(created_at: :desc).limit(5).each do |order| %>
                                             <tr>
-                                                <td>1</td>
-                                                <td class="digits">$120.00</td>
-                                                <td class="font-danger">Bank Transfers</td>
-                                                <td class="digits">On Way</td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td class="digits">$90.00</td>
-                                                <td class="font-secondary">Ewallets</td>
-                                                <td class="digits">Delivered</td>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td class="digits">$240.00</td>
-                                                <td class="font-warning">Cash</td>
-                                                <td class="digits">Delivered</td>
-                                            </tr>
-                                            <tr>
-                                                <td>4</td>
-                                                <td class="digits">$120.00</td>
-                                                <td class="font-primary">Direct Deposit</td>
-                                                <td class="digits">$6523</td>
-                                            </tr>
-                                            <tr>
-                                                <td>5</td>
-                                                <td class="digits">$50.00</td>
-                                                <td class="font-primary">Bank Transfers</td>
-                                                <td class="digits">Delivered</td>
+                                                <td><%= order.id %></td>
+                                                <td class="digits"><%= number_to_currency(order.order_subtotal, :unit => 'KES ') %></td>
+                                                <td class="font-danger"><%= order.payment_method %></td>
+                                                <td class="digits"><%= order.order_status %></td>
                                             </tr>
                                         </tbody>
+                                        <% end %>
                                     </table>
-                                    <a href="order.html" class="btn btn-primary">View All Orders</a>
+                                    <a href="<%= orders_path %>" class="btn btn-primary">View All Orders</a>
                                 </div>
                                 <div class="code-box-copy">
                                     <button class="code-box-copy__btn btn-clipboard" data-clipboard-target="#example-head1" title="" data-original-title="Copy"><i class="icofont icofont-copy-alt"></i></button>
