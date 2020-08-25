@@ -84,7 +84,7 @@ class TransactionsController < ApplicationController
       'account_from' => params[:PhoneNumber],
       'transaction_code' => params[:MpesaReceiptNumber],
       'amount' => params[:Amount], 
-      'order_id' => 0,
+      'order_id' => 1,
       'message' => params[:TransactionDesc],
       'callback_returned' => params[:FullNames],
       'date' => params[:TransTime],
@@ -120,6 +120,7 @@ class TransactionsController < ApplicationController
         balance = order.reducing_balance - amount
         order.reducing_balance = balance
       end
+
       # send order received email 
       customer_id = order.customer_id.to_i
       @customer = Customer.find(customer_id)
