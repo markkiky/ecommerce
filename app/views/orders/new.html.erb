@@ -59,19 +59,19 @@
                                 </div>
                                 <div class="form-group col-md-12 col-sm-12 col-xs-12">
                                     <div class="field-label">Country</div>
-                                    <%= f.select :county, options_for_select(["Kenya", "Uganda", "Tanzania"]) %>
+                                    <%= f.select :billing_country, options_for_select(["Kenya", "Uganda", "Tanzania"]) %>
                                 </div>
                                 <div class="form-group col-md-12 col-sm-12 col-xs-12">
                                     <div class="field-label">Address</div>
-                                    <%= f.text_field :shipping_address %>
+                                    <%= f.text_field :billing_address %>
                                 </div>
                                 <div class="form-group col-md-12 col-sm-12 col-xs-12">
                                     <div class="field-label">Town/City</div>
-                                    <%= f.text_field :shipping_city, type: "text" %>
+                                    <%= f.text_field :billing_city, type: "text" %>
                                 </div>
                                 <div class="form-group col-md-12 col-sm-6 col-xs-12">
                                     <div class="field-label">Postal Code</div>
-                                    <%= f.number_field :shipping_postal_code, type: "number" %>
+                                    <%= f.number_field :billing_postal_code, type: "number" %>
                                 </div>
                                 <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                     <!--<input type="checkbox" name="shipping-option" id="account-option"> --> &ensp;
