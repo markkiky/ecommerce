@@ -1,39 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="description" content="multikart">
-    <meta name="keywords" content="multikart">
-    <meta name="author" content="multikart">
-
-    <!--Google font-->
-    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900" rel="stylesheet">
-
-    <!-- Icons -->
-    <link rel="stylesheet" type="text/css" href="../resources/css/fontawesome.css">
-
-    <!--Slick slider css-->
-    <link rel="stylesheet" type="text/css" href="../resources/css/slick.css">
-    <link rel="stylesheet" type="text/css" href="../resources/css/slick-theme.css">
-
-    <!-- Animate icon -->
-    <link rel="stylesheet" type="text/css" href="../resources/css/animate.css">
-
-    <!-- Themify icon -->
-    <link rel="stylesheet" type="text/css" href="../resources/css/themify-icons.css">
-
-    <!-- Bootstrap css -->
-    <link rel="stylesheet" type="text/css" href="../resources/css/bootstrap.css">
-
-    <!-- Theme css -->
-    <link rel="stylesheet" type="text/css" href="../resources/css/color1.css" media="screen" id="color">
-
-</head>
-
-<body>
 
 
     <!-- header start -->
@@ -163,10 +127,10 @@
                                     <ul class="total">
                                         <li>Total <span class="count"><%= number_to_currency( @order.order_subtotal , unit: ' KES ') %></span></li>
                                     </ul>
-                                </div>
-                                <%= f.fields_for :order do |order| %>
-                                <div class="payment-box">
-                                    <div class="upper-box">
+                                </div>                                    
+                                <%= f.fields_for :order,:html => { class: 'd-none'}  do |order| %>
+                                <div class="payment-box ">
+                                    <div class="upper-box d-none">
                                         <div class="payment-options">
                                             <ul>
                                                 <li>
@@ -226,31 +190,6 @@
     </div>
     <!-- tap to top end -->
 
-
-    <!-- latest jquery-->
-    <script src="../resources/js/jquery-3.3.1.min.js"></script>
-
-    <!-- menu js-->
-    <script src="../resources/js/menu.js"></script>
-
-    <!-- lazyload js-->
-    <script src="../resources/js/lazysizes.min.js"></script>
-
-    <!-- popper js-->
-    <script src="../resources/js/popper.min.js"></script>
-
-    <!-- slick js-->
-    <script src="../resources/js/slick.js"></script>
-
-    <!-- Bootstrap js-->
-    <script src="../resources/js/bootstrap.js"></script>
-
-    <!-- Bootstrap Notification js-->
-    <script src="../resources/js/bootstrap-notify.min.js"></script>
-
-    <!-- Theme js-->
-    <script src="../resources/js/script.js"></script>
-
     <script>
         function openSearch() {
             document.getElementById("search-overlay").style.display = "block";
@@ -283,6 +222,3 @@
 });
        
     </script>
-</body>
-
-</html>

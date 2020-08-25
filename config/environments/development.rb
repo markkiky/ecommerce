@@ -63,13 +63,29 @@ Rails.application.configure do
   # Default action url for devise
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
   config.web_console.whiny_requests = false
-  config.hosts << "05b020ff7b32.ngrok.io"
-  config.hosts << "lvh.me"
-  config.hosts << "97873f8687c0.ngrok.io"
-  config.hosts << "cead7967c790.ngrok.io"
-  config.hosts << "b34c400cfa3a.ngrok.io"
-  config.hosts << "818a08411f67.ngrok.io"
-  config.hosts << "3eb71bf29426.ngrok.io"
-  config.hosts << "f2ef59d2edbe.ngrok.io"
-  config.hosts << "betting.revenuesure.co.ke"
+  
+  config.hosts << "ab57b45726c5.ngrok.io"
+  config.action_cable.url = "ws://localhost:3000/cable"
+  # config.action_mailer.perform_deliveries = true
+  # config.action_mailer.raise_delivery_errors = true
+
+  # Mailings
+  config.action_mailer.default_url_options = { :host => "https://ab57b45726c5.ngrok.io" }
+
+  config.action_mailer.delivery_method = :sendmail
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.default_options = {from: 'markkaris438@gmail.com'}
+
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address:              'smtp.gmail.com',
+    port:                 587,
+    domain:               'gmail.com',
+    user_name:            'markkaris438@gmail.com',
+    password:             'kcebdhffueckqvav',
+    authentication:       'plain',
+    enable_starttls_auto: true  
+  }
+  ActionMailer::Base.raise_delivery_errors = true
 end

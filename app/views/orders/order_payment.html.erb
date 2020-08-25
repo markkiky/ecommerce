@@ -1,0 +1,118 @@
+<%= render 'layouts/header'%>
+<%#render  'layouts/check_payment_modal'%>
+<!-- breadcrumb start -->
+
+<div class="breadcrumb-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="page-title">
+                    <h2>Payment</h2>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <nav aria-label="breadcrumb" class="theme-breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Payment</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- breadcrumb End -->
+<section class="section-b-space">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-sm-12 col-xs-12">
+                <div class="checkout-details">
+                    <div class="order-box">
+                        <div class="title-box">
+                            <div>Product <span>Total</span></div>
+                        </div>
+                        <% @order.items.each do |order| %>
+                        <ul class="qty">
+                            <li><%= order.product.product_name %> × <%= order.quantity %> <span><%= number_to_currency(order.price, unit: ' KES ')%></span></li>
+                            <% end %>
+                        </ul>
+                        <ul class="sub-total">
+                            <li>Subtotal <span class="count"><%= number_to_currency(@order.order_subtotal, unit: ' KES ') %></span></li>
+                            <li>Shipping
+                                <div class="shipping">
+                                    <div class="shopping-option">
+                                        <input type="checkbox" name="free-shipping" id="free-shipping">
+                                        <label for="free-shipping">Free Shipping</label>
+                                    </div>
+                                    <div class="shopping-option">
+                                        <input type="checkbox" name="local-pickup" id="local-pickup">
+                                        <label for="local-pickup">Local Pickup</label>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                        <ul class="total">
+                            <li>Total <span class="count"><%= number_to_currency(@order.order_subtotal, unit: ' KES ') %></span></li>
+                        </ul>
+                    </div>
+                    <%= form_for send_push_path, :remote => true , method: :post do |order| %>
+                    <div class="payment-box">
+                        <div class="upper-box">
+                            <div class="payment-options">
+                                <ul>
+                                    <li>
+                                        <div class="radio-option">
+                                            <!--<input type="radio" name="payment-group" id="payment-1" checked="checked">-->
+                                            <%= order.radio_button :payment_method, "Mpesa", :type => "radio", :name => "order[payment_method]", :id => "payment-1", :checked => true %>
+                                            <label for="payment-1">Mpesa : <%=  @customer.phone %><span class="small-text">Please send a check to Store
+                                                    Name, Store Street, Store Town, Store State /
+                                                    County, Store Postcode.</span></label>
+                                        </div>
+                                    </li>
+
+                                    <li>
+                                        <div class="radio-option paypal">
+                                            <%= order.radio_button :payment_method, "Card", :type => "radio", :name => "order[payment_method]", :id => "payment-3"%>
+                                            <label for="payment-3">Card<span class="image"><img src="" alt=""></span></label>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <%# order.submit "Pay Now",:id => "pay_btn", :class => "btn-solid btn" %>
+
+                            <%= link_to  send_push_path(@order, @customer),remote: true, class: "btn-solid btn", id: "pay"  do %>
+                            <i class="zmdi zmdi-money "></i>
+                            Pay Now
+                            <%end%>
+                        </div>
+                    </div>
+                    <% end %>
+                </div>
+            </div>
+
+            <div class="col-lg-6 col-sm-12 col-xs-12" id="mpesa_options">
+               
+                <h5>Account No: <%= @order.order_number %></h5>
+                <p id="push"></p>
+                <p id="push_response"></p>
+                <p id="payment"></p>
+                <p id="payment_response"></p>
+                <%= link_to  check_payment_path(@order.id),remote: true, class: "btn btn-success btn--icon-text text-white pr-3 ml-3 d-none", id: "check_payment"  do %>
+                <i class="zmdi zmdi-money "></i>
+                Check Payment
+                <%end%>
+                <div id="payment_email" class="mt-5 d-none">
+                    <p>Please check your Email: <%= @customer.email %></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- footer start -->
+
+<%= render "layouts/footer" %>
+
+<!-- footer end -->

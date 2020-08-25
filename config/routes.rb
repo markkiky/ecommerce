@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :complete_orders
   resources :colors
   resources :sizes
   resources :transactions
@@ -16,10 +17,15 @@ Rails.application.routes.draw do
   end
   get '/admin/dashboard', to: "admins#dashboard", as: :admin_dashboards
   get '/contact_us/', to: 'homes#contact_us', as: :contact_us
- 
+
+  get 'payment/:id', to: 'orders#order_payment', as: :order_payment
+  get '/mpesa_push/:id', to: "orders#send_push", as: :send_push
+
+  get "/check_payment/:id", to: "orders#check_payment", as: :check_payment 
+  
   # catgory paths
   resources :categories
-
+  # mount ActionCable.server => '/cable'
   #products path
   resources :products
 
@@ -35,14 +41,14 @@ Rails.application.routes.draw do
   # Customers Social Logins path
   # get 'auth/google_oauth/callback', to: 'sessions#customer_omniauth'
   # get 'auth/admin/callback', to: 'sessions#customer_omniauth'
-  get 'auth/:provider/callback', to: 'sessions#customer_omniauth'
+  get 'auth/:provider/callback', to: 'sessions#omniauth'
 
   #cart routes 
   resources :order_items, path: '/cart/items'
   get '/cart', to: 'order_items#index'
   get '/cart/checkout', to: 'orders#new', as: :checkout
   patch '/cart/checkout', to: 'orders#create'
-  get '/checkout/order_success', to: 'orders#order_success', as: :order_success
+  get 'order_success/:id', to: 'orders#order_success', as: :order_success
 
   # order paths
   resources :orders

@@ -35,7 +35,7 @@ class SessionsController < ApplicationController
         end
     end
 
-    def customer_omniauth
+    def omniauth
         if auth != nil
             if auth.provider == "google_oauth2"
                 @customer = Customer.from_omniauth(auth)
