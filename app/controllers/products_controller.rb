@@ -24,6 +24,7 @@ end
   # GET /products/1
   # GET /products/1.json
   def show
+    @wishlist_exists = Wishlist.where(product: @product, customer: current_customer) == [] ? false : true
   end
 
   # GET /products/new

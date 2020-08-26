@@ -6,6 +6,7 @@ class Customer < ApplicationRecord
          :omniauthable, omniauth_providers: [:facebook, :google_oauth2, :twitter]
          
   has_many :orders
+  has_many :wishlists
   # class << self
   #   def from_omniauth(auth_hash)
   #     user = find_or_create_by(uid: auth_hash['uid'], provider: auth_hash['provider'])

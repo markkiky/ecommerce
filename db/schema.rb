@@ -10,9 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_21_183237) do
+ActiveRecord::Schema.define(version: 2020_08_26_091915) do
 
-  create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
     t.bigint "record_id", null: false
@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 2020_08_21_183237) do
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
   end
 
-  create_table "active_storage_blobs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "active_storage_blobs", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "key", null: false
     t.string "filename", null: false
     t.string "content_type"
@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 2020_08_21_183237) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
-  create_table "admins", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "admins", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -63,7 +63,7 @@ ActiveRecord::Schema.define(version: 2020_08_21_183237) do
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
   end
 
-  create_table "categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "categories", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "category_id"
     t.string "category_name"
     t.text "description"
@@ -73,14 +73,14 @@ ActiveRecord::Schema.define(version: 2020_08_21_183237) do
     t.integer "admin_id"
   end
 
-  create_table "colors", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "colors", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "color_type"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "admin_id"
   end
 
-  create_table "complete_orders", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "complete_orders", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "order_id"
     t.string "customer_id"
     t.string "order_number"
@@ -99,7 +99,7 @@ ActiveRecord::Schema.define(version: 2020_08_21_183237) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "customers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "customers", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "customer_id"
     t.string "first_name"
     t.string "last_name"
@@ -147,16 +147,12 @@ ActiveRecord::Schema.define(version: 2020_08_21_183237) do
     t.index ["uid"], name: "index_customers_on_uid"
   end
 
-  create_table "homes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "homes", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "order_items", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-    t.string "order_id"
-    t.string "product_id"
-    t.string "order_number"
-    t.decimal "price", precision: 10
+  create_table "order_items", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.integer "quantity"
     t.decimal "price", precision: 10
     t.datetime "created_at", precision: 6, null: false
@@ -167,12 +163,12 @@ ActiveRecord::Schema.define(version: 2020_08_21_183237) do
     t.index ["product_id"], name: "index_order_items_on_product_id"
   end
 
-  create_table "orders", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "orders", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "order_id"
     t.string "customer_id"
     t.decimal "order_total", precision: 10
     t.string "order_number"
-    t.string "payment_id"
+    t.string "transaction_id"
     t.datetime "order_date"
     t.datetime "ship_date"
     t.datetime "required_date"
@@ -193,18 +189,11 @@ ActiveRecord::Schema.define(version: 2020_08_21_183237) do
     t.string "order_status", default: "cart"
     t.decimal "order_subtotal", precision: 10
     t.string "payment_method"
-    t.string "client_first_name"
-    t.string "client_last_name"
-    t.string "client_email"
-    t.string "client_phone_number"
-    t.string "client_country"
-    t.string "client_address"
-    t.string "client_city"
-    t.string "client_postal_code"
     t.string "payment_status", default: "Unpaid"
+    t.decimal "reducing_balance", precision: 10
   end
 
-  create_table "products", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "products", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "product_id"
     t.string "sku"
     t.string "id_sku"
@@ -258,14 +247,14 @@ ActiveRecord::Schema.define(version: 2020_08_21_183237) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "sizes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "sizes", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "size_type"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "admin_id"
   end
 
-  create_table "transactions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "transactions", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "transaction_id"
     t.string "order_id"
     t.string "callback_returned"
@@ -279,7 +268,18 @@ ActiveRecord::Schema.define(version: 2020_08_21_183237) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "wishlists", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+    t.bigint "product_id", null: false
+    t.bigint "customer_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["customer_id"], name: "index_wishlists_on_customer_id"
+    t.index ["product_id"], name: "index_wishlists_on_product_id"
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "order_items", "orders"
   add_foreign_key "order_items", "products"
+  add_foreign_key "wishlists", "customers"
+  add_foreign_key "wishlists", "products"
 end

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   resources :complete_orders
   resources :colors
   resources :sizes
@@ -55,5 +56,9 @@ Rails.application.routes.draw do
 
   #search path
   get "search", to: "products#search"
+
+  #wishlist path
+  get "wishlists/update"
+  get "/wishlists", to: "wishlists#index"
 
 end
