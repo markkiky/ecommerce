@@ -5,3 +5,14 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+# Admin add
+Admin.create!(email: 'markkaris438@gmail.com', encrypted_password: "", owner: true)
+
+# Create roles
+Role.create!(title: "NCCGSUPERUSER")
+
+# create sizes
+Size.create!(size_type: "green", admin_id: 1)
+
+# create colors
+Color.create!(color_type: 'red', admin_id: 1)

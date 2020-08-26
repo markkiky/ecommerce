@@ -64,14 +64,18 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
   config.web_console.whiny_requests = false
   
-  config.hosts << "ab57b45726c5.ngrok.io"
   config.action_cable.url = "ws://localhost:3000/cable"
   # config.action_mailer.perform_deliveries = true
   # config.action_mailer.raise_delivery_errors = true
 
   # Mailings
-  config.action_mailer.default_url_options = { :host => "https://ab57b45726c5.ngrok.io" }
-
+  config.action_mailer.default_url_options = { :host => "localhost:3000" }
+  config.hosts << "079d531bb325.ngrok.io"
+  # Rails.application.config.action_cable.allowed_request_origins = ['https://079d531bb325.ngrok.io/']
+  # ActionCable.server.config.allowed_request_origins = [
+  #   'https://079d531bb325.ngrok.io/'
+  # ]
+  config.action_cable.allowed_request_origins = [/http:\/\/*/, /https:\/\/*/]
   config.action_mailer.delivery_method = :sendmail
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true

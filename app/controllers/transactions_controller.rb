@@ -80,21 +80,26 @@ class TransactionsController < ApplicationController
     # Create a new transaction for the received data
     # order id for connection with orders
     callback_params = {
-      'transaction_id' => params[:PayBillNumber], 
-      'account_from' => params[:PhoneNumber],
+      'paybill_number' => params[:PayBillNumber], 
+      'phone_number' => params[:PhoneNumber],
       'transaction_code' => params[:MpesaReceiptNumber],
       'amount' => params[:Amount], 
       'order_id' => 1,
-      'message' => params[:TransactionDesc],
-      'callback_returned' => params[:FullNames],
+      'account_reference' => params[:AccountReference],
+      'transaction_description' => params[:TransactionDesc],
+      'full_names' => params[:FullNames],
       'date' => params[:TransTime],
       'payment_mode' => "MPESA"
     }
     @transaction = Transaction.new(callback_params)
+    # @transaction.save
     # Update the concern Order
-
+   
     if Order.where(:order_number => params[:AccountReference]).exists?
       order = Order.where(:order_number => params[:AccountReference]).last
+      @transaction.order_id = order.id
+      @transaction.save! 
+      
       order.payment_date = Date.today()
       order.transaction_id = @transaction.id
       if order.payment_status == "Unpaid"
@@ -124,7 +129,10 @@ class TransactionsController < ApplicationController
       # send order received email 
       customer_id = order.customer_id.to_i
       @customer = Customer.find(customer_id)
-      OrderMailer.with(customer: @customer, transaction: @transaction, order: order).order_payment.deliver_now
+      # send email notification
+      OrderMailer.with(customer: @customer, transaction: @transaction, order: order).order_payment.deliver_later
+      # broadcast to mpesa channel
+      ActionCable.server.broadcast "mpesa_channel_#{order.id}", phone: params[:PhoneNumber], transaction_code: params[:MpesaReceiptNumber], paybill: params[:PayBillNumber]
     else
     end
 

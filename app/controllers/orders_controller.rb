@@ -35,7 +35,7 @@ class OrdersController < ApplicationController
     
     @customer.save!
     if @order.update_attributes(order_params.merge(order_status: 'pending_payment', order_number: Order.counter, order_date: Date.today()))
-      # session[:cart_token] = nil
+      session[:cart_token] = nil
       redirect_to order_payment_path(@order.id)
     else
       render :new
@@ -66,6 +66,8 @@ class OrdersController < ApplicationController
     @order = Order.find(params[:id])
     @customer = Customer.find(@order.customer_id)
     
+    # used to return client_side to client for successful payments
+    @order_id = @order.id
     
   end
   def order_success

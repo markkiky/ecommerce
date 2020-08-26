@@ -157,11 +157,13 @@
 <body>
 
     <% if notice %>
-    <p class="alert alert-success"><%= notice %></p>
+        <p class="alert alert-success"><%= notice %></p>
     <% end %>
     <% if alert %>
-    <p class="alert alert-danger"><%= alert %></p>
+        <p class="alert alert-danger"><%= alert %></p>
     <% end %>
+    <!-- Render Payments modal -->
+    <%= render 'layouts/payment_modal' %>
     <%= yield %>
 </body>
 
