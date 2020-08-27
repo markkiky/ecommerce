@@ -103,6 +103,7 @@
                                     <li><a href="#"><i class="fa fa-instagram"></i></a></li>
                                     <li><a href="#"><i class="fa fa-rss"></i></a></li>
                                 </ul>
+                                <% if customer_signed_in? %>
                                 <% if @wishlist_exists == true %>
                                 <%= link_to wishlists_update_path(product: @product), :class => "wishlist-btn", remote: true do %>
                                 <i class="fa fa-heart" style="color:#ff4c3b;"></i><span id="wishlist_link" class="title-font" style="color:#ff4c3b;">Remove from Wishlist</span>
@@ -111,6 +112,10 @@
                                 <%= link_to wishlists_update_path(product: @product), :class => "wishlist-btn", remote: true do %>
                                 <i class="fa fa-heart" style="color:#ff4c3b;"></i><span id="wishlist_link" class="title-font" style="color:#ff4c3b; ">Add To WishList</span>
                                 <% end %>
+                                <% end %>
+                                <% else %>
+                                 <a href="<%= new_customer_session_path %>" class="wishlist-btn"  style="color:#000;"><i class="fa fa-heart"></i><span
+                                                class="title-font">Add To WishList</span></a>
                                 <% end %>
                             </div>
                         </div>

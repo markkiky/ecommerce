@@ -3,6 +3,7 @@ class Product < ApplicationRecord
     belongs_to :category
     belongs_to :size
     belongs_to :color
+    has_many :wishlists
     
     has_many_attached :images
 end
