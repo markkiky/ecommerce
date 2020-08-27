@@ -28,7 +28,12 @@ Rails.application.routes.draw do
   resources :categories
   # mount ActionCable.server => '/cable'
   #products path
-  resources :products
+  resources :products do 
+
+    #reviews routes
+    resources :reviews 
+    
+  end 
 
   # devise_for :customers
   resources :customers
