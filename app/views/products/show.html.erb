@@ -114,8 +114,7 @@
                                 <% end %>
                                 <% end %>
                                 <% else %>
-                                 <a href="<%= new_customer_session_path %>" class="wishlist-btn"  style="color:#000;"><i class="fa fa-heart"></i><span
-                                                class="title-font">Add To WishList</span></a>
+                                <a href="<%= new_customer_session_path %>" class="wishlist-btn" style="color:#000;"><i class="fa fa-heart"></i><span class="title-font">Add To WishList</span></a>
                                 <% end %>
                             </div>
                         </div>
@@ -266,25 +265,23 @@
                     <div class="tab-pane fade" id="top-review" role="tabpanel" aria-labelledby="review-top-tab">
                         <!--<form class="theme-form">-->
                         <%= form_for([@product, @product.reviews.build]) do | f | %>
-                            <div class="form-row">
-                                <div class="col-md-12">
-                                    <div class="media">
-                                        <label>Rating</label>
-                                        <div class="media-body ml-3">
-                                            <div class="rating three-star"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
-                                        </div>
+                        <div class="form-row">
+                            <div class="col-md-12">
+                                <div class="media" id="rating-form">
+                                    <label>Rating</label>
+                                    <div class="media-body ml-3">
                                     </div>
-                                    <%= f.number_field :rating %>
-                                </div>
-                                <div class="col-md-12">
-                                    <label for="review">Review Description </label>
-                                    <%= f.text_area :comment, :class => "form-control", :id => "exampleFormControlTextarea1", :rows => "6" %>
-                                     <br>
-                                </div>
-                                <div class="col-md-12">
-                                    <%= f.button "Submit Your Review", :class => "btn btn-solid" %>
                                 </div>
                             </div>
+                            <div class="col-md-12">
+                                <label for="review">Review Description </label>
+                                <%= f.text_area :comment, :class => "form-control", :id => "exampleFormControlTextarea1", :rows => "6" %>
+                                <br>
+                            </div>
+                            <div class="col-md-12">
+                                <%= f.button "Submit Your Review", :class => "btn btn-solid" %>
+                            </div>
+                        </div>
                         <% end %>
                         <!--</form>-->
                     </div>
@@ -432,4 +429,19 @@
     function closeSearch() {
         document.getElementById("search-overlay").style.display = "none";
     }
+
+
+    $('#rating-form').raty({
+        path: '/assets/',
+        scoreName: 'review[rating]'
+    });
+
+    
+    $('.average-review-rating').raty({
+        readOnly: true,
+        score: function() {
+            return $(this).attr('data-score')
+        },
+        path: '/assets/'
+    });
 </script>
