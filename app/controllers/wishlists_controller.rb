@@ -1,4 +1,5 @@
 class WishlistsController < ApplicationController
+  before_action :find_wishlist, only: [:destroy]
   before_action :authenticate_customer!, only: [:index]
 
   def update
@@ -14,5 +15,18 @@ class WishlistsController < ApplicationController
         format.html {}
         format.js {}
     end
+  end
+
+  def destroy
+    @wishlist.destroy
+    respond_to do |format|
+      format.html { redirect_to wishlists_url, notice: 'Wish was successfully removed.' }
+      format.json { head :no_content }
+    end
+  end
+
+  private 
+  def find_wishlist
+    @wishlist = Wishlist.find(params[:id])
   end
 end

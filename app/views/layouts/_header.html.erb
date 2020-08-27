@@ -14,8 +14,9 @@
                 </div>
                 <div class="col-lg-6 text-right">
                     <ul class="header-dropdown">
+                        <li class="mobile-wishlist"><a href="<%= wishlists_path %>"><i class="fa fa-heart" aria-hidden="true"></i></a>
+                        </li>
                         <li class="onhover-dropdown mobile-account"> <i class="fa fa-user" aria-hidden="true"></i>
-
                             <% if current_customer == nil %>
                             My Account
                             <ul class="onhover-show-div">
@@ -57,7 +58,7 @@
                                     <div onclick="closeNav()">
                                         <div class="sidebar-back text-left"><i class="fa fa-angle-left pr-2" aria-hidden="true"></i> Back</div>
                                     </div>
-                                    <ul id="sub-menu" class="sm pixelstrap sm-vertical">                                
+                                    <ul id="sub-menu" class="sm pixelstrap sm-vertical">
                                         <% Category.all.limit(5).reverse.each do | category | %>
                                         <li><a><%= category.category_name %></a></li>
                                         <% end %>
@@ -66,9 +67,9 @@
                             </div>
                         </div>
                         <div class="brand-logo">
-                        <%= link_to root_path, :class => "img-fluid blur-up lazyload", :width => "179px", :height => 'auto' do %>
+                            <%= link_to root_path, :class => "img-fluid blur-up lazyload", :width => "179px", :height => 'auto' do %>
                             <%= image_tag "full-color.png", :class => "img-fluid blur-up lazyload", :alt => "logo", :width => "179px", :height => "34px" %>
-                        <%end%>
+                            <%end%>
                             <a href=""><%# image_tag "full-color.png", :class => "img-fluid blur-up lazyload", :alt => "logo", :width => "179px", :height => "34px" %></a>
                         </div>
                     </div>
@@ -81,7 +82,7 @@
                                         <div class="mobile-back text-right">Back<i class="fa fa-angle-right pl-2" aria-hidden="true"></i></div>
                                     </li>
                                     <li>
-                                        
+
                                         <%= link_to 'Home', root_path %>
                                     </li>
                                     <li>

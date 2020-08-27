@@ -60,5 +60,6 @@ Rails.application.routes.draw do
   #wishlist path
   get "wishlists/update"
   get "/wishlists", to: "wishlists#index"
+  delete 'wishlists/:id(.:format)', :to => 'wishlists#destroy'
 
 end
