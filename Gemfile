@@ -3,6 +3,10 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.0'
 
+#simple form for 
+gem 'simple_form'
+
+#jquery
 gem 'jquery-rails'
 
 #tawk.to authentication

@@ -1,0 +1,23 @@
+<div class="container">
+<%= form_for ([@product, @review]) do | f | %>
+    <h1> Edit Review </h1>
+    <br>
+    <p> Rate </p>
+    <div id="rating-form"> </div>
+    <br>
+    <%= f.label :comment %>
+    <%= f.text_area :comment, class: "form-control placeholder-fix", rows: "4"  %>
+    <br>
+
+    <br>
+    <%= f.submit "UPDATE REVIEW", class: "btn btn-third-col" %>
+    <br>
+    <br>
+<% end %>
+</div>
+<script>
+    $('#rating-form').raty({
+        path: '/assets/',
+        scoreName: 'review[rating]'
+    });
+</script>

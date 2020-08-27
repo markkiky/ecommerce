@@ -3,6 +3,9 @@ class ReviewsController < ApplicationController
     before_action :find_review, only: [:edit, :update, :destroy]
     before_action :authenticate_customer!, only: [:new, :edit, :create]
 
+    def index 
+    end 
+    
     def new 
         @review = Review.new
     end 
