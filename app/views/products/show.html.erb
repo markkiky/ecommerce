@@ -263,14 +263,11 @@
                         </div>
                     </div>
                     <div class="tab-pane fade" id="top-review" role="tabpanel" aria-labelledby="review-top-tab">
-                        <!--<form class="theme-form">-->
                         <%= form_for([@product, @product.reviews.build]) do | f | %>
                         <div class="form-row">
                             <div class="col-md-12">
-                                <div class="media" id="rating-form">
+                                <div id="rating-form">
                                     <label>Rating</label>
-                                    <div class="media-body ml-3">
-                                    </div>
                                 </div>
                             </div>
                             <div class="col-md-12">
@@ -283,8 +280,11 @@
                             </div>
                         </div>
                         <% end %>
-                        <!--</form>-->
                     </div>
+                    <br>
+                    <h4 class="avg-rating">Average Rating</h4>
+                    <div class="average-review-rating" data-score=<%= @average_review %>></div>
+                    <span class="number-of-reviews">From: <%= @product.reviews.count %> reviews </span>
                 </div>
             </div>
         </div>
@@ -430,13 +430,21 @@
         document.getElementById("search-overlay").style.display = "none";
     }
 
-
+</script>
+<script src="../resources/js/jquery.raty.js">
     $('#rating-form').raty({
         path: '/assets/',
         scoreName: 'review[rating]'
     });
 
-    
+    $('.review-rating').raty({
+        readOnly: true,
+        score: function() {
+            return $(this).attr('data-score')
+        },
+        path: '/assets/'
+    });
+
     $('.average-review-rating').raty({
         readOnly: true,
         score: function() {

@@ -3,6 +3,9 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.0'
 
+#jquery
+gem 'jquery-rails'
+
 #simple form for 
 gem 'simple_form'
 
