@@ -47,7 +47,7 @@ Rails.application.routes.draw do
   # Customers Social Logins path
   # get 'auth/google_oauth/callback', to: 'sessions#customer_omniauth'
   # get 'auth/admin/callback', to: 'sessions#customer_omniauth'
-  get '/auth/:provider/callback', to: 'sessions#omniauth'
+  get 'auth/:provider/callback', to: 'sessions#omniauth'
 
   #cart routes 
   resources :order_items, path: '/cart/items'
