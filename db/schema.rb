@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_23_220004) do
+ActiveRecord::Schema.define(version: 2020_08_27_125413) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "name", null: false
@@ -138,6 +138,9 @@ ActiveRecord::Schema.define(version: 2020_08_23_220004) do
     t.string "location"
     t.string "image_url"
     t.string "url"
+    t.string "shipping_option"
+    t.string "pick_up_option"
+    t.string "delivery_option"
     t.index ["email"], name: "index_customers_on_email", unique: true
     t.index ["provider", "uid"], name: "index_customers_on_provider_and_uid", unique: true
     t.index ["provider"], name: "index_customers_on_provider"
@@ -166,6 +169,8 @@ ActiveRecord::Schema.define(version: 2020_08_23_220004) do
     t.datetime "bill_date"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "product_id_id", null: false
+    t.index ["product_id_id"], name: "index_order_items_on_product_id_id"
   end
 
   create_table "orders", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
@@ -234,8 +239,26 @@ ActiveRecord::Schema.define(version: 2020_08_23_220004) do
     t.integer "color_id"
   end
 
+  create_table "reviews", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.integer "rating"
+    t.text "comment"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "customer_id"
+    t.integer "product_id"
+  end
+
   create_table "roles", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "title"
+  end
+
+  create_table "sessions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.string "session_id", null: false
+    t.text "data"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["session_id"], name: "index_sessions_on_session_id", unique: true
+    t.index ["updated_at"], name: "index_sessions_on_updated_at"
   end
 
   create_table "shopping_carts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
@@ -253,16 +276,30 @@ ActiveRecord::Schema.define(version: 2020_08_23_220004) do
   create_table "transactions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "transaction_id"
     t.string "order_id"
-    t.string "callback_returned"
+    t.string "full_names"
     t.decimal "amount", precision: 10
-    t.string "account_from"
+    t.string "phone_number"
     t.string "transaction_code"
     t.string "message"
     t.datetime "date"
     t.string "payment_mode"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "paybill_number"
+    t.string "account_reference"
+    t.string "transaction_description"
+  end
+
+  create_table "wishlists", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.bigint "product_id", null: false
+    t.bigint "customer_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["customer_id"], name: "index_wishlists_on_customer_id"
+    t.index ["product_id"], name: "index_wishlists_on_product_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "wishlists", "customers"
+  add_foreign_key "wishlists", "products"
 end

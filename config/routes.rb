@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   resources :complete_orders
   resources :colors
   resources :sizes
@@ -27,12 +28,18 @@ Rails.application.routes.draw do
   resources :categories
   # mount ActionCable.server => '/cable'
   #products path
-  resources :products
+  resources :products do 
+
+    #reviews routes
+    resources :reviews 
+    
+  end 
 
   # devise_for :customers
   resources :customers
   resources :homes
-  devise_for :customers, :path => "users"
+  devise_for :customers, :path => "users", controllers: { omniauth_callbacks: 'customers/omniauth' }
+
   get '/logout', to: 'sessions#destroy'
   get '/users', to: "devise/registrations#new"
 
@@ -54,5 +61,10 @@ Rails.application.routes.draw do
 
   #search path
   get "search", to: "products#search"
+
+  #wishlist path
+  get "wishlists/update"
+  get "/wishlists", to: "wishlists#index"
+  delete 'wishlists/:id(.:format)', :to => 'wishlists#destroy'
 
 end

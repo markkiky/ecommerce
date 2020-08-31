@@ -6,8 +6,14 @@ class ApplicationController < ActionController::Base
     @current_cart ||= ShoppingCart.new(token: cart_token)
   end
   helper_method :current_cart
+
   
-    private
+  def wishlist_text
+    return @wishlist_exists ? "Remove from Wishlist" : "Add to Wishlist"
+  end    
+ helper_method :wishlist_text
+  
+  private
 
     def current_user
         @current_user ||= Customer.find_by(id: session[:user_id])

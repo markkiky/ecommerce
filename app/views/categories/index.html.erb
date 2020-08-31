@@ -127,11 +127,11 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <% @categories.each do |category| %>
+                                                <% @categories.reverse.each do |category| %>
                                                 <tr>
                                                     <td><%= category.category_name %></td>
                                                     <td><%= link_to 'Edit', edit_category_path(category), :class => "btn btn-secondary" %></td>
-                                                    <td><%= link_to 'Delete', category, method: :delete, data: { confirm: 'Are you sure?'}, :class => "btn btn-primary" %></td>
+                                                    <td><%= link_to 'Delete', category_path(category), method: :delete, data: { confirm: 'Are you sure?'}, :class => "btn btn-primary" %></td>
                                                 </tr>
                                                 <% end %>
                                             </tbody>

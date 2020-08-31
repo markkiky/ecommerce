@@ -39,18 +39,21 @@
     <!-- App css-->
     <link rel="stylesheet" type="text/css" href="../resources/css/admin.css">
 
-        <%= render 'application/favicon' %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+    <%= render 'application/favicon' %>
 </head>
 
 <body>
     <!-- page-wrapper Start-->
-	<% if notice %>
-        <p class="alert alert-success"><%= notice %></p>
+    <% if notice %>
+    <p class="alert alert-success"><%= notice %></p>
     <% end %>
     <% if alert %>
-        <p class="alert alert-danger"><%= alert %></p>
+    <p class="alert alert-danger"><%= alert %></p>
     <% end %>
-	<%= yield %>
+    <%= yield %>
     <!-- latest jquery-->
     <script src="../resources/js/jquery-3.3.1.min.js"></script>
 
@@ -165,6 +168,9 @@
     <!-- Render Payments modal -->
     <%= render 'layouts/payment_modal' %>
     <%= yield %>
+
+    <%= render "layouts/tawk" %>
+
 </body>
 
 <!-- latest jquery-->

@@ -1,5 +1,7 @@
-<%= render "layouts/loader" %>
+
 <%= render 'layouts/header'%>
+
+
 <!-- Home slider -->
 <section class="p-0">
     <div class="slide-1 home-slider">
@@ -13,7 +15,6 @@
                                 <div>
                                     <h4>welcome to meloncoco</h4>
                                     <h1>women fashion</h1>
-                                    <a href="#top_products" class="btn btn-solid">shop now</a>
                                 </div>
                             </div>
                         </div>
@@ -32,7 +33,6 @@
                                 <div>
                                     <h4>welcome to MelonCoco</h4>
                                     <h1>women fashion</h1>
-                                    <a href="#" class="btn btn-solid">shop now</a>
                                 </div>
                             </div>
                         </div>
@@ -284,7 +284,7 @@
 
 
 <!-- Parallax banner -->
-<section class="p-0">
+<!--<section class="p-0">
     <div class="full-banner parallax text-center p-left">
         <img src="../resources/images/parallax/1.jpg" alt="" class="bg-img blur-up lazyload">
         <div class="container">
@@ -337,7 +337,6 @@
                                             <%= button_to order_items_path(:product_id => product.id), {'data-toggle' => 'modal', 'data-target' => '#addtocart', :title => "Add to cart"} do %><i class="ti-shopping-cart"></i><% end %>
                                             <% end %>
                                             <!--<button data-toggle="modal" data-target="#addtocart" title="Add to cart"><i class="ti-shopping-cart"></i></button>-->
-                                            <a href="#" data-toggle="modal" data-target="#quick-view" title="Quick View"><i class="ti-search" aria-hidden="true"></i></a>
                                         </div>
                                     </div>
                                     <div class="product-detail">
@@ -375,7 +374,6 @@
                                             <%= button_to order_items_path(:product_id => product.id), {'data-toggle' => 'modal', 'data-target' => '#addtocart', :title => "Add to cart"} do %><i class="ti-shopping-cart"></i><% end %>
                                             <% end %>
                                             <!--<button data-toggle="modal" data-target="#addtocart" title="Add to cart"><i class="ti-shopping-cart"></i></button>-->
-                                            <a href="#" data-toggle="modal" data-target="#quick-view" title="Quick View"><i class="ti-search" aria-hidden="true"></i></a>
                                         </div>
                                     </div>
                                     <div class="product-detail">
@@ -401,10 +399,10 @@
                                     <div class="img-wrapper">
                                         <div class="lable-block"></div>
                                         <div class="front">
-                                            <a href="/products/ <%= product.id %>"><%= image_tag (product.images[0] if product.images.length > 0) , :class => "img-fluid blur-up lazyload bg-img" %>></a>
+                                            <a href="/products/<%= product.id %>"><%= image_tag (product.images[0] if product.images.length > 0) , :class => "img-fluid blur-up lazyload bg-img" %></a>
                                         </div>
                                         <div class="back">
-                                            <a href="/products/ <%= product.id %>"><%= image_tag (product.images[1] if product.images.length > 0) , :class => "img-fluid blur-up lazyload bg-img" %></a>
+                                            <a href="/products/<%= product.id %>"><%= image_tag (product.images[1] if product.images.length > 0) , :class => "img-fluid blur-up lazyload bg-img" %></a>
                                         </div>
                                         <div class="cart-info cart-wrap">
                                             <%= form_tag order_items_path, remote: true do %>
@@ -413,7 +411,6 @@
                                             <%= button_to order_items_path(:product_id => product.id), {'data-toggle' => 'modal', 'data-target' => '#addtocart', :title => "Add to cart"} do %><i class="ti-shopping-cart"></i><% end %>
                                             <% end %>
                                             <!--<button data-toggle="modal" data-target="#addtocart" title="Add to cart"><i class="ti-shopping-cart"></i></button>-->
-                                            <a href="#" data-toggle="modal" data-target="#quick-view" title="Quick View"><i class="ti-search" aria-hidden="true"></i></a>
                                         </div>
                                     </div>
                                     <div class="product-detail">
@@ -592,52 +589,6 @@
 
 
 <!-- Quick-view modal popup start-->
-<div class="modal fade bd-example-modal-lg theme-modal" id="quick-view" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-        <div class="modal-content quick-view-modal">
-            <div class="modal-body">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <div class="row">
-                    <div class="col-lg-6 col-xs-12">
-                        <div class="quick-view-img"><img src="../resources/images/pro3/1.jpg" alt="" class="img-fluid blur-up lazyload"></div>
-                    </div>
-                    <div class="col-lg-6 rtl-text">
-                        <div class="product-right">
-                            <h2>Women Pink Shirt</h2>
-                            <h3>$32.96</h3>
-                            <ul class="color-variant">
-                                <li class="bg-light0"></li>
-                                <li class="bg-light1"></li>
-                                <li class="bg-light2"></li>
-                            </ul>
-                            <div class="border-product">
-                                <h6 class="product-title">product details</h6>
-                                <p>Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium
-                                    doloremque laudantium</p>
-                            </div>
-                            <div class="product-description border-product">
-                                <div class="size-box">
-                                    <ul>
-                                        <li class="active"><a href="#">s</a></li>
-                                        <li><a href="#">m</a></li>
-                                        <li><a href="#">l</a></li>
-                                        <li><a href="#">xl</a></li>
-                                    </ul>
-                                </div>
-                                <h6 class="product-title">quantity</h6>
-                                <div class="qty-box">
-                                    <div class="input-group"><span class="input-group-prepend"><button type="button" class="btn quantity-left-minus" data-type="minus" data-field=""><i class="ti-angle-left"></i></button> </span>
-                                        <input type="text" name="quantity" class="form-control input-number" value="1"> <span class="input-group-prepend"><button type="button" class="btn quantity-right-plus" data-type="plus" data-field=""><i class="ti-angle-right"></i></button></span></div>
-                                </div>
-                            </div>
-                            <div class="product-buttons"><a href="#" class="btn btn-solid">add to cart</a> <a href="#" class="btn btn-solid">view detail</a></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 <!-- Quick-view modal popup end-->
 
 

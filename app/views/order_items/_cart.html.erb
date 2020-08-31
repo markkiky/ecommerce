@@ -1,6 +1,9 @@
 <%  current_cart.order.items.each do |item| %>
 <li>
     <div class="media">
+        <div>
+            <a href="/products/<%= item.product.id %>"><%= image_tag item.product.images[0] if item.product.images.length > 0 %></a>
+        </div>
         <div class="media-body">
             <a href="#">
                 <h4><%= item.product.product_name %></h4>
@@ -11,7 +14,7 @@
     <div class="close-circle">
         <!--<a href="#"><i class="fa fa-times" aria-hidden="true"></i></a>-->
         <%= form_for item, method: :delete, remote: true do |f| %>
-            <%= f.submit 'X' %>
+        <%= f.submit 'X' %>
         <% end %>
     </div>
 </li>

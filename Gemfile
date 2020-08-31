@@ -3,6 +3,15 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.0'
 
+#jquery
+gem 'jquery-rails'
+
+#simple form for 
+gem 'simple_form'
+
+#tawk.to authentication
+gem 'tawk_rails'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0.3', '>= 6.0.3.2'
 # Use sqlite3 as the database for Active Record
@@ -17,8 +26,14 @@ gem 'puma', '~> 4.1'
 # Devise gems 
 gem 'devise'
 gem 'omniauth'
+# Use Omniauth Google plugin
 gem 'omniauth-google-oauth2'
-gem 'omniauth-twitter', '~> 1.4'
+# Use Omniauth Facebook plugin
+gem 'omniauth-facebook'
+# Use Omniauth Twitter plugin
+gem 'omniauth-twitter'
+# Use ActiveRecord Sessions
+gem 'activerecord-session_store', '~> 1.0'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '>= 6'
