@@ -42,3 +42,6 @@ yarn-debug.log*
 
 .env
 /config/database.yml
+/.bundle
+/vendor/bundle/
+/vendor/ruby/

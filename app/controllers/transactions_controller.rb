@@ -130,7 +130,7 @@ class TransactionsController < ApplicationController
       customer_id = order.customer_id.to_i
       @customer = Customer.find(customer_id)
       # send email notification
-      OrderMailer.with(customer: @customer, transaction: @transaction, order: order).order_payment.deliver_later
+      OrderMailer.with(customer: @customer, transaction: @transaction, order: order).order_payment.deliver_now
       # broadcast to mpesa channel
       ActionCable.server.broadcast "mpesa_channel_#{order.id}", phone: params[:PhoneNumber], transaction_code: params[:MpesaReceiptNumber], paybill: params[:PayBillNumber]
     else
@@ -167,6 +167,6 @@ class TransactionsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def transaction_params
-      params.permit(:transaction_id, :order_id, :callback_returned, :amount, :account_from, :transaction_code, :message, :date, :payment_mode)
+      params.permit(:transaction_id, :order_id, :full_names, :amount, :phone_number, :transaction_code, :message, :date, :payment_mode)
     end
 end

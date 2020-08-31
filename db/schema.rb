@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_21_183237) do
+ActiveRecord::Schema.define(version: 2020_08_23_220004) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "name", null: false
@@ -173,7 +173,7 @@ ActiveRecord::Schema.define(version: 2020_08_21_183237) do
     t.string "customer_id"
     t.decimal "order_total", precision: 10
     t.string "order_number"
-    t.string "payment_id"
+    t.string "transaction_id"
     t.datetime "order_date"
     t.datetime "ship_date"
     t.datetime "required_date"
@@ -194,15 +194,8 @@ ActiveRecord::Schema.define(version: 2020_08_21_183237) do
     t.string "order_status", default: "cart"
     t.decimal "order_subtotal", precision: 10
     t.string "payment_method"
-    t.string "client_first_name"
-    t.string "client_last_name"
-    t.string "client_email"
-    t.string "client_phone_number"
-    t.string "client_country"
-    t.string "client_address"
-    t.string "client_city"
-    t.string "client_postal_code"
     t.string "payment_status", default: "Unpaid"
+    t.decimal "reducing_balance", precision: 10
   end
 
   create_table "products", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|

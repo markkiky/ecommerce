@@ -70,6 +70,7 @@ class OrdersController < ApplicationController
     @order_id = @order.id
     
   end
+
   def order_success
     @order = Order.find(params[:id])
     customer_id = @order.customer_id.to_i
@@ -182,9 +183,6 @@ class OrdersController < ApplicationController
   def check_payment
     @order = Order.find(params[:id])
 
-    require "uri"
-    require "net/http"
-
     url = URI("https://payme.revenuesure.co.ke/api/index.php")
 
     https = Net::HTTP.new(url.host, url.port);
@@ -207,7 +205,21 @@ class OrdersController < ApplicationController
       @response = response_json['data']['callback_returned']
     end
   end
- 
+  
+  def get_transaction
+    
+    url = URI("https://payme.revenuesure.co.ke/api/index.php")
+
+    https = Net::HTTP.new(url.host, url.port);
+    https.use_ssl = true
+
+    request = Net::HTTP::Post.new(url)
+    form_data = [['function', 'searchTransactions'],['keyword', 'NGI1CRTJVX'],['', '']]
+    request.set_form form_data, 'multipart/form-data'
+    response = https.request(request)
+    puts response.read_body
+
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
