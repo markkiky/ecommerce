@@ -21,13 +21,13 @@ class Customer < ApplicationRecord
   # end
 
   # Auth function for google
-  # def self.from_omniauth(auth)
-  #   where(email: auth.info.email).first_or_initialize do |user|
-  #     user.first_name = auth.info.name
-  #     user.email = auth.info.email
-  #     user.password = SecureRandom.hex
-  #   end
-  # end
+  def self.from_omniauth(auth)
+    where(email: auth.info.email).first_or_initialize do |user|
+      user.first_name = auth.info.name
+      user.email = auth.info.email
+      user.password = SecureRandom.hex
+    end
+  end
   # def self.create_from_provider_data(provider_data)
   #   where(provider: provider_data.provider, uid: provider_data.uid).first_or_create do | user |
   #   user.first_name = provider_data.info.name

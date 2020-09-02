@@ -56,14 +56,15 @@
                             <br>
                             <li> <%= button_to  '/auth/google_oauth2', :class => "btn social-btn btn-twitter d-inline-block" do %> <i class="fa fa-google"></i> <% end %>
                             </li>
-                            <li> <%= button_to  '/users/auth/facebook', :class => "btn social-btn btn-twitter d-inline-block" do %> <i class="fa fa-facebook"></i> <% end %>
+                            <li> <%= button_to  '/auth/facebook', :class => "btn social-btn btn-twitter d-inline-block" do %> <i class="fa fa-facebook"></i> <% end %>
                             </li>
                             <li> <%= button_to  '/users/auth/twitter', :class => "btn social-btn btn-twitter d-inline-block" do %> <i class="fa fa-twitter"></i> <% end %>
                             </li>
                         </ul>
                     </div>
                     <%# link_to "Twitter Login", '/auth/twitter', class: "btn btn-primary mt-5" %>
-                    <%= link_to "Log In with Google", '/auth/google_oauth2', class: 'btn btn-primary mt-5' %>
+                    <%# link_to "Log In with Google", '/auth/google_oauth2', class: 'btn btn-primary mt-5' %>
+
                     <%# link_to "Admin In with Google", '/auth/admin', class: 'btn btn-primary mt-5' %>
                 </div>
             </div>
@@ -93,8 +94,10 @@
     }
 
     function closeSearch() {
-        document.getElementById("search-overlay").style.display = "none";
+        doc
+        ument.getElementById("search-overlay").style.display = "none";
     }
+    
 </script>
 
 

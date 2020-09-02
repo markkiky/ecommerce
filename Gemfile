@@ -33,7 +33,7 @@ gem 'omniauth-facebook'
 # Use Omniauth Twitter plugin
 gem 'omniauth-twitter'
 # Use ActiveRecord Sessions
-gem 'activerecord-session_store', '~> 1.0'
+# gem 'activerecord-session_store', '~> 1.0'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '>= 6'
