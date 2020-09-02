@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-
+  devise_for :admins 
   resources :complete_orders
   resources :colors
   resources :sizes
@@ -13,9 +13,6 @@ Rails.application.routes.draw do
   end
   root "homes#index"
   # admin routes
-  devise_for :admins  do
-    
-  end
   get '/admin/dashboard', to: "admins#dashboard", as: :admin_dashboards
 
   #notification routes

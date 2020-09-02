@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
-  protect_from_forgery with: :exception
+  before_action :configure_permitted_parameters, if: :devise_controller?
+
   require "resolv-replace"
   before_action :current_cart
 
@@ -27,6 +28,13 @@ class ApplicationController < ActionController::Base
 
     session[:cart_token] ||= SecureRandom.hex(8)
     @cart_token = session[:cart_token]
+  end
+
+  protected
+
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:avatar])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:avatar])
   end
 
 end

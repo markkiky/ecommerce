@@ -1,7 +1,7 @@
 <div class="page-main-header">
     <div class="main-header-right row">
         <div class="main-header-left d-lg-none">
-            <div class="logo-wrapper"><%= image_tag "full-color.png", :alt => "logo" %></div>
+            <div class="logo-wrapper"><%= image_tag "full-color.png"  %></div>
         </div>
         <div class="mobile-sidebar">
             <div class="media-body text-right switch-sm">
@@ -42,7 +42,10 @@
                     </ul>
                 </li>
                 <li class="onhover-dropdown">
-                    <div class="media align-items-center"><img class="align-self-center pull-right img-50 rounded-circle blur-up lazyloaded" src="../resources/images/dashboard/man.png" alt="header-user">
+                    <div class="media align-items-center">
+                        <% if current_admin %>
+                        <%= image_tag (current_admin.avatar_thumbnail), :class => "align-self-center pull-right img-50 rounded-circle blur-up lazyloaded" %>
+                        <% end %>
                         <div class="dotted-animation"><span class="animate-circle"></span><span class="main-circle"></span></div>
                     </div>
                     <ul class="profile-dropdown onhover-show-div p-20 profile-dropdown-hover">
@@ -50,8 +53,8 @@
                         <li><a href="#"><i data-feather="mail"></i>Inbox</a></li>
                         <li><a href="#"><i data-feather="settings"></i>Settings</a></li>
                         <li>
-                            <%= link_to logout_path do %> 
-                                <i data-feather="log-out"></i>Logout
+                            <%= link_to logout_path do %>
+                            <i data-feather="log-out"></i>Logout
                             <% end %>
                         </li>
                     </ul>
