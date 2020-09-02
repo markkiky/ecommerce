@@ -9,5 +9,5 @@ has_many :colors
 has_many :sizes
 has_many :products
 has_many :orders
-
+has_many :homes
 end

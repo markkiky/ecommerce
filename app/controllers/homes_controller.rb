@@ -1,78 +1,25 @@
 class HomesController < ApplicationController
-  before_action :set_home, only: [:show, :edit, :update, :destroy]
 
-  # GET /homes
-  # GET /homes.json
-  def index
-    @homes = Home.all
-  end
+    def index
+      @notifications = Home.all
+    end 
 
-  # GET /homes/1
-  # GET /homes/1.json
-  def show
-  end
+    def new 
+        @notificaton = Home.new
+    end 
 
-  # GET /homes/new
-  def new
-    @home = Home.new
-  end
+    def create
+         @notification = Home.new(notification_params)
+        if  @notification.save
+            redirect_to contact_path, notice: "Message Sent Successfully!"
+        else 
+            render :new
+        end 
+    end 
 
-  # GET /homes/1/edit
-  def edit
-  end
+    private 
 
-  # GET /homes/contact_us
-  def contact_us
-
-  end
-  # POST /homes
-  # POST /homes.json
-  def create
-    @home = Home.new(home_params)
-
-    respond_to do |format|
-      if @home.save
-        format.html { redirect_to @home, notice: 'Home was successfully created.' }
-        format.json { render :show, status: :created, location: @home }
-      else
-        format.html { render :new }
-        format.json { render json: @home.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # PATCH/PUT /homes/1
-  # PATCH/PUT /homes/1.json
-  def update
-    respond_to do |format|
-      if @home.update(home_params)
-        format.html { redirect_to @home, notice: 'Home was successfully updated.' }
-        format.json { render :show, status: :ok, location: @home }
-      else
-        format.html { render :edit }
-        format.json { render json: @home.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /homes/1
-  # DELETE /homes/1.json
-  def destroy
-    @home.destroy
-    respond_to do |format|
-      format.html { redirect_to homes_url, notice: 'Home was successfully destroyed.' }
-      format.json { head :no_content }
-    end
-  end
-
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_home
-      @home = Home.find(params[:id])
-    end
-
-    # Only allow a list of trusted parameters through.
-    def home_params
-      params.fetch(:home, {})
+    def notification_params
+        params.require(:home).permit(:notification_first_name, :notification_last_name, :notification_phone_number, :notification_email, :notification_message)
     end
 end
