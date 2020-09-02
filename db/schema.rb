@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_27_125413) do
+ActiveRecord::Schema.define(version: 2020_09_02_132743) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "name", null: false
@@ -78,6 +78,7 @@ ActiveRecord::Schema.define(version: 2020_08_27_125413) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "admin_id"
+    t.string "category_id"
   end
 
   create_table "complete_orders", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
@@ -203,6 +204,20 @@ ActiveRecord::Schema.define(version: 2020_08_27_125413) do
     t.decimal "reducing_balance", precision: 10
   end
 
+  create_table "product_colors", id: false, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.bigint "product_id", null: false
+    t.bigint "color_id", null: false
+    t.index ["color_id"], name: "index_product_colors_on_color_id"
+    t.index ["product_id"], name: "index_product_colors_on_product_id"
+  end
+
+  create_table "product_sizes", id: false, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.bigint "product_id", null: false
+    t.bigint "size_id", null: false
+    t.index ["product_id"], name: "index_product_sizes_on_product_id"
+    t.index ["size_id"], name: "index_product_sizes_on_size_id"
+  end
+
   create_table "products", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "product_id"
     t.string "sku"
@@ -271,6 +286,7 @@ ActiveRecord::Schema.define(version: 2020_08_27_125413) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "admin_id"
+    t.string "category_id"
   end
 
   create_table "transactions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
@@ -300,6 +316,10 @@ ActiveRecord::Schema.define(version: 2020_08_27_125413) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "product_colors", "colors"
+  add_foreign_key "product_colors", "products"
+  add_foreign_key "product_sizes", "products"
+  add_foreign_key "product_sizes", "sizes"
   add_foreign_key "wishlists", "customers"
   add_foreign_key "wishlists", "products"
 end

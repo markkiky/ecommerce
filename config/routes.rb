@@ -27,6 +27,7 @@ Rails.application.routes.draw do
   # catgory paths
   resources :categories
   # mount ActionCable.server => '/cable'
+  
   #products path
   resources :products do 
 
@@ -43,7 +44,7 @@ Rails.application.routes.draw do
   get '/logout', to: 'sessions#destroy'
   get '/users', to: "devise/registrations#new"
 
-
+  post '/product_counter', to: "products#product_counter"
   # Customers Social Logins path
   # get 'auth/google_oauth/callback', to: 'sessions#customer_omniauth'
   # get 'auth/admin/callback', to: 'sessions#customer_omniauth'

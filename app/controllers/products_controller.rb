@@ -2,6 +2,8 @@ class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_admin!, only: [:index, :new, :edit]
 
+  skip_before_action :verify_authenticity_token, only: [:product_counter]
+
   # GET /products
   # GET /products.json
   def index
@@ -82,6 +84,19 @@ end
     end
   end
 
+  # POST /product_counter
+  def product_counter
+    
+    puts params[:product_count]
+    @category_id = params[:category_id]
+    @product_count = params[:product_count]
+    @colors = Color.where(:category_id => @category_id).map{ |l| [l.color_type, l.id] }
+    @sizes = Size.where(:category_id => @category_id).map{ |s| [s.size_type, s.id] }
+    
+    respond_to do |format|
+      format.js
+    end
+  end
   # DELETE /products/1
   # DELETE /products/1.json
   def destroy
@@ -100,6 +115,6 @@ end
 
     # Only allow a list of trusted parameters through.
     def product_params
-      params.require(:product).permit(:product_id, :sku, :id_sku, :vendor_product_id, :product_name, :product_description, :supplier_id, :category_id, :quantity_per_unit, :price, :unit_price, :msrp, :available_size, :available_colors, :size, :color, :discount, :unit_weight, :units_in_stock, :units_on_order, :reorder_level, :product_available, :discount_available, :current_order, :note, :ranking, :product_code, :product_quantity, :size_id, :color_id, images: [])
+      params.require(:product).permit(:product_id, :sku, :id_sku, :vendor_product_id, :product_name, :product_description, :supplier_id, :category_id, :quantity_per_unit, :price, :unit_price, :msrp, :available_size, :available_colors, :size, :color, :discount, :unit_weight, :units_in_stock, :units_on_order, :reorder_level, :product_available, :discount_available, :current_order, :note, :ranking, :product_code, :product_quantity, :size_id, :color_id, images: [], color_ids: [], size_ids: [])
     end
   end 

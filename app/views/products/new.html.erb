@@ -145,23 +145,16 @@
                                         </div>
                                         <div class="form">
                                             <div class="form-group row">
-                                                <label for="exampleFormControlSelect1" class="col-xl-3 col-sm-4 mb-0">Select Size :</label>
-                                                <%= select_tag :size_id, options_for_select(@sizes), :prompt => "Select Sizes", :class => "form-control digits col-xl-8 col-sm-7" %>
-
-                                            </div>
-                                            <div class="form-group row">
-                                                <label for="exampleFormControlSelect1" class="col-xl-3 col-sm-4 mb-0">Select Color :</label>
-                                                <%= select_tag :color_id, options_for_select(@colors), :prompt => "Select Colors", :class => "form-control digits col-xl-8 col-sm-7" %>
-
-                                            </div>
-                                            <div class="form-group row">
                                                 <label class="col-xl-3 col-sm-4 mb-0">Total Products :</label>
                                                 <fieldset class="qty-box col-xl-9 col-xl-8 col-sm-7 pl-0">
                                                     <div class="input-group">
                                                         <!--<input class="touchspin" type="text" value="1">-->
-                                                        <%= form.number_field :product_quantity, :class => "touchspin", :value => "1" %>
+                                                        <%= form.number_field :product_quantity, :class => "product_counter", :value => 1, min: 0, max: 1000 %>
                                                     </div>
                                                 </fieldset>
+                                            </div>
+                                            <!-- displays size and color variants -->
+                                            <div id="variants" >
                                             </div>
                                             <div class="form-group row">
                                                 <label class="col-xl-3 col-sm-4">Add Description :</label>
@@ -195,11 +188,12 @@
 
 </div>
 
+
 <!-- latest jquery-->
 <script src="../resources/js/jquery-3.3.1.min.js"></script>
 
 <!-- Bootstrap js-->
-<script src="../resources/js/popper.min.js"></script>
+<script src="../../resources/js/popper.min.js"></script>
 <script src="../resources/js/bootstrap.js"></script>
 
 <!-- feather icon js-->
@@ -238,6 +232,37 @@
 
 <!--script admin-->
 <script src="../resources/js/admin-script.js"></script>
+
+<script>
+    $('#product_product_quantity input').on("click", function() {
+        alert("clicked");
+    });
+    var product_counter = document.getElementById("product_product_quantity")
+    var category = document.getElementById("category_id")
+    category.addEventListener('change', function (evt) {
+        // alert("reached");
+        console.log(evt);
+        $.post("/product_counter",
+        {
+            product_count: product_counter.value,
+            category_id: category.value
+        }
+
+        );
+    })
+    product_counter.addEventListener('input', function(evt) {
+        // alert("reached");
+        console.log(evt);
+        $.post("/product_counter",
+        {
+            product_count: product_counter.value,
+            category_id: category.value
+        }
+
+        );
+    })
+
+</script>
 
 </body>
 

@@ -1,122 +1,8 @@
 <%= action_cable_meta_tag %>
 <% if admin_signed_in? %>
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <title>MelonCoco Admin</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Multikart admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
-    <meta name="keywords" content="admin template, Multikart admin template, dashboard template, flat admin template, responsive admin template, web app">
-    <meta name="author" content="pixelstrap">
-
-    <!-- Google font-->
-    <link href="https://fonts.googleapis.com/css?family=Work+Sans:100,200,300,400,500,600,700,800,900" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-
-    <!-- Font Awesome-->
-    <link rel="stylesheet" type="text/css" href="../resources/css/fontawesome.css">
-
-    <!-- Flag icon-->
-    <link rel="stylesheet" type="text/css" href="../resources/css/flag-icon.css">
-
-    <!-- ico-font-->
-    <link rel="stylesheet" type="text/css" href="../resources/css/icofont.css">
-
-    <!-- Prism css-->
-    <link rel="stylesheet" type="text/css" href="../resources/css/prism.css">
-
-    <!-- Chartist css -->
-    <link rel="stylesheet" type="text/css" href="../resources/css/chartist.css">
-
-    <!-- Bootstrap css-->
-    <link rel="stylesheet" type="text/css" href="../resources/css/bootstrap.css">
-
-    <!-- App css-->
-    <link rel="stylesheet" type="text/css" href="../resources/css/admin.css">
-
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-
-    <%= render 'application/favicon' %>
-</head>
-
-<body>
-    <!-- page-wrapper Start-->
-    <% if notice %>
-    <p class="alert alert-success"><%= notice %></p>
-    <% end %>
-    <% if alert %>
-    <p class="alert alert-danger"><%= alert %></p>
-    <% end %>
     <%= yield %>
-    <!-- latest jquery-->
-    <script src="../resources/js/jquery-3.3.1.min.js"></script>
-
-    <!-- Bootstrap js-->
-    <script src="../resources/js/popper.min.js"></script>
-    <script src="../resources/js/bootstrap.js"></script>
-
-    <!-- feather icon js-->
-    <script src="../resources/js/icons/feather-icon/feather.min.js"></script>
-    <script src="../resources/js/icons/feather-icon/feather-icon.js"></script>
-
-    <!-- Sidebar jquery-->
-    <script src="../resources/js/sidebar-menu.js"></script>
-
-    <!--chartist js-->
-    <script src="../resources/js/chart/chartist/chartist.js"></script>
-
-    <!--chartjs js-->
-    <script src="../resources/js/chart/chartjs/chart.min.js"></script>
-
-    <!-- lazyload js-->
-    <script src="../resources/js/lazysizes.min.js"></script>
-
-    <!--copycode js-->
-    <script src="../resources/js/prism/prism.min.js"></script>
-    <script src="../resources/js/clipboard/clipboard.min.js"></script>
-    <script src="../resources/js/custom-card/custom-card.js"></script>
-
-    <!--counter js-->
-    <script src="../resources/js/counter/jquery.waypoints.min.js"></script>
-    <script src="../resources/js/counter/jquery.counterup.min.js"></script>
-    <script src="../resources/js/counter/counter-custom.js"></script>
-
-    <!--peity chart js-->
-    <script src="../resources/js/chart/peity-chart/peity.jquery.js"></script>
-
-    <!--sparkline chart js-->
-    <script src="../resources/js/chart/sparkline/sparkline.js"></script>
-
-    <!--Customizer admin-->
-    <script src="../resources/js/admin-customizer.js"></script>
-
-    <!--dashboard custom js-->
-    <script src="../resources/js/dashboard/default.js"></script>
-
-    <!--right sidebar js-->
-    <script src="../resources/js/chat-menu.js"></script>
-
-    <!--height equal js-->
-    <script src="../resources/js/height-equal.js"></script>
-
-    <!-- lazyload js-->
-    <script src="../resources/js/lazysizes.min.js"></script>
-
-    <!--script admin-->
-    <script src="../resources/js/admin-script.js"></script>
-
-</body>
-
-</html>
-
-
-
+    
 <% else %>
 <!DOCTYPE html>
 <html>
@@ -160,10 +46,10 @@
 <body>
 
     <% if notice %>
-        <p class="alert alert-success"><%= notice %></p>
+    <p class="alert alert-success"><%= notice %></p>
     <% end %>
     <% if alert %>
-        <p class="alert alert-danger"><%= alert %></p>
+    <p class="alert alert-danger"><%= alert %></p>
     <% end %>
     <!-- Render Payments modal -->
     <%= render 'layouts/payment_modal' %>

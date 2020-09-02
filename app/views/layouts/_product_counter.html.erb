@@ -1,0 +1,24 @@
+<script>
+    var count = < %= @product_count.to_i % >
+        console.log(count);
+    var i;
+    for (i = 0; i < count; i++) {
+        // $("#variants").append('<div class="form-group row"> <label for="exampleFormControlSelect1" class="col-xl-3 col-sm-4 mb-0">Select Color :</label>'+'<%= select_tag :color_id, options_for_select(@colors), :prompt => "Select Colors", :class => "form-control digits col-xl-8 col-sm-7" %>'+' </div>')
+    }
+</script>
+<% count = 1 %>
+<% while count <= @product_count.to_i  %>
+<div class="form-group row">
+    <div class="">
+        <label for="exampleFormControlSelect1" class="">Select Size :</label>
+        <%= select_tag "product[size_ids][]", options_for_select(@sizes), :prompt => "Select Sizes", :class => "form-control digits col-xl-8 col-sm-7" %>
+
+    </div>
+    <div class="">
+        <label for="exampleFormControlSelect1" class="">Select Color :</label>
+        <%= select_tag "product[color_ids][]", options_for_select(@colors), :prompt => "Select Colors", :class => "form-control digits col-xl-8 col-sm-7" %>
+
+    </div>
+</div>
+<% count = count+1 %>
+<%end%>
