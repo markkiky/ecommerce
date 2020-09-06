@@ -1,0 +1,75 @@
+// Responsive images (ensure images don't scale beyond their parents)
+//
+// This is purposefully opt-in via an explicit class rather than being the default for all `<img>`s.
+// We previously tried the "images are responsive by default" approach in Bootstrap v2,
+// and abandoned it in Bootstrap v3 because it breaks lots of third-party widgets (including Google Maps)
+// which weren't expecting the images within themselves to be involuntarily resized.
+// See also https://github.com/twbs/bootstrap/issues/18178
+@import "scss/bootstrap/variables";
+
+// bootstrap mixins
+@import "scss/bootstrap/mixins/alert";
+@import "scss/bootstrap/mixins/background-variant";
+@import "scss/bootstrap/mixins/badge";
+@import "scss/bootstrap/mixins/border-radius";
+@import "scss/bootstrap/mixins/box-shadow";
+@import "scss/bootstrap/mixins/breakpoints";
+@import "scss/bootstrap/mixins/buttons";
+@import "scss/bootstrap/mixins/caret";
+@import "scss/bootstrap/mixins/clearfix";
+@import "scss/bootstrap/mixins/float";
+@import "scss/bootstrap/mixins/forms";
+@import "scss/bootstrap/mixins/gradients";
+@import "scss/bootstrap/mixins/grid";
+@import "scss/bootstrap/mixins/grid-framework";
+@import "scss/bootstrap/mixins/hover";
+@import "scss/bootstrap/mixins/image";
+@import "scss/bootstrap/mixins/list-group";
+@import "scss/bootstrap/mixins/lists";
+@import "scss/bootstrap/mixins/nav-divider";
+@import "scss/bootstrap/mixins/pagination";
+@import "scss/bootstrap/mixins/reset-text";
+@import "scss/bootstrap/mixins/resize";
+@import "scss/bootstrap/mixins/screen-reader";
+@import "scss/bootstrap/mixins/size";
+@import "scss/bootstrap/mixins/table-row";
+@import "scss/bootstrap/mixins/text-emphasis";
+@import "scss/bootstrap/mixins/text-hide";
+@import "scss/bootstrap/mixins/text-truncate";
+@import "scss/bootstrap/mixins/transition";
+@import "scss/bootstrap/mixins/visibility";
+.img-fluid blur-up lazyload {
+  @include img-fluid;
+}
+
+
+// Image thumbnails
+.img-thumbnail {
+  padding: $thumbnail-padding;
+  background-color: $thumbnail-bg;
+  border: $thumbnail-border-width solid $thumbnail-border-color;
+  @include border-radius($thumbnail-border-radius);
+  @include box-shadow($thumbnail-box-shadow);
+
+  // Keep them at most 100% wide
+  @include img-fluid;
+}
+
+//
+// Figures
+//
+
+.figure {
+  // Ensures the caption's text aligns with the image.
+  display: inline-block;
+}
+
+.figure-img {
+  margin-bottom: ($spacer / 2);
+  line-height: 1;
+}
+
+.figure-caption {
+  font-size: $figure-caption-font-size;
+  color: $figure-caption-color;
+}

@@ -2,3 +2,11 @@
 //= link_directory ../stylesheets .css
 //= link favicon/browserconfig.xml
 //= link favicon/site.webmanifest
+//= link dashboard/man.png
+//= link dashboard/user2.jpg
+//= link dashboard/user1.jpg
+//= link dashboard/designer.jpg
+//= link icon/cart.png
+//= link icon/mastercard.png
+//= link icon/visa.png
+//= link application.js

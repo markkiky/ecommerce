@@ -1,0 +1,6 @@
+// Screen Readers
+// -------------------------
+@import "scss/font-awesome/variables";
+@import "scss/font-awesome/mixins";
+.sr-only { @include sr-only(); }
+.sr-only-focusable { @include sr-only-focusable(); }

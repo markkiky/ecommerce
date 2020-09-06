@@ -34,7 +34,7 @@ gem 'omniauth-facebook'
 gem 'omniauth-twitter'
 # Use ActiveRecord Sessions
 # gem 'activerecord-session_store', '~> 1.0'
-
+gem 'sprockets-rails', :require => 'sprockets/railtie'
 # Use SCSS for stylesheets
 gem 'sass-rails', '>= 6'
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker

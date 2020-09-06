@@ -1,99 +1,15 @@
-<%= action_cable_meta_tag %>
-<% if admin_signed_in? %>
-
-    <%= yield %>
-    
-<% else %>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <title>MelonCoco</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MelonCoco Admin</title>
+    <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => "reload" %>
+    <%= javascript_include_tag "application", "data-turbolinks-track" => "reload" %>
 
-    <link rel="icon" href="../resources/images/favicon/1.png" type="image/x-icon">
-    <link rel="shortcut icon" href="../resources/images/favicon/1.png" type="image/x-icon">
-    <!--Google font-->
-    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900" rel="stylesheet">
-
-    <!-- Icons -->
-    <link rel="stylesheet" type="text/css" href="../resources/css/fontawesome.css">
-
-    <!--Slick slider css-->
-    <link rel="stylesheet" type="text/css" href="../resources/css/slick.css">
-    <link rel="stylesheet" type="text/css" href="../resources/css/slick-theme.css">
-
-    <!-- Animate icon -->
-    <link rel="stylesheet" type="text/css" href="../resources/css/animate.css">
-
-    <!-- Themify icon -->
-    <link rel="stylesheet" type="text/css" href="../resources/css/themify-icons.css">
-
-    <!-- Bootstrap css -->
-    <link rel="stylesheet" type="text/css" href="../resources/css/bootstrap.css">
-
-    <!-- Theme css -->
-    <link rel="stylesheet" type="text/css" href="../resources/css/color1.css" media="screen" id="color">
-
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-
-    <%= render 'application/favicon' %>
 </head>
 
 <body>
-
-    <% if notice %>
-    <p class="alert alert-success"><%= notice %></p>
-    <% end %>
-    <% if alert %>
-    <p class="alert alert-danger"><%= alert %></p>
-    <% end %>
-    <!-- Render Payments modal -->
-    <%= render 'layouts/payment_modal' %>
     <%= yield %>
-
-    <%= render "layouts/tawk" %>
-
 </body>
 
-<!-- latest jquery-->
-<script src="../resources/js/jquery-3.3.1.min.js"></script>
-
-<!-- fly cart ui jquery-->
-<script src="../resources/js/jquery-ui.min.js"></script>
-
-<!-- exitintent jquery-->
-<script src="../resources/js/jquery.exitintent.js"></script>
-<script src="../resources/js/exit.js"></script>
-
-<!-- popper js-->
-<script src="../resources/js/popper.min.js"></script>
-
-<!-- slick js-->
-<script src="../resources/js/slick.js"></script>
-
-<!-- menu js-->
-<script src="../resources/js/menu.js"></script>
-
-<!-- lazyload js-->
-<script src="../resources/js/lazysizes.min.js"></script>
-
-<!-- Bootstrap js-->
-<script src="../resources/js/bootstrap.js"></script>
-
-<!-- Bootstrap Notification js-->
-<script src="../resources/js/bootstrap-notify.min.js"></script>
-
-<!-- Fly cart js-->
-<script src="../resources/js/fly-cart.js"></script>
-
-<!-- Theme js-->
-<script src="../resources/js/script.js"></script>
-
 </html>
-
-
-<%end%>

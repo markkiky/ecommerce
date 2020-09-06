@@ -1,0 +1,12 @@
+//
+// Screenreaders
+//
+@import "scss/bootstrap/variables";
+@import "scss/bootstrap/mixins";
+.sr-only {
+  @include sr-only();
+}
+
+.sr-only-focusable {
+  @include sr-only-focusable();
+}

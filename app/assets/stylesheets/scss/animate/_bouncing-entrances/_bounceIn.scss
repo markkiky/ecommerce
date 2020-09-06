@@ -1,0 +1,13 @@
+@mixin bounceIn($count: $countDefault, $duration: $durationDefault, $delay: $delayDefault, $function: $functionDefault, $fill: $fillDefault, $visibility: $visibilityDefault) {
+  // @include animation-name(bounceIn);
+  // @include count($count);
+  // @include duration($duration);
+  // @include delay($delay);
+  // @include function($function);
+  // @include fill-mode($fill);
+  // @include visibility($visibility);
+}
+
+@include bounceIn(12,1 ,1 ,1 ,1,1)
+
+

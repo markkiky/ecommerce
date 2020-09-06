@@ -4,9 +4,10 @@
      </div>
      <div class="sidebar custom-scrollbar">
          <div class="sidebar-user text-center">
-             <div><img class="img-60 rounded-circle lazyloaded blur-up" src="../resources/images/dashboard/man.png" alt="#">
+             <div>
+             <%= image_tag('dashboard/man.png', class: 'img-60 rounded-circle lazyloaded blur-up') %>
              </div>
-             <h6 class="mt-3 f-14"><%= current_admin.email %></h6>
+             <h6 class="mt-3 f-14"><%# current_admin.email %></h6>
              <p>general manager.</p>
          </div>
          <ul class="sidebar-menu">
@@ -23,6 +24,7 @@
                              <li><%= link_to colors_path do %><i class="fa fa-circle"></i>Color<% end %></li>-->
                              <li><%= link_to new_product_path do %><i class="fa fa-circle"></i>Add Product<% end %></li>
                              <li><%= link_to products_path do %><i class="fa fa-circle"></i>Product List<% end %></li>
+                           
                          </ul>
                      </li>
                  </ul>
