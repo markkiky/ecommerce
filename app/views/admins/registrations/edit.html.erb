@@ -42,7 +42,9 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="profile-details text-center">
-                                    <img src="../resources/images/dashboard/designer.jpg" alt="" class="img-fluid img-90 rounded-circle blur-up lazyloaded">
+                                    <% if current_admin %>
+                                    <%= image_tag (current_admin.avatar_thumbnail), :class => "img-fluid img-90 rounded-circle blur-up lazyloaded"%>
+                                    <% end %>
                                     <h5 class="f-w-600 mb-0"><%= current_admin.name %></h5>
                                     <span><%= current_admin.email %></span>
                                     <div class="social">

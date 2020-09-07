@@ -1,5 +1,109 @@
-<h1>New Home</h1>
+ <%= render 'layouts/header' %>
+ <!-- breadcrumb start -->
+ <div class="breadcrumb-section">
+     <div class="container">
+         <div class="row">
+             <div class="col-sm-6">
+                 <div class="page-title">
+                     <h2>contact</h2>
+                 </div>
+             </div>
+             <div class="col-sm-6">
+                 <nav aria-label="breadcrumb" class="theme-breadcrumb">
+                     <ol class="breadcrumb">
+                         <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                         <li class="breadcrumb-item active">contact</li>
+                     </ol>
+                 </nav>
+             </div>
+         </div>
+     </div>
+ </div>
+ <!-- breadcrumb End -->
 
-<%= render 'form', home: @home %>
+ <!--section start-->
+ <section class="contact-page section-b-space">
+     <div class="container">
+         <div class="row section-b-space">
+             <div class="col-lg-7 map">
+                 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.7922389225987!2d36.78849671431534!3d-1.2994551360061066!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f109993a4db3b%3A0x935a305c457e3dd0!2sNgong%20Rd%2C%20Nairobi!5e0!3m2!1sen!2ske!4v1599034202218!5m2!1sen!2ske" allowfullscreen></iframe>
+             </div>
+             <div class="col-lg-5">
+                 <div class="contact-right">
+                     <ul>
+                         <li>
+                             <div class="contact-icon"><img src="../resources/images/icon/phone.png" alt="Generic placeholder image">
+                                 <h6>Contact Us</h6>
+                             </div>
+                             <div class="media-body">
+                                 <p>+91 123 - 456 - 7890</p>
+                                 <p>+86 163 - 451 - 7894</p>
+                             </div>
+                         </li>
+                         <li>
+                             <div class="contact-icon"><i class="fa fa-map-marker" aria-hidden="true"></i>
+                                 <h6>Address</h6>
+                             </div>
+                             <div class="media-body">
+                                 <p>ABC Complex,Near xyz, New York</p>
+                                 <p>USA 123456</p>
+                             </div>
+                         </li>
+                         <li>
+                             <div class="contact-icon"><img src="../resources/images/icon/email.png" alt="Generic placeholder image">
+                                 <h6>Address</h6>
+                             </div>
+                             <div class="media-body">
+                                 <p>Support@Shopcart.com</p>
+                                 <p>info@shopcart.com</p>
+                             </div>
+                         </li>
+                         <li>
+                             <div class="contact-icon"><i class="fa fa-fax" aria-hidden="true"></i>
+                                 <h6>Fax</h6>
+                             </div>
+                             <div class="media-body">
+                                 <p>Support@Shopcart.com</p>
+                                 <p>info@shopcart.com</p>
+                             </div>
+                         </li>
+                     </ul>
+                 </div>
+             </div>
+         </div>
+         <div class="row">
+             <div class="col-sm-12">
+                 <%= form_with scope: :home, url: contact_path, local: true do |form| %>
+                 <div class="form-row">
+                     <div class="col-md-6">
+                         <label for="name">First Name</label>
+                         <%= form.text_field :notification_first_name, required: true, :class => "form-control" %>
+                     </div>
+                     <div class="col-md-6">
+                         <label for="email">Last Name</label>
+                         <%= form.text_field :notification_last_name, required: true, :class => "form-control" %>
+                     </div>
+                     <div class="col-md-6">
+                         <label for="review">Phone number</label>
+                         <%= form.number_field :notification_phone_number, :class => "form-control" %>
+                     </div>
+                     <div class="col-md-6">
+                         <label for="email">Email</label>
+                         <%= form.email_field :notification_email, required: true, :class => "form-control" %>
+                     </div>
+                     <div class="col-md-12">
+                         <label for="review">Write Your Message</label>
+                        <%= form.text_area :notification_message, required: true, :class => "form-control", :rows => 6 %>
+                     </div>
+                     <div class="col-md-12"> <br> 
+                         <%= form.submit "Send Your Message", :class => "btn btn-solid" %>
+                     </div>
+                 </div>
+                 <% end %>
+             </div>
+         </div>
+     </div>
+ </section>
+ <!--Section ends-->
 
-<%= link_to 'Back', homes_path %>
+ <%= render 'layouts/footer' %>
