@@ -1,0 +1,7 @@
+// stylelint-disable declaration-no-important
+@import "scss/bootstrap/variables";
+@import "scss/bootstrap/mixins";
+.shadow-sm { box-shadow: $box-shadow-sm !important; }
+.shadow { box-shadow: $box-shadow !important; }
+.shadow-lg { box-shadow: $box-shadow-lg !important; }
+.shadow-none { box-shadow: none !important; }

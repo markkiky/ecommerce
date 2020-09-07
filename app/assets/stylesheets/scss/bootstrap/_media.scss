@@ -1,0 +1,41 @@
+@import "scss/bootstrap/variables";
+
+// bootstrap mixins
+@import "scss/bootstrap/mixins/alert";
+@import "scss/bootstrap/mixins/background-variant";
+@import "scss/bootstrap/mixins/badge";
+@import "scss/bootstrap/mixins/border-radius";
+@import "scss/bootstrap/mixins/box-shadow";
+@import "scss/bootstrap/mixins/breakpoints";
+@import "scss/bootstrap/mixins/buttons";
+@import "scss/bootstrap/mixins/caret";
+@import "scss/bootstrap/mixins/clearfix";
+@import "scss/bootstrap/mixins/float";
+@import "scss/bootstrap/mixins/forms";
+@import "scss/bootstrap/mixins/gradients";
+@import "scss/bootstrap/mixins/grid";
+@import "scss/bootstrap/mixins/grid-framework";
+@import "scss/bootstrap/mixins/hover";
+@import "scss/bootstrap/mixins/image";
+@import "scss/bootstrap/mixins/list-group";
+@import "scss/bootstrap/mixins/lists";
+@import "scss/bootstrap/mixins/nav-divider";
+@import "scss/bootstrap/mixins/pagination";
+@import "scss/bootstrap/mixins/reset-text";
+@import "scss/bootstrap/mixins/resize";
+@import "scss/bootstrap/mixins/screen-reader";
+@import "scss/bootstrap/mixins/size";
+@import "scss/bootstrap/mixins/table-row";
+@import "scss/bootstrap/mixins/text-emphasis";
+@import "scss/bootstrap/mixins/text-hide";
+@import "scss/bootstrap/mixins/text-truncate";
+@import "scss/bootstrap/mixins/transition";
+@import "scss/bootstrap/mixins/visibility";
+.media {
+  display: flex;
+  align-items: flex-start;
+}
+
+.media-body {
+  flex: 1;
+}

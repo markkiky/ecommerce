@@ -1,0 +1,12 @@
+//
+// Visibility utilities
+//
+@import "scss/bootstrap/variables";
+@import "scss/bootstrap/mixins";
+.visible {
+  @include invisible(visible);
+}
+
+.invisible {
+  @include invisible(hidden);
+}

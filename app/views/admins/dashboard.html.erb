@@ -8,34 +8,41 @@
     <meta name="description" content="Multikart admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
     <meta name="keywords" content="admin template, Multikart admin template, dashboard template, flat admin template, responsive admin template, web app">
     <meta name="author" content="pixelstrap">
-    <link rel="icon" href="../resources/images/dashboard/favicon.png" type="image/x-icon">
-    <link rel="shortcut icon" href="../resources/images/dashboard/favicon.png" type="image/x-icon">
-    <title>Multikart - Premium Admin Template</title>
+    <!-- <link rel="icon" href="../resources/images/dashboard/favicon.png" type="image/x-icon"> -->
+    <%= favicon_link_tag 'default_profile' %>
+    <!--<link rel="shortcut icon" href="../resources/images/dashboard/favicon.png" type="image/x-icon">-->
+    <title>MelonCoco Admin</title>
 
     <!-- Google font-->
     <link href="https://fonts.googleapis.com/css?family=Work+Sans:100,200,300,400,500,600,700,800,900" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
     <!-- Font Awesome-->
-    <link rel="stylesheet" type="text/css" href="../resources/css/fontawesome.css">
+    <!-- <link rel="stylesheet" type="text/css" href="../resources/css/fontawesome.css"> -->
+    <%= stylesheet_link_tag "css/fontawesome" %>
 
     <!-- Flag icon-->
-    <link rel="stylesheet" type="text/css" href="../resources/css/flag-icon.css">
-
+    <!-- <link rel="stylesheet" type="text/css" href="../resources/css/flag-icon.css"> -->
+    <%= stylesheet_link_tag "css/flag-icon.css" %>
     <!-- ico-font-->
-    <link rel="stylesheet" type="text/css" href="../resources/css/icofont.css">
+    <!--<link rel="stylesheet" type="text/css" href="../resources/css/icofont.css"> -->
+    <%= stylesheet_link_tag 'css/icofont.css' %>
 
     <!-- Prism css-->
-    <link rel="stylesheet" type="text/css" href="../resources/css/prism.css">
+    <!--<link rel="stylesheet" type="text/css" href="../resources/css/prism.css">-->
+    <%= stylesheet_link_tag 'css/prism' %>
 
     <!-- Chartist css -->
-    <link rel="stylesheet" type="text/css" href="../resources/css/chartist.css">
+    <!--<link rel="stylesheet" type="text/css" href="../resources/css/chartist.css">-->
+    <%= stylesheet_link_tag 'css/chartist' %>
 
     <!-- Bootstrap css-->
-    <link rel="stylesheet" type="text/css" href="../resources/css/bootstrap.css">
+    <!--<link rel="stylesheet" type="text/css" href="../resources/css/bootstrap.css">-->
+    <%= stylesheet_link_tag 'css/bootstrap' %>
 
     <!-- App css-->
-    <link rel="stylesheet" type="text/css" href="../resources/css/admin.css">
+    <!--<link rel="stylesheet" type="text/css" href="../resources/css/admin.css">-->
+    <%= stylesheet_link_tag 'css/admin' %>
 </head>
 
 <body>
@@ -1005,61 +1012,85 @@
 </div>
 
 <!-- latest jquery-->
-<script src="../resources/js/jquery-3.3.1.min.js"></script>
+<!--<script src="../resources/js/jquery-3.3.1.min.js"></script>-->
+<%= javascript_include_tag 'js/jquery-3.3.1.min.js' %>
 
 <!-- Bootstrap js-->
-<script src="../resources/js/popper.min.js"></script>
-<script src="../resources/js/bootstrap.js"></script>
+<!--<script src="../resources/js/popper.min.js"></script>-->
+<%= javascript_include_tag 'js/popper.min.js' %>
+<!-- <script src="../resources/js/bootstrap.js"></script>-->
+<%= javascript_include_tag 'js/bootstrap.js' %>
 
 <!-- feather icon js-->
-<script src="../resources/js/icons/feather-icon/feather.min.js"></script>
-<script src="../resources/js/icons/feather-icon/feather-icon.js"></script>
+<!-- <script src="../resources/js/icons/feather-icon/feather.min.js"></script>-->
+<%= javascript_include_tag 'js/icons/feather-icon/feather.min.js' %>
+<!-- <script src="../resources/js/icons/feather-icon/feather-icon.js"></script>-->
+<%= javascript_include_tag 'js/icons/feather-icon/feather-icon.js' %>
+
 
 <!-- Sidebar jquery-->
-<script src="../resources/js/sidebar-menu.js"></script>
+<!-- <script src="../resources/js/sidebar-menu.js"></script>-->
+<%= javascript_include_tag 'js/sidebar-menu' %>
 
 <!--chartist js-->
-<script src="../resources/js/chart/chartist/chartist.js"></script>
+<!--<script src="../resources/js/chart/chartist/chartist.js"></script>-->
+<%= javascript_include_tag 'js/chart/chartist/chartist' %>
 
 <!--chartjs js-->
-<script src="../resources/js/chart/chartjs/chart.min.js"></script>
+<!-- <script src="../resources/js/chart/chartjs/chart.min.js"></script> -->
+<%= javascript_include_tag 'js/chart/chartjs/chart.min.js' %>
 
 <!-- lazyload js-->
-<script src="../resources/js/lazysizes.min.js"></script>
+<!-- <script src="../resources/js/lazysizes.min.js"></script>-->
+<%= javascript_include_tag 'js/lazysizes.min.js' %>
 
 <!--copycode js-->
-<script src="../resources/js/prism/prism.min.js"></script>
+<!-- <script src="../resources/js/prism/prism.min.js"></script>
 <script src="../resources/js/clipboard/clipboard.min.js"></script>
-<script src="../resources/js/custom-card/custom-card.js"></script>
+<script src="../resources/js/custom-card/custom-card.js"></script> -->
+<%= javascript_include_tag "js/prism/prism.min.js" %>
+<%= javascript_include_tag 'js/clipboard/clipboard.min.js' %>
+<%= javascript_include_tag 'js/custom-card/custom-card.js' %>
 
 <!--counter js-->
-<script src="../resources/js/counter/jquery.waypoints.min.js"></script>
+<!-- <script src="../resources/js/counter/jquery.waypoints.min.js"></script>
 <script src="../resources/js/counter/jquery.counterup.min.js"></script>
-<script src="../resources/js/counter/counter-custom.js"></script>
+<script src="../resources/js/counter/counter-custom.js"></script> -->
+<%= javascript_include_tag 'js/counter/jquery.waypoints.min.js' %>
+<%= javascript_include_tag 'js/counter/jquery.counterup.min.js' %>
+<%= javascript_include_tag 'js/counter/counter-custom.js' %>
 
 <!--peity chart js-->
-<script src="../resources/js/chart/peity-chart/peity.jquery.js"></script>
+<!--<script src="../resources/js/chart/peity-chart/peity.jquery.js"></script>-->
+<%= javascript_include_tag 'js/chart/peity-chart/peity.jquery.js' %>
 
 <!--sparkline chart js-->
-<script src="../resources/js/chart/sparkline/sparkline.js"></script>
+<!-- <script src="../resources/js/chart/sparkline/sparkline.js"></script> -->
+<%= javascript_include_tag 'js/chart/sparkline/sparkline.js' %>
 
 <!--Customizer admin-->
-<script src="../resources/js/admin-customizer.js"></script>
+<!-- <script src="../resources/js/admin-customizer.js"></script>-->
+<%= javascript_include_tag 'js/admin-customizer.js' %>
 
 <!--dashboard custom js-->
-<script src="../resources/js/dashboard/default.js"></script>
+<!-- <script src="../resources/js/dashboard/default.js"></script>-->
+<%= javascript_include_tag 'js/dashboard/default.js' %>
 
 <!--right sidebar js-->
-<script src="../resources/js/chat-menu.js"></script>
+<!-- <script src="../resources/js/chat-menu.js"></script>-->
+<%= javascript_include_tag 'js/chat-menu.js' %>
 
 <!--height equal js-->
-<script src="../resources/js/height-equal.js"></script>
+<!-- <script src="../resources/js/height-equal.js"></script> -->
+<%= javascript_include_tag 'js/height-equal' %>
 
 <!-- lazyload js-->
-<script src="../resources/js/lazysizes.min.js"></script>
+<!-- <script src="../resources/js/lazysizes.min.js"></script> -->
+<%= javascript_include_tag 'js/lazysizes.min.js' %>
 
 <!--script admin-->
-<script src="../resources/js/admin-script.js"></script>
+<!-- <script src="../resources/js/admin-script.js"></script>-->
+<%= javascript_include_tag 'js/admin-script' %>
 
 </body>
 </html>

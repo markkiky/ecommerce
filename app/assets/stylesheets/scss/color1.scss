@@ -1,0 +1,8 @@
+@import 'scss/theme/variables';
+:root {
+    --theme-deafult: #ff4c3b;
+}
+@import 'scss/theme/style';
+@import 'scss/theme/theme-dark';
+@import 'scss/theme/menu';
+@import 'scss/theme/responsive';

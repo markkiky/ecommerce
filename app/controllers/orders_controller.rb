@@ -9,6 +9,8 @@ class OrdersController < ApplicationController
 
   def index
     @orders = Order.all
+    # @orders.sort_by { |order| [order.order_number, order.order_date] }
+    # @orders.sort
   end
 
   def new
