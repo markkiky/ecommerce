@@ -98,7 +98,9 @@
                                                         <%= link_to edit_product_path(product), {:class => "btn", :type => "button", :title => "", 'data-original-title' => "" } do %> <i class="ti-pencil-alt"></i> <% end %>
                                                     </li>
                                                     <li>
-                                                        <%= link_to product, method: :delete, data: { confirm: 'Are you sure?', toggle: 'modal', target: '#exampleModalCenter', 'original-title' => "" , :class => "btn", :type => "button"} do %> <i class="ti-trash"></i> <% end %>
+                                                        <%= link_to product, method: :delete, data: { confirm: 'Are you sure?', toggle: 'modal', target: '#exampleModalCenter', 'original-title' => "" , :class => "btn", :type => "button"}, remote: true do %> 
+                                                            <i class="ti-trash"></i>
+                                                        <% end %>
                                                     </li>
                                                 </ul>
                                             </div>

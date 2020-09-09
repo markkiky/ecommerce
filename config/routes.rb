@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     root :to => "admins#dashboard", as: :admin_dashboard
     get '/admins/sign_out' => 'devise/sessions#destroy'
   end
+  get "/change_image", to: "products#change_product"
   root "homes#index"
   # admin routes
   get '/admin/dashboard', to: "admins#dashboard", as: :admin_dashboards

@@ -1,8 +1,109 @@
 <%= action_cable_meta_tag %>
 <% if admin_signed_in? %>
+<!DOCTYPE html>
+<html>
 
+<head>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Multikart admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
+    <meta name="keywords" content="admin template, Multikart admin template, dashboard template, flat admin template, responsive admin template, web app">
+    <meta name="author" content="pixelstrap">
+
+    <%= favicon_link_tag 'default_profile' %>
+
+    <title>MelonCoco Admin</title>
+
+    <!-- Google font-->
+    <link href="https://fonts.googleapis.com/css?family=Work+Sans:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <!-- Font Awesome-->
+    <%= stylesheet_link_tag "css/fontawesome" %>
+    <!-- Flag icon-->
+    <%= stylesheet_link_tag "css/flag-icon.css" %>
+    <!-- ico-font-->
+    <%= stylesheet_link_tag 'css/icofont.css' %>
+    <!-- Prism css-->
+    <%= stylesheet_link_tag 'css/prism' %>
+    <!-- Chartist css -->
+    <%= stylesheet_link_tag 'css/chartist' %>
+    <!-- Bootstrap css-->
+    <%= stylesheet_link_tag 'css/bootstrap' %>
+    <!-- App css-->
+    <%= stylesheet_link_tag 'css/admin' %>
+</head>
+
+<body>
     <%= yield %>
-    
+</body>
+<!-- latest jquery-->
+<%= javascript_include_tag 'js/jquery-3.3.1.min.js' %>
+
+
+<!-- Bootstrap js-->
+<%= javascript_include_tag 'js/popper.min.js' %>
+<%= javascript_include_tag 'js/bootstrap.js' %>
+
+<!-- feather icon js-->
+<%= javascript_include_tag 'js/icons/feather-icon/feather.min.js' %>
+<%= javascript_include_tag 'js/icons/feather-icon/feather-icon.js' %>
+
+<!-- Sidebar jquery-->
+<%= javascript_include_tag 'js/sidebar-menu' %>
+
+<!--chartist js-->
+<%= javascript_include_tag 'js/chart/chartist/chartist' %>
+
+<!--chartjs js-->
+<%= javascript_include_tag 'js/chart/chartjs/chart.min.js' %>
+
+<!-- lazyload js-->
+<%= javascript_include_tag 'js/lazysizes.min.js' %>
+
+<!--copycode js-->
+<%= javascript_include_tag "js/prism/prism.min.js" %>
+<%= javascript_include_tag 'js/clipboard/clipboard.min.js' %>
+<%= javascript_include_tag 'js/custom-card/custom-card.js' %>
+
+<!--counter js-->
+<%= javascript_include_tag 'js/counter/jquery.waypoints.min.js' %>
+<%= javascript_include_tag 'js/counter/jquery.counterup.min.js' %>
+<%= javascript_include_tag 'js/counter/counter-custom.js' %>
+
+<!--peity chart js-->
+<%= javascript_include_tag 'js/chart/peity-chart/peity.jquery.js' %>
+
+<!--sparkline chart js-->
+<%= javascript_include_tag 'js/chart/sparkline/sparkline.js' %>
+
+<!--Customizer admin-->
+<%= javascript_include_tag 'js/admin-customizer.js' %>
+
+<!--dashboard custom js-->
+<%= javascript_include_tag 'js/dashboard/default.js' %>
+
+<!--right sidebar js-->
+<%= javascript_include_tag 'js/chat-menu.js' %>
+
+<!--height equal js-->
+<%= javascript_include_tag 'js/height-equal' %>
+
+<!-- lazyload js-->
+<%# javascript_include_tag 'js/lazysizes.min.js' %>
+
+<!--script admin-->
+<%= javascript_include_tag 'js/admin-script' %>
+
+</html>
+
+
 <% else %>
 <!DOCTYPE html>
 <html>
@@ -13,32 +114,33 @@
     <%= csp_meta_tag %>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="icon" href="../resources/images/favicon/1.png" type="image/x-icon">
-    <link rel="shortcut icon" href="../resources/images/favicon/1.png" type="image/x-icon">
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+
     <!--Google font-->
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900" rel="stylesheet">
 
     <!-- Icons -->
-    <link rel="stylesheet" type="text/css" href="../resources/css/fontawesome.css">
+    <%= stylesheet_link_tag "css/fontawesome" %>
 
     <!--Slick slider css-->
-    <link rel="stylesheet" type="text/css" href="../resources/css/slick.css">
-    <link rel="stylesheet" type="text/css" href="../resources/css/slick-theme.css">
+    <%= stylesheet_link_tag "css/slick.css" %>
+    <%= stylesheet_link_tag "css/slick-theme.css" %>
 
     <!-- Animate icon -->
-    <link rel="stylesheet" type="text/css" href="../resources/css/animate.css">
+    <%= stylesheet_link_tag "css/animate.css" %>
 
     <!-- Themify icon -->
-    <link rel="stylesheet" type="text/css" href="../resources/css/themify-icons.css">
+    <%= stylesheet_link_tag "css/themify-icons.css" %>
 
     <!-- Bootstrap css -->
-    <link rel="stylesheet" type="text/css" href="../resources/css/bootstrap.css">
+    <%= stylesheet_link_tag "css/bootstrap" %>
 
     <!-- Theme css -->
-    <link rel="stylesheet" type="text/css" href="../resources/css/color1.css" media="screen" id="color">
+    <!-- <link rel="stylesheet" type="text/css" href="../resources/css/color1.css" media="screen" id="color">-->
+    <%= stylesheet_link_tag "css/color1.css" %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+
 
     <%= render 'application/favicon' %>
 </head>
@@ -60,38 +162,44 @@
 </body>
 
 <!-- latest jquery-->
-<script src="../resources/js/jquery-3.3.1.min.js"></script>
+<%= javascript_include_tag 'js/jquery-3.3.1.min.js' %>
 
 <!-- fly cart ui jquery-->
-<script src="../resources/js/jquery-ui.min.js"></script>
+<%= javascript_include_tag 'js/jquery-ui.min.js' %>
 
 <!-- exitintent jquery-->
-<script src="../resources/js/jquery.exitintent.js"></script>
-<script src="../resources/js/exit.js"></script>
+<%= javascript_include_tag 'js/jquery.exitintent.js' %>
+<%= javascript_include_tag 'js/exit.js' %>
 
 <!-- popper js-->
-<script src="../resources/js/popper.min.js"></script>
+<%= javascript_include_tag 'js/popper.min.js' %>
+
 
 <!-- slick js-->
-<script src="../resources/js/slick.js"></script>
+<%= javascript_include_tag 'js/slick.js' %>
+
 
 <!-- menu js-->
-<script src="../resources/js/menu.js"></script>
+<%= javascript_include_tag 'js/menu.js' %>
+
 
 <!-- lazyload js-->
-<script src="../resources/js/lazysizes.min.js"></script>
+<%= javascript_include_tag 'js/lazysizes.min.js' %>
+
 
 <!-- Bootstrap js-->
-<script src="../resources/js/bootstrap.js"></script>
+<%= javascript_include_tag 'js/bootstrap.js' %>
+
 
 <!-- Bootstrap Notification js-->
-<script src="../resources/js/bootstrap-notify.min.js"></script>
+<%= javascript_include_tag 'js/bootstrap-notify.min.js' %>
+
 
 <!-- Fly cart js-->
-<script src="../resources/js/fly-cart.js"></script>
+<%= javascript_include_tag 'js/fly-cart.js' %>
 
 <!-- Theme js-->
-<script src="../resources/js/script.js"></script>
+<%= javascript_include_tag 'js/script.js' %>
 
 </html>
 

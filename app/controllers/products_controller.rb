@@ -2,7 +2,7 @@ class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_admin!, only: [:index, :new, :edit]
 
-  skip_before_action :verify_authenticity_token, only: [:product_counter]
+  skip_before_action :verify_authenticity_token, only: [:product_counter, :change_product]
 
   # GET /products
   # GET /products.json
@@ -47,6 +47,7 @@ end
     @categories = Category.all.map{ |c| [c.category_name, c.id] }
     @sizes = Size.all.map{ |s| [s.size_type, s.id] }
     @colors = Color.all.map{ |l| [l.color_type, l.id] }
+    @data_id = 1
   end
 
   # POST /products
@@ -104,6 +105,18 @@ end
     respond_to do |format|
       format.html { redirect_to products_url, notice: 'Product was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  # POST /change_image
+  def change_product
+    @data_id = params[:data_id]
+    product_id = params[:product_id]
+    puts product_id
+    
+    @product = Product.find(product_id)
+    respond_to do |format|
+      format.js
     end
   end
 

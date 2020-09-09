@@ -26,7 +26,7 @@
     <link rel="stylesheet" type="text/css" href="../../resources/css/bootstrap.css">
 
     <!-- App css-->
-    <link rel="stylesheet" type="text/css" href="../../resources/css/admin.css">
+    <%= stylesheet_link_tag 'css/admin' %>
 </head>
 
 <body>
@@ -46,7 +46,7 @@
             <%= render 'layouts/admin_sidebar' %>
             <!-- Page Sidebar Ends-->
 
-           
+
             <div class="page-body">
 
                 <!-- Container-fluid starts-->
@@ -86,25 +86,22 @@
                                             <div class="add-product">
                                                 <div class="row">
                                                     <div class="col-xl-9 xl-50 col-sm-6 col-9">
-                                                        <img src="../../resources/images/pro3/1.jpg" alt="" class="img-fluid image_zoom_1 blur-up lazyloaded">
+                                                        <%= image_tag @product.images[1], class: "img-fluid image_zoom_1 blur-up lazyloaded", alt: "", id: "big_image" %>
                                                     </div>
                                                     <div class="col-xl-3 xl-50 col-sm-6 col-3">
-                                                        <ul class="file-upload-product">
-                                                            <li>
-                                                                <div class="box-input-file"><input class="upload" type="file"><i class="fa fa-plus"></i></div>
-                                                            </li>
-                                                            <li>
-                                                                <div class="box-input-file"><input class="upload" type="file"><i class="fa fa-plus"></i></div>
-                                                            </li>
-                                                            <li>
-                                                                <div class="box-input-file"><input class="upload" type="file"><i class="fa fa-plus"></i></div>
-                                                            </li>
-                                                            <li>
-                                                                <div class="box-input-file"><input class="upload" type="file"><i class="fa fa-plus"></i></div>
-                                                            </li>
-                                                            <li>
-                                                                <div class="box-input-file"><input class="upload" type="file"><i class="fa fa-plus"></i></div>
-                                                            </li>
+                                                        <ul class="file-upload-product" id="side_gallery">
+                                                            <% if @product.images.attached? %>
+                                                                <% count = 0 %>
+                                                                <% @product.images.each do |image| %>
+                                                                <% count += 1 %>
+                                                                <li>
+                                                                    <div class="box-input-file mb-5">                       
+                                                                        <%= image_tag  image, onClick: "setBigImage()", "data-id": count, class: "view" %>
+                                                                    </div>
+                                                                </li>
+                                                                <%end%>
+                                                            <%end%>
+                                                           
                                                             <li>
                                                                 <div class="box-input-file"><input class="upload" type="file"><i class="fa fa-plus"></i></div>
                                                             </li>
@@ -174,7 +171,7 @@
             </div>
 
             <!-- footer start-->
-           <%= render 'layouts/admin_footer' %>
+            <%= render 'layouts/admin_footer' %>
             <!-- footer end-->
         </div>
 
@@ -223,6 +220,49 @@
 
     <!--script admin-->
     <script src="../../resources/js/admin-script.js"></script>
+
+    <!-- this pages js -->
+    <script>
+        $(document).ready(function(){
+            $("#side_gallery img").on("click", function () {
+                var data_id = $(this).attr('data-id');
+                var product_id = <%= @product.id %>
+                console.log(product_id);
+                // $("#big_image").attr("src", "<%# url_for(@product.images[data_id])%>")
+                $.ajax({
+                    method: "GET", 
+                    url: "/change_image",
+                    dataType: 'script',
+                    format: "js",
+                    data: { data_id: data_id, product_id: product_id }
+                })
+                // alert("The data-id of clicked item is: " + data_id)
+            });
+            var data_id = $
+        });
+        function setBigImage() {
+            
+        }
+    
+    </script>
+    <style>
+        .box-input-file {
+            width: 50px;
+            height: 50px;
+            background-color: #f1f4fb;
+            position: relative;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-align: center;
+                
+                    align-items: center;
+            -webkit-box-pack: center;
+                
+                    justify-content: center;
+            vertical-align: middle; }
+        }
+    </style>
 
 </body>
 

@@ -10,21 +10,17 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
- *= require_tree .
  */
 
 
-@import "../../../vendor/assets/stylesheets/css/*";
-@import "../../../app/assets/stylesheets/css/*";
-@import "../../../app/assets/stylesheets/scss/*";
+// @import "../../../vendor/assets/stylesheets/css/*";
+// @import "../../../app/assets/stylesheets/css/*";
+// @import "../../../app/assets/stylesheets/scss/*";
 
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-/* Firefox */
-input[type="number"] {
-  -moz-appearance: textfield;
-}
+// @import "../../../vendor/assets/stylesheets/css/fontawesome.scss";
+// @import "../../../vendor/assets/stylesheets/css/slick.css";
+// @import "../../../vendor/assets/stylesheets/css/slick-theme.scss";
+// @import "../../../vendor/assets/stylesheets/css/animate.css";
+// @import "../../../vendor/assets/stylesheets/css/themify-icons.scss";
+// @import "../../../vendor/assets/stylesheets/css/bootstrap.css";
+// @import "../../../vendor/assets/stylesheets/css/color1.scss";

@@ -93,16 +93,23 @@
                                     <div class="col-xl-5">
                                         <div class="add-product">
                                             <div class="row">
-                                                <!--<div class="col-xl-9 xl-50 col-sm-6 col-9">
+                                                <div class="col-xl-9 xl-50 col-sm-6 col-9">
                                                     <img src="../resources/images/pro3/1.jpg" alt="" class="img-fluid image_zoom_1 blur-up lazyloaded">
-                                                </div>-->
+                                                </div>
                                                 <div class="col-xl-3 xl-50 col-sm-6 col-3">
                                                     <ul class="file-upload-product">
                                                         <li>
                                                             <%= form.file_field :images, multiple: true %>
                                                         </li>
-                                                       <!-- <li>
-                                                            <div class="box-input-file"><%= form.file_field :images, multiple: true, class: "upload" %><i class="fa fa-plus"></i></div>
+                                                        <li>
+                                                            <div class="box-input-file">
+                                                                <% if @product.images.attached? %>
+                                                                    <%= image_tag  "filename_with_extension" %>
+                                                                <%else%>
+                                                                    <%= form.file_field :images, multiple: true, class: "upload" %><i class="fa fa-plus"></i>
+                                                                <%end%>
+                                                            </div>
+                                                            
                                                         </li>
                                                         <li>
                                                             <div class="box-input-file"><%= form.file_field :images, multiple: true, class: "upload" %><i class="fa fa-plus"></i></div>
@@ -115,7 +122,7 @@
                                                         </li>
                                                         <li>
                                                             <div class="box-input-file"><%= form.file_field :images, multiple: true, class: "upload" %><i class="fa fa-plus"></i></div>
-                                                        </li>-->
+                                                        </li>
                                                     </ul>
                                                 </div>
                                             </div>
