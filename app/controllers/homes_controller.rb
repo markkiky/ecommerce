@@ -2,6 +2,7 @@ class HomesController < ApplicationController
 
     def index
       @notifications = Home.all
+      @products = Product.all
     end 
 
     def new 

@@ -17,6 +17,9 @@ class CategoriesController < ApplicationController
   # GET /categories/new
   def new
     @category = current_admin.categories.build
+    respond_to do |format|
+      format.js
+    end
   end
 
 
@@ -37,6 +40,10 @@ class CategoriesController < ApplicationController
 
    # GET /categories/1/edit
    def edit
+    
+    respond_to do |format|
+      format.js
+    end
    end
 
   # PATCH/PUT /categories/1

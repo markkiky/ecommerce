@@ -24,18 +24,28 @@
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+
     <!-- Font Awesome-->
     <%= stylesheet_link_tag "css/fontawesome" %>
+
     <!-- Flag icon-->
     <%= stylesheet_link_tag "css/flag-icon.css" %>
+
     <!-- ico-font-->
     <%= stylesheet_link_tag 'css/icofont.css' %>
+
+    <!-- Themify icon -->
+    <%= stylesheet_link_tag 'css/themify-icons' %>
+
     <!-- Prism css-->
     <%= stylesheet_link_tag 'css/prism' %>
+
     <!-- Chartist css -->
     <%= stylesheet_link_tag 'css/chartist' %>
+
     <!-- Bootstrap css-->
     <%= stylesheet_link_tag 'css/bootstrap' %>
+
     <!-- App css-->
     <%= stylesheet_link_tag 'css/admin' %>
 </head>
@@ -43,63 +53,7 @@
 <body>
     <%= yield %>
 </body>
-<!-- latest jquery-->
-<%= javascript_include_tag 'js/jquery-3.3.1.min.js' %>
 
-
-<!-- Bootstrap js-->
-<%= javascript_include_tag 'js/popper.min.js' %>
-<%= javascript_include_tag 'js/bootstrap.js' %>
-
-<!-- feather icon js-->
-<%= javascript_include_tag 'js/icons/feather-icon/feather.min.js' %>
-<%= javascript_include_tag 'js/icons/feather-icon/feather-icon.js' %>
-
-<!-- Sidebar jquery-->
-<%= javascript_include_tag 'js/sidebar-menu' %>
-
-<!--chartist js-->
-<%= javascript_include_tag 'js/chart/chartist/chartist' %>
-
-<!--chartjs js-->
-<%= javascript_include_tag 'js/chart/chartjs/chart.min.js' %>
-
-<!-- lazyload js-->
-<%= javascript_include_tag 'js/lazysizes.min.js' %>
-
-<!--copycode js-->
-<%= javascript_include_tag "js/prism/prism.min.js" %>
-<%= javascript_include_tag 'js/clipboard/clipboard.min.js' %>
-<%= javascript_include_tag 'js/custom-card/custom-card.js' %>
-
-<!--counter js-->
-<%= javascript_include_tag 'js/counter/jquery.waypoints.min.js' %>
-<%= javascript_include_tag 'js/counter/jquery.counterup.min.js' %>
-<%= javascript_include_tag 'js/counter/counter-custom.js' %>
-
-<!--peity chart js-->
-<%= javascript_include_tag 'js/chart/peity-chart/peity.jquery.js' %>
-
-<!--sparkline chart js-->
-<%= javascript_include_tag 'js/chart/sparkline/sparkline.js' %>
-
-<!--Customizer admin-->
-<%= javascript_include_tag 'js/admin-customizer.js' %>
-
-<!--dashboard custom js-->
-<%= javascript_include_tag 'js/dashboard/default.js' %>
-
-<!--right sidebar js-->
-<%= javascript_include_tag 'js/chat-menu.js' %>
-
-<!--height equal js-->
-<%= javascript_include_tag 'js/height-equal' %>
-
-<!-- lazyload js-->
-<%# javascript_include_tag 'js/lazysizes.min.js' %>
-
-<!--script admin-->
-<%= javascript_include_tag 'js/admin-script' %>
 
 </html>
 
