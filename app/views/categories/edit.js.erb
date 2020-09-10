@@ -1,0 +1,5 @@
+// alert("This");
+
+$('#categoryModal').remove();
+$('.page-body').append("<%= j render(:partial => 'layouts/admins/category_modal_edit') %>");
+$("#categoryModal").modal("show");

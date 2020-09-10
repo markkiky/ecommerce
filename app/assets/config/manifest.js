@@ -64,6 +64,22 @@
 //= link js/jsgrid/griddata-transactions.js
 //= link js/jsgrid/jsgrid-transactions.js
 
+//require for pages with an editor
+//= link js/touchspin/vendors.min.js
+//= link js/touchspin/touchspin.js
+//= link js/touchspin/input-groups.min.js
+
+//= link js/editor/ckeditor/ckeditor.js
+//= link js/editor/ckeditor/styles.js
+//= link js/editor/ckeditor/adapters/jquery.js
+//= link js/editor/ckeditor/ckeditor.custom.js
+
+// require for pages with a form
+//= link js/dashboard/form-validation-custom.js
+
+//= link js/jquery.elevatezoom.js
+//= link js/zoom-scripts.js
+
 // precompile css
 //= link css/fontawesome.css
 //= link css/slick.css

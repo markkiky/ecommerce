@@ -1,0 +1,53 @@
+<div class="modal fade" id="categoryModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <%= form_for(setup_category(@category)) do |form| %>
+            <div class="modal-header">
+                <h5 class="modal-title f-w-600" id="exampleModalLabel">Add Category</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+            </div>
+            <div class="modal-body">
+                <!--<form class="needs-validation">-->
+
+                <div class="form">
+                    <div class="form-group">
+                        <%= form.label :category_name, :class => "mb-1" %>
+                        <%= form.text_field :category_name, :class => "form-control" %>
+                        <%= puts "#{@category.category_name} Printing" %>
+                    </div>
+                    <div>
+                        <label for="head" id='color_picker_label'>pick a color</label>
+                        <input type="text" class="d-none" id="color_picker_text" placeholder="Name your color">
+                        <input type="color" value="#e66465" onchange="test(this)" onkeyup="test(this)">
+                    </div>
+
+                    <button class="mt-2 btn btn-warning d-none" id="add_color">+</button>
+                </div>
+
+                <!--</form>-->
+
+            </div>
+            <div class="modal-footer">
+                <%= form.submit "Save", :class => "btn btn-primary"  %>
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Close</button>
+            </div>
+
+            <%end%>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    document.getElementById('add_color').onclick = function() {
+        //create new category div, label, input and color picker
+        $("#add_color").addClass("d-none");
+    }
+
+    function test(t) {
+        console.log(t.value);
+        $("#color_picker_text").removeClass("d-none");
+        $("#color_picker_label").addClass("d-none");
+        $("#add_color").removeClass("d-none");
+    }
+</script>

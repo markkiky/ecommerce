@@ -109,14 +109,22 @@
         <div class="row">
             <div class="col">
                 <div class="product-4 product-m no-arrow">
-                    <% Product.all.limit(4).each do | product| %>
+                    <% Product.all.each do |product| %>
                     <div class="product-box">
                         <div class="img-wrapper">
                             <div class="front">
-                                <a href="/products/ <%= product.id %>"><%= image_tag (product.images[0] if product.images.length > 0) , :class => "img-fluid blur-up lazyload bg-img" %></a>
+                                <% if product.images.attached? %>
+                                    <a href="/products/ <%= product.id %>"><%= image_tag (product.images[0] if product.images.length > 0) , :class => "img-fluid blur-up lazyload bg-img" %></a>
+                                <%else %>
+                                    <a href="/products/ <%= product.id %>"><%= image_tag "default_profile", :class => "img-fluid blur-up lazyload bg-img" %></a>
+                                <%end%>
                             </div>
                             <div class="back">
-                                <a href="/products/ <%= product.id %>"><%= image_tag (product.images[1] if product.images.length > 0) , :class => "img-fluid blur-up lazyload bg-img" %></a>
+                                <% if product.images.attached? %>
+                                    <a href="/products/ <%= product.id %>"><%= image_tag (product.images[1] if product.images.length > 0) , :class => "img-fluid blur-up lazyload bg-img" %></a>
+                                <%else%>
+                                    <a href="/products/ <%= product.id %>"><%= image_tag "default_profile", :class => "img-fluid blur-up lazyload bg-img" %></a>
+                                <%end%>
                             </div>
                             <div class="cart-info cart-wrap">
                                 <%= form_tag order_items_path, remote: true do %>
@@ -134,9 +142,11 @@
                             </a>
                             <h4><%= number_to_currency(product.price, :unit => ' KES ') %></h4>
                             <ul class="color-variant">
-                                <li class="bg-light0"></li>
-                                <li class="bg-light1"></li>
-                                <li class="bg-light2"></li>
+                                <% product.colors.each  do |watu| %>
+                                    <li class="bg-light2"></li>
+                                    <%# watu %>
+                                <%end%>
+                               UKO
                             </ul>
                         </div>
 
@@ -172,9 +182,11 @@
                                 <!--<del>$600.00</del>-->
                             </h4>
                             <ul class="color-variant">
-                                <li class="bg-light0"></li>
-                                <li class="bg-light1"></li>
-                                <li class="bg-light2"></li>
+                                <% product.colors.each  do |watu| %>
+                                    <li class="bg-light2"></li>
+                                    <%# watu %>
+                                <%end%>
+                                UKO1
                             </ul>
                         </div>
                     </div>
@@ -204,9 +216,11 @@
                             </a>
                             <h4><%= number_to_currency(product.price, :unit => ' KES ') %></h4>
                             <ul class="color-variant">
-                                <li class="bg-light0"></li>
-                                <li class="bg-light1"></li>
-                                <li class="bg-light2"></li>
+                                <% product.colors.each  do |watu| %>
+                                    <li class="bg-light2"></li>
+                                    <%# watu %>
+                                <%end%>
+                                UKO3
                             </ul>
                         </div>
                     </div>
@@ -236,9 +250,11 @@
                             </a>
                             <h4><%= number_to_currency(product.price, :unit => ' KES ') %></h4>
                             <ul class="color-variant">
-                                <li class="bg-light0"></li>
-                                <li class="bg-light1"></li>
-                                <li class="bg-light2"></li>
+                                <% product.colors.each  do |watu| %>
+                                    <li class="bg-light2"></li>
+                                    <%# watu %>
+                                <%end%>
+                                UKO4
                             </ul>
                         </div>
                     </div>
@@ -267,9 +283,11 @@
                                 </a>
                                 <h4><%= number_to_currency(product.price, :unit => ' KES ') %></h4>
                                 <ul class="color-variant">
-                                    <li class="bg-light0"></li>
-                                    <li class="bg-light1"></li>
-                                    <li class="bg-light2"></li>
+                                    <% product.colors.each  do |watu| %>
+                                        <li class="bg-light2"></li>
+                                        <%# watu %>
+                                    <%end%>
+                                    UKO5
                                 </ul>
                             </div>
                         </div>
@@ -299,7 +317,7 @@
             </div>
         </div>
     </div>
-</section>
+</section>-->
 <!-- Parallax banner end -->
 
 

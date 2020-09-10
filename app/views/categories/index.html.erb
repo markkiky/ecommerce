@@ -87,34 +87,9 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="btn-popup pull-right">
-                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-original-title="test" data-target="#exampleModal">Add Category</button>
-                                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title f-w-600" id="exampleModalLabel">Add Category</h5>
-                                                        <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <!--<form class="needs-validation">-->
-                                                        <%= form_with scope: :category, url: categories_path, local: true do |form| %>
-                                                        <div class="form">
-                                                            <div class="form-group">
-                                                                <label><%= form.label :category_name, :class => "mb-1" %></label>
-                                                                <%= form.text_field :category_name, :class => "form-control" %>
-                                                            </div>
-                                                        </div>
-                                                        <!--</form>-->
-
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <%= form.submit "Save", :class => "btn btn-primary"  %>
-                                                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Close</button>
-                                                    </div>
-                                                    <% end %>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        <%= link_to new_category_path, :class => "btn btn-primary", remote: true do %>
+                                        Add Category
+                                        <%end%>
                                     </div>
                                 </div>
                                 <div class="card-body">
@@ -130,7 +105,7 @@
                                                 <% @categories.reverse.each do |category| %>
                                                 <tr>
                                                     <td><%= category.category_name %></td>
-                                                    <td><%= link_to 'Edit', edit_category_path(category), :class => "btn btn-secondary" %></td>
+                                                    <td><%= link_to 'Edit', edit_category_path(category), :class => "btn btn-secondary", remote: true %></td>
                                                     <td><%= link_to 'Delete', category_path(category), method: :delete, data: { confirm: 'Are you sure?'}, :class => "btn btn-primary" %></td>
                                                 </tr>
                                                 <% end %>
