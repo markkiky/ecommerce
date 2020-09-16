@@ -7,6 +7,7 @@ class CategoriesController < ApplicationController
   # GET /categories.json
   def index
     @categories = Category.all
+    
   end
 
   # GET /categories/1
@@ -17,16 +18,43 @@ class CategoriesController < ApplicationController
   # GET /categories/new
   def new
     @category = current_admin.categories.build
+    
     respond_to do |format|
       format.js
     end
   end
 
+  # GET /add_color
+  def add_color
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  # GET /remove_color
+  def remove_color
+    respond_to do |format|
+      format.js
+    end
+  end
 
   # POST /categories
   # POST /categories.json
   def create
+    # byebug
     @category = current_admin.categories.build(category_params)
+    @colors = params[:colors]
+    if @colors.count > 1
+      @colors.each do |color| 
+        new_color = Color.new
+        new_color.color_type = color[:color_type]
+        new_color.color_code = color[:color_code]
+        new_color.category_id = Category.last.id + 1
+        new_color.admin_id = current_admin.id
+        new_color.save!
+      end
+    end
+    
     respond_to do |format|
       if @category.save
         format.html { redirect_to categories_path, notice: 'Category was successfully created.' }
@@ -40,7 +68,7 @@ class CategoriesController < ApplicationController
 
    # GET /categories/1/edit
    def edit
-    
+    @colors = Color.where(:category_id => @category.id)
     respond_to do |format|
       format.js
     end
@@ -49,6 +77,26 @@ class CategoriesController < ApplicationController
   # PATCH/PUT /categories/1
   # PATCH/PUT /categories/1.json
   def update
+    @colors = params[:colors]
+    if @colors.count > 1
+      @colors.each do |color| 
+        if color[:color_id] == nil
+          new_color = Color.new
+          new_color.color_type = color[:color_type]
+          new_color.color_code = color[:color_code]
+          new_color.category_id = @category.id
+          new_color.admin_id = @category.admin_id
+          new_color.save!
+        else
+          update_color = Color.find_by(:id => color[:color_id])
+          update_color.update(:color_type =>  color[:color_type], :color_code => color[:color_code])
+        end
+
+
+       
+        # new_color.save!
+      end
+    end
     respond_to do |format|
       if @category.update(category_params)
         format.html { redirect_to categories_path, notice: 'Category was successfully updated.' }
@@ -78,6 +126,6 @@ class CategoriesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def category_params
-      params.require(:category).permit(:category_id, :category_name, :description, :active)
+      params.require(:category).permit(:category_id, :category_name, :description, :active, color: [])
     end
 end

@@ -70,7 +70,8 @@ Rails.application.configure do
 
   # Mailings
   config.action_mailer.default_url_options = { :host => "localhost:3000" }
-  config.hosts << "dcb025c29e48.ngrok.io"
+  # config.hosts << "dcb025c29e48.ngrok.io"
+  config.hosts << "b4e0860c5677.ngrok.io"
   # Rails.application.config.action_cable.allowed_request_origins = ['https://079d531bb325.ngrok.io/']
   # ActionCable.server.config.allowed_request_origins = [
   #   'https://079d531bb325.ngrok.io/'

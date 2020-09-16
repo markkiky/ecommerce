@@ -1,0 +1,15 @@
+<div data-id="1">
+    
+    <!-- <input type="text" class="d-none" id="color_picker_text" placeholder="Name your color">
+                        <input type="color" value="#e66465" onchange="test(this)" onkeyup="test(this)">-->
+    <%# c.text_field :color_type, class: "", placeholder: "Name your color" %>
+    <%# c.color_field :color_code %>
+    <input type="text" class="" id="color_picker_text" placeholder="Name your color" name="colors[][color_type]">
+    <input type="color" value="#e66465" onchange="test(this)" onkeyup="test(this)" name="colors[][color_code]">
+    
+
+</div>
+<script>
+$("#color_picker_text").focus();
+
+</script>
