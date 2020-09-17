@@ -77,9 +77,10 @@
                             <h4><del>$459.00</del><span>55% off</span></h4>
                             <h3>$32.96</h3>
                             <ul class="color-variant">
-                                <li class="bg-light0"></li>
-                                <li class="bg-light1"></li>
-                                <li class="bg-light2"></li>
+                                <% @product.colors.uniq.each  do |color| %>
+                                <li class="product-colors" style="background-color:<%= color.color_code %>" value="<%= color.color_type %>"></li>
+                                <%end%>
+                                
                             </ul>
                             <div class="product-description ">
                                 <div class="border-product">
@@ -112,7 +113,7 @@
                                     </div>
                                 </div>
                                 <div class="product-buttons">
-                                    
+
                                     <%= link_to order_items_path(:product_id => @product.id), { :class => "btn btn-solid", 'data-toggle' => 'modal', 'data-target' => '#addtocart' } do %> Add TO CART <% end %>
                                     <a href="#" class="btn btn-solid">buy now</a>
                                 </div>
@@ -532,3 +533,18 @@
 <%= javascript_include_tag 'js/jquery.elevatezoom.js' %>
 
 <%= javascript_include_tag 'js/admin-script' %>
+
+<script>
+    var color_buttons = document.getElementsByClassName("product-colors")
+    console.log(color_buttons)
+
+    for (var i = 0; i < color_buttons.length; i++) {
+        let color = color_buttons[i].attributes.value.value;
+        color_buttons[i].addEventListener('click', color_changed, true);
+    }
+    
+    function color_changed() {
+        // alert("reached");
+        console.log("Color Changed: Make an action here")
+    }
+</script>

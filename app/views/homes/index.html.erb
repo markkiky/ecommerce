@@ -1,4 +1,3 @@
-
 <%= render 'layouts/header'%>
 
 
@@ -46,7 +45,7 @@
 
 
 <!-- collection banner -->
-<!--<section class="pb-0 ratio2_1">
+<section class="pb-0 ratio2_1">
     <div class="container">
         <div class="row partition2">
             <div class="col-md-6">
@@ -81,7 +80,7 @@
             </div>
         </div>
     </div>
-</section>-->
+</section>
 <!-- collection banner end -->
 
 
@@ -114,16 +113,16 @@
                         <div class="img-wrapper">
                             <div class="front">
                                 <% if product.images.attached? %>
-                                    <a href="/products/ <%= product.id %>"><%= image_tag (product.images[0] if product.images.length > 0) , :class => "img-fluid blur-up lazyload bg-img" %></a>
+                                <a href="/products/ <%= product.id %>"><%= image_tag (product.images[0] if product.images.length > 0) , :class => "img-fluid blur-up lazyload bg-img" %></a>
                                 <%else %>
-                                    <a href="/products/ <%= product.id %>"><%= image_tag "default_profile", :class => "img-fluid blur-up lazyload bg-img" %></a>
+                                <a href="/products/ <%= product.id %>"><%= image_tag "default_profile", :class => "img-fluid blur-up lazyload bg-img" %></a>
                                 <%end%>
                             </div>
                             <div class="back">
                                 <% if product.images.attached? %>
-                                    <a href="/products/ <%= product.id %>"><%= image_tag (product.images[1] if product.images.length > 0) , :class => "img-fluid blur-up lazyload bg-img" %></a>
+                                <a href="/products/ <%= product.id %>"><%= image_tag (product.images[1] if product.images.length > 0) , :class => "img-fluid blur-up lazyload bg-img" %></a>
                                 <%else%>
-                                    <a href="/products/ <%= product.id %>"><%= image_tag "default_profile", :class => "img-fluid blur-up lazyload bg-img" %></a>
+                                <a href="/products/ <%= product.id %>"><%= image_tag "default_profile", :class => "img-fluid blur-up lazyload bg-img" %></a>
                                 <%end%>
                             </div>
                             <div class="cart-info cart-wrap">
@@ -142,11 +141,9 @@
                             </a>
                             <h4><%= number_to_currency(product.price, :unit => ' KES ') %></h4>
                             <ul class="color-variant">
-                                <% product.colors.each  do |watu| %>
-                                    <li class="bg-light2"></li>
-                                    <%# watu %>
+                                <% product.colors.uniq.each  do |color| %>
+                                <li class="bg-light2" style="background-color:<%= color.color_code %>"></li>
                                 <%end%>
-                               UKO
                             </ul>
                         </div>
 
@@ -182,11 +179,9 @@
                                 <!--<del>$600.00</del>-->
                             </h4>
                             <ul class="color-variant">
-                                <% product.colors.each  do |watu| %>
-                                    <li class="bg-light2"></li>
-                                    <%# watu %>
+                                <% product.colors.uniq.each  do |color| %>
+                                <li class="bg-light2" style="background-color:<%= color.color_code %>"></li>
                                 <%end%>
-                                UKO1
                             </ul>
                         </div>
                     </div>
@@ -216,11 +211,9 @@
                             </a>
                             <h4><%= number_to_currency(product.price, :unit => ' KES ') %></h4>
                             <ul class="color-variant">
-                                <% product.colors.each  do |watu| %>
-                                    <li class="bg-light2"></li>
-                                    <%# watu %>
+                                <% product.colors.uniq.each  do |color| %>
+                                <li class="bg-light2" style="background-color:<%= color.color_code %>"></li>
                                 <%end%>
-                                UKO3
                             </ul>
                         </div>
                     </div>
@@ -250,11 +243,9 @@
                             </a>
                             <h4><%= number_to_currency(product.price, :unit => ' KES ') %></h4>
                             <ul class="color-variant">
-                                <% product.colors.each  do |watu| %>
-                                    <li class="bg-light2"></li>
-                                    <%# watu %>
+                                <% product.colors.uniq.each  do |color| %>
+                                <li class="bg-light2" style="background-color:<%= color.color_code %>"></li>
                                 <%end%>
-                                UKO4
                             </ul>
                         </div>
                     </div>
@@ -283,11 +274,9 @@
                                 </a>
                                 <h4><%= number_to_currency(product.price, :unit => ' KES ') %></h4>
                                 <ul class="color-variant">
-                                    <% product.colors.each  do |watu| %>
-                                        <li class="bg-light2"></li>
-                                        <%# watu %>
+                                    <% product.colors.uniq.each  do |color| %>
+                                    <li class="bg-light2" style="background-color:<%= color.color_code %>"></li>
                                     <%end%>
-                                    UKO5
                                 </ul>
                             </div>
                         </div>
