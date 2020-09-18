@@ -49,7 +49,11 @@ class CategoriesController < ApplicationController
         new_color = Color.new
         new_color.color_type = color[:color_type]
         new_color.color_code = color[:color_code]
-        new_color.category_id = Category.last.id + 1
+        if Category.all.count == 0
+          new_color.category_id = 1
+        else
+          new_color.category_id = Category.last.id + 1
+        end
         new_color.admin_id = current_admin.id
         new_color.save!
       end
