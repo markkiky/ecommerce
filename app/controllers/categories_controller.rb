@@ -44,7 +44,7 @@ class CategoriesController < ApplicationController
     # byebug
     @category = current_admin.categories.build(category_params)
     @colors = params[:colors]
-    if @colors.count > 1
+    if @colors.count >= 1
       @colors.each do |color| 
         new_color = Color.new
         new_color.color_type = color[:color_type]
@@ -78,23 +78,23 @@ class CategoriesController < ApplicationController
   # PATCH/PUT /categories/1.json
   def update
     @colors = params[:colors]
-    if @colors.count > 1
+    if @colors.count >= 1
       @colors.each do |color| 
         if color[:color_id] == nil
-          new_color = Color.new
-          new_color.color_type = color[:color_type]
-          new_color.color_code = color[:color_code]
-          new_color.category_id = @category.id
-          new_color.admin_id = @category.admin_id
-          new_color.save!
+          if color[:color_type].length < 1
+            # dont update if no color is selected
+          else
+            new_color = Color.new
+            new_color.color_type = color[:color_type]
+            new_color.color_code = color[:color_code]
+            new_color.category_id = @category.id
+            new_color.admin_id = @category.admin_id
+            new_color.save!
+          end
         else
           update_color = Color.find_by(:id => color[:color_id])
           update_color.update(:color_type =>  color[:color_type], :color_code => color[:color_code])
         end
-
-
-       
-        # new_color.save!
       end
     end
     respond_to do |format|
