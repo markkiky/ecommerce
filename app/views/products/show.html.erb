@@ -74,13 +74,12 @@
                     <div class="product-right">
                         <div class="product-right product-description-box">
                             <h2><%= @product.product_name %></h2>
-                            <h4><del>$459.00</del><span>55% off</span></h4>
-                            <h3>$32.96</h3>
+                            <h3><%= number_to_currency(@product.price , :unit => ' KES ') %></h3>
                             <ul class="color-variant">
                                 <% @product.colors.uniq.each  do |color| %>
                                 <li class="product-colors" style="background-color:<%= color.color_code %>" value="<%= color.color_type %>"></li>
                                 <%end%>
-                                
+
                             </ul>
                             <div class="product-description ">
                                 <div class="border-product">
@@ -93,122 +92,6 @@
                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                                 </div>
                                                 <div class="modal-body"><img src="../assets/images/size-chart.jpg" alt="" class="img-fluid blur-up lazyload"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="size-box">
-                                        <ul>
-                                            <li class="active"><a href="#">s</a></li>
-                                            <li><a href="#">m</a></li>
-                                            <li><a href="#">l</a></li>
-                                            <li><a href="#">xl</a></li>
-                                        </ul>
-                                    </div>
-                                    <h6 class="product-title">quantity</h6>
-                                    <div class="qty-box">
-                                        <div class="input-group"><span class="input-group-prepend"><button type="button" class="btn quantity-left-minus" data-type="minus" data-field=""><i class="ti-angle-left"></i></button> </span>
-                                            <input type="text" name="quantity" class="form-control input-number" value="1">
-                                            <span class="input-group-prepend"><button type="button" class="btn quantity-right-plus" data-type="plus" data-field=""><i class="ti-angle-right"></i></button></span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="product-buttons">
-
-                                    <%= link_to order_items_path(:product_id => @product.id), { :class => "btn btn-solid", 'data-toggle' => 'modal', 'data-target' => '#addtocart' } do %> Add TO CART <% end %>
-                                    <a href="#" class="btn btn-solid">buy now</a>
-                                </div>
-                                <div class="border-product">
-                                    <h6 class="product-title">product details</h6>
-                                    <p><%= @product.product_description %></p>
-                                </div>
-                                <div class="border-product">
-                                    <h6 class="product-title">share it</h6>
-                                    <div class="product-icon">
-                                        <ul class="product-social">
-                                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-rss"></i></a></li>
-                                        </ul>
-                                        <% if customer_signed_in? %>
-                                        <% if @wishlist_exists == true %>
-                                        <%= link_to wishlists_update_path(product: @product), :class => "wishlist-btn", remote: true do %>
-                                        <i class="fa fa-heart" style="color:#ff4c3b;"></i><span id="wishlist_link" class="title-font" style="color:#ff4c3b;">Remove from Wishlist</span>
-                                        <% end %>
-                                        <% else %>
-                                        <%= link_to wishlists_update_path(product: @product), :class => "wishlist-btn", remote: true do %>
-                                        <i class="fa fa-heart" style="color:#ff4c3b;"></i><span id="wishlist_link" class="title-font" style="color:#ff4c3b; ">Add To WishList</span>
-                                        <% end %>
-                                        <% end %>
-                                        <% else %>
-                                        <a href="<%= new_customer_session_path %>" class="wishlist-btn" style="color:#000;"><i class="fa fa-heart"></i><span class="title-font">Add To WishList</span></a>
-                                        <% end %>
-                                    </div>
-                                </div>
-                                <div class="border-product">
-                                    <h6 class="product-title">Time Reminder</h6>
-                                    <div class="timer">
-                                        <p id="demo"><span>25 <span class="padding-l">:</span> <span class="timer-cal">Days</span> </span><span>22 <span class="padding-l">:</span> <span class="timer-cal">Hrs</span>
-                                            </span><span>13 <span class="padding-l">:</span> <span class="timer-cal">Min</span> </span><span>57 <span class="timer-cal">Sec</span></span>
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="single-product-tables border-product detail-section d-none">
-                                    <table>
-                                        <tbody>
-                                            <tr>
-                                                <td>Fabric:</td>
-                                                <td>Chiffon</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Color:</td>
-                                                <td>Red</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Material:</td>
-                                                <td>Crepe printed</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-
-                                <div class="border-product">
-                                    <h6 class="product-title">100% SECURE PAYMENT</h6>
-                                    <div class="payment-card-bottom">
-                                        <ul>
-                                            <li>
-                                                <a href="https://www.safaricom.co.ke/personal/m-pesa" target="_blank"><%= image_tag "mpesa.png", :width => "30px", :height => "30px"%></a>
-                                            </li>
-                                            <li>
-                                                <a href="https://www.visa.co.ke/" target="_blank"><img src="../resources/images/icon/visa.png" alt="" width="30px" height="30px"></a>
-                                            </li>
-                                            <li>
-                                                <a href="https://www.mastercard.us/en-us.html" target="_blank"><img src="../resources/images/icon/mastercard.png" alt="" width="30px" height="30px"></a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 d-none">
-                            <div class="product-right product-form-box">
-                                <h3><%= number_to_currency(@product.price, :unit => ' KES ') %></h3>
-                                <ul class="color-variant">
-                                    <li class="bg-light0"></li>
-                                    <li class="bg-light1"></li>
-                                    <li class="bg-light2"></li>
-                                </ul>
-                                <div class="product-description border-product">
-                                    <h6 class="product-title">select size</h6>
-                                    <div class="modal fade" id="sizemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog modal-dialog-centered" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">Sheer Straight Kurta</h5>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                                </div>
-                                                <div class="modal-body"><img src="../resources/images/size-chart.jpg" alt="" class="img-fluid blur-up lazyload"></div>
                                             </div>
                                         </div>
                                     </div>
@@ -234,12 +117,128 @@
                                     <%= button_to order_items_path(:product_id => @product.id), { :class => "btn btn-solid", 'data-toggle' => 'modal', 'data-target' => '#addtocart' } do %> add to cart <% end %> </div>
                             </div>
                             <% end %>
+                            <div class="border-product">
+                                <h6 class="product-title">product details</h6>
+                                <p><%= @product.product_description %></p>
+                            </div>
+                            <div class="border-product">
+                                <h6 class="product-title">share it</h6>
+                                <div class="product-icon">
+                                    <ul class="product-social">
+                                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-rss"></i></a></li>
+                                    </ul>
+                                    <% if customer_signed_in? %>
+                                    <% if @wishlist_exists == true %>
+                                    <%= link_to wishlists_update_path(product: @product), :class => "wishlist-btn", remote: true do %>
+                                    <i class="fa fa-heart" style="color:#ff4c3b;"></i><span id="wishlist_link" class="title-font" style="color:#ff4c3b;">Remove from Wishlist</span>
+                                    <% end %>
+                                    <% else %>
+                                    <%= link_to wishlists_update_path(product: @product), :class => "wishlist-btn", remote: true do %>
+                                    <i class="fa fa-heart" style="color:#ff4c3b;"></i><span id="wishlist_link" class="title-font" style="color:#ff4c3b; ">Add To WishList</span>
+                                    <% end %>
+                                    <% end %>
+                                    <% else %>
+                                    <a href="<%= new_customer_session_path %>" class="wishlist-btn" style="color:#000;"><i class="fa fa-heart"></i><span class="title-font">Add To WishList</span></a>
+                                    <% end %>
+                                </div>
+                            </div>
+                            <div class="border-product">
+                                <h6 class="product-title">Time Reminder</h6>
+                                <div class="timer">
+                                    <p id="demo"><span>25 <span class="padding-l">:</span> <span class="timer-cal">Days</span> </span><span>22 <span class="padding-l">:</span> <span class="timer-cal">Hrs</span>
+                                        </span><span>13 <span class="padding-l">:</span> <span class="timer-cal">Min</span> </span><span>57 <span class="timer-cal">Sec</span></span>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="single-product-tables border-product detail-section d-none">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td>Fabric:</td>
+                                            <td>Chiffon</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Color:</td>
+                                            <td>Red</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Material:</td>
+                                            <td>Crepe printed</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
 
+                            <div class="border-product">
+                                <h6 class="product-title">100% SECURE PAYMENT</h6>
+                                <div class="payment-card-bottom">
+                                    <ul>
+                                        <li>
+                                            <a href="https://www.safaricom.co.ke/personal/m-pesa" target="_blank"><%= image_tag "mpesa.png", :width => "30px", :height => "30px"%></a>
+                                        </li>
+                                        <li>
+                                            <a href="https://www.visa.co.ke/" target="_blank"><img src="../resources/images/icon/visa.png" alt="" width="30px" height="30px"></a>
+                                        </li>
+                                        <li>
+                                            <a href="https://www.mastercard.us/en-us.html" target="_blank"><img src="../resources/images/icon/mastercard.png" alt="" width="30px" height="30px"></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
+                    </div>
+                    <div class="col-lg-4 d-none">
+                        <div class="product-right product-form-box">
+                            <h3><%= number_to_currency(@product.price, :unit => ' KES ') %></h3>
+                            <ul class="color-variant">
+                                <li class="bg-light0"></li>
+                                <li class="bg-light1"></li>
+                                <li class="bg-light2"></li>
+                            </ul>
+                            <div class="product-description border-product">
+                                <h6 class="product-title">select size</h6>
+                                <div class="modal fade" id="sizemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Sheer Straight Kurta</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            </div>
+                                            <div class="modal-body"><img src="../resources/images/size-chart.jpg" alt="" class="img-fluid blur-up lazyload"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="size-box">
+                                    <ul>
+                                        <li class="active"><a href="#">s</a></li>
+                                        <li><a href="#">m</a></li>
+                                        <li><a href="#">l</a></li>
+                                        <li><a href="#">xl</a></li>
+                                    </ul>
+                                </div>
+                                <h6 class="product-title">quantity</h6>
+                                <%= form_tag order_items_path, remote: true do %>
+                                <%= hidden_field_tag :product_id, @product.id %>
+                                <div class="qty-box">
+                                    <div class="input-group"><span class="input-group-prepend"><button type="button" class="btn quantity-left-minus" data-type="minus" data-field=""><i class="ti-angle-left"></i></button> </span>
+                                        <!--<input type="text" name="quantity" class="form-control input-number" value="1"> <span class="input-group-prepend"><button type="button" class="btn quantity-right-plus" data-type="plus" data-field=""><i class="ti-angle-right"></i></button></span></div>-->
+                                        <%= number_field_tag :quantity, 1, min: 1, :class => "form-control input-number" %><span class="input-group-prepend"><button type="button" class="btn quantity-right-plus" data-type="plus" data-field=""><i class="ti-angle-right"></i></button></span></div>
+                                </div>
+                                <!--<div class="product-buttons"><a href="#" data-toggle="modal" data-target="#addtocart" class="btn btn-solid">add to cart</a><a href="#" class="btn btn-solid">buy now</a></div>    -->
+                            </div>
+                            <div class="product-buttons">
+                                <%= button_to order_items_path(:product_id => @product.id), { :class => "btn btn-solid", 'data-toggle' => 'modal', 'data-target' => '#addtocart' } do %> add to cart <% end %> </div>
+                        </div>
+                        <% end %>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 </section>
 <!-- Section ends -->
 
@@ -542,7 +541,7 @@
         let color = color_buttons[i].attributes.value.value;
         color_buttons[i].addEventListener('click', color_changed, true);
     }
-    
+
     function color_changed() {
         // alert("reached");
         console.log("Color Changed: Make an action here")
