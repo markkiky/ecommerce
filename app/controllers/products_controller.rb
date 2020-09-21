@@ -2,7 +2,7 @@ class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_admin!, only: [:index, :new, :edit]
 
-  skip_before_action :verify_authenticity_token, only: [:product_counter, :change_product]
+  # skip_before_action :verify_authenticity_token, only: [:product_counter, :change_product]
 
   # GET /products
   # GET /products.json

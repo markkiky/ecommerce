@@ -1,7 +1,6 @@
 class TransactionsController < ApplicationController
   before_action :set_transaction, only: [:show, :edit, :update, :destroy]
   # before_action :authenticate_admin!, only:[:index]
-  skip_before_action :verify_authenticity_token
 
   # GET /transactions
   # GET /transactions.json
