@@ -1,0 +1,26 @@
+<div data-id="1">
+    
+    <!-- <input type="text" class="d-none" id="color_picker_text" placeholder="Name your color">
+                        <input type="color" value="#e66465" onchange="test(this)" onkeyup="test(this)">-->
+    <%# c.text_field :color_type, class: "", placeholder: "Name your color" %>
+    <%# c.color_field :color_code %>
+    
+    <p></p>
+    <input type="text" class="" id="color_picker_text" placeholder="Name your new variant" name="variants[][variant_name]" >
+    <a href="/save_variant" data-remote= "true" onclick = "change_variant_name(this)">Add</a>
+    <% link_to save_variant_path, class: "btn btn-success", remote: true, :html => {:onclick => 'alert("some javascript executed before ajax")'} do%>
+        Add
+    <%end%>
+    <%
+=begin%>
+ <input type="color" value="#e66465" onchange="add_variant(this)" onkeyup="add_variant(this)" name="variants[][variant_value]"> 
+<%
+=end%>
+
+    
+
+</div>
+<script>
+$("#color_picker_text").focus();
+
+</script>
