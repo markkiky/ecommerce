@@ -1,3 +1,4 @@
+
 <div class="page-main-header">
     <div class="main-header-right row">
         <div class="main-header-left d-lg-none">
@@ -25,7 +26,7 @@
                         <li><a href="#" data-lng="en"><i class="flag-icon flag-icon-is"></i> English</a></li>
                     </ul>
                 </li>
-                <li class="onhover-dropdown"><i data-feather="bell"></i><span class="badge badge-pill badge-primary pull-right notification-badge"><%= Home.all.count %></span><span class="dot"></span>
+                <li class="onhover-dropdown"><i data-feather="bell"></i><span class="badge badge-pill badge-primary pull-right notification-badge"><%= Home.all.count %></span>
                     <ul class="notification-dropdown onhover-show-div p-0">
                         <li>Notification <span class="badge badge-pill badge-primary pull-right"><%= Home.all.count %></span></li>
                         <% Home.all.each do | notification | %>
@@ -46,7 +47,7 @@
                         <% if current_admin %>
                         <%= image_tag (current_admin.avatar_thumbnail), :class => "align-self-center pull-right img-50 rounded-circle blur-up lazyloaded" %>
                         <% end %>
-                        <div class="dotted-animation"><span class="animate-circle"></span><span class="main-circle"></span></div>
+                        <div class=""><span class="animate-circle"></span><span class="main-circle"></span></div>
                     </div>
                     <ul class="profile-dropdown onhover-show-div p-20 profile-dropdown-hover">
                         <li><a href="#"><i data-feather="user"></i>Edit Profile</a></li>
@@ -57,6 +58,12 @@
                             <i data-feather="log-out"></i>Logout
                             <% end %>
                         </li>
+                    </ul>
+                </li>
+                <li class="onhover-div mobile-cart">
+                    <div><img src="../resources/images/icon/cart.png" class="img-fluid blur-up lazyload" alt=""><span class="badge badge-pill badge-primary pull-right" style="margin-left: 2px;"><%= current_cart.items_count %></span></div>
+                    <ul class="show-div shopping-cart" id="cart" style="padding: 30px;">
+                        <%= render "order_items/cart" %>
                     </ul>
                 </li>
             </ul>
