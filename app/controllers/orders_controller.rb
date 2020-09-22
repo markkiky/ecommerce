@@ -17,6 +17,32 @@ class OrdersController < ApplicationController
     @order = current_cart.order
     @customer = current_customer
   end
+
+  def admin_order
+    @order = Order.new
+    @categories = Category.all.map{ |c| [c.category_name, c.id] }
+    respond_to do |format|
+      format.js
+    end
+  end 
+
+  def order_product
+
+    @products = Product.where(:category_id => params[:category_id]).map{ |p| [p.product_name, p.id] }
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  #GET /get_price
+  def get_price
+    product_id = params[:product_id]
+    @product = Product.find(product_id)
+    @price = @product.price
+    respond_to do |format|
+      format.js
+    end
+  end
  
   def create
     # check if order_cart_subtotal is empty

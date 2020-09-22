@@ -65,6 +65,13 @@ Rails.application.routes.draw do
   # order paths
   resources :orders
 
+  #admin order orders#admin_order
+  get '/admin_order', to: 'orders#admin_order', as: :admin_order
+  get "/order_product", to: "orders#order_product"
+  get "/get_price", to: "orders#get_price"
+
+
+
   #search path
   get "search", to: "products#search"
 

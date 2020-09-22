@@ -1,22 +1,28 @@
 <%  current_cart.order.items.each do |item| %>
 <li>
     <div class="media">
+        <% if item.product.images.attached? %>
         <div>
             <a href="/products/<%= item.product.id %>"><%= image_tag item.product.images[0] if item.product.images.length > 0 %></a>
         </div>
+        <% else %>
+        <div>
+            <a href="/products/ <%= item.product.id %>"><%= image_tag "default_profile", :class => "img-fluid blur-up lazyload bg-img" %></a>
+        </div>
+        <% end %>
         <div class="media-body">
-            <a href="#">
+            <a href="/products/<%= item.product.id %>"">
                 <h4><%= item.product.product_name %></h4>
             </a>
             <h4><span><%= item.quantity %> x <%= number_to_currency(item.price , :unit => ' KES ') %></span></h4>
         </div>
     </div>
-    <div class="close-circle">
-        <!--<a href="#"><i class="fa fa-times" aria-hidden="true"></i></a>-->
-        <%= form_for item, method: :delete, remote: true do |f| %>
-        <%= f.submit 'X' %>
-        <% end %>
-    </div>
+    <div class=" close-circle">
+                <!--<a href="#"><i class="fa fa-times" aria-hidden="true"></i></a>-->
+                <%= form_for item, method: :delete, remote: true do |f| %>
+                <%= f.submit 'X' %>
+                <% end %>
+        </div>
 </li>
 <% end %>
 <li>

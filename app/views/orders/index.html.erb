@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -29,150 +30,157 @@
     <!-- App css-->
     <%= stylesheet_link_tag 'css/admin' %>
 </head>
+
 <body>
 
-<!-- page-wrapper Start-->
-<div class="page-wrapper">
+    <!-- page-wrapper Start-->
+    <div class="page-wrapper">
 
-    <!-- Page Header Start-->
-    <%= render 'layouts/admin_header' %>
-    <!-- Page Header Ends -->
+        <!-- Page Header Start-->
+        <%= render 'layouts/admin_header' %>
+        <!-- Page Header Ends -->
 
-    <!-- Page Body Start-->
-    <div class="page-body-wrapper">
+        <!-- Page Body Start-->
+        <div class="page-body-wrapper">
 
-        <!-- Page Sidebar Start-->
-        <%= render 'layouts/admin_sidebar' %>
-        <!-- Page Sidebar Ends-->
+            <!-- Page Sidebar Start-->
+            <%= render 'layouts/admin_sidebar' %>
+            <!-- Page Sidebar Ends-->
 
-        <!-- Right sidebar Start-->
-        <%= render 'layouts/admins/admin_right_sidebar' %>
-        <!-- Right sidebar Ends-->
+            <!-- Right sidebar Start-->
+            <%= render 'layouts/admins/admin_right_sidebar' %>
+            <!-- Right sidebar Ends-->
 
-        <div class="page-body">
+            <div class="page-body">
 
-            <!-- Container-fluid starts-->
-            <div class="container-fluid">
-                <div class="page-header">
+                <!-- Container-fluid starts-->
+                <div class="container-fluid">
+                    <div class="page-header">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="page-header-left">
+                                    <h3>Orders
+                                        <small>Arigiene Admin panel</small>
+                                    </h3>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <ol class="breadcrumb pull-right">
+                                    <li class="breadcrumb-item"><a href="index.html"><i data-feather="home"></i></a></li>
+                                    <li class="breadcrumb-item">Sales</li>
+                                    <li class="breadcrumb-item active">Orders</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Container-fluid Ends-->
+
+                <!-- Container-fluid starts-->
+                <div class="container-fluid">
                     <div class="row">
-                        <div class="col-lg-6">
-                            <div class="page-header-left">
-                                <h3>Orders
-                                    <small>MelonCoco Admin panel</small>
-                                </h3>
+                        <div class="col-sm-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5>Manage Order</h5>
+                                    <div style="float: right;">
+                                        <%= link_to admin_order_path, :class => "btn btn-primary", remote: true do %>
+                                        Place Order
+                                        <%end%>
+                                    </div>
+                                </div>
+                                <div class="card-body order-datatable">
+                                    <table class="display" id="basic-1">
+                                        <thead>
+                                            <tr>
+                                                <th>No</th>
+                                                <th>Order Id</th>
+                                                <th>Product</th>
+                                                <th>Payment Status</th>
+                                                <th>Payment Method</th>
+                                                <th>Order Status</th>
+                                                <th>Date</th>
+                                                <th>Total</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <% count = 0 %>
+                                            <% @orders.each do |order| %>
+                                            <tr>
+                                                <td><%= count += 1 %></td>
+                                                <td><%= order.order_number %></td>
+                                                <td>
+                                                    <div class="d-flex">
+                                                        <img src="../assets/images/electronics/product/25.jpg" alt="" class="img-fluid img-30 mr-2 blur-up lazyloaded">
+                                                        <img src="../assets/images/electronics/product/13.jpg" alt="" class="img-fluid img-30 mr-2 blur-up lazyloaded">
+                                                        <img src="../assets/images/electronics/product/16.jpg" alt="" class="img-fluid img-30 blur-up lazyloaded">
+                                                    </div>
+                                                </td>
+                                                <td><span class="badge badge-secondary"><%= order.payment_status %></span></td>
+                                                <td><%= order.payment_method %></td>
+                                                <td><span class="badge badge-success"><%= order.order_status %></span></td>
+                                                <% if order.order_date != nil %>
+                                                <td><%= order.order_date.to_date %></td>
+                                                <%else%>
+                                                <td><%= order.created_at.to_date %></td>
+                                                <%end%>
+                                                <% if order.order_total != nil %>
+                                                <td><%= order.order_total %></td>
+                                                <%else%>
+                                                <td><%= order.order_subtotal %></td>
+                                                <%end%>
+                                            </tr>
+                                            <%end%>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <ol class="breadcrumb pull-right">
-                                <li class="breadcrumb-item"><a href="index.html"><i data-feather="home"></i></a></li>
-                                <li class="breadcrumb-item">Sales</li>
-                                <li class="breadcrumb-item active">Orders</li>
-                            </ol>
                         </div>
                     </div>
                 </div>
-            </div>
-            <!-- Container-fluid Ends-->
+                <!-- Container-fluid Ends-->
 
-            <!-- Container-fluid starts-->
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <h5>Manage Order</h5>
-                            </div>
-                            <div class="card-body order-datatable">
-                                <table class="display" id="basic-1">
-                                    <thead>
-                                    <tr>
-                                        <th>No</th>
-                                        <th>Order Id</th>
-                                        <th>Product</th>
-                                        <th>Payment Status</th>
-                                        <th>Payment Method</th>
-                                        <th>Order Status</th>
-                                        <th>Date</th>
-                                        <th>Total</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <% count = 0 %>
-                                    <% @orders.each do |order| %>
-                                    <tr>
-                                        <td><%= count += 1 %></td>
-                                        <td><%= order.order_number %></td>
-                                        <td>
-                                            <div class="d-flex">
-                                                <img src="../assets/images/electronics/product/25.jpg" alt="" class="img-fluid img-30 mr-2 blur-up lazyloaded">
-                                                <img src="../assets/images/electronics/product/13.jpg" alt="" class="img-fluid img-30 mr-2 blur-up lazyloaded">
-                                                <img src="../assets/images/electronics/product/16.jpg" alt="" class="img-fluid img-30 blur-up lazyloaded">
-                                            </div>
-                                        </td>
-                                        <td><span class="badge badge-secondary"><%= order.payment_status %></span></td>
-                                        <td><%= order.payment_method %></td>
-                                        <td><span class="badge badge-success"><%= order.order_status %></span></td>
-                                        <% if order.order_date != nil %>
-                                            <td><%= order.order_date.to_date %></td>
-                                        <%else%>
-                                            <td><%= order.created_at.to_date %></td>
-                                        <%end%>
-                                        <% if order.order_total != nil %>
-                                            <td><%= order.order_total %></td>
-                                        <%else%>
-                                            <td><%= order.order_subtotal %></td>
-                                        <%end%>
-                                    </tr>
-                                    <%end%>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
-            <!-- Container-fluid Ends-->
+
+            <!-- footer start-->
+            <%= render 'layouts/admin_footer' %>
+            <!-- footer end-->
 
         </div>
 
-        <!-- footer start-->
-        <%= render 'layouts/admin_footer' %>
-        <!-- footer end-->
-
     </div>
 
-</div>
+    <!-- latest jquery-->
+    <%= javascript_include_tag 'js/jquery-3.3.1.min.js' %>
 
-<!-- latest jquery-->
-<%= javascript_include_tag 'js/jquery-3.3.1.min.js' %>
+    <!-- Bootstrap js-->
+    <%= javascript_include_tag 'js/popper.min.js' %>
+    <%= javascript_include_tag 'js/bootstrap.js' %>
 
-<!-- Bootstrap js-->
-<%= javascript_include_tag 'js/popper.min.js' %>
-<%= javascript_include_tag 'js/bootstrap.js' %>
+    <!-- feather icon js-->
+    <%= javascript_include_tag 'js/icons/feather-icon/feather.min.js' %>
+    <%= javascript_include_tag 'js/icons/feather-icon/feather-icon.js' %>
 
-<!-- feather icon js-->
-<%= javascript_include_tag 'js/icons/feather-icon/feather.min.js' %>
-<%= javascript_include_tag 'js/icons/feather-icon/feather-icon.js' %>
+    <!-- Sidebar jquery-->
+    <%= javascript_include_tag 'js/sidebar-menu' %>
 
-<!-- Sidebar jquery-->
-<%= javascript_include_tag 'js/sidebar-menu' %>
+    <!-- Datatable js-->
+    <%= javascript_include_tag 'js/datatables/jquery.dataTables.min.js' %>
+    <%= javascript_include_tag 'js/datatables/custom-basic' %>
 
-<!-- Datatable js-->
-<%= javascript_include_tag 'js/datatables/jquery.dataTables.min.js' %>
-<%= javascript_include_tag 'js/datatables/custom-basic' %>
+    <!--Customizer admin-->
+    <%= javascript_include_tag 'js/admin-customizer.js' %>
 
-<!--Customizer admin-->
-<%= javascript_include_tag 'js/admin-customizer.js' %>
+    <!-- lazyload js-->
+    <%= javascript_include_tag 'js/lazysizes.min.js' %>
 
-<!-- lazyload js-->
-<%= javascript_include_tag 'js/lazysizes.min.js' %>
+    <!--right sidebar js-->
+    <%= javascript_include_tag 'js/chat-menu.js' %>
 
-<!--right sidebar js-->
-<%= javascript_include_tag 'js/chat-menu.js' %>
-
-<!--script admin-->
-<%= javascript_include_tag 'js/admin-script' %>
+    <!--script admin-->
+    <%= javascript_include_tag 'js/admin-script' %>
 
 
 </body>
+
 </html>

@@ -1,0 +1,5 @@
+$("#price").remove();
+var price = <%= @price %>
+console.log(price)
+//$(".products").remove();
+$('.price').append("<%= j render(:partial => 'layouts/admins/price') %>");
