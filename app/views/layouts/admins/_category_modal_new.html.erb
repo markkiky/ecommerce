@@ -15,8 +15,8 @@
                         <%= form.text_field :category_name, :class => "form-control" %>
                         <%= puts "#{@category.category_name} Printing" %>
                     </div>
-                    <%= form.fields_for(:color, :html => {:id => 'color_form'}) do |c| %>
-                    <div class="color_class">
+                    <%= form.fields_for(:color, :html => {:id => 'color_form', class: "d-none"}) do |c| %>
+                    <div class="color_class d-none">
                         <div data-id="1">
                             <label for="head" id='color_picker_label'>pick a color</label>
                             

@@ -55,7 +55,7 @@ class CategoriesController < ApplicationController
           new_color.category_id = Category.last.id + 1
         end
         new_color.admin_id = current_admin.id
-        new_color.save!
+        # new_color.save!
       end
     end
     
@@ -93,11 +93,11 @@ class CategoriesController < ApplicationController
             new_color.color_code = color[:color_code]
             new_color.category_id = @category.id
             new_color.admin_id = @category.admin_id
-            new_color.save!
+            # new_color.save!
           end
         else
           update_color = Color.find_by(:id => color[:color_id])
-          update_color.update(:color_type =>  color[:color_type], :color_code => color[:color_code])
+          # update_color.update(:color_type =>  color[:color_type], :color_code => color[:color_code])
         end
       end
     end

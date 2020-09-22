@@ -1,273 +1,252 @@
-<!DOCTYPE html>
-<html lang="en">
+<!-- page-wrapper Start-->
+<div class="page-wrapper">
 
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Multikart admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
-    <meta name="keywords" content="admin template, Multikart admin template, dashboard template, flat admin template, responsive admin template, web app">
-    <meta name="author" content="pixelstrap">
-    <link rel="icon" href="../../resources/images/dashboard/favicon.png" type="image/x-icon">
-    <link rel="shortcut icon" href="../../resources/images/dashboard/favicon.png" type="image/x-icon">
-    <title>Multikart - Premium Admin Template</title>
-
-    <!-- Google font-->
-    <link href="https://fonts.googleapis.com/css?family=Work+Sans:100,200,300,400,500,600,700,800,900" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-
-    <!-- Font Awesome-->
-    <link rel="stylesheet" type="text/css" href="../../resources/css/fontawesome.css">
-
-    <!-- Flag icon-->
-    <link rel="stylesheet" type="text/css" href="../../resources/css/flag-icon.css">
-
-    <!-- Bootstrap css-->
-    <link rel="stylesheet" type="text/css" href="../../resources/css/bootstrap.css">
-
-    <!-- App css-->
-    <%= stylesheet_link_tag 'css/admin' %>
-</head>
-
-<body>
-
-    <!-- page-wrapper Start-->
-    <div class="page-wrapper">
-
-        <!-- Page Header Start-->
-        <%= render 'layouts/admin_header' %>
-        <!-- Page Header Ends -->
+    <!-- Page Header Start-->
+    <%= render 'layouts/admin_header' %>
+    <!-- Page Header Ends -->
 
 
-        <!-- Page Body Start-->
-        <div class="page-body-wrapper">
+    <!-- Page Body Start-->
+    <div class="page-body-wrapper">
 
-            <!-- Page Sidebar Start-->
-            <%= render 'layouts/admin_sidebar' %>
-            <!-- Page Sidebar Ends-->
+        <!-- Page Sidebar Start-->
+        <%= render 'layouts/admin_sidebar' %>
+        <!-- Page Sidebar Ends-->
 
 
-            <div class="page-body">
+        <div class="page-body">
 
-                <!-- Container-fluid starts-->
-                <div class="container-fluid">
-                    <div class="page-header">
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <div class="page-header-left">
-                                    <h3>Add Products
-                                        <small>Multikart Admin panel</small>
-                                    </h3>
-                                </div>
+            <!-- Container-fluid starts-->
+            <div class="container-fluid">
+                <div class="page-header">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="page-header-left">
+                                <h3>Add Products
+                                    <small>Multikart Admin panel</small>
+                                </h3>
                             </div>
-                            <div class="col-lg-6">
-                                <ol class="breadcrumb pull-right">
-                                    <li class="breadcrumb-item"><a href="index.html"><i data-feather="home"></i></a></li>
-                                    <li class="breadcrumb-item">Physical</li>
-                                    <li class="breadcrumb-item active">Add Product</li>
-                                </ol>
-                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <ol class="breadcrumb pull-right">
+                                <li class="breadcrumb-item"><a href="index.html"><i data-feather="home"></i></a></li>
+                                <li class="breadcrumb-item">Physical</li>
+                                <li class="breadcrumb-item active">Add Product</li>
+                            </ol>
                         </div>
                     </div>
                 </div>
-                <!-- Container-fluid Ends-->
+            </div>
+            <!-- Container-fluid Ends-->
 
-                <!-- Container-fluid starts-->
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h5>Add Product</h5>
-                                </div>
-                                <div class="card-body">
-                                    <div class="row product-adding">
-                                        <div class="col-xl-5">
-                                            <div class="add-product">
-                                                <div class="row">
-                                                    <div class="col-xl-9 xl-50 col-sm-6 col-9">
+            <!-- Container-fluid starts-->
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>Add Product</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="row product-adding">
+                                    <div class="col-xl-5">
+                                        <div class="add-product">
+                                            <div class="row">
+                                                <div class="col-xl-9 xl-50 col-sm-6 col-9">
                                                     <% if @product.images.attached? %>
-                                                        <%= image_tag @product.images[0], class: "img-fluid image_zoom_1 blur-up lazyloaded", alt: "", id: "big_image" %>
+                                                    <%= image_tag @product.images[0], class: "img-fluid image_zoom_1 blur-up lazyloaded", alt: "", id: "big_image" %>
                                                     <%else%>
                                                     <%= image_tag 'default_profile', class: "img-fluid image_zoom_1 blur-up lazyloaded", alt: "", id: "big_image" %>
                                                     <%end%>
-                                                    </div>
-                                                    <div class="col-xl-3 xl-50 col-sm-6 col-3">
-                                                        <ul class="file-upload-product" id="side_gallery">
-                                                            <% if @product.images.attached? %>
-                                                                <% count = 0 %>
-                                                                <% @product.images.each do |image| %>
-                                                                <% count += 1 %>
-                                                                <li>
-                                                                    <div class="box-input-file mb-5">                       
-                                                                        <%= image_tag  image, onClick: "setBigImage()", "data-id": count, class: "view" %>
-                                                                    </div>
-                                                                </li>
-                                                                <%end%>
-                                                            <%end%>
-                                                           
-                                                            <li>
-                                                                <div class="box-input-file"><input class="upload" type="file"><i class="fa fa-plus"></i></div>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
+                                                </div>
+                                                <div class="col-xl-3 xl-50 col-sm-6 col-3">
+                                                    <ul class="file-upload-product" id="side_gallery">
+                                                        <% if @product.images.attached? %>
+                                                        <% count = 0 %>
+                                                        <% @product.images.each do |image| %>
+                                                        <% count += 1 %>
+                                                        <li>
+                                                            <div class="box-input-file mb-5">
+                                                                <%= image_tag  image, onClick: "setBigImage()", "data-id": count, class: "view" %>
+                                                            </div>
+                                                        </li>
+                                                        <%end%>
+                                                        <%end%>
+
+                                                        <li>
+                                                            <div class="box-input-file"><input class="upload" type="file"><i class="fa fa-plus"></i></div>
+                                                        </li>
+                                                    </ul>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-xl-7">
-                                            <form class="needs-validation add-product-form" novalidate="">
-                                                <div class="form">
-                                                    <div class="form-group mb-3 row">
-                                                        <label for="validationCustom01" class="col-xl-3 col-sm-4 mb-0">Title :</label>
-                                                        <input class="form-control col-xl-8 col-sm-7" id="validationCustom01" type="text" required="">
-                                                        <div class="valid-feedback">Looks good!</div>
-                                                    </div>
-                                                    <div class="form-group mb-3 row">
-                                                        <label for="validationCustom02" class="col-xl-3 col-sm-4 mb-0">Price :</label>
-                                                        <input class="form-control col-xl-8 col-sm-7" id="validationCustom02" type="text" required="">
-                                                        <div class="valid-feedback">Looks good!</div>
-                                                    </div>
-                                                    <div class="form-group mb-3 row">
-                                                        <label for="validationCustomUsername" class="col-xl-3 col-sm-4 mb-0">Product Code :</label>
-                                                        <input class="form-control col-xl-8 col-sm-7" id="validationCustomUsername" type="text" required="">
-                                                        <div class="invalid-feedback offset-sm-4 offset-xl-3">Please choose Valid Code.</div>
-                                                    </div>
+                                    </div>
+                                    <div class="col-xl-7">
+                                        <%
+=begin%>
+ <form class="needs-validation add-product-form" novalidate=""> 
+<%
+=end%>
+                                        <%= form_for setup_product(@product) , url: "/products/#{@product.id}", method: :patch do |form| %>
+                                            <div class="form">
+                                                <div class="form-group mb-3 row">
+                                                    <label for="validationCustom01" class="col-xl-3 col-sm-4 mb-0">Select Category:</label>
+                                                    <%= form.select(:category_id, options_for_select(@categories), {} , {class: "form-control col-xl-8 col-sm-7", prompt: "Select a category", required: true} ) %>
                                                 </div>
-                                                <div class="form">
-                                                    <div class="form-group row">
-                                                        <label for="exampleFormControlSelect1" class="col-xl-3 col-sm-4 mb-0">Select Size :</label>
-                                                        <select class="form-control digits col-xl-8 col-sm-7" id="exampleFormControlSelect1">
-                                                            <option>Small</option>
-                                                            <option>Medium</option>
-                                                            <option>Large</option>
-                                                            <option>Extra Large</option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <label class="col-xl-3 col-sm-4 mb-0">Total Products :</label>
-                                                        <fieldset class="qty-box col-xl-9 col-xl-8 col-sm-7 pl-0">
-                                                            <div class="input-group">
-                                                                <input class="touchspin" type="text" value="1">
-                                                            </div>
-                                                        </fieldset>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <label class="col-xl-3 col-sm-4">Add Description :</label>
-                                                        <div class="col-xl-8 col-sm-7 pl-0 description-sm">
-                                                            <textarea id="editor1" name="editor1" cols="10" rows="4"></textarea>
+                                                <div class="form-group mb-3 row">
+                                                    <label for="validationCustom02" class="col-xl-3 col-sm-4 mb-0">Price :</label>
+                                                    <%=form.text_field :price, class: "form-control col-xl-8 col-sm-7" %>
+                                                    <div class="valid-feedback">Looks good!</div>
+                                                </div>
+                                                <div class="form-group mb-3 row">
+                                                    <label for="validationCustomUsername" class="col-xl-3 col-sm-4 mb-0">Product Code :</label>
+                                                    <%=form.text_field :product_code, class: "form-control col-xl-8 col-sm-7" %>
+                                                    <div class="invalid-feedback offset-sm-4 offset-xl-3">Please choose Valid Code.</div>
+                                                </div>
+                                            </div>
+                                            <div class="form">
+                                                <!--<div class="form-group row">
+                                                    <label for="exampleFormControlSelect1" class="col-xl-3 col-sm-4 mb-0">Select Size :</label>
+                                                    <select class="form-control digits col-xl-8 col-sm-7" id="exampleFormControlSelect1">
+                                                        <option>Small</option>
+                                                        <option>Medium</option>
+                                                        <option>Large</option>
+                                                        <option>Extra Large</option>
+                                                    </select>
+                                                </div>-->
+                                                <div class="form-group row">
+                                                    <label class="col-xl-3 col-sm-4 mb-0">Total Products :</label>
+                                                    <fieldset class="qty-box col-xl-9 col-xl-8 col-sm-7 pl-0">
+                                                        <div class="input-group">
+                                                            
+                                                            <%= form.text_field :product_quantity, class: "touchspin"%>
                                                         </div>
+                                                    </fieldset>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-xl-3 col-sm-4">Add Description :</label>
+                                                    <div class="col-xl-8 col-sm-7 pl-0 description-sm">
+                                               
+                                                        
+                                                         <textarea id="editor1" name="product[product_description]" cols="10" rows="4" value="<%= @product.product_description %>"></textarea>
                                                     </div>
                                                 </div>
-                                                <div class="offset-xl-3 offset-sm-4">
-                                                    <button type="submit" class="btn btn-primary">Add</button>
-                                                    <button type="button" class="btn btn-light">Discard</button>
-                                                </div>
-                                            </form>
-                                        </div>
+                                            </div>
+                                            <div class="offset-xl-3 offset-sm-4">
+                                                <%= form.submit "Add", class: "btn btn-primary" %>
+                                                <button type="button" class="btn btn-light">Discard</button>
+                                            </div>
+                                        <%end%>
+                                        <%
+=begin%>
+ </form> 
+<%
+=end%>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- Container-fluid Ends-->
-
             </div>
+            <!-- Container-fluid Ends-->
 
-            <!-- footer start-->
-            <%= render 'layouts/admin_footer' %>
-            <!-- footer end-->
         </div>
 
+        <!-- footer start-->
+        <%= render 'layouts/admin_footer' %>
+        <!-- footer end-->
     </div>
 
-    <!-- latest jquery-->
-    <script src="../../resources/js/jquery-3.3.1.min.js"></script>
+</div>
 
-    <!-- Bootstrap js-->
-    <script src="../../resources/js/popper.min.js"></script>
-    <script src="../../resources/js/bootstrap.js"></script>
+<!-- latest jquery-->
+<%= javascript_include_tag 'js/jquery-3.3.1.min.js' %>
 
-    <!-- feather icon js-->
-    <script src="../../resources/js/icons/feather-icon/feather.min.js"></script>
-    <script src="../../resources/js/icons/feather-icon/feather-icon.js"></script>
+<!-- Bootstrap js-->
+<%= javascript_include_tag 'js/popper.min.js' %>
+<%= javascript_include_tag 'js/bootstrap.js' %>
 
-    <!-- Sidebar jquery-->
-    <script src="../../resources/js/sidebar-menu.js"></script>
+<!-- feather icon js-->
+<%= javascript_include_tag 'js/icons/feather-icon/feather.min.js' %>
+<%= javascript_include_tag 'js/icons/feather-icon/feather-icon.js' %>
 
-    <!-- touchspin js-->
-    <script src="../../resources/js/touchspin/vendors.min.js"></script>
-    <script src="../../resources/js/touchspin/touchspin.js"></script>
-    <script src="../../resources/js/touchspin/input-groups.min.js"></script>
+<!-- Sidebar jquery-->
+<%= javascript_include_tag 'js/sidebar-menu' %>
 
-    <!-- form validation js-->
-    <script src="../../resources/js/dashboard/form-validation-custom.js"></script>
+<!-- touchspin js -->
+<%= javascript_include_tag 'js/touchspin/vendors.min.js' %>
+<%= javascript_include_tag 'js/touchspin/touchspin.js' %>
+<%= javascript_include_tag 'js/touchspin/input-groups.min.js' %>
 
-    <!-- ckeditor js-->
-    <script src="../../resources/js/editor/ckeditor/ckeditor.js"></script>
-    <script src="../../resources/js/editor/ckeditor/styles.js"></script>
-    <script src="../../resources/js/editor/ckeditor/adapters/jquery.js"></script>
-    <script src="../../resources/js/editor/ckeditor/ckeditor.custom.js"></script>
+<!-- form validation js-->
+<%= javascript_include_tag 'js/dashboard/form-validation-custom.js' %>
 
-    <!-- Zoom js-->
-    <script src="../../resources/js/jquery.elevatezoom.js"></script>
-    <script src="../../resources/js/zoom-scripts.js"></script>
+<!-- ckeditor js-->
+<script src="../../resources/js/editor/ckeditor/ckeditor.js"></script>
+<%= javascript_include_tag 'js/editor/ckeditor/styles.js' %>
+<%= javascript_include_tag 'js/editor/ckeditor/adapters/jquery.js' %>
+<%= javascript_include_tag 'js/editor/ckeditor/ckeditor.custom.js' %>
 
-    <!--Customizer admin-->
-    <script src="../../resources/js/admin-customizer.js"></script>
+<!-- Zoom js-->
+<%= javascript_include_tag 'js/jquery.elevatezoom.js' %>
+<%= javascript_include_tag 'js/zoom-scripts.js' %>
 
-    <!-- lazyload js-->
-    <script src="../../resources/js/lazysizes.min.js"></script>
+<!--Customizer admin-->
+<%= javascript_include_tag 'js/admin-customizer.js' %>
 
-    <!--right sidebar js-->
-    <script src="../../resources/js/chat-menu.js"></script>
+<!-- lazyload js-->
+<%= javascript_include_tag 'js/lazysizes.min.js' %>
 
-    <!--script admin-->
-    <script src="../../resources/js/admin-script.js"></script>
+<!--right sidebar js-->
+<%= javascript_include_tag 'js/chat-menu.js' %>
 
-    <!-- this pages js -->
-    <script>
-        $(document).ready(function(){
-            $("#side_gallery img").on("click", function () {
-                var data_id = $(this).attr('data-id');
-                var product_id = <%= @product.id %>
+<!--script admin-->
+<%= javascript_include_tag 'js/admin-script' %>
+
+<!-- this pages js -->
+<script>
+    $(document).ready(function() {
+        $("#side_gallery img").on("click", function() {
+            var data_id = $(this).attr('data-id');
+            var product_id = < %= @product.id % >
                 console.log(product_id);
-                // $("#big_image").attr("src", "<%# url_for(@product.images[data_id])%>")
-                $.ajax({
-                    method: "GET", 
-                    url: "/change_image",
-                    dataType: 'script',
-                    format: "js",
-                    data: { data_id: data_id, product_id: product_id }
-                })
-                // alert("The data-id of clicked item is: " + data_id)
-            });
-            var data_id = $
+            // $("#big_image").attr("src", "<%# url_for(@product.images[data_id])%>")
+            $.ajax({
+                method: "GET",
+                url: "/change_image",
+                dataType: 'script',
+                format: "js",
+                data: {
+                    data_id: data_id,
+                    product_id: product_id
+                }
+            })``
+            // alert("The data-id of clicked item is: " + data_id)
         });
-        function setBigImage() {
-            
-        }
-    
-    </script>
-    <style>
-        .box-input-file {
-            width: 50px;
-            height: 50px;
-            background-color: #f1f4fb;
-            position: relative;
-            display: -webkit-box;
-            display: -ms-flexbox;
-            display: flex;
-            -webkit-box-align: center;
-                
-                    align-items: center;
-            -webkit-box-pack: center;
-                
-                    justify-content: center;
-            vertical-align: middle; }
-        }
-    </style>
+        var data_id = $
+    });
 
-</body>
+    function setBigImage() {
 
-</html>
+    }
+</script>
+<style>
+    .box-input-file {
+        width: 50px;
+        height: 50px;
+        background-color: #f1f4fb;
+        position: relative;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+
+        align-items: center;
+        -webkit-box-pack: center;
+
+        justify-content: center;
+        vertical-align: middle;
+    }
+    }
+</style>
