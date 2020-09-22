@@ -1,4 +1,3 @@
-
 <div class="page-main-header">
     <div class="main-header-right row">
         <div class="main-header-left d-lg-none">
@@ -58,12 +57,6 @@
                             <i data-feather="log-out"></i>Logout
                             <% end %>
                         </li>
-                    </ul>
-                </li>
-                <li class="onhover-div mobile-cart">
-                    <div><img src="../resources/images/icon/cart.png" class="img-fluid blur-up lazyload" alt=""><span class="badge badge-pill badge-primary pull-right" style="margin-left: 2px;"><%= current_cart.items_count %></span></div>
-                    <ul class="show-div shopping-cart" id="cart" style="padding: 30px;">
-                        <%= render "order_items/cart" %>
                     </ul>
                 </li>
             </ul>

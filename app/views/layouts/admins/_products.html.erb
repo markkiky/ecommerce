@@ -1,0 +1,17 @@
+ <%= select_tag :products, options_for_select(@products), :prompt => "Select Products", :class => "form-control digits col-xl-8 col-sm-7" %>
+<script>
+$('#products').on("change", function (e) {
+    alert("CHANGES");
+    $.ajax({
+                    method: "GET", 
+                    url: "/get_price",
+                    dataType: 'script',
+                    format: "js",
+                    data: {
+                        product_id: $( "#products").val()
+                    }
+                })
+    
+})
+
+</script>

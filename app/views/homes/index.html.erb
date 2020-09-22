@@ -66,42 +66,7 @@
 
 
 <!-- collection banner -->
-<section class="pb-0 ratio2_1">
-    <div class="container">
-        <div class="row partition2">
-            <div class="col-md-6">
-                <a href="#">
-                    <div class="collection-banner p-right text-center">
-                        <div class="img-part">
-                            <img src="../resources/images/sub-banner1.jpg" class="img-fluid blur-up lazyload bg-img" alt="">
-                        </div>
-                        <div class="contain-banner">
-                            <div>
-                                <h4>save 30%</h4>
-                                <h2>men</h2>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-md-6">
-                <a href="#">
-                    <div class="collection-banner p-right text-center">
-                        <div class="img-part">
-                            <img src="../resources/images/sub-banner2.jpg" class="img-fluid blur-up lazyload bg-img" alt="">
-                        </div>
-                        <div class="contain-banner">
-                            <div>
-                                <h4>save 60%</h4>
-                                <h2>women</h2>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </div>
-</section>
+
 <!-- collection banner end -->
 
 
@@ -110,16 +75,7 @@
     <h4>special offer</h4>
     <h2 class="title-inner1">top products</h2>
 </div>
-<div class="container">
-    <div class="row">
-        <div class="col-lg-6 offset-lg-3">
-            <div class="product-para">
-                <p class="text-center">Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                    Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,</p>
-            </div>
-        </div>
-    </div>
-</div>
+
 <!-- Paragraph end -->
 
 
@@ -176,11 +132,19 @@
                             <!--<div class="lable-block"><span class="lable3">new</span> <span class="lable4">on
                                     sale</span></div>-->
                             <div class="front">
+                                <% if product.images.attached? %>
                                 <a href="/products/ <%= product.id %>">
                                     <%= image_tag (product.images[0] if product.images.length > 0) , :class => "img-fluid blur-up lazyload bg-img" %></a>
+                                <%else%>
+                                <a href="/products/ <%= product.id %>"><%= image_tag "default_profile", :class => "img-fluid blur-up lazyload bg-img" %></a>
+                                <%end%>
                             </div>
                             <div class="back">
+                                <% if product.images.attached? %>
                                 <a href="/products/ <%= product.id %>"><%= image_tag (product.images[1] if product.images.length > 0) , :class => "img-fluid blur-up lazyload bg-img" %></a>
+                                <%else%>
+                                <a href="/products/ <%= product.id %>"><%= image_tag "default_profile", :class => "img-fluid blur-up lazyload bg-img" %></a>
+                                <%end%>
                             </div>
                             <div class="cart-info cart-wrap">
                                 <%= form_tag order_items_path, remote: true do %>
@@ -211,10 +175,18 @@
                     <div class="product-box">
                         <div class="img-wrapper">
                             <div class="front">
+                                <%if product.images.attached? %>
                                 <a href="/products/ <%= product.id %>"><%= image_tag (product.images[0] if product.images.length > 0) , :class => "img-fluid blur-up lazyload bg-img" %></a>
+                                <%else%>
+                                <a href="/products/ <%= product.id %>"><%= image_tag "default_profile", :class => "img-fluid blur-up lazyload bg-img" %></a>
+                                <%end%>
                             </div>
                             <div class="back">
+                                <%if product.images.attached? %>
                                 <a href="/products/ <%= product.id %>"><%= image_tag (product.images[1] if product.images.length > 0) , :class => "img-fluid blur-up lazyload bg-img" %></a>
+                                <%else%>
+                                <a href="/products/ <%= product.id %>"><%= image_tag "default_profile", :class => "img-fluid blur-up lazyload bg-img" %></a>
+                                <%end%>
                             </div>
                             <div class="cart-info cart-wrap">
                                 <%= form_tag order_items_path, remote: true do %>
@@ -243,10 +215,18 @@
                     <div class="product-box">
                         <div class="img-wrapper">
                             <div class="front">
+                                <% if product.images.attached? %>
                                 <a href="/products/ <%= product.id %>"><%= image_tag (product.images[0] if product.images.length > 0) , :class => "img-fluid blur-up lazyload bg-img" %></a>
+                                <%else%>
+                                <a href="/products/ <%= product.id %>"><%= image_tag "default_profile", :class => "img-fluid blur-up lazyload bg-img" %></a>
+                                <%end%>
                             </div>
                             <div class="back">
+                                <% if product.images.attached? %>
                                 <a href="/products/ <%= product.id %>"><%= image_tag (product.images[1] if product.images.length > 0) , :class => "img-fluid blur-up lazyload bg-img" %></a>
+                                <%else%>
+                                <a href="/products/ <%= product.id %>"><%= image_tag "default_profile", :class => "img-fluid blur-up lazyload bg-img" %></a>
+                                <%end%>
                             </div>
                         </div>
                         <div class="cart-info cart-wrap">
@@ -275,10 +255,18 @@
                     <div class="product-box">
                         <div class="img-wrapper">
                             <div class="front">
+                                <% if product.images.attached? %>
                                 <a href="/products/ <%= product.id %>"><%= image_tag (product.images[0] if product.images.length > 0) , :class => "img-fluid blur-up lazyload bg-img" %></a>
+                                <%else%>
+                                <a href="/products/ <%= product.id %>"><%= image_tag "default_profile", :class => "img-fluid blur-up lazyload bg-img" %></a>
+                                <%end%>
                             </div>
                             <div class="back">
+                                <% if product.images.attached? %>
                                 <a href="/products/ <%= product.id %>"><%= image_tag (product.images[1] if product.images.length > 0) , :class => "img-fluid blur-up lazyload bg-img" %></a>
+                                <%else%>
+                                <a href="/products/ <%= product.id %>"><%= image_tag "default_profile", :class => "img-fluid blur-up lazyload bg-img" %></a>
+                                <%end%>
                             </div>
                             <div class="cart-info cart-wrap">
                                 <%= form_tag order_items_path, remote: true do %>
@@ -353,10 +341,18 @@
                                 <div class="product-box">
                                     <div class="img-wrapper">
                                         <div class="front">
+                                            <% if product.images.attached? %>
                                             <a href="/products/<%= product.id %>"><%= image_tag (product.images[0] if product.images.length > 0) , :class => "img-fluid blur-up lazyload bg-img" %></a>
+                                            <%else%>
+                                            <a href="/products/ <%= product.id %>"><%= image_tag "default_profile", :class => "img-fluid blur-up lazyload bg-img" %></a>
+                                            <%end%>
                                         </div>
                                         <div class="back">
+                                            <% if product.images.attached? %>
                                             <a href="/products/<%= product.id %>"><%= image_tag (product.images[1] if product.images.length > 0) , :class => "img-fluid blur-up lazyload bg-img" %></a>
+                                            <%else%>
+                                            <a href="/products/ <%= product.id %>"><%= image_tag "default_profile", :class => "img-fluid blur-up lazyload bg-img" %></a>
+                                            <%end%>
                                         </div>
                                         <div class="cart-info cart-wrap">
                                             <%= form_tag order_items_path, remote: true do %>
@@ -390,10 +386,18 @@
                                     <div class="img-wrapper">
                                         <div class="lable-block"></div>
                                         <div class="front">
+                                            <% if product.images.attached? %>
                                             <a href="/products/<%= product.id %>"><%= image_tag (product.images[0] if product.images.length > 0) , :class => "img-fluid blur-up lazyload bg-img" %></a>
+                                            <%else%>
+                                            <a href="/products/ <%= product.id %>"><%= image_tag "default_profile", :class => "img-fluid blur-up lazyload bg-img" %></a>
+                                            <%end%>
                                         </div>
                                         <div class="back">
+                                            <% if product.images.attached? %>
                                             <a href="/products/<%= product.id %>"><%= image_tag (product.images[1] if product.images.length > 0) , :class => "img-fluid blur-up lazyload bg-img" %></a>
+                                            <%else%>
+                                            <a href="/products/ <%= product.id %>"><%= image_tag "default_profile", :class => "img-fluid blur-up lazyload bg-img" %></a>
+                                            <%end%>
                                         </div>
                                         <div class="cart-info cart-wrap">
                                             <%= form_tag order_items_path, remote: true do %>
@@ -427,10 +431,18 @@
                                     <div class="img-wrapper">
                                         <div class="lable-block"></div>
                                         <div class="front">
+                                            <%if product.images.attached? %>
                                             <a href="/products/<%= product.id %>"><%= image_tag (product.images[0] if product.images.length > 0) , :class => "img-fluid blur-up lazyload bg-img" %></a>
+                                            <%else%>
+                                            <a href="/products/ <%= product.id %>"><%= image_tag "default_profile", :class => "img-fluid blur-up lazyload bg-img" %></a>
+                                            <%end%>
                                         </div>
                                         <div class="back">
+                                            <% if product.images.attached? %>
                                             <a href="/products/<%= product.id %>"><%= image_tag (product.images[1] if product.images.length > 0) , :class => "img-fluid blur-up lazyload bg-img" %></a>
+                                            <%else%>
+                                            <a href="/products/ <%= product.id %>"><%= image_tag "default_profile", :class => "img-fluid blur-up lazyload bg-img" %></a>
+                                            <%end%>
                                         </div>
                                         <div class="cart-info cart-wrap">
                                             <%= form_tag order_items_path, remote: true do %>
@@ -526,80 +538,7 @@
 
 
 <!-- instagram section -->
-<section class="instagram ratio_square">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12 p-0">
-                <h2 class="title-borderless"># instagram</h2>
-                <div class="slide-7 no-arrow slick-instagram">
-                    <div>
-                        <a href="#">
-                            <div class="instagram-box"> <img src="../resources/images/slider/2.jpg" class="bg-img" alt="Avatar" style="width:100%">
-                                <div class="overlay"><i class="fa fa-instagram" aria-hidden="true"></i></div>
-                            </div>
-                        </a>
-                    </div>
-                    <div>
-                        <a href="#">
-                            <div class="instagram-box"> <img src="../resources/images/slider/3.jpg" class="bg-img" alt="Avatar" style="width:100%">
-                                <div class="overlay"><i class="fa fa-instagram" aria-hidden="true"></i></div>
-                            </div>
-                        </a>
-                    </div>
-                    <div>
-                        <a href="#">
-                            <div class="instagram-box"> <img src="../resources/images/slider/4.jpg" class="bg-img" alt="Avatar" style="width:100%">
-                                <div class="overlay"><i class="fa fa-instagram" aria-hidden="true"></i></div>
-                            </div>
-                        </a>
-                    </div>
-                    <div>
-                        <a href="#">
-                            <div class="instagram-box"> <img src="../resources/images/slider/9.jpg" class="bg-img" alt="Avatar" style="width:100%">
-                                <div class="overlay"><i class="fa fa-instagram" aria-hidden="true"></i></div>
-                            </div>
-                        </a>
-                    </div>
-                    <div>
-                        <a href="#">
-                            <div class="instagram-box"> <img src="../resources/images/slider/6.jpg" class="bg-img" alt="Avatar" style="width:100%">
-                                <div class="overlay"><i class="fa fa-instagram" aria-hidden="true"></i></div>
-                            </div>
-                        </a>
-                    </div>
-                    <div>
-                        <a href="#">
-                            <div class="instagram-box"> <img src="../resources/images/slider/7.jpg" class="bg-img" alt="Avatar" style="width:100%">
-                                <div class="overlay"><i class="fa fa-instagram" aria-hidden="true"></i></div>
-                            </div>
-                        </a>
-                    </div>
-                    <div>
-                        <a href="#">
-                            <div class="instagram-box"> <img src="../resources/images/slider/8.jpg" class="bg-img" alt="Avatar" style="width:100%">
-                                <div class="overlay"><i class="fa fa-instagram" aria-hidden="true"></i></div>
-                            </div>
-                        </a>
-                    </div>
-                    <div>
-                        <a href="#">
-                            <div class="instagram-box"> <img src="../resources/images/slider/9.jpg" class="bg-img" alt="Avatar" style="width:100%">
-                                <div class="overlay"><i class="fa fa-instagram" aria-hidden="true"></i></div>
-                            </div>
-                        </a>
-                    </div>
-                    <div>
-                        <a href="#">
-                            <div class="instagram-box"> <img src="../resources/images/slider/2.jpg" class="bg-img" alt="Avatar" style="width:100%">
-                                <div class="overlay"><i class="fa fa-instagram" aria-hidden="true"></i></div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+
 <!-- instagram section end -->
 
 

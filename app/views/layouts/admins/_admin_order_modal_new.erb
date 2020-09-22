@@ -1,0 +1,64 @@
+<div class="modal fade" id="categoryModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <%= form_for(@order) do |form| %>
+            <div class="modal-header">
+                <h5 class="modal-title f-w-600" id="exampleModalLabel">Create Order</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+            </div>
+            <div class="modal-body">
+                <!--<form class="needs-validation">-->
+
+                <div class="form">
+                    <div class="form-group">
+                        <label>Select Category</label>
+                        <%= select_tag :category_id, options_for_select(@categories), :prompt => "Select Category", :class => "form-control digits col-xl-8 col-sm-7" %>
+                    </div>
+                    <div class="form-group products">
+                        <label>Select Product</label>
+                        <%= select_tag :products, raw("<option>Select Product</option>"), :class => "form-control digits col-xl-8 col-sm-7" %>
+                    </div>
+                    <div class="form-group price">
+                        <%= number_field_tag :price %>
+                    </div>
+                     <div class="qty-box">
+                        <label>Add Quantity</label>
+                         <%= number_field_tag :quantity, 1, min: 1%>
+                    </div>
+                 
+                    <!--<button class="mt-2 btn btn-warning d-none" id="add_color">+</button>-->
+
+                </div>
+
+                <!--</form>-->
+
+            </div>
+            <div class="modal-footer">
+                <%= form.submit "Save", :class => "btn btn-primary"  %>
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Close</button>
+            </div>
+
+            <%end%>
+
+        </div>
+    </div>
+</div>
+<script>
+$('#category_id').on("change", function (e) {
+    
+         $.ajax({
+                    method: "GET", 
+                    url: "/order_product",
+                    dataType: 'script',
+                    format: "js",
+                    data: {
+                        category_id: $( "#category_id").val()
+                    }
+                })
+    
+    
+})
+
+
+   
+</script>

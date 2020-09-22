@@ -81,34 +81,22 @@
                                             <li class="bg-light1"></li>
                                             <li class="bg-light2"></li>
                                         </ul>-->
-                                    <br>
-                                    <%= form_tag order_items_path, remote: true do %>
-                                    <%= hidden_field_tag :product_id, @products.ids %>
-                                    <div class="qty-box">
-                                        <%= number_field_tag :quantity, 1, min: 1, :class => "form-control input-number" %>
-                                    </div>
-                                    <br>
-                                    <div class="product-buttons">
-                                        <%= button_to order_items_path(:product_id => @products.ids), { :class => "btn btn-primary", 'data-toggle' => 'modal', 'data-target' => '#addtocart', remote: true  } do %> add to cart <% end %>
-                                    </div>
-                                    <% end %>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <% end %>
                 </div>
-                <% end %>
             </div>
+            <!-- Container-fluid Ends-->
+
         </div>
-        <!-- Container-fluid Ends-->
+
+        <!-- footer start-->
+        <%= render 'layouts/admin_footer' %>
+        <!-- footer end-->
 
     </div>
-
-    <!-- footer start-->
-    <%= render 'layouts/admin_footer' %>
-    <!-- footer end-->
-
-</div>
 
 </div>
 
