@@ -69,6 +69,7 @@ Rails.application.routes.draw do
   get '/admin_order', to: 'orders#admin_order', as: :admin_order
   get "/order_product", to: "orders#order_product"
   get "/get_price", to: "orders#get_price"
+  post '/admin/place_order', to: "orders#create_admin_order", as: :admin_place_order
 
 
 

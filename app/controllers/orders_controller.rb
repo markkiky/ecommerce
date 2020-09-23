@@ -8,7 +8,7 @@ class OrdersController < ApplicationController
   before_action :authenticate_customer!, only: [:new, :create]
 
   def index
-    @orders = Order.all
+    @orders = Order.where.not(:order_status => "cart")
     # @orders.sort_by { |order| [order.order_number, order.order_date] }
     # @orders.sort
   end
@@ -18,6 +18,7 @@ class OrdersController < ApplicationController
     @customer = current_customer
   end
 
+  # GET /admin_order
   def admin_order
     @order = Order.new
     @categories = Category.all.map{ |c| [c.category_name, c.id] }
@@ -26,8 +27,8 @@ class OrdersController < ApplicationController
     end
   end 
 
+  # GET /order_product
   def order_product
-
     @products = Product.where(:category_id => params[:category_id]).map{ |p| [p.product_name, p.id] }
     respond_to do |format|
       format.js
@@ -39,6 +40,24 @@ class OrdersController < ApplicationController
     product_id = params[:product_id]
     @product = Product.find(product_id)
     @price = @product.price
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  # Submits admin order into orders
+  # POST /admin_order
+  def create_admin_order
+    puts params
+    @order = Order.new(:order_number => Order.counter, :order_date => Time.now, :order_status => "pending_payment")
+
+    @order.save
+
+    @order_id = @order.order_id
+    @order_date = @order.order_date
+    @order_total = @order.order_subtotal
+    @payment_method = @order.payment_method
+    @order_status = @order.order_status
     respond_to do |format|
       format.js
     end
@@ -92,6 +111,8 @@ class OrdersController < ApplicationController
      
   end
 
+  
+
   def show
   end
 
@@ -111,6 +132,53 @@ class OrdersController < ApplicationController
   end 
   def destroy
     @order.destroy   
+  end
+
+
+  def send_push
+    require "uri"
+    require "net/http"
+
+    url = URI("https://payme.revenuesure.co.ke/index.php")
+
+    https = Net::HTTP.new(url.host, url.port);
+    https.use_ssl = true
+
+    request = Net::HTTP::Post.new(url)
+    form_data = [['function', 'CustomerPayBillOnlinePush'],['PayBillNumber', '367776'],['Amount', '1'],['PhoneNumber', '0719401837'],['AccountReference', 'MS2006TEST3'],['TransactionDesc', 'MS2006TEST3'],['FullNames', '- - -']]
+    request.set_form form_data, 'multipart/form-data'
+    response = https.request(request)
+    puts response.read_body
+
+  end
+
+  def check_payment
+
+
+  end
+
+  # GET All MPESA Transactions for a particular paybill with date
+  # POST /get_transactions
+  def get_transactions
+
+  end
+
+
+  def search_transactions
+    require "uri"
+    require "net/http"
+
+    url = URI("https://payme.revenuesure.co.ke/api/index.php")
+
+    https = Net::HTTP.new(url.host, url.port);
+    https.use_ssl = true
+
+    request = Net::HTTP::Post.new(url)
+    form_data = [['function', 'searchTransactions'],['keyword', 'NGI1CRTJVX'],['', '']]
+    request.set_form form_data, 'multipart/form-data'
+    response = https.request(request)
+    puts response.read_body
+
   end
   
   def send_push
