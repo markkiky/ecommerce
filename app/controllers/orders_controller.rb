@@ -135,22 +135,28 @@ class OrdersController < ApplicationController
   end
 
 
-  # def send_push
-  #   require "uri"
-  #   require "net/http"
+  def send_push
+    phone = params[:phone]
+    order_id = params[:id]
+    @order = Order.find(order_id)
+    
 
-  #   url = URI("https://payme.revenuesure.co.ke/index.php")
+    url = URI("https://payme.revenuesure.co.ke/index.php")
 
-  #   https = Net::HTTP.new(url.host, url.port);
-  #   https.use_ssl = true
+    https = Net::HTTP.new(url.host, url.port);
+    https.use_ssl = true
 
-  #   request = Net::HTTP::Post.new(url)
-  #   form_data = [['function', 'CustomerPayBillOnlinePush'],['PayBillNumber', '367776'],['Amount', '1'],['PhoneNumber', '0719401837'],['AccountReference', 'MS2006TEST3'],['TransactionDesc', 'MS2006TEST3'],['FullNames', '- - -']]
-  #   request.set_form form_data, 'multipart/form-data'
-  #   response = https.request(request)
-  #   puts response.read_body
+    request = Net::HTTP::Post.new(url)
+    form_data = [['function', 'CustomerPayBillOnlinePush'],['PayBillNumber', '367776'],['Amount', @order.order_subtotal.to_s],['PhoneNumber', phone],['AccountReference', @order.order_number],['TransactionDesc', @order.order_number],['FullNames', '- - -']]
+    request.set_form form_data, 'multipart/form-data'
+    response = https.request(request)
+    puts response.read_body
 
-  # end
+    respond_to do |format|
+      format.js
+    end
+
+  end
 
   # def check_payment
 
@@ -181,105 +187,105 @@ class OrdersController < ApplicationController
 
   end
   
-  def send_push
-    @order = Order.find(params[:id])
-    @id = params[:id]
-    require "uri"
-    require "net/http"
+  # def send_push
+  #   @order = Order.find(params[:id])
+  #   @id = params[:id]
+  #   require "uri"
+  #   require "net/http"
 
-    url = URI("https://payme.revenuesure.co.ke/api/index.php")
+  #   url = URI("https://payme.revenuesure.co.ke/api/index.php")
 
-    https = Net::HTTP.new(url.host, url.port);
-    https.use_ssl = true
+  #   https = Net::HTTP.new(url.host, url.port);
+  #   https.use_ssl = true
 
-    request = Net::HTTP::Post.new(url)
-    form_data = [['function', 'searchTransactions'],['keyword', @order.order_number],['', '']]
-    request.set_form form_data, 'multipart/form-data'
-    response = https.request(request)
-    puts response.read_body
+  #   request = Net::HTTP::Post.new(url)
+  #   form_data = [['function', 'searchTransactions'],['keyword', @order.order_number],['', '']]
+  #   request.set_form form_data, 'multipart/form-data'
+  #   response = https.request(request)
+  #   puts response.read_body
 
-    response_json = JSON.parse(response.read_body)
+  #   response_json = JSON.parse(response.read_body)
 
-    if response_json['success'] != true
+  #   if response_json['success'] != true
 
-      # @order.order_number = "shoesX"
-      @customer = Customer.find(@order.customer_id)
-      url = URI("https://payme.revenuesure.co.ke/index.php")
-      https = Net::HTTP.new(url.host, url.port);
-      https.use_ssl = true
-      request = Net::HTTP::Post.new(url)
-      form_data = [['TransactionType', 'CustomerPayBillOnline'],['PayBillNumber', '367776'],['Amount', @order.order_subtotal.to_i.to_s],['PhoneNumber', @customer.phone],['AccountReference', @order.order_number],['TransactionDesc', @order.order_number],['FullNames', '- - -']]
-      request.set_form form_data, 'multipart/form-data'
-      response = https.request(request)
-      puts response.read_body
-      response_json = JSON.parse(response.body)
+  #     # @order.order_number = "shoesX"
+  #     @customer = Customer.find(@order.customer_id)
+  #     url = URI("https://payme.revenuesure.co.ke/index.php")
+  #     https = Net::HTTP.new(url.host, url.port);
+  #     https.use_ssl = true
+  #     request = Net::HTTP::Post.new(url)
+  #     form_data = [['TransactionType', 'CustomerPayBillOnline'],['PayBillNumber', '367776'],['Amount', @order.order_subtotal.to_i.to_s],['PhoneNumber', @customer.phone],['AccountReference', @order.order_number],['TransactionDesc', @order.order_number],['FullNames', '- - -']]
+  #     request.set_form form_data, 'multipart/form-data'
+  #     response = https.request(request)
+  #     puts response.read_body
+  #     response_json = JSON.parse(response.body)
 
-      # @response = response_json['ResponseDescription']
-      @response = "Push Sent"
+  #     # @response = response_json['ResponseDescription']
+  #     @response = "Push Sent"
 
-    else 
-      @response = "Already Paid"
-      # Save it to db
-      if Order.where(:order_number => response_json['data'][0]['TransactionDesc']).exists?
-        order = Order.where(:order_number => response_json['data'][0]['TransactionDesc']).last
-        callback_params = {
-          'transaction_id' => response_json['data'][0]['account_to'], 
-          'account_from' => response_json['data'][0]['account_from'], 
-          'transaction_code' => response_json['data'][0]['transaction_code'],
-          'amount' => response_json['data'][0]['amount'], 
-          'order_id' => order.id,
-          'message' => response_json['data'][0]['TransactionDesc'],
-          'callback_returned' => response_json['data'][0]['names'],
-          'date' => response_json['data'][0]['date'],
-          'payment_mode' => response_json['data'][0]['payment_mode']
-        }
-        amount = response_json['data'][0]['amount']
-        amount = amount.to_i
-      @transaction = Transaction.new(callback_params)
-      order.payment_date = Date.today()
-      order.transaction_id = @transaction.id
+  #   else 
+  #     @response = "Already Paid"
+  #     # Save it to db
+  #     if Order.where(:order_number => response_json['data'][0]['TransactionDesc']).exists?
+  #       order = Order.where(:order_number => response_json['data'][0]['TransactionDesc']).last
+  #       callback_params = {
+  #         'transaction_id' => response_json['data'][0]['account_to'], 
+  #         'account_from' => response_json['data'][0]['account_from'], 
+  #         'transaction_code' => response_json['data'][0]['transaction_code'],
+  #         'amount' => response_json['data'][0]['amount'], 
+  #         'order_id' => order.id,
+  #         'message' => response_json['data'][0]['TransactionDesc'],
+  #         'callback_returned' => response_json['data'][0]['names'],
+  #         'date' => response_json['data'][0]['date'],
+  #         'payment_mode' => response_json['data'][0]['payment_mode']
+  #       }
+  #       amount = response_json['data'][0]['amount']
+  #       amount = amount.to_i
+  #     @transaction = Transaction.new(callback_params)
+  #     order.payment_date = Date.today()
+  #     order.transaction_id = @transaction.id
   
-      if order.payment_status == "Unpaid"
-        balance = order.order_subtotal - amount
-        # set the balance here in future.
-        order.reducing_balance = balance
-      if balance <= 0
-        order.payment_status = "Paid"
-        order.paid = true
-      elsif balance > 0
-        order.payment_status = 'part'
-      end
-      elsif order.payment_status == "part"
-        balance = order.reducing_balance - amount
-        order.reducing_balance = balance
-      if balance <= 0
-        order.payment_status = "Paid"
-        order.paid = true
-      elsif balance > 0
-        order.payment_status = 'part'
-      end
+  #     if order.payment_status == "Unpaid"
+  #       balance = order.order_subtotal - amount
+  #       # set the balance here in future.
+  #       order.reducing_balance = balance
+  #     if balance <= 0
+  #       order.payment_status = "Paid"
+  #       order.paid = true
+  #     elsif balance > 0
+  #       order.payment_status = 'part'
+  #     end
+  #     elsif order.payment_status == "part"
+  #       balance = order.reducing_balance - amount
+  #       order.reducing_balance = balance
+  #     if balance <= 0
+  #       order.payment_status = "Paid"
+  #       order.paid = true
+  #     elsif balance > 0
+  #       order.payment_status = 'part'
+  #     end
       
-      elsif order.payment_status == "Paid"
-      balance = order.reducing_balance - amount
-      order.reducing_balance = balance
-      end
-      # send order received email 
-      customer_id = order.customer_id.to_i
+  #     elsif order.payment_status == "Paid"
+  #     balance = order.reducing_balance - amount
+  #     order.reducing_balance = balance
+  #     end
+  #     # send order received email 
+  #     customer_id = order.customer_id.to_i
       
-      @customer = Customer.find(customer_id)
-      OrderMailer.with(customer: @customer, transaction: @transaction, order: order).order_payment.deliver_now
-      @transaction.save!
-      order.save!
-    end
-    end
+  #     @customer = Customer.find(customer_id)
+  #     OrderMailer.with(customer: @customer, transaction: @transaction, order: order).order_payment.deliver_now
+  #     @transaction.save!
+  #     order.save!
+  #   end
+  #   end
     
     
 
-    # redirect_to order_success_path
-    # respond_to do |format|
-    #   format.js
-    # end
-  end
+  #   # redirect_to order_success_path
+  #   # respond_to do |format|
+  #   #   format.js
+  #   # end
+  # end
 
   def check_payment
     @order = Order.find(params[:id])

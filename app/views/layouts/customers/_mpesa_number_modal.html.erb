@@ -1,0 +1,52 @@
+<%# stylesheet_link_tag "mpesa_modal" %>
+<!-- Modal -->
+<div class="modal fade" id="mpesaNumberModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+        
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Phone Confirmation</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <%= form_with url: send_push_path, id: 'send_push'  do |f| %>								
+            <div class="col-12 p-5 pb-10">
+    
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Phone Number</label>
+                    
+                    <%= f.number_field :phone, placeholder: "Enter Phone", class: "form-control", required: true, value: @customer.phone  %>
+                    <small id="emailHelp" class="form-text text-muted">We'll never share your phone number with anyone else.</small>
+                </div>
+                
+               
+            </div>
+            
+           
+            <div class="modal-footer justify-content-center">
+                <div class="col-md-12 mb-3 pb-0 dropdown">
+                    <%= submit_tag("Send Push", :class => "m-0 p-3 text-center drop-bottom w-100 mb-24rem mt-3 btn btn-solid text-capitalize blue") %>
+                    
+                </div>
+                
+            </div>
+        <% end %>
+      <div class="modal-body">
+        <div class="col-12">
+        
+        </div>
+      </div>
+      <div class="modal-footer d-none">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+
+
+
+</script>

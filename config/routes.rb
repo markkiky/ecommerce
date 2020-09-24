@@ -21,7 +21,8 @@ Rails.application.routes.draw do
   post 'contact', to: 'homes#create'
 
   get 'payment/:id', to: 'orders#order_payment', as: :order_payment
-  get '/mpesa_push/:id', to: "orders#send_push", as: :send_push
+  post '/mpesa_push/:id', to: "orders#send_push", as: :send_push
+
 
   get "/check_payment/:id", to: "orders#check_payment", as: :check_payment 
   
