@@ -18,7 +18,7 @@
             <div class="col-sm-6">
                 <nav aria-label="breadcrumb" class="theme-breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                        <li class="breadcrumb-item"><a href="<%= root_url %>">Home</a></li>
                         <li class="breadcrumb-item active" aria-current="page">product</li>
                     </ol>
                 </nav>
@@ -82,8 +82,8 @@
                             </ul>
                             <div class="product-description ">
                                 <div class="border-product">
-                                    <h6 class="product-title size-text">select size <span><a href="" data-toggle="modal" data-target="#sizemodal">size chart</a></span></h6>
-                                    <div class="modal fade" id="sizemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <!--<h6 class="product-title size-text">select size <span><a href="" data-toggle="modal" data-target="#sizemodal">size chart</a></span></h6>-->
+                                   <!--<div class="modal fade" id="sizemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-centered" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
@@ -101,7 +101,7 @@
                                             <li><a href="#">l</a></li>
                                             <li><a href="#">xl</a></li>
                                         </ul>
-                                    </div>
+                                    </div>-->
                                     <h6 class="product-title">quantity</h6>
                                     <%= form_tag order_items_path, remote: true do %>
                                     <%= hidden_field_tag :product_id, @product.id %>
@@ -124,11 +124,11 @@
                                 <h6 class="product-title">share it</h6>
                                 <div class="product-icon">
                                     <ul class="product-social">
+                                        <li><%= social_share_button_tag(@product.product_name, :allow_sites => %w(twitter), 'data-twitter-title' => 'Checkout This Product: ') %></li>
                                         <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
                                         <li><a href="#"><i class="fa fa-twitter"></i></a></li>
                                         <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-rss"></i></a></li>
+                                        <li><a><i class="fa fa-whatsapp"></i></a></li>
                                     </ul>
                                     <% if customer_signed_in? %>
                                     <% if @wishlist_exists == true %>
@@ -145,14 +145,14 @@
                                     <% end %>
                                 </div>
                             </div>
-                            <div class="border-product">
+                            <!--<div class="border-product">
                                 <h6 class="product-title">Time Reminder</h6>
                                 <div class="timer">
                                     <p id="demo"><span>25 <span class="padding-l">:</span> <span class="timer-cal">Days</span> </span><span>22 <span class="padding-l">:</span> <span class="timer-cal">Hrs</span>
                                         </span><span>13 <span class="padding-l">:</span> <span class="timer-cal">Min</span> </span><span>57 <span class="timer-cal">Sec</span></span>
                                     </p>
                                 </div>
-                            </div>
+                            </div>-->
                             <div class="single-product-tables border-product detail-section d-none">
                                 <table>
                                     <tbody>
@@ -261,55 +261,24 @@
                 </ul>
                 <div class="tab-content nav-material" id="top-tabContent">
                     <div class="tab-pane fade show active" id="top-home" role="tabpanel" aria-labelledby="top-home-tab">
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
-                            has been the industry's standard dummy text ever since the 1500s, when an unknown
-                            printer took a galley of type and scrambled it to make a type specimen book. It has
-                            survived not only five centuries, but also the leap into electronic typesetting,
-                            remaining essentially unchanged. It was popularised in the 1960s with the release of
-                            Letraset sheets containing Lorem Ipsum passages, and more recently with desktop
-                            publishing software like Aldus PageMaker including versions of Lorem Ipsum. Lorem Ipsum
-                            is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                            industry's standard dummy text ever since the 1500s, when an unknown printer took a
-                            galley of type and scrambled it to make a type specimen book. It has survived not only
-                            five centuries, but also the leap into electronic typesetting, remaining essentially
-                            unchanged. It was popularised in the 1960s with the release of Letraset sheets
-                            containing Lorem Ipsum passages, and more recently with desktop publishing software like
-                            Aldus PageMaker including versions of Lorem Ipsum.</p>
+                        <p><%= @product.product_description%> </p>
                     </div>
                     <div class="tab-pane fade" id="top-profile" role="tabpanel" aria-labelledby="profile-top-tab">
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
-                            has been the industry's standard dummy text ever since the 1500s, when an unknown
-                            printer took a galley of type and scrambled it to make a type specimen book. It has
-                            survived not only five centuries, but also the leap into electronic typesetting,
-                            remaining essentially unchanged. It was popularised in the 1960s with the release of
-                            Letraset sheets containing Lorem Ipsum passages, and more recently with desktop
-                            publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                        <p><%= @product.product_description %></p>
                         <div class="single-product-tables">
                             <table>
                                 <tbody>
                                     <tr>
-                                        <td>Febric</td>
-                                        <td>Chiffon</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Color</td>
-                                        <td>Red</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Material</td>
-                                        <td>Crepe printed</td>
+                                        <td>Scent:</td>
+                                        <td>-</td>
                                     </tr>
                                 </tbody>
                             </table>
                             <table>
                                 <tbody>
                                     <tr>
-                                        <td>Length</td>
-                                        <td>50 Inches</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Size</td>
-                                        <td>S, M, L .XXL</td>
+                                        <td>Color:</td>
+                                        <td>-</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -383,11 +352,11 @@
                             <h6><%= product.product_name %></h6>
                         </a>
                         <h4><%= number_to_currency(product.price, :unit => ' KES ') %></h4>
-                        <ul class="color-variant">
+                       <!--<ul class="color-variant">
                             <li class="bg-light0"></li>
                             <li class="bg-light1"></li>
                             <li class="bg-light2"></li>
-                        </ul>
+                        </ul> -->
                     </div>
                 </div>
             </div>

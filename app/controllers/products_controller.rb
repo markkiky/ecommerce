@@ -28,8 +28,8 @@ end
   def show
     if @product.reviews.blank?
       @average_review = 0
-   else
-      @average_review = @product.reviews.average(:rating).round(2)
+  #  else
+  #     @average_review = @product.reviews.average(:rating).round(2)
    end
     @wishlist_exists = Wishlist.where(product: @product, customer: current_customer) == [] ? false : true
   end
