@@ -7,6 +7,8 @@ class OrdersController < ApplicationController
   before_action :authenticate_admin!, only: [:index, :show]
   before_action :authenticate_customer!, only: [:new, :create]
 
+  after_action :check_payment, only: [:send_push]
+
   def index
     @orders = Order.where.not(:order_status => "cart")
     # @orders.sort_by { |order| [order.order_number, order.order_date] }
@@ -171,9 +173,6 @@ class OrdersController < ApplicationController
 
 
   def search_transactions
-    require "uri"
-    require "net/http"
-
     url = URI("https://payme.revenuesure.co.ke/api/index.php")
 
     https = Net::HTTP.new(url.host, url.port);
@@ -303,6 +302,7 @@ class OrdersController < ApplicationController
 
     response_json = JSON.parse(response.read_body)
     puts response_json['success']
+    byebug
     if response_json['success'] != true
       @response = response_json['message']
     else
