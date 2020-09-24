@@ -15,7 +15,7 @@ document.addEventListener('turbolinks:load', () => {
       {
         connected() {
           // console.log("Connected to mpesa channel");
-          alert("now connected: mpesa_channel: "+ order_id);
+          // alert("now connected: mpesa_channel: "+ order_id);
           // Called when the subscription is ready for use on the server
         },
 
@@ -32,7 +32,7 @@ document.addEventListener('turbolinks:load', () => {
           paybill.append(data.paybill);
           phone.append(data.phone);
           transaction_code.append(data.transaction_code);
-
+          $("#order_success_btn").attr('href', "https://shop.arigiene.com/order_success/"+order_id);
           $("#paymentModal").modal('show');
           // ActionCable.server.broadcast 'mpesa_channel', message: "Bitches be ware"
         },

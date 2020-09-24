@@ -135,27 +135,27 @@ class OrdersController < ApplicationController
   end
 
 
-  def send_push
-    require "uri"
-    require "net/http"
+  # def send_push
+  #   require "uri"
+  #   require "net/http"
 
-    url = URI("https://payme.revenuesure.co.ke/index.php")
+  #   url = URI("https://payme.revenuesure.co.ke/index.php")
 
-    https = Net::HTTP.new(url.host, url.port);
-    https.use_ssl = true
+  #   https = Net::HTTP.new(url.host, url.port);
+  #   https.use_ssl = true
 
-    request = Net::HTTP::Post.new(url)
-    form_data = [['function', 'CustomerPayBillOnlinePush'],['PayBillNumber', '367776'],['Amount', '1'],['PhoneNumber', '0719401837'],['AccountReference', 'MS2006TEST3'],['TransactionDesc', 'MS2006TEST3'],['FullNames', '- - -']]
-    request.set_form form_data, 'multipart/form-data'
-    response = https.request(request)
-    puts response.read_body
+  #   request = Net::HTTP::Post.new(url)
+  #   form_data = [['function', 'CustomerPayBillOnlinePush'],['PayBillNumber', '367776'],['Amount', '1'],['PhoneNumber', '0719401837'],['AccountReference', 'MS2006TEST3'],['TransactionDesc', 'MS2006TEST3'],['FullNames', '- - -']]
+  #   request.set_form form_data, 'multipart/form-data'
+  #   response = https.request(request)
+  #   puts response.read_body
 
-  end
+  # end
 
-  def check_payment
+  # def check_payment
 
 
-  end
+  # end
 
   # GET All MPESA Transactions for a particular paybill with date
   # POST /get_transactions
