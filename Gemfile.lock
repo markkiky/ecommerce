@@ -167,11 +167,12 @@ GEM
       omniauth-oauth (~> 1.1)
       rack
     orm_adapter (0.5.0)
+    passenger (6.0.6)
+      rack
+      rake (>= 0.8.1)
     polyamorous (2.3.2)
       activerecord (>= 5.2.1)
     public_suffix (4.0.5)
-    puma (4.3.5)
-      nio4r (~> 2.0)
     rack (2.2.3)
     rack-proxy (0.6.5)
       rack
@@ -310,7 +311,7 @@ DEPENDENCIES
   omniauth-facebook
   omniauth-google-oauth2
   omniauth-twitter
-  puma (~> 4.1)
+  passenger (>= 6.0.6)
   rails (~> 6.0.3, >= 6.0.3.2)
   rails_db
   rails_real_favicon
