@@ -17,7 +17,7 @@ class Order < ApplicationRecord
 
         if @orders.count < 1
             count = "1"
-            order_number = "#{prefix}#{year}#{day}-#{month}#{count.rjust(3,0)}"
+            order_number = "#{prefix}#{year}#{day}-#{month}#{count.rjust(3,"0")}"
             return order_number
         elsif 
             last = Order.last
@@ -25,7 +25,7 @@ class Order < ApplicationRecord
                 count = last.order_number.split(//).last(3).join.to_i
                 count = count + 1
                 series = count.to_s
-                order_number = "#{prefix}#{year}#{day}-#{month}#{series.rjust(3,0)}"
+                order_number = "#{prefix}#{year}#{day}-#{month}#{series.rjust(3,"0")}"
                 return order_number
             else
                 count = last.id
