@@ -1,7 +1,6 @@
 <!-- loader start -->
 <!-- loader end -->
 
-
 <!-- header start -->
 <%= render 'layouts/header' %>
 <!-- header end -->
@@ -370,7 +369,7 @@
                         </div>
                         <div class="back">
                             <% if @product.images.attached? %>
-                            <a href="/products/<%= product.id %>"><%= image_tag (product.images[1] if product.images.length > 0) , :class => "img-fluid blur-up lazyload bg-img" %></a>
+                            <a href="/products/<%= product.id %>"><%= image_tag (product.images[0] if product.images.length > 0) , :class => "img-fluid blur-up lazyload bg-img" %></a>
                             <%else%>
                             <a href="/products/ <%= product.id %>"><%= image_tag "default_profile", :class => "img-fluid blur-up lazyload bg-img" %></a>
                             <%end%>
@@ -485,6 +484,46 @@
 </div>
 <!-- tap to top end -->
 
+<!-- latest jquery-->
+<%= javascript_include_tag 'js/jquery-3.3.1.min.js' %>
+
+<!-- fly cart ui jquery-->
+<%= javascript_include_tag 'js/jquery-ui.min.js' %>
+
+<!-- exitintent jquery-->
+<%= javascript_include_tag 'js/jquery.exitintent.js' %>
+<%= javascript_include_tag 'js/exit.js' %>
+
+<!-- popper js-->
+<%= javascript_include_tag 'js/popper.min.js' %>
+
+
+<!-- slick js-->
+<%= javascript_include_tag 'js/slick.js' %>
+
+
+<!-- menu js-->
+<%= javascript_include_tag 'js/menu.js' %>
+
+
+<!-- lazyload js-->
+<%= javascript_include_tag 'js/lazysizes.min.js' %>
+
+
+<!-- Bootstrap js-->
+<%= javascript_include_tag 'js/bootstrap.js' %>
+
+
+<!-- Bootstrap Notification js-->
+<%= javascript_include_tag 'js/bootstrap-notify.min.js' %>
+
+
+<!-- Fly cart js-->
+<%= javascript_include_tag 'js/fly-cart.js' %>
+
+<!-- Theme js-->
+<%= javascript_include_tag 'js/script.js' %>
+
 
 
 <script>
@@ -496,52 +535,6 @@
         document.getElementById("search-overlay").style.display = "none";
     }
 </script>
-<script src="../resources/js/jquery.raty.js">
-    $('#rating-form').raty({
-        path: '/assets/',
-        scoreName: 'review[rating]'
-    });
-
-    $('.review-rating').raty({
-        readOnly: true,
-        score: function() {
-            return $(this).attr('data-score')
-        },
-        path: '/assets/'
-    });
-
-    $('.average-review-rating').raty({
-        readOnly: true,
-        score: function() {
-            return $(this).attr('data-score')
-        },
-        path: '/assets/'
-    });
-</script>
-
-<!-- latest jquery-->
-<%= javascript_include_tag 'js/jquery-3.3.1.min.js' %>
-
-
-<!-- Bootstrap js-->
-<%= javascript_include_tag 'js/menu.js' %>
-<%= javascript_include_tag 'js/lazysizes.min.js' %>
-
-<!-- feather icon js-->
-<%= javascript_include_tag 'js/icons/feather-icon/feather.min.js' %>
-<%= javascript_include_tag 'js/icons/feather-icon/feather-icon.js' %>
-
-<!-- Sidebar jquery-->
-<%= javascript_include_tag 'js/sidebar-menu' %>
-
-<%= javascript_include_tag 'js/popper.min.js' %>
-
-<%= javascript_include_tag 'js/slick.js' %>
-<%= javascript_include_tag 'js/bootstrap.js' %>
-
-<%= javascript_include_tag 'js/bootstrap-notify.min.js' %>
-
-<%= javascript_include_tag 'js/jquery.elevatezoom.js' %>
 
 <%= javascript_include_tag 'js/admin-script' %>
 
@@ -558,4 +551,27 @@
         // alert("reached");
         console.log("Color Changed: Make an action here")
     }
+   $(document).ready(function(){
+       reloadPage();
+        function reloadPage(){
+             (function()
+            {
+            if( window.localStorage )
+            {
+                if( !localStorage.getItem('firstLoad') )
+                {
+                localStorage['firstLoad'] = true;
+                window.location.reload();
+                }  
+                else
+                localStorage.removeItem('firstLoad');
+            }
+            })();
+        }
+       
+    });
+
+    // location.reload();
+
 </script>
+
