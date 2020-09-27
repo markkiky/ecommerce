@@ -64,7 +64,7 @@ class OrdersController < ApplicationController
       format.js
     end
   end
- 
+
   def create
     # check if order_cart_subtotal is empty
     #  TO DOs
@@ -160,11 +160,6 @@ class OrdersController < ApplicationController
 
   end
 
-  # def check_payment
-
-
-  # end
-
   # GET All MPESA Transactions for a particular paybill with date
   # POST /get_transactions
   def get_transactions
@@ -185,131 +180,95 @@ class OrdersController < ApplicationController
     puts response.read_body
 
   end
-  
-  # def send_push
-  #   @order = Order.find(params[:id])
-  #   @id = params[:id]
-  #   require "uri"
-  #   require "net/http"
-
-  #   url = URI("https://payme.revenuesure.co.ke/api/index.php")
-
-  #   https = Net::HTTP.new(url.host, url.port);
-  #   https.use_ssl = true
-
-  #   request = Net::HTTP::Post.new(url)
-  #   form_data = [['function', 'searchTransactions'],['keyword', @order.order_number],['', '']]
-  #   request.set_form form_data, 'multipart/form-data'
-  #   response = https.request(request)
-  #   puts response.read_body
-
-  #   response_json = JSON.parse(response.read_body)
-
-  #   if response_json['success'] != true
-
-  #     # @order.order_number = "shoesX"
-  #     @customer = Customer.find(@order.customer_id)
-  #     url = URI("https://payme.revenuesure.co.ke/index.php")
-  #     https = Net::HTTP.new(url.host, url.port);
-  #     https.use_ssl = true
-  #     request = Net::HTTP::Post.new(url)
-  #     form_data = [['TransactionType', 'CustomerPayBillOnline'],['PayBillNumber', '367776'],['Amount', @order.order_subtotal.to_i.to_s],['PhoneNumber', @customer.phone],['AccountReference', @order.order_number],['TransactionDesc', @order.order_number],['FullNames', '- - -']]
-  #     request.set_form form_data, 'multipart/form-data'
-  #     response = https.request(request)
-  #     puts response.read_body
-  #     response_json = JSON.parse(response.body)
-
-  #     # @response = response_json['ResponseDescription']
-  #     @response = "Push Sent"
-
-  #   else 
-  #     @response = "Already Paid"
-  #     # Save it to db
-  #     if Order.where(:order_number => response_json['data'][0]['TransactionDesc']).exists?
-  #       order = Order.where(:order_number => response_json['data'][0]['TransactionDesc']).last
-  #       callback_params = {
-  #         'transaction_id' => response_json['data'][0]['account_to'], 
-  #         'account_from' => response_json['data'][0]['account_from'], 
-  #         'transaction_code' => response_json['data'][0]['transaction_code'],
-  #         'amount' => response_json['data'][0]['amount'], 
-  #         'order_id' => order.id,
-  #         'message' => response_json['data'][0]['TransactionDesc'],
-  #         'callback_returned' => response_json['data'][0]['names'],
-  #         'date' => response_json['data'][0]['date'],
-  #         'payment_mode' => response_json['data'][0]['payment_mode']
-  #       }
-  #       amount = response_json['data'][0]['amount']
-  #       amount = amount.to_i
-  #     @transaction = Transaction.new(callback_params)
-  #     order.payment_date = Date.today()
-  #     order.transaction_id = @transaction.id
-  
-  #     if order.payment_status == "Unpaid"
-  #       balance = order.order_subtotal - amount
-  #       # set the balance here in future.
-  #       order.reducing_balance = balance
-  #     if balance <= 0
-  #       order.payment_status = "Paid"
-  #       order.paid = true
-  #     elsif balance > 0
-  #       order.payment_status = 'part'
-  #     end
-  #     elsif order.payment_status == "part"
-  #       balance = order.reducing_balance - amount
-  #       order.reducing_balance = balance
-  #     if balance <= 0
-  #       order.payment_status = "Paid"
-  #       order.paid = true
-  #     elsif balance > 0
-  #       order.payment_status = 'part'
-  #     end
-      
-  #     elsif order.payment_status == "Paid"
-  #     balance = order.reducing_balance - amount
-  #     order.reducing_balance = balance
-  #     end
-  #     # send order received email 
-  #     customer_id = order.customer_id.to_i
-      
-  #     @customer = Customer.find(customer_id)
-  #     OrderMailer.with(customer: @customer, transaction: @transaction, order: order).order_payment.deliver_now
-  #     @transaction.save!
-  #     order.save!
-  #   end
-  #   end
-    
-    
-
-  #   # redirect_to order_success_path
-  #   # respond_to do |format|
-  #   #   format.js
-  #   # end
-  # end
 
   def check_payment
-    @order = Order.find(params[:id])
+    # @order = Order.find(params[:id])
+    @mpesa_job_id = MpesaWorker.perform_async(params[:id])
+    puts "MPESA JOB ID: #{@mpesa_job_id}"
+    status = Sidekiq::Status::status(@mpesa_job_id)
+    queue = Sidekiq::Status::queued?   @mpesa_job_id
+    Sidekiq::Status::working?  @mpesa_job_id
+    Sidekiq::Status::complete? @mpesa_job_id
+    Sidekiq::Status::failed?   @mpesa_job_id
+    puts "Status = #{status}"
+    puts "Queued? #{queue}"
+    respond_to do |format|
+      format.js
+    end
+    # puts "#{@response} Tumefikiwo"
+  end
 
-    url = URI("https://payme.revenuesure.co.ke/api/index.php")
-
-    https = Net::HTTP.new(url.host, url.port);
-    https.use_ssl = true
-
-    request = Net::HTTP::Post.new(url)
-    form_data = [['function', 'checkPaymentVerification'],['account_reference', @order.order_number ]]
-    request.set_form form_data, 'multipart/form-data'
-    response = https.request(request)
-    puts response.read_body
-
-    response_json = JSON.parse(response.read_body)
-    puts response_json['success']
-    byebug
-    if response_json['success'] != true
-      @response = response_json['message']
-    else
-      if response_json['data']['callback_returned'] == "PAID"
+  # saves payments 
+  def after_check_payment(order_id, response_json)
+    puts "BACK TO THE CONTROLLER YAAAAY!!!!!!!!"
+  
+    # split up objects for easier saving
+    if response_json['success'] == true
+      transaction_data = response_json["data"]
+      if  transaction_data["callback_returned"] == "PENDING"
+        puts "PENDING"
+        # ActionCable.server.broadcast "test_channel", message: "Failed To Get Payment"
+        ActionCable.server.broadcast "test_channel", response_json: response_json, status: "pending",  order_id: order_id
+      elsif transaction_data["callback_returned"] == "PAID"
+        puts "PAID"
+        # Saving Payment
+        payment_data =  response_json["data2"]
+        # Create a new transaction for the received data
+        # check if order exists
+        # if order = Order.where(:order_number => payment_data["ref"])
+        if order = Order.find(order_id)
+          order_id = order.id
+        else
+          # place in order number 
+          order_id = 1
+        end
+        transaction_params = {
+          'paybill_number' => payment_data["account_to"], 
+          'phone_number' => payment_data["account_from"],
+          'transaction_code' => payment_data["transaction_code"],
+          'amount' => payment_data["amount"], 
+          'order_id' => order_id,
+          'account_reference' => payment_data["ref"],
+          'transaction_description' => payment_data["TransactionDesc"],
+          'full_names' =>payment_data["names"],
+          'date' => payment_data["date"],
+          'payment_mode' => payment_data["payment_mode"]
+        }
+        @transaction = Transaction.new(transaction_params)
+        @transaction.save
+        # ActionCable.server.broadcast "test_channel", message: "Payment Received"
+        # TestChannel.broadcast_to(current_customer, message: "Payment Received", status: "paid")
+        ActionCable.server.broadcast "test_channel", response_json: response_json, status: "paid", order_id: order_id
+      elsif response_json["data"]["callback_returned"] == "UNPAID"
+        puts "UNPAID"
+        # ActionCable.server.broadcast "test_channel", message: response_json["data"]["callback_returned"]
+        # TestChannel.broadcast_to(current_customer, message: response_json["data"]["callback_returned"], status: "UNPAID")
+        ActionCable.server.broadcast "test_channel", response_json: response_json, status: "unpaid",  order_id: order_id
+        
+      else
+        puts "FAILED"
+        ActionCable.server.broadcast "test_channel", response_json: response_json, status: "error",  order_id: order_id
         
       end
-      @response = response_json['data']['callback_returned']
+      
+    elsif response_json['success'] == false
+      ActionCable.server.broadcast "test_channel", message: "Failed to send push"
+    end
+    
+  end
+
+  def fetch
+    job_id = params[:job_id]
+    if Sidekiq::Status::complete? job_id
+      render :status => 200, :text => Sidekiq::Status::get(job_id, :output)
+    elsif Sidekiq::Status::failed? job_id
+      render :status => 500, :text => 'Failed'
+    else
+      render :status => 202, :text => ''
+    end
+
+    respond_to do |format|
+      format.js
     end
   end
   
@@ -332,6 +291,12 @@ class OrdersController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_order
       @order = Order.find(params[:id])
+    end
+
+    # define a set of transaction params
+
+    def transaction_params
+      params.require(:transaction).permit()
     end
 
     # Only allow a list of trusted parameters through.

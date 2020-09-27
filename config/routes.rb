@@ -1,4 +1,10 @@
+
 Rails.application.routes.draw do
+  require 'sidekiq/web'
+  require 'sidekiq-status/web'
+  mount Sidekiq::Web, at: '/sidekiq'
+
+  get "orders/completed", to: "orders#after_check_payment"
   devise_for :admins 
   resources :complete_orders
   resources :colors
@@ -25,6 +31,8 @@ Rails.application.routes.draw do
 
 
   get "/check_payment/:id", to: "orders#check_payment", as: :check_payment 
+
+  
   
   # catgory paths
   resources :categories

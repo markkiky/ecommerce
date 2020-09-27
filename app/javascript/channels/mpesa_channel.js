@@ -3,7 +3,7 @@ import consumer from "./consumer";
 // a user who is receiving data from this mpesa_channel
 // a subscription connects the user to a certain channel
 document.addEventListener('turbolinks:load', () => {
-
+  
   const element = document.getElementById("test");
   var order_id = null;
   // check if order_id div has something, means not on that page
@@ -14,7 +14,7 @@ document.addEventListener('turbolinks:load', () => {
       { channel: "MpesaChannel", order_id: order_id },
       {
         connected() {
-          // console.log("Connected to mpesa channel");
+          console.log("Connected to mpesa channel");
           // alert("now connected: mpesa_channel: "+ order_id);
           // Called when the subscription is ready for use on the server
         },

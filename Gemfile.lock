@@ -73,7 +73,10 @@ GEM
       regexp_parser (~> 1.5)
       xpath (~> 3.2)
     childprocess (3.0.0)
+    chronic_duration (0.10.6)
+      numerizer (~> 0.1.1)
     concurrent-ruby (1.1.7)
+    connection_pool (2.2.3)
     crass (1.0.6)
     devise (4.7.2)
       bcrypt (~> 3.0)
@@ -137,10 +140,13 @@ GEM
     multi_json (1.15.0)
     multi_xml (0.6.0)
     multipart-post (2.1.1)
+    mustermann (1.1.1)
+      ruby2_keywords (~> 0.0.1)
     mysql2 (0.5.3)
     nio4r (2.5.2)
     nokogiri (1.10.10)
       mini_portile2 (~> 2.4.0)
+    numerizer (0.1.1)
     oauth (0.5.4)
     oauth2 (1.4.4)
       faraday (>= 0.8, < 2.0)
@@ -174,6 +180,8 @@ GEM
       activerecord (>= 5.2.1)
     public_suffix (4.0.5)
     rack (2.2.3)
+    rack-protection (2.1.0)
+      rack
     rack-proxy (0.6.5)
       rack
     rack-test (1.1.0)
@@ -231,6 +239,7 @@ GEM
       railties (>= 5.0)
     ruby-vips (2.0.17)
       ffi (~> 1.9)
+    ruby2_keywords (0.0.2)
     rubyzip (2.3.0)
     sass-rails (6.0.0)
       sassc-rails (~> 2.1, >= 2.1.1)
@@ -245,9 +254,24 @@ GEM
     selenium-webdriver (3.142.7)
       childprocess (>= 0.5, < 4.0)
       rubyzip (>= 1.2.2)
+    sidekiq (6.1.2)
+      connection_pool (>= 2.2.2)
+      rack (~> 2.0)
+      redis (>= 4.2.0)
+    sidekiq-status (1.1.4)
+      chronic_duration
+      sidekiq (>= 3.0)
     simple_form (5.0.2)
       actionpack (>= 5.0)
       activemodel (>= 5.0)
+    sinatra (2.1.0)
+      mustermann (~> 1.0)
+      rack (~> 2.2)
+      rack-protection (= 2.1.0)
+      tilt (~> 2.0)
+    slim (4.1.0)
+      temple (>= 0.7.6, < 0.9)
+      tilt (>= 2.0.6, < 2.1)
     spring (2.1.0)
     spring-watcher-listen (2.0.1)
       listen (>= 2.7, < 4.0)
@@ -260,6 +284,7 @@ GEM
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
     tawk_rails (1.2.0)
+    temple (0.8.2)
     terminal-table (1.8.0)
       unicode-display_width (~> 1.1, >= 1.1.1)
     thor (1.0.1)
@@ -318,7 +343,11 @@ DEPENDENCIES
   redis (~> 4.0)
   sass-rails (>= 6)
   selenium-webdriver
+  sidekiq
+  sidekiq-status
   simple_form
+  sinatra
+  slim
   spring
   spring-watcher-listen (~> 2.0.0)
   sprockets-rails

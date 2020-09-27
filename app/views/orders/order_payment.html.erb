@@ -3,7 +3,7 @@
 <%= render 'layouts/customers/mpesa_number_modal' %>
 <%#render  'layouts/check_payment_modal'%>
 <!-- breadcrumb start -->
-<div id='test' data-order-id= "<%= @order_id %>"></div>
+<div id='test' data-order-id="<%= @order_id %>"></div>
 <div class="breadcrumb-section">
     <div class="container">
         <div class="row">
@@ -57,49 +57,49 @@
                     </div>
                     <%# form_for send_push_path, :remote => true , method: :post do |order| %>
                     <form>
-                    <div class="payment-box">
-                        <div class="upper-box">
-                            <div class="payment-options">
-                                <ul>
-                                    <li>
-                                        <div class="radio-option">
-                                            <!--<input type="radio" name="payment-group" id="payment-1" checked="checked">-->
-                                            <%# order.radio_button :payment_method, "Mpesa", :type => "radio", :name => "order[payment_method]", :id => "payment-1", :checked => true %>
-                                          
-                                            <label for="payment-1">Mpesa : <%=  @customer.phone %><span class="small-text">Please send a check to Store
-                                                    Name, Store Street, Store Town, Store State /
-                                                    County, Store Postcode.</span></label>
-                                        </div>
-                                    </li>
+                        <div class="payment-box">
+                            <div class="upper-box">
+                                <div class="payment-options">
+                                    <ul>
+                                        <li>
+                                            <div class="radio-option">
+                                                <!--<input type="radio" name="payment-group" id="payment-1" checked="checked">-->
+                                                <%# order.radio_button :payment_method, "Mpesa", :type => "radio", :name => "order[payment_method]", :id => "payment-1", :checked => true %>
 
-                                    <li>
-                                        <div class="radio-option paypal">
-                                            <%# order.radio_button :payment_method, "Card", :type => "radio", :name => "order[payment_method]", :id => "payment-3"%>
-                                            <!-- <label for="payment-3">Card<span class="image"><img src="" alt=""></span></label>-->
-                                        </div>
-                                    </li>
-                                </ul>
+                                                <label for="payment-1">Mpesa : <%=  @customer.phone %><span class="small-text">Please send a check to Store
+                                                        Name, Store Street, Store Town, Store State /
+                                                        County, Store Postcode.</span></label>
+                                            </div>
+                                        </li>
+
+                                        <li>
+                                            <div class="radio-option paypal">
+                                                <%# order.radio_button :payment_method, "Card", :type => "radio", :name => "order[payment_method]", :id => "payment-3"%>
+                                                <!-- <label for="payment-3">Card<span class="image"><img src="" alt=""></span></label>-->
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <%# order.submit "Pay Now",:id => "pay_btn", :class => "btn-solid btn" %>
+                                <button type="button" class="btn btn-solid" data-toggle="modal" data-target="#mpesaNumberModal">
+                                    Pay Now
+                                </button>
+                                <% link_to  send_push_path(@order.id), remote: true, class: "btn-solid btn", id: "pay"  do %>
+                                <i class="zmdi zmdi-money "></i>
+                                Pay Now
+
+                                <%end%>
                             </div>
                         </div>
-                        <div class="text-right">
-                            <%# order.submit "Pay Now",:id => "pay_btn", :class => "btn-solid btn" %>
-                            <button type="button" class="btn btn-solid" data-toggle="modal" data-target="#mpesaNumberModal">
-                            Pay Now
-                            </button>
-                            <% link_to  send_push_path(@order.id), remote: true, class: "btn-solid btn", id: "pay"  do %>
-                            <i class="zmdi zmdi-money "></i>
-                            Pay Now
-                
-                            <%end%>
-                        </div>
-                    </div>
                     </form>
                     <%# end %>
                 </div>
             </div>
 
             <div class="col-lg-6 col-sm-12 col-xs-12" id="mpesa_options">
-               
+
                 <h5>Account No: <%= @order.order_number %></h5>
                 <p id="push"></p>
                 <p id="push_response"></p>
@@ -164,11 +164,11 @@
 <%= javascript_include_tag 'js/script.js' %>
 
 <script>
+    var phone_number = "<%= @customer.phone %>"
+    $("#phone").value = phone_number;
+    console.log(phone_number)
 
-var phone_number = "<%= @customer.phone %>"
-$("#phone").value = phone_number;
-console.log(phone_number)
-function close_modal(){
-   $("#mpesaModal").toggle();
- }
+    // function close_modal() {
+    //     $("#mpesaModal").toggle();
+    // }
 </script>

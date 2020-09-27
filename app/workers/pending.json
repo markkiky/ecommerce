@@ -1,0 +1,30 @@
+{
+    "status": null,
+    "success": true,
+    "message": "Data ",
+    "data": {
+        "id": "1599533",
+        "account_to": "175555",
+        "merchant_request_id": "8086-5562511-1",
+        "ref": "5454545888",
+        "callback_returned": "PENDING",
+        "TransactionDesc": "5454545888",
+        "mobileNotification": "NULL",
+        "amount": "1",
+        "account_from": "254714420943",
+        "date": "2020-09-27 23:02:05",
+        "code": "1",
+        "message": "Push Sent",
+        "transaction_code": "-",
+        "payment_mode": "MPESA",
+        "posted": "false",
+        "names": "-",
+        "email": "-",
+        "api_key": "-",
+        "sms": "-",
+        "smsResponse": "-",
+        "company": "-",
+        "status": "-"
+    },
+    "data2": null
+}
