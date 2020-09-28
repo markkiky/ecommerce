@@ -59,7 +59,7 @@
                                         <div class="sidebar-back text-left"><i class="fa fa-angle-left pr-2" aria-hidden="true"></i> Back</div>
                                     </div>
                                     <ul id="sub-menu" class="sm pixelstrap sm-vertical">
-                                        <% Category.all.limit(5).reverse.each do | category | %>
+                                        <% Category.all.reverse.each do | category | %>
                                         <li><a><%= category.category_name %></a></li>
                                         <% end %>
                                     </ul>
