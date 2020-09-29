@@ -4,9 +4,11 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '2.6.0'
 
 #gem passenger
-gem "passenger", ">= 6.0.6", require: "phusion_passenger/rack_handler"
+# gem "passenger", ">= 6.0.6", require: "phusion_passenger/rack_handler"
 #jquery
 gem 'jquery-rails'
+
+gem 'gon', '~> 6.4'
 
 #simple form for 
 gem 'simple_form'
@@ -24,7 +26,7 @@ gem 'mysql2'
 gem 'rails_db'
 
 # Use Puma as the app server
-# gem 'puma', '~> 4.1'
+gem 'puma', '~> 4.1'
 
 # Devise gems 
 gem 'devise'

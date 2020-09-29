@@ -12,9 +12,9 @@
       <div class="modal-body">
         <!-- show phone number that paid, paybill used, account_used, transaction code -->
         <div class="paid">
-          <p id="paybill">Paybill Number: <p>
-          <p id="transaction_code">Transaction Code: </p>
-          <p id="phone">Phone Number: </p>
+          <p>Paybill Number: <span id="paybill"></span><p>
+          <p>Transaction Code: <span id="transaction_code"></span></p>
+          <p>Phone Number: <span id="phone"></span></p>
         </div>
         <div class="unpaid">
           <p class="message">No payment received</p>
@@ -22,6 +22,10 @@
 
         <div class="pending">
           <p class="message">Waiting for payment</p>
+        </div>
+
+        <div class="failed">
+          <p class="message">Failed to make Mpesa payment</p>
         </div>
         
       </div>

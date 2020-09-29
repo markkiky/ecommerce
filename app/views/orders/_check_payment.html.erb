@@ -1,0 +1,64 @@
+<%= include_gon %>
+
+
+<script>
+    // receive payment params from controller
+    // $("#mpesaModal").modal('hide');
+    $("#mpesaModal").modal("hide");
+    // alert("mark is sure?");
+    var status = gon.status;
+    var order_id = gon.order_id;
+    var response_json = gon.response_json;
+
+    // js variables for easier consumption
+    var payment_info = null;
+    var transaction_info = null;
+   
+    switch (status) {
+        case "unpaid":
+            payment_info = response_json.data;
+            $("#paymentModalLabel").text(payment_info.message);
+            $(".paid").addClass("d-none");
+            $(".pending").addClass('d-none');
+            $(".failed").addClass("d-none");
+            break;
+
+        case 'paid':
+            transaction_info = response_json.data
+            payment_info = response_json.data2
+            const paybill = payment_info.account_to
+            const phone = payment_info.account_from
+            const transaction_code = payment_info.transaction_code
+            $("#paymentModalLabel").text(transaction_info.message)
+            $("#paybill").text(paybill)
+            $("#phone").text(phone)
+            $("#transaction_code").text(transaction_code)
+            $("#order_success_btn").attr('href', "http://localhost:3000/order_success/" + order_id);
+            // $("#paid").addClass("d-none")
+            $(".unpaid").addClass('d-none')
+            $(".failed").addClass("d-none")
+            $(".pending").addClass('d-none')
+            break;
+
+        case 'pending':
+            transaction_info = response_json.data
+            $("#paymentModalLabel").text(transaction_info.message)
+            $(".paid").addClass("d-none")
+            $(".unpaid").addClass('d-none')
+            $(".failed").addClass("d-none")
+            break;
+        default:
+            // failed to send push 
+            $("#paymentModalLabel").text(response_json);
+            $(".unpaid").addClass('d-none');
+            $(".paid").addClass("d-none");
+            $(".pending").addClass('d-none');
+            
+            break;
+    }
+
+    
+    $("#paymentModal").modal('show');
+    
+    
+</script>

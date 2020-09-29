@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_11_074530) do
+ActiveRecord::Schema.define(version: 2020_09_21_081953) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "name", null: false
@@ -71,6 +71,15 @@ ActiveRecord::Schema.define(version: 2020_09_11_074530) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "admin_id"
+  end
+
+  create_table "category_variants", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.string "variant_name"
+    t.string "variant_value"
+    t.string "variant_code"
+    t.string "category_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "colors", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
@@ -160,14 +169,22 @@ ActiveRecord::Schema.define(version: 2020_09_11_074530) do
   end
 
   create_table "order_items", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-    t.integer "quantity"
+    t.string "order_id"
+    t.string "product_id"
+    t.string "order_number"
     t.decimal "price", precision: 10
+    t.integer "quantity"
+    t.string "discount"
+    t.decimal "total", precision: 10
+    t.string "id_sku"
+    t.string "size"
+    t.string "color"
+    t.boolean "fulfilled"
+    t.datetime "ship_date"
+    t.string "order_item_id"
+    t.datetime "bill_date"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "product_id", null: false
-    t.bigint "order_id", null: false
-    t.index ["order_id"], name: "index_order_items_on_order_id"
-    t.index ["product_id"], name: "index_order_items_on_product_id"
   end
 
   create_table "orders", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
@@ -285,6 +302,10 @@ ActiveRecord::Schema.define(version: 2020_09_11_074530) do
     t.string "category_id"
   end
 
+  create_table "test", id: false, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.string "code", limit: 3, null: false
+  end
+
   create_table "transactions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "transaction_id"
     t.string "order_id"
@@ -312,8 +333,6 @@ ActiveRecord::Schema.define(version: 2020_09_11_074530) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "order_items", "orders"
-  add_foreign_key "order_items", "products"
   add_foreign_key "product_colors", "colors"
   add_foreign_key "product_colors", "products"
   add_foreign_key "product_sizes", "products"

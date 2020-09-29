@@ -1,18 +1,14 @@
-// var push = "Mpesa service response: ";
 
-// var push_response = "<%# @response %>";
-// var id = "<%# @id %>"
-// $("#push").html(push);
-// $("#push_response").html(push_response)
+$('#mpesaNumberModal').modal("hide");
 
-// if (push_response == "Already Paid"){
-//     $("#payment_email").removeClass('d-none');
-//     $('#pay').attr('href', "https://ecommerce.revenuesure.co.ke/order_success/"+ id )
-// }else{
-//      $("#check_payment").removeClass('d-none');
-// }
-
-
-$('#mpesaNumberModal').remove();
-$('.title-box').append("<% j render(:partial => 'layouts/customers/mpesa_modal') %>");
 $("#mpesaModal").modal("show");
+var order_id = <%= @order_id %>;
+$.ajax({
+    method: "GET",
+    url: "/check_payment/" + order_id,
+    dataType: 'script',
+    format: "js",
+    data: {
+        order_id: order_id
+    }
+})
