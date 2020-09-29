@@ -55,49 +55,52 @@
                             <li>Total <span class="count"><%= number_to_currency(@order.order_subtotal, unit: ' KES ') %></span></li>
                         </ul>
                     </div>
-                    <%# form_for send_push_path, :remote => true , method: :post do |order| %>
+                    <%= form_for send_push_path, :remote => true , method: :post do |order| %>
                     <form>
                         <div class="payment-box">
                             <div class="upper-box">
                                 <div class="payment-options">
                                     <ul>
-                                        <li>
-                                            <div class="radio-option">
-                                                <!--<input type="radio" name="payment-group" id="payment-1" checked="checked">-->
-                                                <%# order.radio_button :payment_method, "Mpesa", :type => "radio", :name => "order[payment_method]", :id => "payment-1", :checked => true %>
+                                        
+                                        <fieldset>
+                                            <li>
+                                                <div class="radio-option">
+                                                    <input type="radio" name="payment-group" id="payment-1" checked="checked" onclick="changed_payment(this)" value="mpesa">
+                                                    <%# order.radio_button :payment_method, "Mpesa", :type => "radio", :name => "order[payment_method]", :id => "payment-1", :checked => true %>
 
-                                                <label for="payment-1">Mpesa : <%=  @customer.phone %><span class="small-text">Please send a check to Store
-                                                        Name, Store Street, Store Town, Store State /
-                                                        County, Store Postcode.</span></label>
-                                            </div>
-                                        </li>
+                                                    <label for="payment-1">Mpesa : <%=  @customer.phone %><span class="small-text">Please send a check to Store
+                                                            Name, Store Street, Store Town, Store State /
+                                                            County, Store Postcode.</span></label>
+                                                </div>
+                                            </li>
 
-                                        <li>
-                                            <div class="radio-option paypal">
-                                                <%# order.radio_button :payment_method, "Card", :type => "radio", :name => "order[payment_method]", :id => "payment-3"%>
-                                                <!-- <label for="payment-3">Card<span class="image"><img src="" alt=""></span></label>-->
-                                                <input type="radio" id="card" name="card" value="card">
-                                                <label for="card">Card</label><br>
+                                            <li>
+                                                <div class="radio-option paypal">
+                                                    <%# order.radio_button :payment_method, "Card", :type => "radio", :name => "order[payment_method]", :id => "payment-3"%>
+                                                    <!-- <label for="payment-3">Card<span class="image"><img src="" alt=""></span></label>-->
+                                                    <input type="radio" id="payment-2" name="payment-group" value="card" onclick="changed_payment(this)">
+                                                    <label for="payment-2">Card</label><br>
 
-                                            </div>
-                                        </li>
+                                                </div>
+                                            </li>
+                                        </fieldset>
                                     </ul>
                                 </div>
                             </div>
                             <div class="text-right">
                                 <%# order.submit "Pay Now",:id => "pay_btn", :class => "btn-solid btn" %>
-                                <button type="button" class="btn btn-solid" data-toggle="modal" data-target="#mpesaNumberModal">
-                                    Pay Now
+                                <button type="button" class="btn btn-solid" data-toggle="modal" data-target="#mpesaNumberModal" id="mpesa">
+                                    Mpesa pay
                                 </button>
-                                <% link_to  send_push_path(@order.id), remote: true, class: "btn-solid btn", id: "pay"  do %>
+                                <%= link_to  card_path(:order_id => @order_id), class: "btn-solid btn d-none", id: "card"  do %>
                                 <i class="zmdi zmdi-money "></i>
-                                Pay Now
+                                Card pay
 
                                 <%end%>
                             </div>
                         </div>
                     </form>
-                    <%# end %>
+                    <%end %>
                 </div>
             </div>
 
@@ -167,6 +170,7 @@
 <%= javascript_include_tag 'js/script.js' %>
 
 <script>
+
     var phone_number = "<%= @customer.phone %>"
     $("#phone").value = phone_number;
     console.log(phone_number)
@@ -175,8 +179,21 @@
     //     $("#mpesaModal").toggle();
     // }
 
-$("#card").change(function(){
-     var url = "<%= card_path %>";
-      window.open(url, '_blank');
-})
+    $("#card").onclick(function() {
+        var url = "<%= card_path %>";
+        window.open(url, '_blank');
+    })
+
+
+    function changed_payment(e) {
+        // alert(e.value)
+        if(e.value == "card"){
+             $("#mpesa").addClass('d-none')
+            $("#card").removeClass("d-none")
+        }else if (e.value == "mpesa"){
+            $("#mpesa").removeClass('d-none')
+            $("#card").addClass("d-none")
+        }
+
+    }
 </script>
