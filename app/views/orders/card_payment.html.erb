@@ -1,2 +1,2 @@
-<iframe src="https://payme.revenuesure.co.ke/testcards/index.php?access=2d56060e76533089845359A39be6f2c7&amount=100&currency=USD&reference_number=87878787&&" height="100%" width="100%">
+<iframe src="<%= "https://payme.revenuesure.co.ke/testcards/index.php?access=2d56060e76533089845359A39be6f2c7&amount=#{@order.order_subtotal}&currency=KES&reference_number=#{@order.order_number}&& "%>" height="100%" width="100%">
 </iframe>
