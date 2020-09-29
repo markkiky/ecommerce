@@ -158,6 +158,59 @@ class TransactionsController < ApplicationController
     
   end
 
+  def card
+# byebug
+    # transaction_code = params[:code]
+    # status = params[:status]
+    # message = params[:message]
+    # transaction_id = params[:transaction_id]
+    # date = params[:TransTime]
+    # reconciliation_id = params[:reconciliation_id]
+    # amount = params[:Amount]
+    # amount = amount.to_i
+    # currency = params[:currency]
+
+    # Create a new transaction for the received data
+    # order id for connection with orders
+    callback_params = {
+      'transaction_code' => params[:code],
+      'status' => params[:status],
+      'message' => params[:message],
+      'transaction_id' => params[:id],
+      'order_id' => 1,
+      'date' => params[:submitTimeUtc],
+      'amount' => params[:authorizedAmount],
+      'reconciliation_id' => params[:reconciliationId],
+      'currency' => params[:currency],
+      'payment_mode' => "CARD",
+      'full_names' =>" Order.where(:order_id => 1).last.order_number"
+    }
+    @transaction = Transaction.new(callback_params)
+    # @transaction.save
+    # Update the concern Order
+
+    respond_to do |format|
+      if @transaction.save! 
+        # broadcast mpesa payments on mpesa channel
+        # send email notification 
+        
+        
+        
+        # ActionCable.server.broadcast 'mpesa',
+        #   order_number: order.order_number,
+        #   payment_status: order.payment_status
+        # head :ok
+        # format.html { redirect_to @transaction, notice: 'Transaction was successfully created.' }
+        format.json { render :show, status: :created, location: @transaction }
+      else
+        # format.html { render :new }
+        format.json { render json: @transaction.errors, status: :unprocessable_entity }
+      end
+    end
+
+
+  end 
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_transaction
@@ -166,6 +219,6 @@ class TransactionsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def transaction_params
-      params.permit(:transaction_id, :order_id, :full_names, :amount, :phone_number, :transaction_code, :message, :date, :payment_mode)
+      params.permit(:transaction_id, :order_id, :full_names, :amount, :phone_number, :transaction_code, :message, :date, :payment_mode, :status, :reconciliation_id, :currency)
     end
 end

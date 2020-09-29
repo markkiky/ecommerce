@@ -173,6 +173,10 @@ class OrdersController < ApplicationController
   def get_transactions
   end
 
+  def card_payment 
+  end
+
+
   def search_transactions
     url = URI("https://payme.revenuesure.co.ke/api/index.php")
 

@@ -76,6 +76,9 @@
                                             <div class="radio-option paypal">
                                                 <%# order.radio_button :payment_method, "Card", :type => "radio", :name => "order[payment_method]", :id => "payment-3"%>
                                                 <!-- <label for="payment-3">Card<span class="image"><img src="" alt=""></span></label>-->
+                                                <input type="radio" id="card" name="card" value="card">
+                                                <label for="card">Card</label><br>
+
                                             </div>
                                         </li>
                                     </ul>
@@ -171,4 +174,9 @@
     // function close_modal() {
     //     $("#mpesaModal").toggle();
     // }
+
+$("#card").change(function(){
+     var url = "<%= card_path %>";
+      window.open(url, '_blank');
+})
 </script>
