@@ -159,30 +159,31 @@ class TransactionsController < ApplicationController
   end
 
   def card
-
-    transaction_code = params[:TransactionDesc]
-    status = params[:status]
-    message = params[:message]
-    transaction_id = params[:transaction_id]
-    date = params[:TransTime]
-    reconciliation_id = params[:reconciliation_id]
-    amount = params[:Amount]
-    amount = amount.to_i
-    currency = params[:currency]
+# byebug
+    # transaction_code = params[:code]
+    # status = params[:status]
+    # message = params[:message]
+    # transaction_id = params[:transaction_id]
+    # date = params[:TransTime]
+    # reconciliation_id = params[:reconciliation_id]
+    # amount = params[:Amount]
+    # amount = amount.to_i
+    # currency = params[:currency]
 
     # Create a new transaction for the received data
     # order id for connection with orders
     callback_params = {
-      'transaction_code' => params[:TransactionDesc],
+      'transaction_code' => params[:code],
       'status' => params[:status],
       'message' => params[:message],
-      'transaction_id' => params[:transaction_id],
+      'transaction_id' => params[:id],
       'order_id' => 1,
-      'date' => params[:TransTime],
-      'amount' => params[:amount],
-      'reconciliation_id' => params[:reconciliation_id],
+      'date' => params[:submitTimeUtc],
+      'amount' => params[:authorizedAmount],
+      'reconciliation_id' => params[:reconciliationId],
       'currency' => params[:currency],
-      'payment_mode' => "CARD"
+      'payment_mode' => "CARD",
+      'full_names' =>" Order.where(:order_id => 1).last.order_number"
     }
     @transaction = Transaction.new(callback_params)
     # @transaction.save
