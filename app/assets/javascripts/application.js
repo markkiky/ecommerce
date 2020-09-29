@@ -3,7 +3,7 @@
 //= require_tree ../../../vendor/assets/javascripts/.
 //= require_tree ../../../app/assets/javascripts/.
 
-function close_payments_modal(){
+function close_payment_modal(){
     $("#paymentModal").modal("hide");
 }
 

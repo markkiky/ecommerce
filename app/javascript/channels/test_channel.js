@@ -5,6 +5,7 @@ consumer.subscriptions.create("TestChannel", {
     // Called when the subscription is ready for use on the server
     // alert("test")
     // this.send({ message: 'Client is live' })
+    console.log("Connected to test");
   },
 
   disconnected() {
@@ -23,8 +24,8 @@ consumer.subscriptions.create("TestChannel", {
     // phone.append(data.phone);
     // transaction_code.append(data.transaction_code);
     // $("#order_success_btn").attr('href', "https://shop.arigiene.com/order_success/"+order_id);
-    
-    
+    // $("#mpesaModal").modal("hide");
+    $('#mpesaNumber').remove();
     var status = data.status
     var order_id = data.order_id
     var payment_info = null
