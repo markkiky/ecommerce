@@ -160,32 +160,30 @@ class TransactionsController < ApplicationController
 
   def card
 
-    paybill = params[:PayBillNumber]
-    phone = params[:PhoneNumber]
-    mpesa_transaction_code = params[:MpesaReceiptNumber]
+    transaction_code = params[:TransactionDesc]
+    status = params[:status]
+    message = params[:message]
+    transaction_id = params[:transaction_id]
+    date = params[:TransTime]
+    reconciliation_id = params[:reconciliation_id]
     amount = params[:Amount]
     amount = amount.to_i
-    account_no = params[:AccountReference]
-    transaction_description = params[:TransactionDesc]
-    name = params[:FullNames]
-    date = params[:TransTime]
-    
+    currency = params[:currency]
 
     # Create a new transaction for the received data
     # order id for connection with orders
     callback_params = {
-      'paybill_number' => params[:PayBillNumber], 
-      'phone_number' => params[:PhoneNumber],
-      'transaction_code' => params[:MpesaReceiptNumber],
-      'amount' => params[:Amount], 
+      'transaction_code' => params[:TransactionDesc],
+      'status' => params[:status],
+      'message' => params[:message],
+      'transaction_id' => params[:transaction_id],
       'order_id' => 1,
-      'account_reference' => params[:AccountReference],
-      'transaction_description' => params[:TransactionDesc],
-      'full_names' => params[:FullNames],
       'date' => params[:TransTime],
+      'amount' => params[:amount],
+      'reconciliation_id' => params[:reconciliation_id],
+      'currency' => params[:currency],
       'payment_mode' => "CARD"
     }
-    puts "#{callback_params[:paybill_number]} NIMEFIKIWO"
     @transaction = Transaction.new(callback_params)
     # @transaction.save
     # Update the concern Order
@@ -220,6 +218,6 @@ class TransactionsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def transaction_params
-      params.permit(:transaction_id, :order_id, :full_names, :amount, :phone_number, :transaction_code, :message, :date, :payment_mode)
+      params.permit(:transaction_id, :order_id, :full_names, :amount, :phone_number, :transaction_code, :message, :date, :payment_mode, :status, :reconciliation_id, :currency)
     end
 end
