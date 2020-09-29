@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   resources :sizes
   resources :transactions
   post 'transactions/mpesa', to: 'transactions#mpesa_transcation_callback', as: :mpesa_callback
+  # post 'transactions/card', to: 'transactions#card_transaction_callback', as: :card_callback
+  post "transactions/card", to: 'transactions#card'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   
   authenticated :admin do
@@ -31,6 +33,9 @@ Rails.application.routes.draw do
 
 
   get "/check_payment/:id", to: "orders#check_payment", as: :check_payment 
+
+  #card payment path
+  get 'card', to: 'orders#card_payment', as: :card
 
   
   

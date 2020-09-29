@@ -158,6 +158,60 @@ class TransactionsController < ApplicationController
     
   end
 
+  def card
+
+    paybill = params[:PayBillNumber]
+    phone = params[:PhoneNumber]
+    mpesa_transaction_code = params[:MpesaReceiptNumber]
+    amount = params[:Amount]
+    amount = amount.to_i
+    account_no = params[:AccountReference]
+    transaction_description = params[:TransactionDesc]
+    name = params[:FullNames]
+    date = params[:TransTime]
+    
+
+    # Create a new transaction for the received data
+    # order id for connection with orders
+    callback_params = {
+      'paybill_number' => params[:PayBillNumber], 
+      'phone_number' => params[:PhoneNumber],
+      'transaction_code' => params[:MpesaReceiptNumber],
+      'amount' => params[:Amount], 
+      'order_id' => 1,
+      'account_reference' => params[:AccountReference],
+      'transaction_description' => params[:TransactionDesc],
+      'full_names' => params[:FullNames],
+      'date' => params[:TransTime],
+      'payment_mode' => "CARD"
+    }
+    puts "#{callback_params[:paybill_number]} NIMEFIKIWO"
+    @transaction = Transaction.new(callback_params)
+    # @transaction.save
+    # Update the concern Order
+
+    respond_to do |format|
+      if @transaction.save! 
+        # broadcast mpesa payments on mpesa channel
+        # send email notification 
+        
+        
+        
+        # ActionCable.server.broadcast 'mpesa',
+        #   order_number: order.order_number,
+        #   payment_status: order.payment_status
+        # head :ok
+        # format.html { redirect_to @transaction, notice: 'Transaction was successfully created.' }
+        format.json { render :show, status: :created, location: @transaction }
+      else
+        # format.html { render :new }
+        format.json { render json: @transaction.errors, status: :unprocessable_entity }
+      end
+    end
+
+
+  end 
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_transaction
