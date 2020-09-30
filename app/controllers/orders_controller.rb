@@ -9,7 +9,7 @@ class OrdersController < ApplicationController
   before_action :authenticate_admin!, only: [:index, :show]
   # before_action :authenticate_customer!, only: [:new, :create]
 
-  # before_action :set_order, only: [:check_payment]
+  before_action :set_order, only: [:show]
 
   # after_action :check_payment, only: [:send_push]
 
@@ -163,6 +163,14 @@ class OrdersController < ApplicationController
   end
 
   def show
+    puts @order
+    # byebug
+    @items = @order.items
+
+    respond_to do |format|
+      # format.html
+      format.js
+    end
   end
 
   def order_payment

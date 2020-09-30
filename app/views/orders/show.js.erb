@@ -1,0 +1,14 @@
+// alert("GLASES")
+// debugger
+console.log("HOW many times")
+console.log($("#orderModalCenter").length)
+// debugger
+$("#orderModalCenter").remove();
+
+if ($("#orderModalCenter").length > 0){
+
+}else{
+
+$('.page-body').append("<%= j render(:partial => 'show_order_modal') %>");
+$("#orderModalCenter").modal("show");
+}
