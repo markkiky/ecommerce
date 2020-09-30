@@ -1,0 +1,4 @@
+// alert("Nimefikiwo");
+$("#transactionModalCenter").remove();
+$('.page-body').append("<%= j render(:partial => 'show_transaction_modal') %>");
+$("#transactionModalCenter").modal("show");

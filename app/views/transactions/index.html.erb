@@ -1,144 +1,122 @@
-<!DOCTYPE html>
-<html lang="en">
+<%= render "show_transaction_modal" %>
 
-<head>
+<!-- page-wrapper Start-->
+<div class="page-wrapper">
 
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Multikart admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
-    <meta name="keywords" content="admin template, Multikart admin template, dashboard template, flat admin template, responsive admin template, web app">
-    <meta name="author" content="pixelstrap">
-    <%= favicon_link_tag 'default_profile' %>
-    <title>MelonCoco Admin</title>
+    <!-- Page Header Start-->
+    <%= render 'layouts/admin_header' %>
+    <!-- Page Header Ends -->
 
-    <!-- Google font-->
-    <link href="https://fonts.googleapis.com/css?family=Work+Sans:100,200,300,400,500,600,700,800,900" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <!-- Page Body Start-->
+    <div class="page-body-wrapper">
 
-    <!-- Font Awesome-->
-    <%= stylesheet_link_tag "css/fontawesome" %>
+        <!-- Page Sidebar Start-->
+        <%= render 'layouts/admin_sidebar' %>
+        <!-- Page Sidebar Ends-->
 
-    <!-- Flag icon-->
-    <%= stylesheet_link_tag "css/flag-icon.css" %>
+        <!-- Right sidebar Start-->
+        <%= render 'layouts/admins/admin_right_sidebar' %>
+        <!-- Right sidebar Ends-->
 
-    <!-- jsgrid css-->
-    <%= stylesheet_link_tag "css/jsgrid.css" %>
+        <div class="page-body">
 
-    <!-- Datatables css-->
-    <%= stylesheet_link_tag "css/datatables.css" %>
-
-    <!-- Bootstrap css-->
-    <%= stylesheet_link_tag "css/bootstrap.css" %>
-
-    <!-- App css-->
-    <%= stylesheet_link_tag 'css/admin' %>
-
-</head>
-
-<body>
-    <!-- page-wrapper Start-->
-    <div class="page-wrapper">
-
-        <!-- Page Header Start-->
-        <%= render 'layouts/admin_header' %>
-        <!-- Page Header Ends -->
-
-        <!-- Page Body Start-->
-        <div class="page-body-wrapper">
-
-            <!-- Page Sidebar Start-->
-            <%= render "layouts/admin_sidebar" %>
-            <!-- Page Sidebar Ends-->
-
-            <!-- Right sidebar Start-->
-            <%= render 'layouts/admins/admin_right_sidebar' %>
-            <!-- Right sidebar Ends-->
-
-            <div class="page-body">
-
-                <!-- Container-fluid starts-->
-                <div class="container-fluid">
-                    <div class="page-header">
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <div class="page-header-left">
-                                    <h3>Transactions
-                                        <small>MelonCoco panel</small>
-                                    </h3>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <ol class="breadcrumb pull-right">
-                                    <li class="breadcrumb-item"><a href="index.html"><i data-feather="home"></i></a></li>
-                                    <li class="breadcrumb-item">Sales</li>
-                                    <li class="breadcrumb-item active">Transactions</li>
-                                </ol>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Container-fluid Ends-->
-
-                <!-- Container-fluid starts-->
-                <div class="container-fluid">
+            <!-- Container-fluid starts-->
+            <div class="container-fluid">
+                <div class="page-header">
                     <div class="row">
-                        <div class="col-sm-12">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h5>Manage Order</h5>
+                        <div class="col-lg-6">
+                            <div class="page-header-left">
+                                <h3>Orders
+                                    <small>Arigiene Admin panel</small>
+                                </h3>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <ol class="breadcrumb pull-right">
+                                <li class="breadcrumb-item"><a href="index.html"><i data-feather="home"></i></a></li>
+                                <li class="breadcrumb-item">Sales</li>
+                                <li class="breadcrumb-item active">Orders</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Container-fluid Ends-->
+
+            <!-- Container-fluid starts-->
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>Manage Order</h5>
+                                <div style="float: right;">
+                                    <%= link_to admin_order_path, :class => "btn btn-primary", remote: true do %>
+                                    Place Order
+                                    <%end%>
                                 </div>
-                                <div class="card-body order-datatable">
-                                    <table class="display" id="basic-1">
-                                        <thead>
-                                            <tr>
-                                                <th>No</th>
-                                                <th>Order Id</th>
-                                                <th>Product</th>
-                                                <th>Payment Status</th>
-                                                <th>Payment Method</th>
-                                                <th>Order Status</th>
-                                                <th>Date</th>
-                                                <th>Total</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <% count = 0 %>
-                                            <% @transactions.each do |transaction| %>
-                                            <tr>
-                                                <td><%= count += 1 %></td>
-                                                <td><%= transaction.transaction_code %></td>
-                                                <td>
-                                                    <%= Order.find(transaction.order_id).order_number %>
-                                                </td>
-                                                <td><span class="badge badge-secondary"><%= transaction.transaction_description %></span></td>
-                                                <td><%= transaction.payment_mode %></td>
-                                                <td><span class="badge badge-success"><%= transaction.phone_number %></span></td>
-                                                <% if transaction.date != nil %>
-                                                <td><%= transaction.date.to_date %></td>
-                                                <%else%>
-                                                <td><%= transaction.date.to_date %></td>
-                                                <%end%>
-                                                <% if transaction.amount != nil %>
-                                                <td><%= transaction.amount %></td>
-                                                <%else%>
-                                                <td><%= transaction.amount %></td>
-                                                <%end%>
-                                            </tr>
+                            </div>
+                            <div class="card-body order-datatable">
+                                <table class="table table-hover table-striped spacing8" id="basic-1">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Full Names</th>
+
+                                            <th>Payment Mode</th>
+
+
+                                            <th>Date</th>
+                                            <th>Total</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% count = 0 %>
+                                        <% @transactions.reverse.each do |transaction| %>
+                                        <tr>
+                                            <td><%= count += 1 %></td>
+                                            <td><%= transaction.full_names %></td>
+
+                                            <td><span class="badge badge-secondary"><%= transaction.payment_mode %></span></td>
+
+
+                                            <% if transaction.date != nil %>
+                                            <td><%= transaction.date.to_date %></td>
+                                            <%else%>
+                                            <td><%= transaction.created_at.to_date %></td>
                                             <%end%>
-                                        </tbody>
-                                    </table>
-                                </div>
+
+                                            <% if transaction.amount != nil %>
+                                            <td><%= transaction.amount %></td>
+                                            <%else%>
+                                            <td><%= transaction.amount %></td>
+                                            <%end%>
+
+                                            <td>
+                                                <div class='actions row-actions'>
+
+                                                    <%= link_to transaction_path(transaction.id), remote: true, class: "show" do %>
+                                                    <span><i class="fa fa-eye" aria-hidden="true"></i></span>
+                                                    <%end%>
+
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <%end%>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- Container-fluid Ends-->
-
             </div>
+            <!-- Container-fluid Ends-->
 
-            <!-- footer start-->
-            <%= render "layouts/admin_footer" %>
+        </div>
+
+        <!-- footer start-->
+        <%= render 'layouts/admin_footer' %>
         <!-- footer end-->
 
     </div>
@@ -148,39 +126,40 @@
 <!-- latest jquery-->
 <%= javascript_include_tag 'js/jquery-3.3.1.min.js' %>
 
-            <!-- Bootstrap js-->
-            <%= javascript_include_tag 'js/popper.min.js' %>
-            <%= javascript_include_tag 'js/bootstrap.js' %>
+<!-- Bootstrap js-->
+<%= javascript_include_tag 'js/popper.min.js' %>
+<%= javascript_include_tag 'js/bootstrap.js' %>
 
-            <!-- feather icon js-->
-            <%= javascript_include_tag 'js/icons/feather-icon/feather.min.js' %>
-            <%= javascript_include_tag 'js/icons/feather-icon/feather-icon.js' %>
+<!-- feather icon js-->
+<%= javascript_include_tag 'js/icons/feather-icon/feather.min.js' %>
+<%= javascript_include_tag 'js/icons/feather-icon/feather-icon.js' %>
 
-            <!-- Sidebar jquery-->
-            <%= javascript_include_tag 'js/sidebar-menu' %>
+<!-- Sidebar jquery-->
+<%= javascript_include_tag 'js/sidebar-menu' %>
 
+<!-- Datatable js-->
+<%= javascript_include_tag 'js/datatables/jquery.dataTables.min.js' %>
+<%= javascript_include_tag 'js/datatables/custom-basic' %>
 
-            <!-- Jsgrid js-->
-            <%= javascript_include_tag 'js/jsgrid/jsgrid.min.js' %>
-            <%= javascript_include_tag 'js/jsgrid/griddata-transactions' %>
-            <%= javascript_include_tag "js/jsgrid/jsgrid-transactions" %>
+<!--Customizer admin-->
+<%= javascript_include_tag 'js/admin-customizer.js' %>
 
-            <!-- Datatable js-->
-            <%= javascript_include_tag 'js/datatables/jquery.dataTables.min.js' %>
-            <%= javascript_include_tag 'js/datatables/custom-basic' %>
+<!-- lazyload js-->
+<%= javascript_include_tag 'js/lazysizes.min.js' %>
 
-            <!--Customizer admin-->
-            <%= javascript_include_tag 'js/admin-customizer.js' %>
+<!--right sidebar js-->
+<%= javascript_include_tag 'js/chat-menu.js' %>
 
-            <!-- lazyload js-->
-            <%= javascript_include_tag 'js/lazysizes.min.js' %>
+<!--script admin-->
+<%= javascript_include_tag 'js/admin-script' %>
 
-            <!--right sidebar js-->
-            <%= javascript_include_tag 'js/chat-menu.js' %>
-
-            <!--script admin-->
-            <%= javascript_include_tag 'js/admin-script' %>
-
-</body>
-
-</html>
+<script>
+    var ordersTable = null
+    $(document).ready(function() {
+        ordersTable = $("#basic-1").DataTable({
+            // alert('databale found');
+            // console.log("656565")
+        });
+        //   PopulateItemsTable();
+    });
+</script>

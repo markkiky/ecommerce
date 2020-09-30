@@ -1,0 +1,106 @@
+
+<!-- Modals -->
+<div class="modal fade" id="transactionModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">More details about the Bill</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <h6><strong>Order Number.</strong></h6>
+                    <p>The Bill No. goes here</p>
+                    <hr>
+
+                    <h6><strong>Details</strong></h6>
+                    <p>Transfer <strong>Amount</strong> to <strong>Bill No.</strong></p>
+                    <hr>
+
+                    <div class="row">
+                        <div class="col-6">
+                            <h6><strong>Date Receipted</strong></h6>
+                            <p>1st Aug 2020</p>
+                        </div>
+
+                        <div class="col-6">
+                            <h6><strong>Time</strong></h6>
+                            <p>11:45:26 AM</p>
+                        </div>
+                    </div>
+                    <hr>
+
+
+                    <h6><strong>Editted By.</strong></h6>
+                    <p><a title="" href="member-profile.html">Amos Wele</a></p>
+                    <hr>
+
+                    <h6><strong>Bill Status</strong></h6>
+                    <p><span class="listview_item chat_available">Active</span></td>
+                    </p>
+                    <hr>
+
+                    <h6><strong>Customer Details.</strong></h6>
+                    <p><strong>Name</strong> She Her</a></p>
+                    <p><strong>Contact:</strong> +254 700 191 331</p>
+                    <p><strong>Email:</strong> sheher@email.com</p>
+                    <hr>
+
+
+                    <h6><strong>Brief Description</strong></h6>
+                    <p>Traditional heading elements are designed to work best in the meat of your page content. When you need a heading to stand out, consider using a display heading - a larger, slightly more opinionated heading style.</p>
+
+                    <hr>
+                    <div class="row">
+                        <div class="col-6">
+                            <h6 class="text-left"><strong>Amount</strong></h6>
+                            <h3 class="text-left">KES 9,000</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-success btn--icon-text px-5" data-dismiss="modal">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+        $(document).ready(function(){
+
+            // code to read selected table row cell data (values).
+            $("#data-table").on('click','.btnSelect',function(){
+                // alert("clicked");
+                // get the current row
+                var currentRow=$(this).closest("tr");
+
+                var col1=$(this).parent().siblings().eq(0).text(); // get current row 1st TD value
+                var col2=$(this).parent().siblings().eq(2).text();// get current row 2nd TD
+                var id_num=$(this).parent().siblings().eq(1).text();
+                var col3=$(this).parent().siblings().eq(3).text(); // get current row 3rd TD
+
+                var results=$(this).parent().siblings('.test-results').text();
+                var the_lab=$(this).parent().siblings('.the-lab').text();
+                var lab_val=0;
+
+
+                //alert(col1);
+
+                $("#get-id textarea").val(results);
+                $("#get-id #labId").val(lab_val);
+
+
+                $('#get-id .modal-body .the-id0').val(col1);
+                $('#get-id .modal-body .the-id1').val(col2);
+                $('#get-id .modal-body .the-id2').val(col3);
+                $('#inspectionCodeText').text($('#inspectionCode').val());
+
+                $('#testTittle').html(' <code class="modal_text"> '+id_num+' </code>');
+
+
+            });
+        });
+    </script>

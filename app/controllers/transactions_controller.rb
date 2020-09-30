@@ -6,11 +6,17 @@ class TransactionsController < ApplicationController
   # GET /transactions.json
   def index
     @transactions = Transaction.all
+    @orders = Order.all
   end
 
   # GET /transactions/1
   # GET /transactions/1.json
   def show
+    
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   # GET /transactions/new
