@@ -80,9 +80,8 @@ class TransactionsController < ApplicationController
     transaction_description = params[:TransactionDesc]
     name = params[:FullNames]
     date = params[:TransTime]
-    
 
-    # Create a new transaction for the received data
+     # Create a new transaction for the received data
     # order id for connection with orders
     callback_params = {
       'paybill_number' => params[:PayBillNumber], 
@@ -97,8 +96,16 @@ class TransactionsController < ApplicationController
       'payment_mode' => "MPESA"
     }
     @transaction = Transaction.new(callback_params)
-    # @transaction.save
-    # Update the concern Order
+
+    response = {
+      status: 200,
+      message: "Mpesa CallBack Payment Received",
+      data: callback_params
+     
+    }    
+    # return response to Alex
+    render json: response
+   
    
     if Order.where(:order_number => params[:AccountReference]).exists?
       order = Order.where(:order_number => params[:AccountReference]).last
@@ -137,47 +144,15 @@ class TransactionsController < ApplicationController
       # send email notification
       OrderMailer.with(customer: @customer, transaction: @transaction, order: order).order_payment.deliver_now
       # broadcast to mpesa channel
-      ActionCable.server.broadcast "mpesa_channel_#{order.id}", phone: params[:PhoneNumber], transaction_code: params[:MpesaReceiptNumber], paybill: params[:PayBillNumber]
+      # ActionCable.server.broadcast "mpesa_channel_#{order.id}", phone: params[:PhoneNumber], transaction_code: params[:MpesaReceiptNumber], paybill: params[:PayBillNumber]
     else
+      
     end
 
-
-    
-    respond_to do |format|
-      if @transaction.save! 
-        # broadcast mpesa payments on mpesa channel
-        # send email notification 
-        
-        
-        
-        # ActionCable.server.broadcast 'mpesa',
-        #   order_number: order.order_number,
-        #   payment_status: order.payment_status
-        # head :ok
-        # format.html { redirect_to @transaction, notice: 'Transaction was successfully created.' }
-        format.json { render :show, status: :created, location: @transaction }
-      else
-        # format.html { render :new }
-        format.json { render json: @transaction.errors, status: :unprocessable_entity }
-      end
-    end
-    
   end
 
   def card
-# byebug
-    # transaction_code = params[:code]
-    # status = params[:status]
-    # message = params[:message]
-    # transaction_id = params[:transaction_id]
-    # date = params[:TransTime]
-    # reconciliation_id = params[:reconciliation_id]
-    # amount = params[:Amount]
-    # amount = amount.to_i
-    # currency = params[:currency]
 
-    # Create a new transaction for the received data
-    # order id for connection with orders
     callback_params = {
       'transaction_code' => params[:code],
       'status' => params[:status],
@@ -188,31 +163,22 @@ class TransactionsController < ApplicationController
       'amount' => params[:authorizedAmount],
       'reconciliation_id' => params[:reconciliationId],
       'currency' => params[:currency],
-      'payment_mode' => "CARD",
-      'full_names' =>" Order.where(:order_id => 1).last.order_number"
+      'payment_mode' => "CARD"
+      
     }
     @transaction = Transaction.new(callback_params)
     # @transaction.save
     # Update the concern Order
+    response = {
+      status: 200,
+      message: "Card CallBack Payment Received",
+      data: callback_params
+     
+    }    
+    # return response to Alex
+    render json: response
 
-    respond_to do |format|
-      if @transaction.save! 
-        # broadcast mpesa payments on mpesa channel
-        # send email notification 
-        
-        
-        
-        # ActionCable.server.broadcast 'mpesa',
-        #   order_number: order.order_number,
-        #   payment_status: order.payment_status
-        # head :ok
-        # format.html { redirect_to @transaction, notice: 'Transaction was successfully created.' }
-        format.json { render :show, status: :created, location: @transaction }
-      else
-        # format.html { render :new }
-        format.json { render json: @transaction.errors, status: :unprocessable_entity }
-      end
-    end
+   
 
 
   end 

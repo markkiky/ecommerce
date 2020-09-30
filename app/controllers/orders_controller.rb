@@ -195,7 +195,7 @@ class OrdersController < ApplicationController
       https.use_ssl = true
 
       request = Net::HTTP::Post.new(url)
-      form_data = [["function", "CustomerPayBillOnlinePush"], ["PayBillNumber", "367776"], ["Amount", @order.order_subtotal.to_s], ["PhoneNumber", phone], ["AccountReference", @order.order_number], ["TransactionDesc", @order.order_number], ["FullNames", "- - -"]]
+      form_data = [["function", "CustomerPayBillOnlinePush"], ["PayBillNumber", "175555"], ["Amount", @order.order_subtotal.to_s], ["PhoneNumber", phone], ["AccountReference", @order.order_number], ["TransactionDesc", @order.order_number], ["FullNames", "- - -"]]
       request.set_form form_data, "multipart/form-data"
       response = https.request(request)
       puts response.read_body
