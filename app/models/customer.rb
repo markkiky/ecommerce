@@ -8,6 +8,9 @@ class Customer < ApplicationRecord
   has_many :orders
   has_many :wishlists
   has_many :reviews
+
+  validates :first_name, :presence => true
+  validates :last_name, :presence => true
   # class << self
   #   def from_omniauth(auth_hash)
   #     user = find_or_create_by(uid: auth_hash['uid'], provider: auth_hash['provider'])

@@ -1,13 +1,12 @@
+<%= devise_error_messages! %>
 <head>
-
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Multikart admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
     <meta name="keywords" content="admin template, Multikart admin template, dashboard template, flat admin template, responsive admin template, web app">
     <meta name="author" content="pixelstrap">
-    <link rel="icon" href="../resources/images/dashboard/favicon.png" type="image/x-icon">
-    <link rel="shortcut icon" href="../resources/images/dashboard/favicon.png" type="image/x-icon">
+    <%= favicon_link_tag 'ArigieneLogo' %>
 
     <!-- Google font-->
     <link href="https://fonts.googleapis.com/css?family=Work+Sans:100,200,300,400,500,600,700,800,900" rel="stylesheet">
@@ -169,7 +168,6 @@
                             <div class="tab-content" id="top-tabContent">
                                 <div class="tab-pane fade show active" id="top-profile" role="tabpanel" aria-labelledby="top-profile-tab">
                                     <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), :html => {:class => "form-horizontal auth-form"}) do |f| %>
-                                    <%= f.error_notification %>
                                     <div class="form-group">
                                         <%= f.email_field :email, :class => "form-control", autofocus: true, :placeholder => "Email", required: true %>
                                     </div>
@@ -200,7 +198,6 @@
                                 </div>
                                 <div class="tab-pane fade" id="top-contact" role="tabpanel" aria-labelledby="contact-top-tab">
                                     <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), :html => {:class => "form-horizontal auth-form"}) do |f| %>
-                                    <%= f.error_notification %>
                                     <div class="form-group">
                                         <%= f.email_field :email, :class => "form-control", autofocus: true, :placeholder => "Email", required: true %>
                                     </div>
@@ -274,5 +271,3 @@
         dots: true
     });
 </script>
-
-<%= render "admins/shared/links" %>

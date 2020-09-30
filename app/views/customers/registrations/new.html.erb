@@ -1,3 +1,4 @@
+<%= devise_error_messages! %>
 <%= render 'layouts/header' %>
 <!-- breadcrumb start -->
 <div class="breadcrumb-section">
@@ -11,7 +12,7 @@
             <div class="col-sm-6">
                 <nav aria-label="breadcrumb" class="theme-breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                        <li class="breadcrumb-item"><a href="<%= root_url %>">Home</a></li>
                         <li class="breadcrumb-item active" aria-current="page">create account</li>
                     </ol>
                 </nav>
@@ -29,42 +30,37 @@
             <div class="col-lg-12">
                 <h3>create account</h3>
                 <div class="theme-card">
-
                     <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), :html => {:class => "theme-form"}) do |f| %>
-                    <%= f.error_notification %>
                     <div class="form-row form-inputs">
                         <div class="col-md-6">
                             <%= f.label :first_name %>
                             <%= f.text_field :first_name, autofocus: true,  class: "form-control", placeholder: "First Name", required: true %>
                         </div>
-                        <div class="col-md-6">
-
+                         <div class="col-md-6">
                             <%= f.label :last_name %>
                             <%= f.text_field :last_name, class: "form-control", placeholder: "Last Name", required: true %>
-
-                        </div>
+                        </div>  
                     </div>
-                    <div class="form-row form-inputs">
+                    <div class="form-row form-inputs">    
                         <div class="col-md-6">
-
                             <%= f.label :email %>
-
                             <%= f.email_field :email, autocomplete: "email", placeholder: "Email", class: "form-control",  required: true %>
                         </div>
-                        <div class="col-md-6">
+                         <div class="col-md-6">
                             <%= f.label :password %>
-
-                            <%= f.password_field :password, autocomplete: 'new-password', class: 'form-control', placeholder: "Enter your password", required: true %>
-                        </div>
-                        <%= f.submit "Create Account", class: 'btn btn-solid' %>
+                            <%= f.password_field :password, required: true, :class => "form-control", :placeholder => "Password", hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length), input_html: { autocomplete: "new-password" } %>
+                        </div>                             
+                        <div class="col-md-6">
+                            <%= f.label :password_confirmation %>
+                            <%= f.password_field :password_confirmation, :class => "form-control", required: true, :placeholder => "Confirm Password", input_html: { autocomplete: "new-password" } %>
+                        </div>          
                     </div>
-                    <%end%>
-
+                        <%= f.submit "Create Account", class: 'btn btn-solid' %>
+                    <% end %>
                 </div>
             </div>
         </div>
     </div>
 </section>
 <!--Section ends-->
-<%= render  'layouts/theme_setting'%>
 <%= render 'layouts/footer' %>
