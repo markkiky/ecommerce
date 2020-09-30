@@ -4,7 +4,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">More details about the Bill</h5>
+                <h5 class="modal-title" id="exampleModalLongTitle">More details about the Transaction</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -12,51 +12,34 @@
             <div class="modal-body">
                 <div>
                     <h6><strong>Order Number.</strong></h6>
-                    <p>The Bill No. goes here</p>
-                    <hr>
-
-                    <h6><strong>Details</strong></h6>
-                    <p>Transfer <strong>Amount</strong> to <strong>Bill No.</strong></p>
+                    <p><%= @transaction.order_id %></p>
                     <hr>
 
                     <div class="row">
                         <div class="col-6">
-                            <h6><strong>Date Receipted</strong></h6>
-                            <p>1st Aug 2020</p>
-                        </div>
-
-                        <div class="col-6">
-                            <h6><strong>Time</strong></h6>
-                            <p>11:45:26 AM</p>
+                            <h6><strong>Date</strong></h6>
+                            <p><%= @transaction.created_at %></p>
                         </div>
                     </div>
                     <hr>
-
-
-                    <h6><strong>Editted By.</strong></h6>
-                    <p><a title="" href="member-profile.html">Amos Wele</a></p>
-                    <hr>
-
-                    <h6><strong>Bill Status</strong></h6>
-                    <p><span class="listview_item chat_available">Active</span></td>
+                    <h6><strong>Payment Mode </strong></h6>
+                    <p><span class="listview_item chat_available"><%= @transaction.payment_mode %></span></td>
                     </p>
                     <hr>
 
                     <h6><strong>Customer Details.</strong></h6>
-                    <p><strong>Name</strong> She Her</a></p>
-                    <p><strong>Contact:</strong> +254 700 191 331</p>
-                    <p><strong>Email:</strong> sheher@email.com</p>
+                    <p><strong>Name</strong><%= @transaction.full_names %></a></p>
                     <hr>
 
 
                     <h6><strong>Brief Description</strong></h6>
-                    <p>Traditional heading elements are designed to work best in the meat of your page content. When you need a heading to stand out, consider using a display heading - a larger, slightly more opinionated heading style.</p>
+                    <p><%= @transaction.message %></p>
 
                     <hr>
                     <div class="row">
                         <div class="col-6">
                             <h6 class="text-left"><strong>Amount</strong></h6>
-                            <h3 class="text-left">KES 9,000</h3>
+                            <h3 class="text-left"><%= @transaction.amount%></h3>
                         </div>
                     </div>
                 </div>
