@@ -7,7 +7,7 @@ class OrdersController < ApplicationController
   @@mpesa_retry = 3
 
   before_action :authenticate_admin!, only: [:index, :show]
-  before_action :authenticate_customer!, only: [:new, :create]
+  # before_action :authenticate_customer!, only: [:new, :create]
 
   # before_action :set_order, only: [:check_payment]
 
@@ -21,7 +21,11 @@ class OrdersController < ApplicationController
 
   def new
     @order = current_cart.order
-    @customer = current_customer
+    if current_customer != nil
+      @customer = current_customer
+    else
+      @customer = Customer.new
+    end
   end
 
   # GET /admin_order
@@ -73,25 +77,67 @@ class OrdersController < ApplicationController
     # check if order_cart_subtotal is empty
     #  TO DOs
     @order = current_cart.order
-    @order.customer_id = current_customer.id
 
-    @customer = current_customer
-    @customer.first_name = params[:customer][:first_name]
-    @customer.last_name = params[:customer][:last_name]
-    # @customer.email = params[:customer][:email]
-    @customer.phone = params[:customer][:phone]
-    @customer.county = params[:customer][:county]
-    @customer.shipping_address = params[:customer][:shipping_address]
-    @customer.shipping_city = params[:customer][:shipping_city]
-    @customer.shipping_postal_code = params[:customer][:shipping_postal_code]
-    @customer.billing_address = params[:customer][:billing_address]
-    @customer.billing_country = params[:customer][:billing_country]
-    @customer.billing_city = params[:customer][:billing_city]
-    @customer.billing_postal_code = params[:customer][:billing_postal_code]
-    @customer.delivery_option = params[:customer][:delivery_option]
-    @customer.pick_up_option = params[:customer][:pick_up_option]
+    if current_customer != nil
+      @order.customer_id = current_customer.id
+      @customer = current_customer
+      @customer.first_name = params[:customer][:first_name]
+      @customer.last_name = params[:customer][:last_name]
+      # @customer.email = params[:customer][:email]
+      @customer.phone = params[:customer][:phone]
+      @customer.county = params[:customer][:county]
+      @customer.shipping_address = params[:customer][:shipping_address]
+      @customer.shipping_city = params[:customer][:shipping_city]
+      @customer.shipping_postal_code = params[:customer][:shipping_postal_code]
+      @customer.billing_address = params[:customer][:billing_address]
+      @customer.billing_country = params[:customer][:billing_country]
+      @customer.billing_city = params[:customer][:billing_city]
+      @customer.billing_postal_code = params[:customer][:billing_postal_code]
+      @customer.delivery_option = params[:customer][:delivery_option]
+      @customer.pick_up_option = params[:customer][:pick_up_option]
 
-    @customer.save!
+      @customer.save!
+    elsif current_customer == nil
+      # check customer exists
+      if Customer.where(:email => params[:customer][:email]).exists?
+        @customer = Customer.where(:email => params[:customer][:email]).last
+        @customer.first_name = params[:customer][:first_name]
+        @customer.last_name = params[:customer][:last_name]
+        @customer.email = params[:customer][:email]
+        @customer.phone = params[:customer][:phone]
+        @customer.county = params[:customer][:county]
+        @customer.shipping_address = params[:customer][:shipping_address]
+        @customer.shipping_city = params[:customer][:shipping_city]
+        @customer.shipping_postal_code = params[:customer][:shipping_postal_code]
+        @customer.billing_address = params[:customer][:billing_address]
+        @customer.billing_country = params[:customer][:billing_country]
+        @customer.billing_city = params[:customer][:billing_city]
+        @customer.billing_postal_code = params[:customer][:billing_postal_code]
+        @customer.delivery_option = params[:customer][:delivery_option]
+        @customer.pick_up_option = params[:customer][:pick_up_option]
+        @customer.save!
+        @order.customer_id = @customer.id
+      else
+        @customer = Customer.new
+        @customer.first_name = params[:customer][:first_name]
+        @customer.last_name = params[:customer][:last_name]
+        @customer.email = params[:customer][:email]
+        @customer.phone = params[:customer][:phone]
+        @customer.county = params[:customer][:county]
+        @customer.shipping_address = params[:customer][:shipping_address]
+        @customer.shipping_city = params[:customer][:shipping_city]
+        @customer.shipping_postal_code = params[:customer][:shipping_postal_code]
+        @customer.billing_address = params[:customer][:billing_address]
+        @customer.billing_country = params[:customer][:billing_country]
+        @customer.billing_city = params[:customer][:billing_city]
+        @customer.billing_postal_code = params[:customer][:billing_postal_code]
+        @customer.delivery_option = params[:customer][:delivery_option]
+        @customer.pick_up_option = params[:customer][:pick_up_option]
+        @customer.password = "123456"
+        @customer.save!
+        @order.customer_id = @customer.id
+      end
+    end
     if @order.update_attributes(order_params.merge(order_status: "pending_payment", order_number: Order.counter, order_date: Date.today()))
       session[:cart_token] = nil
       redirect_to order_payment_path(@order.id)
@@ -269,53 +315,6 @@ class OrdersController < ApplicationController
     respond_to do |format|
       format.js
     end
-  end
-
-  def create
-    # check if order_cart_subtotal is empty
-    #  TO DOs
-    @order = current_cart.order
-    @order.customer_id = current_customer.id
-
-    @customer = current_customer
-    @customer.first_name = params[:customer][:first_name]
-    @customer.last_name = params[:customer][:last_name]
-    # @customer.email = params[:customer][:email]
-    @customer.phone = params[:customer][:phone]
-    @customer.county = params[:customer][:county]
-    @customer.shipping_address = params[:customer][:shipping_address]
-    @customer.shipping_city = params[:customer][:shipping_city]
-    @customer.shipping_postal_code = params[:customer][:shipping_postal_code]
-    @customer.billing_address = params[:customer][:billing_address]
-    @customer.billing_country = params[:customer][:billing_country]
-    @customer.billing_city = params[:customer][:billing_city]
-    @customer.billing_postal_code = params[:customer][:billing_postal_code]
-    @customer.delivery_option = params[:customer][:delivery_option]
-    @customer.pick_up_option = params[:customer][:pick_up_option]
-
-    @customer.save!
-    if @order.update_attributes(order_params.merge(order_status: "pending_payment", order_number: Order.counter, order_date: Date.today()))
-      session[:cart_token] = nil
-      redirect_to order_payment_path(@order.id)
-    else
-      render :new
-    end
-    # if @order.payment_method == "Mpesa"
-
-    # elsif @order.payment_method == "Cash on Delivery"
-    #     redirect_to order_success_path
-    #     url = URI("http://sna.co.ke/sna_api/index.php")
-    #    http = Net::HTTP.new(url.host, url.port);
-    #    request = Net::HTTP::Post.new(url)
-    #    form_data = [['function', 'sendMessage'],['phoneNumber', @order.client_phone_number],['message', "Hi #{@order.client_name}. Your Order Number #{@order.id} of KES #{@order.order_subtotal.to_i.to_s.reverse.gsub(/...(?=.)/,'\&,').reverse} is being processed."],['senderId', 'COVERAPP'],['username', 'MALISAFI']]
-    #    request.set_form form_data, 'multipart/form-data'
-    #    response = http.request(request)
-    #    puts response.read_body
-
-    # elsif @order.payment_method == "Card"
-    #   redirect_to order_success_path
-    # end
-
   end
 
   #

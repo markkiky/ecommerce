@@ -73,7 +73,9 @@ Rails.application.routes.draw do
   resources :order_items, path: '/cart/items'
   get '/cart', to: 'order_items#index'
   get '/cart/checkout', to: 'orders#new', as: :checkout
+  # post '/cart/checkout', to: 'orders#new', as: :guest_checkout
   patch '/cart/checkout', to: 'orders#create'
+  post '/cart/checkout', to: "orders#create"
   get 'order_success/:id', to: 'orders#order_success', as: :order_success
 
   # order paths
