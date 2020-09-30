@@ -18,15 +18,29 @@
 
         <div class="page-body">
 
-            <!-- Container-fluid starts-->
-            <div class="container-fluid">
-                <div class="page-header">
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="page-header-left">
-                                <h3>Orders
-                                    <small>Arigiene Admin panel</small>
-                                </h3>
+            <!-- Right sidebar Start-->
+            <%= render 'layouts/admins/admin_right_sidebar' %>
+            <!-- Right sidebar Ends-->
+
+            <div class="page-body">
+
+                <!-- Container-fluid starts-->
+                <div class="container-fluid">
+                    <div class="page-header">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="page-header-left">
+                                    <h3>Orders
+                                        <small>Arigiene Admin panel</small>
+                                    </h3>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <ol class="breadcrumb pull-right">
+                                    <li class="breadcrumb-item"><a href="<%= root_url %>"><i data-feather="home"></i></a></li>
+                                    <li class="breadcrumb-item">Sales</li>
+                                    <li class="breadcrumb-item active">Orders</li>
+                                </ol>
                             </div>
                         </div>
                         <div class="col-lg-6">
@@ -122,7 +136,6 @@
 <%= javascript_include_tag 'js/popper.min.js' %>
 <%= javascript_include_tag 'js/bootstrap.js' %>
 
-<!-- feather icon js-->
 <%= javascript_include_tag 'js/icons/feather-icon/feather.min.js' %>
 <%= javascript_include_tag 'js/icons/feather-icon/feather-icon.js' %>
 

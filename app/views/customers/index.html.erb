@@ -1,198 +1,141 @@
-<div class="page-wrapper">
-    <%= render "layouts/admin_header"%>
-    <div class="page-body-wrapper">
-        <%= render 'layouts/admin_sidebar' %>
-        <div class="page-body">
-            <!-- Container-fluid starts-->
-            <div class="container-fluid">
-                <div class="page-header">
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="page-header-left">
-                                <h3>User List
-                                    <small>Multikart Admin panel</small>
-                                </h3>
+
+
+    <!-- page-wrapper Start-->
+    <div class="page-wrapper">
+
+        <!-- Page Header Start-->
+        <%= render 'layouts/admin_header' %>
+        <!-- Page Header Ends -->
+
+        <!-- Page Body Start-->
+        <div class="page-body-wrapper">
+
+            <!-- Page Sidebar Start-->
+            <%= render 'layouts/admin_sidebar' %>
+            <!-- Page Sidebar Ends-->
+
+            <!-- Right sidebar Start-->
+            <%= render 'layouts/admins/admin_right_sidebar' %>
+            <!-- Right sidebar Ends-->
+
+            <div class="page-body">
+
+                <!-- Container-fluid starts-->
+                <div class="container-fluid">
+                    <div class="page-header">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="page-header-left">
+                                    <h3>Users
+                                        <small>Arigiene Admin panel</small>
+                                    </h3>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <ol class="breadcrumb pull-right">
+                                    <li class="breadcrumb-item"><a href="<%= root_url %>"><i data-feather="home"></i></a></li>
+                                    <li class="breadcrumb-item">User List</li>
+                                    <li class="breadcrumb-item active">Users</li>
+                                </ol>
                             </div>
                         </div>
-                        <div class="col-lg-6">
-                            <ol class="breadcrumb pull-right">
-                                <li class="breadcrumb-item"><a href="index.html"><i data-feather="home"></i></a></li>
-                                <li class="breadcrumb-item">Users</li>
-                                <li class="breadcrumb-item active">User List</li>
-                            </ol>
+                    </div>
+                </div>
+                <!-- Container-fluid Ends-->
+
+                <!-- Container-fluid starts-->
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5>User Details</h5>
+                                    <div style="float: right;">
+                                        <%= link_to admin_order_path, :class => "btn btn-primary d-none", remote: true do %>
+                                        Place Order
+                                        <%end%>
+                                    </div>
+                                </div>
+                                <div class="card-body order-datatable">
+                                    <table class="display" id="basic-1">
+                                        <thead>
+                                            <tr>
+                                                <th>No</th>
+                                                <th>First Name</th>
+                                                <th>Last Name</th>
+                                                <th>Phone Number </th>
+                                                <th>Email</th>
+                                                <th>Country</th>
+                                                <th>Last Login</th>
+                                        </thead>
+                                        <tbody>
+                                            <% count = 0 %>
+                                            <% @customers.each do |user| %>
+                                            <tr>
+                                                <td><%= count += 1 %></td>
+                                                <td><%= user.first_name %></td>
+                                                <td><%= user.last_name %></td>
+                                                <td><%= user.phone %></td>
+                                                <td><%= user.email %></td>
+                                                <td><%= user.county %></td>
+                                                <td><%= user.last_sign_in_at %></td>
+                                            </tr>
+                                            <% end %>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <!-- Container-fluid Ends-->
+                <!-- Container-fluid Ends-->
 
-            <!-- Container-fluid starts-->
-            <div class="container-fluid">
-                <div class="card">
-                    <div class="card-header">
-                        <h5>User Details</h5>
-                    </div>
-                    <div class="card-body vendor-table">
-                        <table class="display" id="basic-1">
-                            <thead>
-                                <tr>
-                                    <th>Customer</th>
-                                    <th>First name</th>
-                                    <th>Last name</th>
-                                    <th>Class</th>
-                                    <th>Room</th>
-                                    <th>Building</th>
-                                    <th>Address1</th>
-                                    <th>Address2</th>
-                                    <th>City</th>
-                                    <th>County</th>
-                                    <th>Phone</th>
-                                    <th>Email</th>
-                                    <th>Password</th>
-                                    <th>Credit card</th>
-                                    <th>Credit card type</th>
-                                    <th>Card exp mo</th>
-                                    <th>Card exp yr</th>
-                                    <th>Billing address</th>
-                                    <th>Billing city</th>
-                                    <th>Billing region</th>
-                                    <th>Billing postal code</th>
-                                    <th>Billing country</th>
-                                    <th>Shipping address</th>
-                                    <th>Shipping city</th>
-                                    <th>Shipping region</th>
-                                    <th>Shipping postal code</th>
-                                    <th>Shipping country</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                             <% @customers.each do |customer| %>
-                                <tr>
-                                    
-                                    <td><%= customer.customer_id %></td>
-                                    <td><%= customer.first_name %></td>
-                                    <td><%= customer.last_name %></td>
-                                    <td><%= customer.class %></td>
-                                    <td><%= customer.room %></td>
-                                    <td><%= customer.building %></td>
-                                    <td><%= customer.address1 %></td>
-                                    <td><%= customer.address2 %></td>
-                                    <td><%= customer.city %></td>
-                                    <td><%= customer.county %></td>
-                                    <td><%= customer.phone %></td>
-                                    <td><%= customer.email %></td>
-                                    <td><%= customer.password %></td>
-                                    <td><%= customer.credit_card %></td>
-                                    <td><%= customer.credit_card_type_id %></td>
-                                    <td><%= customer.card_exp_mo %></td>
-                                    <td><%= customer.card_exp_yr %></td>
-                                    <td><%= customer.billing_address %></td>
-                                    <td><%= customer.billing_city %></td>
-                                    <td><%= customer.billing_region %></td>
-                                    <td><%= customer.billing_postal_code %></td>
-                                    <td><%= customer.billing_country %></td>
-                                    <td><%= customer.shipping_address %></td>
-                                    <td><%= customer.shipping_city %></td>
-                                    <td><%= customer.shipping_region %></td>
-                                    <td><%= customer.shipping_postal_code %></td>
-                                    <td><%= customer.shipping_country %></td>
-                                    <td>
-                                        <div>
-                                            <i class="fa fa-edit mr-2 font-success"></i>
-                                            <i class="fa fa-trash font-danger"></i>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <%end%>
-                            </tbody>
-                        </table>
-                    </div>
-
-                </div>
             </div>
-            <!-- Container-fluid Ends-->
+
+            <!-- footer start-->
+            <%= render 'layouts/admin_footer' %>
+            <!-- footer end-->
+
         </div>
+
     </div>
-</div>
 
-<div class="d-none">
-    <p id="notice"><%= notice %></p>
+    <!-- latest jquery-->
+    <%= javascript_include_tag 'js/jquery-3.3.1.min.js' %>
 
-    <h1>Customers</h1>
+    <!-- Bootstrap js-->
+    <%= javascript_include_tag 'js/popper.min.js' %>
+    <%= javascript_include_tag 'js/bootstrap.js' %>
 
-    <table>
-        <thead>
-            <tr>
-                <th>Customer</th>
-                <th>First name</th>
-                <th>Last name</th>
-                <th>Class</th>
-                <th>Room</th>
-                <th>Building</th>
-                <th>Address1</th>
-                <th>Address2</th>
-                <th>City</th>
-                <th>County</th>
-                <th>Phone</th>
-                <th>Email</th>
-                <th>Password</th>
-                <th>Credit card</th>
-                <th>Credit card type</th>
-                <th>Card exp mo</th>
-                <th>Card exp yr</th>
-                <th>Billing address</th>
-                <th>Billing city</th>
-                <th>Billing region</th>
-                <th>Billing postal code</th>
-                <th>Billing country</th>
-                <th>Shipping address</th>
-                <th>Shipping city</th>
-                <th>Shipping region</th>
-                <th>Shipping postal code</th>
-                <th>Shipping country</th>
-                <th colspan="3"></th>
-            </tr>
-        </thead>
+    <%= javascript_include_tag 'js/icons/feather-icon/feather.min.js' %>
+    <%= javascript_include_tag 'js/icons/feather-icon/feather-icon.js' %>
 
-        <tbody>
-            <% @customers.each do |customer| %>
-            <tr>
-                <td><%= customer.customer_id %></td>
-                <td><%= customer.first_name %></td>
-                <td><%= customer.last_name %></td>
-                <td><%= customer.class %></td>
-                <td><%= customer.room %></td>
-                <td><%= customer.building %></td>
-                <td><%= customer.address1 %></td>
-                <td><%= customer.address2 %></td>
-                <td><%= customer.city %></td>
-                <td><%= customer.county %></td>
-                <td><%= customer.phone %></td>
-                <td><%= customer.email %></td>
-                <td><%= customer.password %></td>
-                <td><%= customer.credit_card %></td>
-                <td><%= customer.credit_card_type_id %></td>
-                <td><%= customer.card_exp_mo %></td>
-                <td><%= customer.card_exp_yr %></td>
-                <td><%= customer.billing_address %></td>
-                <td><%= customer.billing_city %></td>
-                <td><%= customer.billing_region %></td>
-                <td><%= customer.billing_postal_code %></td>
-                <td><%= customer.billing_country %></td>
-                <td><%= customer.shipping_address %></td>
-                <td><%= customer.shipping_city %></td>
-                <td><%= customer.shipping_region %></td>
-                <td><%= customer.shipping_postal_code %></td>
-                <td><%= customer.shipping_country %></td>
-                <td><%= link_to 'Show', customer %></td>
-                <td><%= link_to 'Edit', edit_customer_path(customer) %></td>
-                <td><%= link_to 'Destroy', customer, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-            </tr>
-            <% end %>
-        </tbody>
-    </table>
+    <!-- Sidebar jquery-->
+    <%= javascript_include_tag 'js/sidebar-menu' %>
 
-    <br>
+    <!-- Datatable js-->
+    <%= javascript_include_tag 'js/datatables/jquery.dataTables.min.js' %>
+    <%= javascript_include_tag 'js/datatables/custom-basic' %>
 
-    <%= link_to 'New Customer', new_customer_path %>
-</div>
+    <!--Customizer admin-->
+    <%= javascript_include_tag 'js/admin-customizer.js' %>
+
+    <!-- lazyload js-->
+    <%= javascript_include_tag 'js/lazysizes.min.js' %>
+
+    <!--right sidebar js-->
+    <%= javascript_include_tag 'js/chat-menu.js' %>
+
+    <!--script admin-->
+    <%= javascript_include_tag 'js/admin-script' %>
+
+<script>
+var ordersTable = null
+$(document).ready(function() {
+  ordersTable = $("#basic-1").DataTable({
+    // alert('databale found');
+    // console.log("656565")
+  });
+//   PopulateItemsTable();
+});
+</script>
