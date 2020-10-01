@@ -3,8 +3,8 @@ class OrdersController < ApplicationController
   require "uri"
   require "net/http"
   require "json"
-  @@mpesa_timeout = 30
-  @@mpesa_retry = 3
+  @@mpesa_timeout = 50
+  @@mpesa_retry = 2
 
   before_action :authenticate_admin!, only: [:index, :show]
   # before_action :authenticate_customer!, only: [:new, :create]
