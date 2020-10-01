@@ -1,0 +1,6 @@
+// alert("NIMEFIKIWO")
+
+
+$('#chooseModalCenter').remove();
+$('.page-body').append("<%= j render(:partial => 'layouts/admins/choose_payment_modal') %>");
+$("#chooseModalCenter").modal("show");

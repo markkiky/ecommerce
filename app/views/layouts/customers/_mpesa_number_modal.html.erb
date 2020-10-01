@@ -15,8 +15,11 @@
     
                 <div class="form-group">
                     <label for="exampleInputEmail1">Phone Number</label>
-                    
+                    <% if @customer != nil %>
                     <%= f.number_field :phone, placeholder: "Enter Phone", class: "form-control", required: true, value: @customer.phone  %>
+                    <%else%>
+                    <%= f.number_field :phone, placeholder: "Enter Phone", class: "form-control", required: true %>
+                    <%end%>
                     <small id="emailHelp" class="form-text text-muted">We'll never share your phone number with anyone else.</small>
                 </div>
                 

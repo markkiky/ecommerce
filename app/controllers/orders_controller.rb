@@ -37,6 +37,31 @@ class OrdersController < ApplicationController
     end
   end
 
+  def choose_payment
+    # byebug
+    @order = Order.find(params[:id])
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+
+  def admin_payment
+    
+    if params["payment-group"] == 'mpesa'
+
+    elsif  params["payment-group"] == 'card'
+
+    elsif  params["payment-group"] == 'cash'
+
+    end
+    @payment_group = params['payment-group']
+    
+    respond_to do |format|
+      format.js
+    end
+  end
+
   # GET /order_product
   def order_product
     @products = Product.where(:category_id => params[:category_id]).map { |p| [p.product_name, p.id] }

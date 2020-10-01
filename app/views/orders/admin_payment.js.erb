@@ -1,0 +1,19 @@
+// receive payment-group
+// alert("NIMEFIKIWO")
+
+var payment_group ="<%= @payment_group %>"
+
+// alert(payment_group);
+
+if(payment_group == 'mpesa'){
+    $('.page-body').append("<%= j render(:partial => 'layouts/customers/mpesa_number_modal') %>");
+    $("#chooseModalCenter").modal("hide")
+    $("#mpesaNumberModal").modal("show")
+
+
+}else if (payment_group == "cod"){
+
+}else if (payment_group == "card"){
+
+
+}

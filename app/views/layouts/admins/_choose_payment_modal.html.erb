@@ -1,56 +1,58 @@
 <!-- Modal -->
 <div class="modal fade" id="chooseModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Choose Payment Method</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Choose Payment Method</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
 
-    <form>
-      <div class="payment-box">
-                            <div class="upper-box">
-                                <div class="payment-options">
-                                    <ul>
-                                        
-                                        <fieldset>
-                                            <li>
-                                                <div class="radio-option">
-                                                    <input type="radio" name="payment-group" id="payment-1" checked="checked" value="mpesa">
+                
+                    <%= form_for admin_payment_path(@order.id), :remote => true do |form| %>
+                    <div class="payment-box">
+                        <div class="upper-box">
+                            <div class="payment-options">
+                                <ul>
 
-                                                    <label for="payment-1">Mpesa</label>
-                                                </div>
-                                            </li>
+                                    <fieldset>
+                                        <li>
+                                            <div class="radio-option">
+                                                <input type="radio" name="payment-group" id="payment-1" checked="checked" value="mpesa">
 
-                                            <li>
-                                                <div class="radio-option">
-                                                    <input type="radio" id="payment-2" name="payment-group" value="card">
-                                                    <label for="payment-2">Card</label>
+                                                <label for="payment-1">Mpesa</label>
+                                            </div>
+                                        </li>
 
-                                                </div>
-                                            </li>
+                                        <li>
+                                            <div class="radio-option">
+                                                <input type="radio" id="payment-2" name="payment-group" value="card">
+                                                <label for="payment-2">Card</label>
 
-                                               <li>
-                                                <div class="radio-option">
-                                                    <input type="radio" id="payment-3" name="payment-group" value="cod">
-                                                    <label for="payment-3">Cash on Delivery</label><br>
+                                            </div>
+                                        </li>
 
-                                                </div>
-                                            </li>
-                                        </fieldset>
-                                    </ul>
-                                </div>
+                                        <li>
+                                            <div class="radio-option">
+                                                <input type="radio" id="payment-3" name="payment-group" value="cod">
+                                                <label for="payment-3">Cash on Delivery</label><br>
+
+                                            </div>
+                                        </li>
+                                    </fieldset>
+                                </ul>
                             </div>
-                      
                         </div>
-        </form>                
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
+
+                    </div>
+                    <button type="button" class="btn btn-secondary d-none" data-dismiss="modal">PAY NOW</button>
+                    <%= form.submit "PAY NOW", class: "btn btn-secondary" %>
+                    <%end%>
+                
+            </div>
+            
+        </div>
     </div>
-  </div>
 </div>

@@ -1,4 +1,4 @@
-<%= render "layouts/admins/choose_payment_modal" %>
+<%# render "layouts/admins/choose_payment_modal" %>
 <!-- page-wrapper Start-->
 <div class="page-wrapper">
 
@@ -104,9 +104,13 @@
                                             <td><%= order.order_subtotal %></td>
                                             <%end%>
                                             <td>
-                                               <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#chooseModalCenter">
+                                               <button type="button" class="btn btn-primary d-none" data-toggle="modal" data-target="#chooseModalCenter">
                                                     Pay
                                                 </button>
+                                               
+                                                <%= link_to  choose_payment_path(order.id), :remote => true do %>
+                                                    Pay
+                                                <%end %>
                                                 
                                             </td>
                                         </tr>

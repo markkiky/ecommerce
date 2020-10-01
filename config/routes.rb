@@ -66,11 +66,13 @@ Rails.application.routes.draw do
   resources :homes
   devise_for :customers, :path => "users"
 
+  get "/choose_payment/:id", to: 'orders#choose_payment', as: :choose_payment
+  post '/choose_payment/:id', to: "orders#admin_payment", as: :admin_payment
 devise_scope :customer do
   get '/logout', to: 'sessions#destroy'
   get '/users', to: "devise/registrations#new"
 end 
-
+  # post '/admin_payment', to: "orders#admin_payment", as: :admin_payment
   post '/product_counter', to: "products#product_counter"
   # Customers Social Logins path
   # get 'auth/google_oauth/callback', to: 'sessions#customer_omniauth'
