@@ -1,18 +1,22 @@
+<!-- page-wrapper Start-->
+<div class="page-wrapper">
 
+    <!-- Page Header Start-->
+    <%= render 'layouts/admin_header' %>
+    <!-- Page Header Ends -->
 
-    <!-- page-wrapper Start-->
-    <div class="page-wrapper">
+    <!-- Page Body Start-->
+    <div class="page-body-wrapper">
 
-        <!-- Page Header Start-->
-        <%= render 'layouts/admin_header' %>
-        <!-- Page Header Ends -->
+        <!-- Page Sidebar Start-->
+        <%= render 'layouts/admin_sidebar' %>
+        <!-- Page Sidebar Ends-->
 
-        <!-- Page Body Start-->
-        <div class="page-body-wrapper">
+        <!-- Right sidebar Start-->
+        <%= render 'layouts/admins/admin_right_sidebar' %>
+        <!-- Right sidebar Ends-->
 
-            <!-- Page Sidebar Start-->
-            <%= render 'layouts/admin_sidebar' %>
-            <!-- Page Sidebar Ends-->
+        <div class="page-body">
 
             <!-- Right sidebar Start-->
             <!-- Right sidebar Ends-->
@@ -38,120 +42,143 @@
                                 </ol>
                             </div>
                         </div>
+                        <div class="col-lg-6">
+                            <ol class="breadcrumb pull-right">
+                                <li class="breadcrumb-item"><a href="index.html"><i data-feather="home"></i></a></li>
+                                <li class="breadcrumb-item">Sales</li>
+                                <li class="breadcrumb-item active">Orders</li>
+                            </ol>
+                        </div>
                     </div>
                 </div>
-                <!-- Container-fluid Ends-->
+            </div>
+            <!-- Container-fluid Ends-->
 
-                <!-- Container-fluid starts-->
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h5>Manage Order</h5>
-                                    <div style="float: right;">
-                                        <%= link_to admin_order_path, :class => "btn btn-primary", remote: true do %>
-                                        Place Order
-                                        <%end%>
-                                    </div>
+            <!-- Container-fluid starts-->
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>Manage Order</h5>
+                                <div style="float: right;">
+                                    <%= link_to admin_order_path, :class => "btn btn-primary", remote: true do %>
+                                    Place Order
+                                    <%end%>
                                 </div>
-                                <div class="card-body order-datatable">
-                                    <table class="display" id="basic-1">
-                                        <thead>
-                                            <tr>
-                                                <th>No</th>
-                                                <th>Order Id</th>
-                                                <th>Product</th>
-                                                <th>Payment Status</th>
-                                                <th>Payment Method</th>
-                                                <th>Order Status</th>
-                                                <th>Date</th>
-                                                <th>Total</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <% count = 0 %>
-                                            <% @orders.reverse.each do |order| %>
-                                            <tr>
-                                                <td><%= count += 1 %></td>
-                                                <td><%= order.order_number %></td>
-                                                <td>
-                                                    <div class="d-flex">
-                                                        <img src="../assets/images/electronics/product/25.jpg" alt="" class="img-fluid img-30 mr-2 blur-up lazyloaded">
-                                                        <img src="../assets/images/electronics/product/13.jpg" alt="" class="img-fluid img-30 mr-2 blur-up lazyloaded">
-                                                        <img src="../assets/images/electronics/product/16.jpg" alt="" class="img-fluid img-30 blur-up lazyloaded">
-                                                    </div>
-                                                </td>
-                                                <td><span class="badge badge-secondary"><%= order.payment_status %></span></td>
-                                                <td><%= order.payment_method %></td>
-                                                <td><span class="badge badge-success"><%= order.order_status %></span></td>
-                                                <% if order.order_date != nil %>
-                                                <td><%= order.order_date.to_date %></td>
-                                                <%else%>
-                                                <td><%= order.created_at.to_date %></td>
-                                                <%end%>
-                                                <% if order.order_total != nil %>
-                                                <td><%= order.order_total %></td>
-                                                <%else%>
-                                                <td><%= order.order_subtotal %></td>
-                                                <%end%>
-                                            </tr>
+                            </div>
+                            <div class="card-body order-datatable">
+                                <table class="display" id="basic-1">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Order Id</th>
+                                            <th>Product</th>
+                                            <th>Payment Status</th>
+                                            <th>Payment Method</th>
+                                            <th>Order Status</th>
+                                            <th>Date</th>
+                                            <th>Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% count = 0 %>
+                                        <% @orders.reverse.each do |order| %>
+                                        <tr>
+                                            <td><%= count += 1 %></td>
+                                            <td><%= order.order_number %></td>
+                                            <td>
+                                                <div class="d-flex">
+                                                    <%= link_to order_path(order.id), class: "product_images", remote: true do%>
+                                                        <i class="fa fa-file-image-o" aria-hidden="true"></i>
+                                                    <% end %>
+                                                </div>
+                                            </td>
+                                            <td><span class="badge badge-secondary"><%= order.payment_status %></span></td>
+                                            <td><%= order.payment_method %></td>
+                                            <td><span class="badge badge-success"><%= order.order_status %></span></td>
+                                            <% if order.order_date != nil %>
+                                            <td><%= order.order_date.to_date %></td>
+                                            <%else%>
+                                            <td><%= order.created_at.to_date %></td>
                                             <%end%>
-                                        </tbody>
-                                    </table>
-                                </div>
+                                            <% if order.order_total != nil %>
+                                            <td><%= order.order_total %></td>
+                                            <%else%>
+                                            <td><%= order.order_subtotal %></td>
+                                            <%end%>
+                                        </tr>
+                                        <%end%>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- Container-fluid Ends-->
-
             </div>
-
-            <!-- footer start-->
-            <%= render 'layouts/admin_footer' %>
-            <!-- footer end-->
+            <!-- Container-fluid Ends-->
 
         </div>
 
+        <!-- footer start-->
+        <%= render 'layouts/admin_footer' %>
+        <!-- footer end-->
+
     </div>
 
-    <!-- latest jquery-->
-    <%= javascript_include_tag 'js/jquery-3.3.1.min.js' %>
+</div>
 
-    <!-- Bootstrap js-->
-    <%= javascript_include_tag 'js/popper.min.js' %>
-    <%= javascript_include_tag 'js/bootstrap.js' %>
+<!-- latest jquery-->
+<%= javascript_include_tag 'js/jquery-3.3.1.min.js' %>
 
-    <%= javascript_include_tag 'js/icons/feather-icon/feather.min.js' %>
-    <%= javascript_include_tag 'js/icons/feather-icon/feather-icon.js' %>
+<!-- Bootstrap js-->
+<%= javascript_include_tag 'js/popper.min.js' %>
+<%= javascript_include_tag 'js/bootstrap.js' %>
 
-    <!-- Sidebar jquery-->
-    <%= javascript_include_tag 'js/sidebar-menu' %>
+<%= javascript_include_tag 'js/icons/feather-icon/feather.min.js' %>
+<%= javascript_include_tag 'js/icons/feather-icon/feather-icon.js' %>
 
-    <!-- Datatable js-->
-    <%= javascript_include_tag 'js/datatables/jquery.dataTables.min.js' %>
-    <%= javascript_include_tag 'js/datatables/custom-basic' %>
+<!-- Sidebar jquery-->
+<%= javascript_include_tag 'js/sidebar-menu' %>
 
-    <!--Customizer admin-->
-    <%= javascript_include_tag 'js/admin-customizer.js' %>
+<!-- Datatable js-->
+<%= javascript_include_tag 'js/datatables/jquery.dataTables.min.js' %>
+<%= javascript_include_tag 'js/datatables/custom-basic' %>
 
-    <!-- lazyload js-->
-    <%= javascript_include_tag 'js/lazysizes.min.js' %>
+<!--Customizer admin-->
+<%= javascript_include_tag 'js/admin-customizer.js' %>
 
-    <!--right sidebar js-->
-    <%= javascript_include_tag 'js/chat-menu.js' %>
+<!-- lazyload js-->
+<%= javascript_include_tag 'js/lazysizes.min.js' %>
 
-    <!--script admin-->
-    <%= javascript_include_tag 'js/admin-script' %>
+<!--right sidebar js-->
+<%= javascript_include_tag 'js/chat-menu.js' %>
+
+<!--script admin-->
+<%= javascript_include_tag 'js/admin-script' %>
 
 <script>
-var ordersTable = null
-$(document).ready(function() {
-  ordersTable = $("#basic-1").DataTable({
-    // alert('databale found');
-    // console.log("656565")
-  });
-//   PopulateItemsTable();
-});
+    var ordersTable = null
+    $(document).ready(function() {
+        ordersTable = $("#basic-1").DataTable({
+            // alert('databale found');
+            // console.log("656565")
+        });
+        //   PopulateItemsTable();
+    });
+
+    $('.product_images').on("click", function(e) {
+        
+        // var url = e.delegateTarget.href
+        // $.ajax({
+        //     method: "GET",
+        //     url: url,
+        //     dataType: 'script',
+        //     format: "js",
+        //     data: {
+        //         // product_id: url
+        //     }
+        // })
+
+    })
 </script>
