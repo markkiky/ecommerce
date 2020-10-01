@@ -19,6 +19,11 @@ Rails.application.routes.draw do
     root :to => "admins#dashboard", as: :admin_dashboard
     get '/admins/sign_out' => 'devise/sessions#destroy'
   end
+
+  devise_scope :admin do
+    get '/admins', to: "devise/registrations#new"
+    get '/admins/sign_out' => 'devise/sessions#destroy'
+  end
   get "/change_image", to: "products#change_product"
   root "homes#index"
   # admin routes
@@ -60,8 +65,10 @@ Rails.application.routes.draw do
   resources :homes
   devise_for :customers, :path => "users"
 
+devise_scope :customer do
   get '/logout', to: 'sessions#destroy'
   get '/users', to: "devise/registrations#new"
+end 
 
   post '/product_counter', to: "products#product_counter"
   # Customers Social Logins path
