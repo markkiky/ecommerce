@@ -1,3 +1,7 @@
+// alert('we are  here');
+$('.mobile-sidebar .switch a').on('click',function(event){
+event.preventDefault();
+});
 $.sidebarMenu = function(menu) {
   var animationSpeed = 300,
       subMenuSelector = '.sidebar-submenu';
