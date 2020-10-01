@@ -66,7 +66,7 @@
                                 <table class="display" id="basic-1">
                                     <thead>
                                         <tr>
-                                            <th>No</th>
+                                            <th class="d-none">No</th>
                                             <th>Order Id</th>
                                             <th>Product</th>
                                             <th>Payment Status</th>
@@ -80,12 +80,12 @@
                                         <% count = 0 %>
                                         <% @orders.reverse.each do |order| %>
                                         <tr>
-                                            <td><%= count += 1 %></td>
+                                            <td class="d-none"><%= count += 1 %></td>
                                             <td><%= order.order_number %></td>
                                             <td>
                                                 <div class="d-flex">
                                                     <%= link_to order_path(order.id), class: "product_images", remote: true do%>
-                                                        <i class="fa fa-file-image-o" aria-hidden="true"></i>
+                                                        <u> View Products </u>
                                                     <% end %>
                                                 </div>
                                             </td>

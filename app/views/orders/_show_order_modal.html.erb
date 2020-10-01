@@ -11,13 +11,49 @@
             </div>
             <div class="modal-body">
                 <div>
-                   <% @items.each do |item| %>
-                        <%= item.product.product_name %>
-                        <%= item.quantity %>
-                        <br>
-                   <%end%>
-                </div>
-            </div>
+                     <table class="table cart-table table-responsive-xs">
+                        <thead>
+                            <tr class="table-head">
+                                <th scope="col">Image</th>
+                                <th scope="col">Product Name</th>
+                                <th scope="col">Price</th>
+                                <th scope="col">Quantity</th>
+                            </tr>
+                        </thead>
+                        <% @items.each do |item| %>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="d-flex">
+                                        <% if item.product.images.attached? %>
+                                            <a href="/products/<%= item.product.id %>"><%= image_tag (item.product.images[0] if item.product.images.length > 0) , :class => "img-fluid img-30 mr-2 blur-up lazyloaded" %></a>
+                                        <% else %>
+                                            <a href="/products/<%= item.product.id %>"><%= image_tag "default_profile", :class => "img-fluid img-30 mr-2 blur-up lazyloaded" %></a>
+                                        <% end %>
+                                    </div>
+                                </td>
+                                <td><a href="/products/<%= item.product.id %>"> <%= item.product.product_name %></a>
+                                </td>
+                                <td>
+                                    <p><%= number_to_currency(item.price, unit: ' KES ') %></p>
+                                </td>
+                                <td>
+                                    <p> <%= item.quantity %>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <% end %>
+                    </table>
+                    <table class="table cart-table table-responsive-md">
+                        <tfoot>
+                            <tr>
+                                <td>Amount:</td>
+                                <td>
+                                    <h2><%= number_to_currency(@order.order_subtotal, unit: ' KES ') %></h2>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
             <div class="modal-footer">
 
                 <button type="button" class="btn btn-success btn--icon-text px-5" data-dismiss="modal">OK</button>
