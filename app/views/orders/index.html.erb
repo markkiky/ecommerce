@@ -1,4 +1,4 @@
-
+<%= render "layouts/admins/choose_payment_modal" %>
 <!-- page-wrapper Start-->
 <div class="page-wrapper">
 
@@ -74,6 +74,7 @@
                                             <th>Order Status</th>
                                             <th>Date</th>
                                             <th>Total</th>
+                                            <th>Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -102,6 +103,12 @@
                                             <%else%>
                                             <td><%= order.order_subtotal %></td>
                                             <%end%>
+                                            <td>
+                                               <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#chooseModalCenter">
+                                                    Launch demo modal
+                                                </button>
+                                                
+                                            </td>
                                         </tr>
                                         <%end%>
                                     </tbody>
