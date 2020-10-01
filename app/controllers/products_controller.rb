@@ -45,7 +45,8 @@ end
 
   # GET /products/1/edit
   def edit
-    @categories = Category.all.map{ |c| [c.category_name, c.id] }
+    @category = Category.where(:id => @product.category_id)
+    @categories = Category.all
     @sizes = Size.all.map{ |s| [s.size_type, s.id] }
     @colors = Color.all.map{ |l| [l.color_type, l.id] }
     @data_id = 1
@@ -54,12 +55,24 @@ end
   # POST /products
   # POST /products.json
   def create
+    # byebug
     @product = current_admin.products.build(product_params)
     @product.category_id = params[:category_id]
-    @product.size_id = params[:size_id]
-    @product.color_id = params[:color_id]
+    # @product.size_id = params[:size_id]
+    # @product.color_id = params[:color_id]
+    
+
     respond_to do |format|
       if @product.save
+        params[:product][:size].each do |size|
+          puts size[:number].to_i
+          number = size[:number].to_i
+          
+          while number > 1
+            ProductSize.create!(:product_id => @product.id, :size_id => size["size_id"])
+            number = number - 1
+          end
+        end
         format.html { redirect_to products_path , noticep: 'Product was successfully created.' }
         format.json { render :show, status: :created, location: @product }
       else
@@ -93,8 +106,7 @@ end
     @category_id = params[:category_id]
     @product_count = params[:product_count]
     @colors = Color.where(:category_id => @category_id).map{ |l| [l.color_type, l.id] }
-    @sizes = Size.where(:category_id => @category_id).map{ |s| [s.size_type, s.id] }
-    
+    @sizes = Size.where(:category_id => @category_id)
     respond_to do |format|
       format.js
     end

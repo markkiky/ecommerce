@@ -60,15 +60,12 @@ class OrdersController < ApplicationController
   def create_admin_order
     puts params
     @order = Order.new(:order_number => Order.counter, :order_date => Time.now, :order_status => "pending_payment")
-
     @order.save
 
-    @order_id = @order.order_id
-    @order_date = @order.order_date
-    @order_total = @order.order_subtotal
-    @payment_method = @order.payment_method
-    @order_status = @order.order_status
+    OrderItem.create(:order_id => @order.id, :product_id => params[:products], :price => params[:price], :quantity => params[:quantity])
+    gon.order = @order
     respond_to do |format|
+      format.html
       format.js
     end
   end

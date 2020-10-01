@@ -84,14 +84,21 @@
                                     <div class="col-xl-7">
                                         <%
 =begin%>
- <form class="needs-validation add-product-form" novalidate=""> 
-<%
+                                        <form class="needs-validation add-product-form" novalidate="">
+                                            <%
 =end%>
-                                        <%= form_for setup_product(@product) , url: "/products/#{@product.id}", method: :patch do |form| %>
+                                            <%= form_for setup_product(@product) , url: "/products/#{@product.id}", method: :patch do |form| %>
                                             <div class="form">
                                                 <div class="form-group mb-3 row">
                                                     <label for="validationCustom01" class="col-xl-3 col-sm-4 mb-0">Select Category:</label>
-                                                    <%= form.select(:category_id, options_for_select(@categories), {} , {class: "form-control col-xl-8 col-sm-7", prompt: "Select a category", required: true} ) %>
+                                                    <%# form.select(:category_id, options_for_select(@categories), {} , {class: "form-control col-xl-8 col-sm-7", prompt: "Select a category", required: true} ) %>
+                                                    
+                                                    <% if @category == nil %>
+                                                    <%= form.select(:category, raw(""), {include_blank: "-- Select One --"}, required: true, class: "input100" ) %>
+                                                    <%else%>
+
+                                                    <%= form.select(:category_id, @categories.map {|category| [category["category_name"], category["id"]]}, {include_blank: false}, class: "form-control col-xl-8 col-sm-7") %>
+                                                    <%end%>
                                                 </div>
                                                 <div class="form-group mb-3 row">
                                                     <label for="validationCustom02" class="col-xl-3 col-sm-4 mb-0">Price :</label>
@@ -118,7 +125,7 @@
                                                     <label class="col-xl-3 col-sm-4 mb-0">Total Products :</label>
                                                     <fieldset class="qty-box col-xl-9 col-xl-8 col-sm-7 pl-0">
                                                         <div class="input-group">
-                                                            
+
                                                             <%= form.text_field :product_quantity, class: "touchspin"%>
                                                         </div>
                                                     </fieldset>
@@ -126,9 +133,9 @@
                                                 <div class="form-group row">
                                                     <label class="col-xl-3 col-sm-4">Add Description :</label>
                                                     <div class="col-xl-8 col-sm-7 pl-0 description-sm">
-                                               
-                                                        
-                                                         <textarea id="editor1" name="product[product_description]" cols="10" rows="4" value="<%= @product.product_description %>"></textarea>
+
+
+                                                        <textarea id="editor1" name="product[product_description]" cols="10" rows="4" value="<%= @product.product_description %>"></textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -136,11 +143,11 @@
                                                 <%= form.submit "Add", class: "btn btn-primary" %>
                                                 <button type="button" class="btn btn-light">Discard</button>
                                             </div>
-                                        <%end%>
-                                        <%
+                                            <%end%>
+                                            <%
 =begin%>
- </form> 
-<%
+                                        </form>
+                                        <%
 =end%>
                                     </div>
                                 </div>
@@ -221,7 +228,7 @@
                     data_id: data_id,
                     product_id: product_id
                 }
-            })``
+            })
             // alert("The data-id of clicked item is: " + data_id)
         });
         var data_id = $

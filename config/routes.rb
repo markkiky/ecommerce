@@ -53,6 +53,7 @@ Rails.application.routes.draw do
 
   # Add color ajax
   get "/add_color", to: 'categories#add_color', as: :add_color
+  get "/add_size", to: 'categories#add_size', as: :add_size
   get "/remove_color", to: "categories#remove_color", as: :remove_color
 
   # devise_for :customers

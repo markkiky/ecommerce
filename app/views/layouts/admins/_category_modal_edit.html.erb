@@ -25,18 +25,30 @@
                     </div>
                     <%end%>
 
-                  
                     <div class="color_class d-none">
                         <label for="head" id='color_picker_label'>add a color</label>
                         <input type="text" class="d-none" id="color_picker_text" placeholder="Name your color" name="colors[][color_type]">
-                        <input type="color" value="#e66465" onchange="test(this)" onkeyup="test(this)" name="colors[][color_code]"> 
+                        <input type="color" value="#e66465" onchange="test(this)" onkeyup="test(this)" name="colors[][color_code]">
                     </div>
+                    <div class="size_class">
+                        <p>Size Variant</p>
+                        <%= form.fields_for :size do |b| %>
+                            <% @sizes.each do |size| %>
+                            <%= b.text_field :size_type, class: "", :value => size.size_type, name: "sizes[][size_type]" %>
+                            <%= hidden_field_tag :size_id, size.id, name: "sizes[][size_id]" %>
+                            <%end%>
+                       
+                        <%end%>
 
+                    </div>
                     <%= link_to add_color_path, :class => "mt-2 btn btn-warning d-none", id: "add_color", remote: true do %>
                     +
                     <%end%>
                     <%= link_to remove_color_path, :class => "mt-2 btn btn-warning d-none", id: "delete_color", remote: true do %>
                     -
+                    <%end%>
+                    <%= link_to add_size_path, class: "mt-2 btn btn-warning", id: "add_color", remote: true  do %>
+                    +
                     <%end%>
                 </div>
 

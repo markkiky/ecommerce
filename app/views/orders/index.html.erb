@@ -1,3 +1,4 @@
+
 <!-- page-wrapper Start-->
 <div class="page-wrapper">
 
@@ -43,16 +44,10 @@
                                 </ol>
                             </div>
                         </div>
-                        <div class="col-lg-6">
-                            <ol class="breadcrumb pull-right">
-                                <li class="breadcrumb-item"><a href="index.html"><i data-feather="home"></i></a></li>
-                                <li class="breadcrumb-item">Sales</li>
-                                <li class="breadcrumb-item active">Orders</li>
-                            </ol>
-                        </div>
+                       
                     </div>
                 </div>
-            </div>
+            
             <!-- Container-fluid Ends-->
 
             <!-- Container-fluid starts-->
@@ -161,11 +156,9 @@
 <script>
     var ordersTable = null
     $(document).ready(function() {
-        ordersTable = $("#basic-1").DataTable({
-            // alert('databale found');
-            // console.log("656565")
-        });
-        //   PopulateItemsTable();
+        ordersTable = $("#basic-1").DataTable();
+        // alert(ordersTable);
+       
     });
 
     $('.product_images').on("click", function(e) {

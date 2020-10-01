@@ -1,24 +1,32 @@
 <script>
-    var count = < %= @product_count.to_i % >
-        console.log(count);
-    var i;
-    for (i = 0; i < count; i++) {
-        // $("#variants").append('<div class="form-group row"> <label for="exampleFormControlSelect1" class="col-xl-3 col-sm-4 mb-0">Select Color :</label>'+'<%= select_tag :color_id, options_for_select(@colors), :prompt => "Select Colors", :class => "form-control digits col-xl-8 col-sm-7" %>'+' </div>')
-    }
+    // var count = <%= @product_count.to_i %>
+    //     console.log(count);
+    // var i;
+    // for (i = 0; i < count; i++) {
+    //     // $("#variants").append('<div class="form-group row"> <label for="exampleFormControlSelect1" class="col-xl-3 col-sm-4 mb-0">Select Color :</label>'+'<%= select_tag :color_id, options_for_select(@colors), :prompt => "Select Colors", :class => "form-control digits col-xl-8 col-sm-7" %>'+' </div>')
+    // }
 </script>
-<% count = 1 %>
-<% while count <= @product_count.to_i  %>
+<%# count = 1 %>
+<%# while count <= @product_count.to_i  %>
 <div class="form-group row">
     <div class="">
         <label for="exampleFormControlSelect1" class="">Select Size :</label>
-        <%= select_tag "product[size_ids][]", options_for_select(@sizes), :prompt => "Select Sizes", :class => "form-control digits col-xl-8 col-sm-7" %>
+        <br>
+        <% @sizes.each do |size| %>
+            
+            <%= label_tag "size",  size.size_type %>
+            <%= hidden_field_tag :product, size.id, name: "product[size][][size_id]" %>
+            <%= number_field_tag("product[size][][number]") %>
+            <br>
+        <%end%>
+        <%# select_tag "product[size_ids][]", options_for_select(@sizes), :prompt => "Select Sizes", :class => "form-control digits col-xl-8 col-sm-7" %>
 
     </div>
-    <div class="">
+    <div class="d-none">
         <label for="exampleFormControlSelect1" class="">Select Color :</label>
         <%= select_tag "product[color_ids][]", options_for_select(@colors), :prompt => "Select Colors", :class => "form-control digits col-xl-8 col-sm-7" %>
 
     </div>
 </div>
-<% count = count+1 %>
-<%end%>
+<%# count = count+1 %>
+<%#end%>

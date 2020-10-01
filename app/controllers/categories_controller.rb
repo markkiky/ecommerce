@@ -2,12 +2,10 @@ class CategoriesController < ApplicationController
   before_action :set_category, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_admin!, only: [:index, :new, :edit]
 
-
   # GET /categories
   # GET /categories.json
   def index
     @categories = Category.all
-    
   end
 
   # GET /categories/1
@@ -18,7 +16,7 @@ class CategoriesController < ApplicationController
   # GET /categories/new
   def new
     @category = current_admin.categories.build
-    
+
     respond_to do |format|
       format.js
     end
@@ -38,6 +36,13 @@ class CategoriesController < ApplicationController
     end
   end
 
+  # GET /add_size
+  def add_size
+    respond_to do |format|
+      format.js
+    end
+  end
+
   # POST /categories
   # POST /categories.json
   def create
@@ -45,7 +50,7 @@ class CategoriesController < ApplicationController
     @category = current_admin.categories.build(category_params)
     @colors = params[:colors]
     if @colors.count >= 1
-      @colors.each do |color| 
+      @colors.each do |color|
         new_color = Color.new
         new_color.color_type = color[:color_type]
         new_color.color_code = color[:color_code]
@@ -58,10 +63,26 @@ class CategoriesController < ApplicationController
         # new_color.save!
       end
     end
-    
+
+    @sizes = params[:sizes]
+    if @sizes.count >= 1
+      @sizes.each do |size|
+        new_size = Size.new
+        new_size.size_type = size[:size_type]
+        # new_color.color_code = color[:color_code]
+        if Category.all.count == 0
+          new_size.category_id = 1
+        else
+          new_size.category_id = Category.last.id + 1
+        end
+        new_size.admin_id = current_admin.id
+        new_size.save!
+      end
+    end
+
     respond_to do |format|
       if @category.save
-        format.html { redirect_to categories_path, notice: 'Category was successfully created.' }
+        format.html { redirect_to categories_path, notice: "Category was successfully created." }
         format.json { render :show, status: :created, location: @category }
       else
         format.html { render :new }
@@ -70,20 +91,22 @@ class CategoriesController < ApplicationController
     end
   end
 
-   # GET /categories/1/edit
-   def edit
+  # GET /categories/1/edit
+  def edit
     @colors = Color.where(:category_id => @category.id)
+    @sizes = Size.where(:category_id => @category.id)
+    puts "sizes: #{@sizes}"
     respond_to do |format|
       format.js
     end
-   end
+  end
 
   # PATCH/PUT /categories/1
   # PATCH/PUT /categories/1.json
   def update
     @colors = params[:colors]
     if @colors.count >= 1
-      @colors.each do |color| 
+      @colors.each do |color|
         if color[:color_id] == nil
           if color[:color_type].length < 1
             # dont update if no color is selected
@@ -101,9 +124,29 @@ class CategoriesController < ApplicationController
         end
       end
     end
+    @sizes = params[:sizes]
+    if @sizes.count >= 1
+      @sizes.each do |size|
+        if size[:size_type] == nil
+          if size[:size_type].length < 1
+            # dont update if no color is selected
+          else
+            new_size = Size.new
+            new_size.size_type = size[:size_type]
+            # new_color.color_code = color[:color_code]
+            new_size.category_id = @category.id
+            new_size.admin_id = @category.admin_id
+            new_color.save!
+          end
+        else
+          update_size = Size.find_by(:id => size[:size_id])
+          update_size.update(:size_type =>  size[:size_type])
+        end
+      end
+    end
     respond_to do |format|
       if @category.update(category_params)
-        format.html { redirect_to categories_path, notice: 'Category was successfully updated.' }
+        format.html { redirect_to categories_path, notice: "Category was successfully updated." }
         format.json { render :show, status: :ok, location: @category }
       else
         format.html { render :edit }
@@ -117,19 +160,20 @@ class CategoriesController < ApplicationController
   def destroy
     @category.destroy
     respond_to do |format|
-      format.html { redirect_to categories_url, notice: 'Category was successfully destroyed.' }
+      format.html { redirect_to categories_url, notice: "Category was successfully destroyed." }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_category
-      @category = Category.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def category_params
-      params.require(:category).permit(:category_id, :category_name, :description, :active, color: [])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_category
+    @category = Category.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def category_params
+    params.require(:category).permit(:category_id, :category_name, :description, :active, color: [])
+  end
 end

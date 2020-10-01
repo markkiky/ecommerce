@@ -24,11 +24,18 @@
                             <input type="color" value="#e66465" onchange="test(this)" onkeyup="test(this)" name="colors[][color_code]">
                         </div>
                     </div>
+                    <div class="size_class">
+                        <p>Size Variant</p>
+
+                    </div>
 
                     <%end%>
 
                     <!--<button class="mt-2 btn btn-warning d-none" id="add_color">+</button>-->
                     <%= link_to add_color_path, class: "mt-2 btn btn-warning d-none", id: "add_color", remote: true  do %>
+                    +
+                    <%end%>
+                    <%= link_to add_size_path, class: "mt-2 btn btn-warning", id: "add_color", remote: true  do %>
                     +
                     <%end%>
                 </div>

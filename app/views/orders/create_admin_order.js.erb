@@ -1,20 +1,18 @@
-alert("Submitting form");
-$("#placeOrderModal").modal("toggle");
+// alert("Submitting form");
+// debugger
+
+
+// console.log(gon.order)
+$('.page-body').append("<%= j render(:partial => 'create_admin_order') %>");
 // console.log(myTable)
-var numbers = ordersTable.rows().count()
+
 
 //Receive new Row params
-let order_id = "<%= @order_id %>"
-let product_url = "";
-let payment_status = "<%= @order.order_status %>"
-let payment_method = "<%= @order.payment_method %>"
-let order_status = "<%= @order.order_status %>"
-let date = <%= @order_date %>
-let amount = "<%= @order.order_subtotal%>"
+
 
 //Add row to datatable
-ordersTable.row.add([numbers, order_id, product_url, payment_status, payment_method, order_status, date, total]);
+// ordersTable.row.add([numbers, order_id, product_url, payment_status, payment_method, order_status, date, total]);
 // ordersTable.draw();
 
 // ordersTable.ajax.reload(null, false)
-ordersTable.page('last').draw();
+// ordersTable.page('last').draw();

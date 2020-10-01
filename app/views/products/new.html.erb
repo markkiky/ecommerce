@@ -119,11 +119,10 @@
                                                     <div class="input-group">
                                                         <!--<input class="touchspin" type="text" value="1">-->
                                                         <%# form.number_field :product_quantity, :class => "product_counter touchspin", :value => 1, min: 0, max: 1000 %>
-                                                        <%= form.number_field :product_quantity, :class => "touchspin", :value => 1, min: 0, max: 1000 %>
+                                                        <%= form.number_field :product_quantity, :class => "touchspin", :value => 1 %>
                                                     </div>
                                                 </fieldset>
-                                            </div>
-                                            
+                                            </div>                        
                                             <!-- displays size and color variants -->
                                             <div id="variants" >
                                             </div>
@@ -219,18 +218,18 @@
     var product_counter = document.getElementById("product_product_quantity")
     var category = document.getElementById("category_id")
 
-    //removing this temporarily
-    // category.addEventListener('change', function (evt) {
-    //     // alert("reached");
-    //     console.log(evt);
-    //     $.post("/product_counter",
-    //     {
-    //         product_count: product_counter.value,
-    //         category_id: category.value
-    //     }
+    // removing this temporarily
+    category.addEventListener('change', function (evt) {
+        // alert("reached");
+        console.log(evt);
+        $.post("/product_counter",
+        {
+            product_count: product_counter.value,
+            category_id: category.value
+        }
 
-    //     );
-    // })
+        );
+    })
     // product_counter.addEventListener('input', function(evt) {
     //     // alert("reached");
     //     console.log(evt);
