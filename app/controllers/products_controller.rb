@@ -64,15 +64,15 @@ end
 
     respond_to do |format|
       if @product.save
-        params[:product][:size].each do |size|
-          puts size[:number].to_i
-          number = size[:number].to_i
+        # params[:product][:size].each do |size|
+        #   puts size[:number].to_i
+        #   number = size[:number].to_i
           
-          while number > 1
-            ProductSize.create!(:product_id => @product.id, :size_id => size["size_id"])
-            number = number - 1
-          end
-        end
+        #   while number > 1
+        #     ProductSize.create!(:product_id => @product.id, :size_id => size["size_id"])
+        #     number = number - 1
+        #   end
+        # end
         format.html { redirect_to products_path , noticep: 'Product was successfully created.' }
         format.json { render :show, status: :created, location: @product }
       else

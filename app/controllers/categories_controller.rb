@@ -64,21 +64,21 @@ class CategoriesController < ApplicationController
       end
     end
 
-    @sizes = params[:sizes]
-    if @sizes.count >= 1
-      @sizes.each do |size|
-        new_size = Size.new
-        new_size.size_type = size[:size_type]
-        # new_color.color_code = color[:color_code]
-        if Category.all.count == 0
-          new_size.category_id = 1
-        else
-          new_size.category_id = Category.last.id + 1
-        end
-        new_size.admin_id = current_admin.id
-        new_size.save!
-      end
-    end
+    # @sizes = params[:sizes]
+    # if @sizes.count >= 1
+    #   @sizes.each do |size|
+    #     new_size = Size.new
+    #     new_size.size_type = size[:size_type]
+    #     # new_color.color_code = color[:color_code]
+    #     if Category.all.count == 0
+    #       new_size.category_id = 1
+    #     else
+    #       new_size.category_id = Category.last.id + 1
+    #     end
+    #     new_size.admin_id = current_admin.id
+    #     new_size.save!
+    #   end
+    # end
 
     respond_to do |format|
       if @category.save
@@ -104,46 +104,46 @@ class CategoriesController < ApplicationController
   # PATCH/PUT /categories/1
   # PATCH/PUT /categories/1.json
   def update
-    @colors = params[:colors]
-    if @colors.count >= 1
-      @colors.each do |color|
-        if color[:color_id] == nil
-          if color[:color_type].length < 1
-            # dont update if no color is selected
-          else
-            new_color = Color.new
-            new_color.color_type = color[:color_type]
-            new_color.color_code = color[:color_code]
-            new_color.category_id = @category.id
-            new_color.admin_id = @category.admin_id
-            # new_color.save!
-          end
-        else
-          update_color = Color.find_by(:id => color[:color_id])
-          # update_color.update(:color_type =>  color[:color_type], :color_code => color[:color_code])
-        end
-      end
-    end
-    @sizes = params[:sizes]
-    if @sizes.count >= 1
-      @sizes.each do |size|
-        if size[:size_type] == nil
-          if size[:size_type].length < 1
-            # dont update if no color is selected
-          else
-            new_size = Size.new
-            new_size.size_type = size[:size_type]
-            # new_color.color_code = color[:color_code]
-            new_size.category_id = @category.id
-            new_size.admin_id = @category.admin_id
-            new_color.save!
-          end
-        else
-          update_size = Size.find_by(:id => size[:size_id])
-          update_size.update(:size_type =>  size[:size_type])
-        end
-      end
-    end
+    # @colors = params[:colors]
+    # if @colors.count >= 1
+    #   @colors.each do |color|
+    #     if color[:color_id] == nil
+    #       if color[:color_type].length < 1
+    #         # dont update if no color is selected
+    #       else
+    #         new_color = Color.new
+    #         new_color.color_type = color[:color_type]
+    #         new_color.color_code = color[:color_code]
+    #         new_color.category_id = @category.id
+    #         new_color.admin_id = @category.admin_id
+    #         # new_color.save!
+    #       end
+    #     else
+    #       update_color = Color.find_by(:id => color[:color_id])
+    #       # update_color.update(:color_type =>  color[:color_type], :color_code => color[:color_code])
+    #     end
+    #   end
+    # end
+    # @sizes = params[:sizes]
+    # if @sizes.count >= 1
+    #   @sizes.each do |size|
+    #     if size[:size_type] == nil
+    #       if size[:size_type].length < 1
+    #         # dont update if no color is selected
+    #       else
+    #         new_size = Size.new
+    #         new_size.size_type = size[:size_type]
+    #         # new_color.color_code = color[:color_code]
+    #         new_size.category_id = @category.id
+    #         new_size.admin_id = @category.admin_id
+    #         new_color.save!
+    #       end
+    #     else
+    #       update_size = Size.find_by(:id => size[:size_id])
+    #       update_size.update(:size_type =>  size[:size_type])
+    #     end
+    #   end
+    # end
     respond_to do |format|
       if @category.update(category_params)
         format.html { redirect_to categories_path, notice: "Category was successfully updated." }

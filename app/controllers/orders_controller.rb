@@ -84,11 +84,12 @@ class OrdersController < ApplicationController
   # POST /admin_order
   def create_admin_order
     puts params
-    @order = Order.new(:order_number => Order.counter, :order_date => Time.now, :order_status => "pending_payment")
+    @order = Order.new(:order_number => Order.counter, :order_date => Time.now, :order_status => "pending_payment", :order_subtotal => params[:price])
     @order.save
 
     OrderItem.create(:order_id => @order.id, :product_id => params[:products], :price => params[:price], :quantity => params[:quantity])
     gon.order = @order
+    gon.order_date = @order.order_date.to_s
     respond_to do |format|
       format.html
       format.js
@@ -219,13 +220,13 @@ class OrdersController < ApplicationController
     @order = Order.find(order_id)
     @order_id = @order.id
     begin
-      url = URI("https://payme.revenuesure.co.ke/index.php")
+      url = URI(AdminConfig["payme"])
 
       https = Net::HTTP.new(url.host, url.port)
       https.use_ssl = true
 
       request = Net::HTTP::Post.new(url)
-      form_data = [["function", "CustomerPayBillOnlinePush"], ["PayBillNumber", "175555"], ["Amount", @order.order_subtotal.to_s], ["PhoneNumber", phone], ["AccountReference", @order.order_number], ["TransactionDesc", @order.order_number], ["FullNames", "- - -"]]
+      form_data = [["function", "CustomerPayBillOnlinePush"], ["PayBillNumber", AdminConfig["paybill"]], ["Amount", @order.order_subtotal.to_s], ["PhoneNumber", phone], ["AccountReference", @order.order_number], ["TransactionDesc", @order.order_number], ["FullNames", "- - -"]]
       request.set_form form_data, "multipart/form-data"
       response = https.request(request)
       puts response.read_body
@@ -387,9 +388,11 @@ class OrdersController < ApplicationController
         }
         @transaction = Transaction.new(transaction_params)
         @transaction.save
+        # save_payment(order_id, response_json)
+
         # ActionCable.server.broadcast "test_channel", message: "Payment Received"
         # TestChannel.broadcast_to(current_customer, message: "Payment Received", status: "paid")
-        ActionCable.server.broadcast "test_channel", response_json: response_json, status: "paid", order_id: order_id
+        # ActionCable.server.broadcast "test_channel", response_json: response_json, status: "paid", order_id: order_id
       elsif response_json["data"]["callback_returned"] == "UNPAID"
         puts "UNPAID"
         # ActionCable.server.broadcast "test_channel", message: response_json["data"]["callback_returned"]
@@ -401,6 +404,52 @@ class OrdersController < ApplicationController
       end
     elsif response_json["success"] == false
       ActionCable.server.broadcast "test_channel", message: "Failed to send push"
+    end
+  end
+
+
+  def save_payment(order_id, response_json)
+    
+    if Order.where(:order_number => params[:AccountReference]).exists?
+      order = Order.where(:order_number => params[:AccountReference]).last
+      @transaction.order_id = order.id
+      @transaction.save! 
+      
+      order.payment_date = Date.today()
+      order.transaction_id = @transaction.id
+      if order.payment_status == "Unpaid"
+        balance = order.order_subtotal - amount
+        # set the balance here in future.
+        order.reducing_balance = balance
+        if balance <= 0
+          order.payment_status = "Paid"
+          order.paid = true
+        elsif balance > 0
+          order.payment_status = 'part'
+        end
+      elsif order.payment_status == "part"
+        balance = order.reducing_balance - amount
+        order.reducing_balance = balance
+        if balance <= 0
+          order.payment_status = "Paid"
+          order.paid = true
+        elsif balance > 0
+          order.payment_status = 'part'
+        end
+      elsif order.payment_status == "Paid"
+        balance = order.reducing_balance - amount
+        order.reducing_balance = balance
+      end
+
+      # send order received email 
+      customer_id = order.customer_id.to_i
+      @customer = Customer.find(customer_id)
+      # send email notification
+      OrderMailer.with(customer: @customer, transaction: @transaction, order: order).order_payment.deliver_now
+      # broadcast to mpesa channel
+      # ActionCable.server.broadcast "mpesa_channel_#{order.id}", phone: params[:PhoneNumber], transaction_code: params[:MpesaReceiptNumber], paybill: params[:PayBillNumber]
+    else
+      
     end
   end
 

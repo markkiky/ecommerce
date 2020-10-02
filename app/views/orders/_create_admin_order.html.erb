@@ -1,20 +1,28 @@
 <%= include_gon %>
 
 <script>
-var numbers = ordersTable.rows().count() + 1
-// debugger
-// let order_id = "<%# @order_id %>"
-// let product_url = "";
-// let payment_status = "<%# @order.order_status %>"
-// let payment_method = "<%# @order.payment_method %>"
-// let order_status = "<%# @order.order_status %>"
-// let date = "<%# @order_date %>"
-// let amount = "<%# @order.order_subtotal%>"
+
+    var numbers = ordersTable.rows().count() + 1
+    location.reload(); 
+    // debugger
+    // let order_id = "<%# @order_id %>"
+    // let product_url = "";
+    // let payment_status = "<%# @order.order_status %>"
+    // let payment_method = "<%# @order.payment_method %>"
+    // let order_status = "<%# @order.order_status %>"
+    // let date = "<%# @order_date %>"
+    // let amount = "<%# @order.order_subtotal%>"
     // alert(gon.order)
-    var order = gon.order
-    $("#placeOrderModal").modal("hide");
-     ordersTable.row.add([numbers, order.order_number, "<%=  j render(:partial => 'order_icon') %>", order.payment_status, order.payment_method, order.order_status, order.order_date, order.order_subtotal]);
-    //  ordersTable.draw();
-    //  ordersTable.ajax.reload(null, false);
-     ordersTable.page('last').draw();
+    // var order = gon.order
+    // var order_date = gon.order_date
+
+    // order_date = order_date.slice(0, 10);
+
+    // $("#placeOrderModal").modal("hide");
+    // var order_row = [numbers, order.order_number, "<%=  j render(:partial => 'layouts/orders/view_product') %>", "<%=  j render(:partial => 'layouts/orders/payment_status') %>", order.payment_method, "<%=  j render(:partial => 'layouts/orders/order_status') %>", order_date, order.order_subtotal, "<%=  j render(:partial => 'layouts/orders/pay_action') %>"];
+    // debugger
+    // // ordersTable.row.add([numbers, order.order_number, "<%=  j render(:partial => 'layouts/orders/view_product') %>", "<%=  j render(:partial => 'layouts/orders/payment_status') %>", order.payment_method, "<%=  j render(:partial => 'layouts/orders/order_status') %>", order_date, order.order_subtotal, "<%=  j render(:partial => 'layouts/orders/pay_action') %>"]);
+    // //  ordersTable.draw();
+    // //  ordersTable.ajax.reload(null, false);
+    // ordersTable.page().draw();
 </script>

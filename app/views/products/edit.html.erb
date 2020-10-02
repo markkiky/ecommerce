@@ -82,12 +82,8 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-7 col-md-7 col-sm-12 pl-2">
-                                        <%
-=begin%>
-                                        <form class="needs-validation add-product-form" novalidate="">
-                                            <%
-=end%>
-                                            <%= form_for setup_product(@product) , url: "/products/#{@product.id}", method: :patch do |form| %>
+
+                                            <%= form_for setup_product(@product), url: "/products/#{@product.id}", method: :PATCH do |form| %>
                                             <div class="form row">
                                                 <div class="form-group col-12 mb-3">
                                                     <label for="validationCustom01" class=""><strong>Select Category:</strong></label>
@@ -114,7 +110,8 @@
                                                 <div class="form-group col-12 mb-3">
                                                     <label class=""><strong>Edit Description :</strong></label>
                                                     <div class="description-sm">
-                                                        <textarea id="" name="product[product_description]" class= "form-control input100 " cols="10" rows="4" value="<%= @product.product_description %>"></textarea>
+                                                        <!--<textarea id="" name="product[product_description]" class= "form-control input100 " cols="10" rows="4" value="<%# @product.product_description %>"></textarea>-->
+                                                        <%= form.text_area :product_description , name: "product[product_description]", cols: 10, rows: 4 , class: "form-control input100" %>
                                                     </div>
                                                 </div>
                                                 <div class="form-group col-12 mb-3">
@@ -143,11 +140,7 @@
                                                 <%= form.submit "Edit", class: "btn btn-primary  btn-bg" %>
                                             </div>
                                             <%end%>
-                                            <%
-=begin%>
-                                        </form>
-                                        <%
-=end%>
+
                                     </div>
                                 </div>
                             </div>
@@ -237,6 +230,9 @@
     function setBigImage() {
 
     }
+    $(".upload").on('change', function() {
+            alert("reached  ")
+    });
 </script>
 <script>
     // In your Javascript (external .js resource or <script> tag)

@@ -47,9 +47,13 @@
                     <table class="table cart-table table-responsive-md">
                         <tfoot>
                             <tr>
-                                <td>Amount:</td>
                                 <td>
-                                    <h2><%= number_to_currency(@order.order_subtotal, unit: ' KES ') %></h2>
+                                Amount:
+                                <p><h2><%= number_to_currency(@order.order_subtotal, unit: ' KES ') %></h2></p>
+                                </td>
+                                <td>
+                                    
+                                    <!--<h2><%# number_to_currency(@order.order_subtotal, unit: ' KES ') %></h2>-->
                                 </td>
                             </tr>
                         </tfoot>

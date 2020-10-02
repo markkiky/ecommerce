@@ -66,7 +66,7 @@
                                 <table class="display" id="basic-1">
                                     <thead>
                                         <tr>
-                                            <th class="d-none">No</th>
+                                            <th class="">No</th>
                                             <th>Order Id</th>
                                             <th>Product</th>
                                             <th>Payment Status</th>
@@ -81,7 +81,7 @@
                                         <% count = 0 %>
                                         <% @orders.reverse.each do |order| %>
                                         <tr>
-                                            <td class="d-none"><%= count += 1 %></td>
+                                            <td class=""><%= count += 1 %></td>
                                             <td><%= order.order_number %></td>
                                             <td>
                                                 <div class="d-flex">
@@ -107,10 +107,12 @@
                                                <button type="button" class="btn btn-primary d-none" data-toggle="modal" data-target="#chooseModalCenter">
                                                     Pay
                                                 </button>
-                                               
-                                                <%= link_to  choose_payment_path(order.id), :remote => true do %>
+                                                <% if order.customer_id == nil %>
+                                                    <%= link_to  choose_payment_path(order.id), :remote => true do %>
                                                     Pay
-                                                <%end %>
+                                                    <%end %>
+                                                <%end%>
+                                                
                                                 
                                             </td>
                                         </tr>
@@ -185,4 +187,25 @@
         // })
 
     })
+
+    $(document).ready(function(){
+       reloadPage();
+        function reloadPage(){
+             (function()
+            {
+            if( window.localStorage )
+            {
+                if( !localStorage.getItem('firstLoad') )
+                {
+                localStorage['firstLoad'] = true;
+                window.location.reload();
+                }  
+                else
+                localStorage.removeItem('firstLoad');
+            }
+            })();
+        }
+       
+    });
+
 </script>
