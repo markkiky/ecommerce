@@ -7776,7 +7776,7 @@ footer {
 .qty-box .input-group {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
-          justify-content: center; }
+          justify-content: flex-start; }
   .qty-box .input-group span button {
     background: #ffffff !important;
     border: 1px solid #ced4da; }
@@ -15768,6 +15768,10 @@ div.dataTables_wrapper div.dataTables_paginate {
       border-color: #ffbc58;
       background: #ffbc58;
       color: #ffffff; }
+
+      .select2-results__option{
+        display:block !important;
+      }
 
 .btn-warning {
   color: #ffffff; }
@@ -24163,3 +24167,5 @@ body.rtl .account-setting {
     padding-right: 35px; }
     .collection-banner .contain-banner.banner-4 h2 {
       font-size: 15px; } }
+
+      

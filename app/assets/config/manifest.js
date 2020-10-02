@@ -80,6 +80,8 @@
 //= link js/jquery.elevatezoom.js
 //= link js/zoom-scripts.js
 
+//= link js/bootstrap-select.min.js
+
 // precompile css
 //= link css/fontawesome.css
 //= link css/slick.css
@@ -93,6 +95,7 @@
 //= link css/prism.css
 //= link css/chartist.css
 //= link css/admin.css
+//= link css/bootstrap-select.min.css
 
 // require for any view with datatable
 //= link css/datatables.css
