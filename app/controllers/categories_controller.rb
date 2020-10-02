@@ -47,22 +47,22 @@ class CategoriesController < ApplicationController
   # POST /categories.json
   def create
     # byebug
-    @category = current_admin.categories.build(category_params)
-    @colors = params[:colors]
-    if @colors.count >= 1
-      @colors.each do |color|
-        new_color = Color.new
-        new_color.color_type = color[:color_type]
-        new_color.color_code = color[:color_code]
-        if Category.all.count == 0
-          new_color.category_id = 1
-        else
-          new_color.category_id = Category.last.id + 1
-        end
-        new_color.admin_id = current_admin.id
-        # new_color.save!
-      end
-    end
+    
+    # @colors = params[:colors]
+    # if @colors.count >= 1
+    #   @colors.each do |color|
+    #     new_color = Color.new
+    #     new_color.color_type = color[:color_type]
+    #     new_color.color_code = color[:color_code]
+    #     if Category.all.count == 0
+    #       new_color.category_id = 1
+    #     else
+    #       new_color.category_id = Category.last.id + 1
+    #     end
+    #     new_color.admin_id = current_admin.id
+    #     # new_color.save!
+    #   end
+    # end
 
     # @sizes = params[:sizes]
     # if @sizes.count >= 1
@@ -79,7 +79,9 @@ class CategoriesController < ApplicationController
     #     new_size.save!
     #   end
     # end
-
+    @category = current_admin.categories.build(category_params)
+    # Category.create(:category_name => "MIMI", :variants => {:moq => "5l"})
+    @category.variants = {:moq => "130L"}
     respond_to do |format|
       if @category.save
         format.html { redirect_to categories_path, notice: "Category was successfully created." }

@@ -22,8 +22,11 @@ gem 'rails', '~> 6.0.3', '>= 6.0.3.2'
 # gem 'sqlite3', '~> 1.4'
 
 # Use Mysql2 as the database for Active Record
-gem 'mysql2'
+# gem 'mysql2'
 gem 'rails_db'
+
+#Use Postgre as the database for active Receord
+gem 'pg'
 
 # Use Puma as the app server
 gem 'puma', '~> 4.1'

@@ -5,6 +5,8 @@ class ApplicationController < ActionController::Base
   require "resolv-replace"
   before_action :current_cart
 
+
+  @admin_panel = "Arigiene Admin Panel"
   def current_cart
     @current_cart ||= ShoppingCart.new(token: cart_token)
   end

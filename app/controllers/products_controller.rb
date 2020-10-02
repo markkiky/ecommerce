@@ -37,6 +37,7 @@ end
 
   # GET /products/new
   def new
+    @admin_panel = "Arigiene Admin Panel"
     @product = current_admin.products.build
     @categories = Category.all.map{ |c| [c.category_name, c.id] }
     @sizes = Size.all.map{ |s| [s.size_type, s.id] }

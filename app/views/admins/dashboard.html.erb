@@ -152,7 +152,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <% Order.all.order(created_at: :desc).limit(5).each do |order| %>
+                                            <%  @orders.each do |order| %>
                                             <tr>
                                                 <td><%= order.id %></td>
                                                 <td class="digits"><%= number_to_currency(order.order_subtotal, :unit => 'KES ') %></td>
