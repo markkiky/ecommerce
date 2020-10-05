@@ -368,12 +368,7 @@ class OrdersController < ApplicationController
         # Create a new transaction for the received data
         # check if order exists
         # if order = Order.where(:order_number => payment_data["ref"])
-        if order = Order.find(order_id)
-          order_id = order.id
-        else
-          # place in order number
-          order_id = 1
-        end
+        
         transaction_params = {
           "paybill_number" => payment_data["account_to"],
           "phone_number" => payment_data["account_from"],
@@ -388,6 +383,8 @@ class OrdersController < ApplicationController
         }
         @transaction = Transaction.new(transaction_params)
         @transaction.save
+
+        @order.update(:payment_status => "paid", :reducing_balance => 0, :payment_method => "MPESA", :order_status => "payment_received", :payment_date => @transaction.date, :paid => true)
         # save_payment(order_id, response_json)
 
         # ActionCable.server.broadcast "test_channel", message: "Payment Received"
