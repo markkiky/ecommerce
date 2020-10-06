@@ -1,0 +1,162 @@
+<!-- page-wrapper Start-->
+<div class="page-wrapper">
+
+    <!-- Page Header Start-->
+    <%= render 'layouts/admin_header' %>
+    <!-- Page Header Ends -->
+
+    <!-- Page Body Start-->
+    <div class="page-body-wrapper">
+
+        <!-- Page Sidebar Start-->
+        <%= render 'layouts/admin_sidebar' %>
+        <!-- Page Sidebar Ends-->
+
+        <!-- Right sidebar Start -->
+
+        <!-- Right sidebar Ends-->
+
+        <div class="page-body">
+
+            <!-- Container-fluid starts-->
+            <div class="container-fluid">
+                <div class="page-header">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="page-header-left">
+                                <h3>Variants
+                                    <small>Arigiene Admin Panel</small>
+                                </h3>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <ol class="breadcrumb pull-right">
+                                <li class="breadcrumb-item"><a href="<%= root_url %>"><i data-feather="home"></i></a></li>
+                                <li class="breadcrumb-item"><%= @category.category_name %></li>
+                                <li class="breadcrumb-item active">Variants</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- footer start-->
+
+            <!-- Container-fluid starts-->
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>Category Variants</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="btn-popup pull-right">
+                                    <%# link_to new_category_path, :class => "btn btn-primary", remote: true do %>
+                                    Add Category
+                                    <%#end%>
+                                </div>
+                            </div>
+                            <div class="card-body">
+
+                                <div>
+                                    <button></button>
+
+                                </div>
+                                <div class="user-status table-responsive latest-order-table">
+                                    <%= form_with(model: @variants, local: true) do |form| %>
+                                    <%= label_tag 'variants[discount][body]', 'Body' %>
+                                    <%= text_area_tag 'variants[discount][]' %>
+                                    <%= label_tag 'variants[discount][text]', 'Text' %>
+                                    <%#text_field_tag 'variants[discount][text]', variants.discount['text'] %>
+
+                                    <%# variants.discount['list_items'].each do |item| %>
+                                    <%= label_tag 'variants[discount][][list_item][text]', 'Item' %>
+                                    <%# text_field_tag 'variants[discount][][list_item][text]', item['text'] %>
+                                    <%# end %>
+                                    <% end %>
+                                    <table class="table table-bordernone d-none">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Category Name</th>
+                                                <th> Actions </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Container-fluid Ends-->
+
+            <%# render 'layouts/admin_footer' %>
+            <!-- footer end-->
+
+        </div>
+
+    </div>
+
+
+    <!-- latest jquery-->
+    <%= javascript_include_tag 'js/jquery-3.3.1.min.js' %>
+
+    <!-- fly cart ui jquery-->
+    <%= javascript_include_tag 'js/jquery-ui.min.js' %>
+
+    <!-- exitintent jquery-->
+    <%= javascript_include_tag 'js/jquery.exitintent.js' %>
+    <%= javascript_include_tag 'js/exit.js' %>
+
+    <!-- popper js-->
+    <%= javascript_include_tag 'js/popper.min.js' %>
+
+
+    <!-- slick js-->
+    <%= javascript_include_tag 'js/slick.js' %>
+
+
+    <!-- menu js-->
+    <%= javascript_include_tag 'js/menu.js' %>
+
+
+    <!-- lazyload js-->
+    <%= javascript_include_tag 'js/lazysizes.min.js' %>
+
+
+    <!-- Bootstrap js-->
+    <%= javascript_include_tag 'js/bootstrap.js' %>
+
+
+    <!-- Bootstrap Notification js-->
+    <%= javascript_include_tag 'js/bootstrap-notify.min.js' %>
+
+
+    <!-- Fly cart js-->
+    <%= javascript_include_tag 'js/fly-cart.js' %>
+
+    <!-- Theme js-->
+    <%= javascript_include_tag 'js/script.js' %>
+
+
+    <script>
+        $(document).ready(function(e) {
+            // alert("")
+            var order_id = "<%= @order_id %>"
+            get_variants(order_id);
+        })
+
+
+        function get_variants(order_id) {
+            $.ajax({
+                method: "GET",
+                url: "/variants/" + order_id,
+                dataType: 'script',
+                format: "js",
+
+            })
+        }
+    </script>

@@ -13,4 +13,5 @@ class Product < ApplicationRecord
     
     
     has_many_attached :images
+    store_accessor :product_group, :moq, :product_description, :rrp, :whole_sale, :moq_description
 end

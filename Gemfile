@@ -27,6 +27,7 @@ gem 'rails_db'
 
 #Use Postgre as the database for active Receord
 gem 'pg'
+gem "jquery-fileupload-rails"
 
 # Use Puma as the app server
 gem 'puma', '~> 4.1'

@@ -29,6 +29,12 @@ Rails.application.routes.draw do
   # admin routes
   get '/admin/dashboard', to: "admins#dashboard", as: :admin_dashboards
 
+  get "/category/variants/:id", to: "categories#category_variants", as: :category_variants
+
+  get "/variants/:id", to: "categories#get_variants", as: :get_all_variants_path
+
+  get "/show_variants", to: "products#show_variants", as: :show_variants
+
   #notification routes
   get 'contact', to: 'homes#new', as: :contact
   post 'contact', to: 'homes#create'

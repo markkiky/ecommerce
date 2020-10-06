@@ -16,7 +16,24 @@
             order.items.sum(:quantity)
           end
         
-          def add_item(product_id:, quantity: 1)
+          def add_item(product_id:, quantity: , price: )
+            product = Product.find(product_id)
+        
+            order_item = order.items.find_or_initialize_by(
+              product_id: product_id
+            )
+        
+            order_item.price = price
+            order_item.quantity = quantity
+        
+            ActiveRecord::Base.transaction do
+              order_item.save
+              update_sub_total!
+            end
+          end
+
+
+          def add_item_old(product_id:, quantity: 1)
             product = Product.find(product_id)
         
             order_item = order.items.find_or_initialize_by(

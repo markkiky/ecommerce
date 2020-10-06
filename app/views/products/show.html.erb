@@ -1,6 +1,6 @@
 <!-- loader start -->
 <!-- loader end -->
-
+<%= include_gon %>
 <!-- header start -->
 <%= render 'layouts/header' %>
 <!-- header end -->
@@ -72,18 +72,33 @@
                 <div class="col-lg-6 rtl-text">
                     <div class="product-right">
                         <div class="product-right product-description-box">
-                            <h2><%= @product.product_name %></h2>
-                            <h3><%= number_to_currency(@product.price , :unit => ' KES ') %></h3>
-                            <ul class="color-variant">
+                            <h2 id="product_name"><%= @product.product_name %></h2>
+
+                            <p>Retail Price</p>
+                            <% if @category.variants.keys.count > 3 %>
+                            <h3 id="rrp"><%= number_to_currency(@category.rrp.first , :unit => ' KES ') %></h3>
+                            <%else%>
+                            <h3 id="rrp"><%= number_to_currency(@product.price , :unit => ' KES ') %></h3>
+                            <%end%>
+                            <br />
+
+                            <p>WholeSale Price:</p>
+                            <% if @category.variants.keys.count > 3 %>
+                            <h3 id="whole_sale"><%= number_to_currency(@category.whole_sale.first , :unit => ' KES ') %></h3>
+                            <%else%>
+                            <h3 id="whole_sale"><%= number_to_currency(@product.price , :unit => ' KES ') %></h3>
+                            <%end%>
+                            <br />
+                            <ul class="color-variant d-flex">
                                 <% @product.colors.uniq.each  do |color| %>
                                 <li class="product-colors" style="background-color:<%= color.color_code %>" value="<%= color.color_type %>"></li>
                                 <%end%>
-
                             </ul>
+
                             <div class="product-description ">
                                 <div class="border-product">
                                     <!--<h6 class="product-title size-text">select size <span><a href="" data-toggle="modal" data-target="#sizemodal">size chart</a></span></h6>-->
-                                   <!--<div class="modal fade" id="sizemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal fade" id="sizemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-centered" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
@@ -95,25 +110,47 @@
                                         </div>
                                     </div>
                                     <div class="size-box">
-                                        <ul>
-                                            <li class="active"><a href="#">s</a></li>
-                                            <li><a href="#">m</a></li>
-                                            <li><a href="#">l</a></li>
-                                            <li><a href="#">xl</a></li>
+                                        <ul class="d-flex">
+                                            <%count = 0%>
+                                            <% if @category.name != nil %>
+                                            <% @category.name.each do |name| %>
+                                            <li class="variants" id="<%= "variants#{count}"%>"><%= name %></li>
+                                            <% count = count + 1 %>
+                                            <%end%>
+                                            <%end%>
                                         </ul>
-                                    </div>-->
+                                    </div>
+                                    <div>
+                                        <p id="discount"></p>
+                                    </div>
                                     <h6 class="product-title">quantity</h6>
                                     <%= form_tag order_items_path, remote: true do %>
-                                    <%= hidden_field_tag :product_id, @product.id %>
+                                    <%= hidden_field_tag :current_moq, @category.moq.first %>
+                                    <%= hidden_field_tag :rrp_price, @category.rrp.first %>
+                                    <%= hidden_field_tag :whole_sale_price, @category.whole_sale.first %>
+                                    <%= text_field_tag :product_id, @product.id, class: "d-none" %>
+                                    
+
                                     <div class="qty-box">
-                                        <div class="input-group"><span class="input-group-prepend"><button type="button" class="btn quantity-left-minus" data-type="minus" data-field=""><i class="ti-angle-left"></i></button> </span>
+                                        <div class="input-group">
+                                            <span class="input-group-prepend">
+                                                <button type="button" class="btn quantity-left-minus" data-type="minus" data-field=""><i class="ti-angle-left"></i></button>
+                                            </span>
                                             <!--<input type="text" name="quantity" class="form-control input-number" value="1"> <span class="input-group-prepend"><button type="button" class="btn quantity-right-plus" data-type="plus" data-field=""><i class="ti-angle-right"></i></button></span></div>-->
-                                            <%= number_field_tag :quantity, 1, min: 1, :class => "form-control input-number" %><span class="input-group-prepend"><button type="button" class="btn quantity-right-plus" data-type="plus" data-field=""><i class="ti-angle-right"></i></button></span></div>
+                                            <%= number_field_tag :quantity, 1, min: 1, :class => "form-control input-number" %>
+                                            <span class="input-group-prepend">
+                                                <button type="button" class="btn quantity-right-plus" data-type="plus" data-field=""><i class="ti-angle-right"></i></button>
+                                            </span>
+                                        </div>
                                     </div>
                                     <!--<div class="product-buttons"><a href="#" data-toggle="modal" data-target="#addtocart" class="btn btn-solid">add to cart</a><a href="#" class="btn btn-solid">buy now</a></div>    -->
                                 </div>
                                 <div class="product-buttons">
-                                    <%= button_to order_items_path(:product_id => @product.id), { :class => "btn btn-solid", 'data-toggle' => 'modal', 'data-target' => '#addtocart' } do %> add to cart <% end %> </div>
+                                    <%= button_to order_items_path(:product_id => @product.id), { :class => "btn btn-solid ", 'data-toggle' => 'modal', 'data-target' => '#addtocart', id: "to_cart" } do %>
+                                     add to cart 
+                                    <% end %>
+                                    
+                                </div>
                             </div>
                             <% end %>
                             <div class="border-product">
@@ -220,7 +257,7 @@
                                 </div>
                                 <h6 class="product-title">quantity</h6>
                                 <%= form_tag order_items_path, remote: true do %>
-                                <%= hidden_field_tag :product_id, @product.id %>
+                                <%# hidden_field_tag :product_id, @product.id %>
                                 <div class="qty-box">
                                     <div class="input-group"><span class="input-group-prepend"><button type="button" class="btn quantity-left-minus" data-type="minus" data-field=""><i class="ti-angle-left"></i></button> </span>
                                         <!--<input type="text" name="quantity" class="form-control input-number" value="1"> <span class="input-group-prepend"><button type="button" class="btn quantity-right-plus" data-type="plus" data-field=""><i class="ti-angle-right"></i></button></span></div>-->
@@ -351,11 +388,7 @@
                             <h6><%= product.product_name %></h6>
                         </a>
                         <h4><%= number_to_currency(product.price, :unit => ' KES ') %></h4>
-                       <!--<ul class="color-variant">
-                            <li class="bg-light0"></li>
-                            <li class="bg-light1"></li>
-                            <li class="bg-light2"></li>
-                        </ul> -->
+
                     </div>
                 </div>
             </div>
@@ -507,7 +540,25 @@
 <%= javascript_include_tag 'js/admin-script' %>
 
 <script>
+    $(document).ready(function() {
+        reloadPage();
+
+        function reloadPage() {
+            (function() {
+                if (window.localStorage) {
+                    if (!localStorage.getItem('firstLoad')) {
+                        localStorage['firstLoad'] = true;
+                        window.location.reload();
+                    } else
+                        localStorage.removeItem('firstLoad');
+                }
+            })();
+        }
+
+    });
     var color_buttons = document.getElementsByClassName("product-colors")
+    var category = gon.category;
+    var product = gon.product;
     console.log(color_buttons)
 
     for (var i = 0; i < color_buttons.length; i++) {
@@ -519,27 +570,40 @@
         // alert("reached");
         console.log("Color Changed: Make an action here")
     }
-   $(document).ready(function(){
-       reloadPage();
-        function reloadPage(){
-             (function()
-            {
-            if( window.localStorage )
-            {
-                if( !localStorage.getItem('firstLoad') )
-                {
-                localStorage['firstLoad'] = true;
-                window.location.reload();
-                }  
-                else
-                localStorage.removeItem('firstLoad');
-            }
-            })();
-        }
+    
+
+    $(".variants").on('click', function(e) {
+        // debugger
+        $(".variants").removeClass("active")
+        $("#" + e.currentTarget.id).addClass("active")
+        // alert(e.delegateTarget)
+        console.log(e);
+        let name = e.delegateTarget.innerHTML;
+
+
+        let names = category.variants.name;
+        let index = names.indexOf(name);
+
+
+        $("#rrp").text("KES " + category.variants.rrp[index]);
+        $("#rrp_price").val(category.variants.rrp[index]);
+        $("#whole_sale").text("KES " + category.variants.whole_sale[index]);
+        $("#whole_sale_price").val(category.variants.whole_sale[index]);
+        $("#current_moq").val(category.variants.moq[index]);
+        $("#discount").text("Wholesale at: " + category.variants.moq_description[index]);
+
+
        
-    });
-
+    })
+    $(".input-group-prepend").on('click', function(e){
+        // alert("quantity changed")
+    })
+    $("#quantity").on("change keyup paste", function(e){
+        // alert("input changed")
+    })
+    $("#variants0").addClass("active")
+    $("#discount").text("Wholesale at: " + category.variants.moq_description[0])
+    // $("#to_cart").setEnabled(false)
+    
     // location.reload();
-
 </script>
-

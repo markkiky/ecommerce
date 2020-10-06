@@ -10,6 +10,9 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
+*= require jquery.fileupload
+*= require jquery.fileupload-ui
+
  */
 
 // @import "../../../vendor/assets/stylesheets/css/*";
@@ -116,7 +119,6 @@ input[type="number"] {
   }
 }
 
-
 .lds-spinner div:after {
   content: " ";
   display: block;
@@ -157,216 +159,292 @@ input[type="number"] {
   color: #468847;
   text-align: left;
 
-// GINA TAble CSS
-.table {
-  width: 100%;
-  margin-bottom: 1rem;
-  background-color: transparent
-}
-.table td, .table th {
-  padding: 1rem 2.5rem;
-  vertical-align: top;
-  border-top: 1px solid #f2f4f5;
-  font-size: 12px;
-  white-space: nowrap;
-  font-weight: 600;
-  color: #282b2f !important;
-}
-.table thead th {
-  vertical-align: bottom;
-  border-bottom: 2px solid #f2f4f5
-}
-.table tbody+tbody {
-  border-top: 2px solid #f2f4f5
-}
-.table .table {
-  background-color: #f3f3f3
-}
-.table-sm td, .table-sm th {
-  padding: .75rem 1rem
-}
-.table-bordered, .table-bordered td, .table-bordered th {
-  border: 1px solid #f2f4f5
-}
-.table-bordered thead td, .table-bordered thead th {
-  border-bottom-width: 2px
-}
-.table-borderless tbody+tbody, .table-borderless td, .table-borderless th, .table-borderless thead th {
-  border: 0
-}
-.table-hover tbody tr:hover, .table-striped tbody tr:nth-of-type(odd) {
-  background-color: #f2f4f5
-}
-.table-primary, .table-primary>td, .table-primary>th {
-  background-color: #c1e2fc
-}
-.table-primary tbody+tbody, .table-primary td, .table-primary th, .table-primary thead th {
-  border-color: #8cc8f9
-}
-.table-hover .table-primary:hover, .table-hover .table-primary:hover>td, .table-hover .table-primary:hover>th {
-  background-color: #a9d7fb
-}
-.table-secondary, .table-secondary>td, .table-secondary>th {
-  background-color: #dddfe2
-}
-.table-secondary tbody+tbody, .table-secondary td, .table-secondary th, .table-secondary thead th {
-  border-color: #c0c4c8
-}
-.table-hover .table-secondary:hover, .table-hover .table-secondary:hover>td, .table-hover .table-secondary:hover>th {
-  background-color: #cfd2d6
-}
-.table-success, .table-success>td, .table-success>th {
-  background-color: #c6efdd
-}
-.table-success tbody+tbody, .table-success td, .table-success th, .table-success thead th {
-  border-color: #94e2c1
-}
-.table-hover .table-success:hover, .table-hover .table-success:hover>td, .table-hover .table-success:hover>th {
-  background-color: #b2e9d1
-}
-.table-info, .table-info>td, .table-info>th {
-  background-color: #b8e7fc
-}
-.table-info tbody+tbody, .table-info td, .table-info th, .table-info thead th {
-  border-color: #7cd2f9
-}
-.table-hover .table-info:hover, .table-hover .table-info:hover>td, .table-hover .table-info:hover>th {
-  background-color: #a0dffb
-}
-.table-warning, .table-warning>td, .table-warning>th {
-  background-color: #ffefc1
-}
-.table-warning tbody+tbody, .table-warning td, .table-warning th, .table-warning thead th {
-  border-color: #ffe28c
-}
-.table-hover .table-warning:hover, .table-hover .table-warning:hover>td, .table-hover .table-warning:hover>th {
-  background-color: #ffe8a8
-}
-.table-danger, .table-danger>td, .table-danger>th {
-  background-color: #ffd6d5
-}
-.table-danger tbody+tbody, .table-danger td, .table-danger th, .table-danger thead th {
-  border-color: #ffb2b0
-}
-.table-hover .table-danger:hover, .table-hover .table-danger:hover>td, .table-hover .table-danger:hover>th {
-  background-color: #ffbdbc
-}
-.table-light, .table-light>td, .table-light>th {
-  background-color: #fcfcfc
-}
-.table-light tbody+tbody, .table-light td, .table-light th, .table-light thead th {
-  border-color: #fafafa
-}
-.table-hover .table-light:hover, .table-hover .table-light:hover>td, .table-hover .table-light:hover>th {
-  background-color: #efefef
-}
-.table-dark, .table-dark>td, .table-dark>th {
-  background-color: #ccced0
-}
-.table-dark tbody+tbody, .table-dark td, .table-dark th, .table-dark thead th {
-  border-color: #a0a4a8
-}
-.table-hover .table-dark:hover, .table-hover .table-dark:hover>td, .table-hover .table-dark:hover>th {
-  background-color: #bfc1c4
-}
-.table-active, .table-active>td, .table-active>th {
-  background-color: #f2f4f5
-}
-.table-hover .table-active:hover, .table-hover .table-active:hover>td, .table-hover .table-active:hover>th {
-  background-color: #e3e7eb
-}
-.table .thead-dark th {
-  color: #f3f3f3;
-  background-color: #313a44;
-  border-color: #3e464e
-}
-.table .thead-light th {
-  color: #495057;
-  background-color: #f2f4f5;
-  border-color: #f2f4f5
-}
-.table-dark {
-  color: #f3f3f3;
-  background-color: #313a44
-}
-.table-dark td, .table-dark th, .table-dark thead th {
-  border-color: #3e464e
-}
-.table-dark.table-bordered, .table-responsive>.table-bordered {
-  border: 0
-}
-.table-dark.table-striped tbody tr:nth-of-type(odd) {
-  background-color: rgba(255,255,255,.05)
-}
-.table-dark.table-hover tbody tr:hover {
-  background-color: rgba(255,255,255,.075)
-}
-.form-control, .form-control-plaintext, .form-control:disabled, .form-control:focus, .form-control[readonly] {
-  background-color: transparent
-}
+  // GINA TAble CSS
+  .table {
+    width: 100%;
+    margin-bottom: 1rem;
+    background-color: transparent;
+  }
+  .table td,
+  .table th {
+    padding: 1rem 2.5rem;
+    vertical-align: top;
+    border-top: 1px solid #f2f4f5;
+    font-size: 12px;
+    white-space: nowrap;
+    font-weight: 600;
+    color: #282b2f !important;
+  }
+  .table thead th {
+    vertical-align: bottom;
+    border-bottom: 2px solid #f2f4f5;
+  }
+  .table tbody + tbody {
+    border-top: 2px solid #f2f4f5;
+  }
+  .table .table {
+    background-color: #f3f3f3;
+  }
+  .table-sm td,
+  .table-sm th {
+    padding: 0.75rem 1rem;
+  }
+  .table-bordered,
+  .table-bordered td,
+  .table-bordered th {
+    border: 1px solid #f2f4f5;
+  }
+  .table-bordered thead td,
+  .table-bordered thead th {
+    border-bottom-width: 2px;
+  }
+  .table-borderless tbody + tbody,
+  .table-borderless td,
+  .table-borderless th,
+  .table-borderless thead th {
+    border: 0;
+  }
+  .table-hover tbody tr:hover,
+  .table-striped tbody tr:nth-of-type(odd) {
+    background-color: #f2f4f5;
+  }
+  .table-primary,
+  .table-primary > td,
+  .table-primary > th {
+    background-color: #c1e2fc;
+  }
+  .table-primary tbody + tbody,
+  .table-primary td,
+  .table-primary th,
+  .table-primary thead th {
+    border-color: #8cc8f9;
+  }
+  .table-hover .table-primary:hover,
+  .table-hover .table-primary:hover > td,
+  .table-hover .table-primary:hover > th {
+    background-color: #a9d7fb;
+  }
+  .table-secondary,
+  .table-secondary > td,
+  .table-secondary > th {
+    background-color: #dddfe2;
+  }
+  .table-secondary tbody + tbody,
+  .table-secondary td,
+  .table-secondary th,
+  .table-secondary thead th {
+    border-color: #c0c4c8;
+  }
+  .table-hover .table-secondary:hover,
+  .table-hover .table-secondary:hover > td,
+  .table-hover .table-secondary:hover > th {
+    background-color: #cfd2d6;
+  }
+  .table-success,
+  .table-success > td,
+  .table-success > th {
+    background-color: #c6efdd;
+  }
+  .table-success tbody + tbody,
+  .table-success td,
+  .table-success th,
+  .table-success thead th {
+    border-color: #94e2c1;
+  }
+  .table-hover .table-success:hover,
+  .table-hover .table-success:hover > td,
+  .table-hover .table-success:hover > th {
+    background-color: #b2e9d1;
+  }
+  .table-info,
+  .table-info > td,
+  .table-info > th {
+    background-color: #b8e7fc;
+  }
+  .table-info tbody + tbody,
+  .table-info td,
+  .table-info th,
+  .table-info thead th {
+    border-color: #7cd2f9;
+  }
+  .table-hover .table-info:hover,
+  .table-hover .table-info:hover > td,
+  .table-hover .table-info:hover > th {
+    background-color: #a0dffb;
+  }
+  .table-warning,
+  .table-warning > td,
+  .table-warning > th {
+    background-color: #ffefc1;
+  }
+  .table-warning tbody + tbody,
+  .table-warning td,
+  .table-warning th,
+  .table-warning thead th {
+    border-color: #ffe28c;
+  }
+  .table-hover .table-warning:hover,
+  .table-hover .table-warning:hover > td,
+  .table-hover .table-warning:hover > th {
+    background-color: #ffe8a8;
+  }
+  .table-danger,
+  .table-danger > td,
+  .table-danger > th {
+    background-color: #ffd6d5;
+  }
+  .table-danger tbody + tbody,
+  .table-danger td,
+  .table-danger th,
+  .table-danger thead th {
+    border-color: #ffb2b0;
+  }
+  .table-hover .table-danger:hover,
+  .table-hover .table-danger:hover > td,
+  .table-hover .table-danger:hover > th {
+    background-color: #ffbdbc;
+  }
+  .table-light,
+  .table-light > td,
+  .table-light > th {
+    background-color: #fcfcfc;
+  }
+  .table-light tbody + tbody,
+  .table-light td,
+  .table-light th,
+  .table-light thead th {
+    border-color: #fafafa;
+  }
+  .table-hover .table-light:hover,
+  .table-hover .table-light:hover > td,
+  .table-hover .table-light:hover > th {
+    background-color: #efefef;
+  }
+  .table-dark,
+  .table-dark > td,
+  .table-dark > th {
+    background-color: #ccced0;
+  }
+  .table-dark tbody + tbody,
+  .table-dark td,
+  .table-dark th,
+  .table-dark thead th {
+    border-color: #a0a4a8;
+  }
+  .table-hover .table-dark:hover,
+  .table-hover .table-dark:hover > td,
+  .table-hover .table-dark:hover > th {
+    background-color: #bfc1c4;
+  }
+  .table-active,
+  .table-active > td,
+  .table-active > th {
+    background-color: #f2f4f5;
+  }
+  .table-hover .table-active:hover,
+  .table-hover .table-active:hover > td,
+  .table-hover .table-active:hover > th {
+    background-color: #e3e7eb;
+  }
+  .table .thead-dark th {
+    color: #f3f3f3;
+    background-color: #313a44;
+    border-color: #3e464e;
+  }
+  .table .thead-light th {
+    color: #495057;
+    background-color: #f2f4f5;
+    border-color: #f2f4f5;
+  }
+  .table-dark {
+    color: #f3f3f3;
+    background-color: #313a44;
+  }
+  .table-dark td,
+  .table-dark th,
+  .table-dark thead th {
+    border-color: #3e464e;
+  }
+  .table-dark.table-bordered,
+  .table-responsive > .table-bordered {
+    border: 0;
+  }
+  .table-dark.table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+  .table-dark.table-hover tbody tr:hover {
+    background-color: rgba(255, 255, 255, 0.075);
+  }
+  .form-control,
+  .form-control-plaintext,
+  .form-control:disabled,
+  .form-control:focus,
+  .form-control[readonly] {
+    background-color: transparent;
+  }
 
-@media (max-width:575.98px) {
-.table-responsive-sm {
-  display: block;
-  width: 100%;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  -ms-overflow-style: -ms-autohiding-scrollbar
-}
-.table-responsive-sm>.table-bordered {
-  border: 0
-}
-}
+  @media (max-width: 575.98px) {
+    .table-responsive-sm {
+      display: block;
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      -ms-overflow-style: -ms-autohiding-scrollbar;
+    }
+    .table-responsive-sm > .table-bordered {
+      border: 0;
+    }
+  }
 
-@media (max-width:767.98px) {
-.table-responsive-md {
-  display: block;
-  width: 100%;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  -ms-overflow-style: -ms-autohiding-scrollbar
-}
-.table-responsive-md>.table-bordered {
-  border: 0
-}
-}
+  @media (max-width: 767.98px) {
+    .table-responsive-md {
+      display: block;
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      -ms-overflow-style: -ms-autohiding-scrollbar;
+    }
+    .table-responsive-md > .table-bordered {
+      border: 0;
+    }
+  }
 
-@media (max-width:991.98px) {
-.table-responsive-lg {
-  display: block;
-  width: 100%;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  -ms-overflow-style: -ms-autohiding-scrollbar
-}
-.table-responsive-lg>.table-bordered {
-  border: 0
-}
-}
+  @media (max-width: 991.98px) {
+    .table-responsive-lg {
+      display: block;
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      -ms-overflow-style: -ms-autohiding-scrollbar;
+    }
+    .table-responsive-lg > .table-bordered {
+      border: 0;
+    }
+  }
 
-@media (max-width:1199.98px) {
-.table-responsive-xl {
-  display: block;
-  width: 100%;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  -ms-overflow-style: -ms-autohiding-scrollbar
-}
-.table-responsive-xl>.table-bordered {
-  border: 0
-}
-}
-.table-responsive {
-  display: block;
-  width: 100%;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  -ms-overflow-style: -ms-autohiding-scrollbar
-}
+  @media (max-width: 1199.98px) {
+    .table-responsive-xl {
+      display: block;
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      -ms-overflow-style: -ms-autohiding-scrollbar;
+    }
+    .table-responsive-xl > .table-bordered {
+      border: 0;
+    }
+  }
+  .table-responsive {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+  }
 
-.paginate_button {
-  margin-left: 0.5rem;
-  margin-right: 0.5rem;
-  cursor: pointer;
-}
+  .paginate_button {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+    cursor: pointer;
+  }
 }

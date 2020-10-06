@@ -47,7 +47,7 @@ class CategoriesController < ApplicationController
   # POST /categories.json
   def create
     # byebug
-    
+
     # @colors = params[:colors]
     # if @colors.count >= 1
     #   @colors.each do |color|
@@ -81,7 +81,15 @@ class CategoriesController < ApplicationController
     # end
     @category = current_admin.categories.build(category_params)
     # Category.create(:category_name => "MIMI", :variants => {:moq => "5l"})
-    @category.variants = {:moq => "130L"}
+    # @category.variants = {
+
+    #   :product_description => ["50ml with mint scent", "100ml with mint scent", "5L with mint scent", "20L with mint scent"],
+    #   :rrp => ["100", "180", "2050", "8000"],
+    #   :whole_sale => ["80", "140", "2060", "8000"],
+    #   :moq => ["240", "240", "2", "1"],
+    #   :moq_description => ["10 dozens (240 pieces)", "10 dozens (240 pieces)", "2 jericans", "1 Jerican"],
+    #   :name => ['50ml', '100ml', '5L', '20L']
+    # } 
     respond_to do |format|
       if @category.save
         format.html { redirect_to categories_path, notice: "Category was successfully created." }
@@ -157,6 +165,27 @@ class CategoriesController < ApplicationController
     end
   end
 
+  def category_variants
+    @category = Category.find(params[:id])
+    @order_id = @category.id
+    # @category = Category.find(category_id)
+
+    @categories = Category.all
+    # byebug
+    respond_to do |format|
+      format.html
+    end
+  end
+
+  def get_variants
+    @category = Category.find(params[:id])
+    gon.variants = @category.variants
+    # respond_to do |format|
+    #   # format.html
+    #   format.js
+    # end
+  end
+
   # DELETE /categories/1
   # DELETE /categories/1.json
   def destroy
@@ -176,6 +205,6 @@ class CategoriesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def category_params
-    params.require(:category).permit(:category_id, :category_name, :description, :active, color: [])
+    params.require(:category).permit(:category_id, :category_name, :description, :active, color: [], variants: [])
   end
 end

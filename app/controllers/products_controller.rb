@@ -9,29 +9,38 @@ class ProductsController < ApplicationController
   def index
     if params[:category].blank?
       @products = Product.all.order("created_at DESC")
-   else 
+    else
       @category_id = Category.find_by(category_name: params[:category]).id
       @products = Product.where(:category_id => @category_id).order("created_at DESC")
-   end 
- end 
+    end
+  end
 
- def search 
-  if params[:q].blank?  
-      redirect_to(root_path, alert: "Search Field Empty!") and return  
-    else    
+  def search
+    if params[:q].blank?
+      redirect_to(root_path, alert: "Search Field Empty!") and return
+    else
       @products = Product.where("product_name LIKE ? OR product_description LIKE ?", "%" + params[:q] + "%", "%" + params[:q] + "%")
-    end 
-end
+    end
+  end
+
+  # def show_variants
+  #   puts "NIMEGONGWA BUDAAAAAAA"
+  #   # byebug
+  # end
 
   # GET /products/1
   # GET /products/1.json
   def show
     # console
+    @category = Category.find(@product.category_id)
+
+    gon.category = @category
+    gon.product = @product
     if @product.reviews.blank?
       @average_review = 0
-  #  else
-  #     @average_review = @product.reviews.average(:rating).round(2)
-   end
+      #  else
+      #     @average_review = @product.reviews.average(:rating).round(2)
+    end
     @wishlist_exists = Wishlist.where(product: @product, customer: current_customer) == [] ? false : true
   end
 
@@ -39,17 +48,17 @@ end
   def new
     @admin_panel = "Arigiene Admin Panel"
     @product = current_admin.products.build
-    @categories = Category.all.map{ |c| [c.category_name, c.id] }
-    @sizes = Size.all.map{ |s| [s.size_type, s.id] }
-    @colors = Color.all.map{ |l| [l.color_type, l.id] }
+    @categories = Category.all.map { |c| [c.category_name, c.id] }
+    @sizes = Size.all.map { |s| [s.size_type, s.id] }
+    @colors = Color.all.map { |l| [l.color_type, l.id] }
   end
 
   # GET /products/1/edit
   def edit
     @category = Category.where(:id => @product.category_id)
     @categories = Category.all
-    @sizes = Size.all.map{ |s| [s.size_type, s.id] }
-    @colors = Color.all.map{ |l| [l.color_type, l.id] }
+    @sizes = Size.all.map { |s| [s.size_type, s.id] }
+    @colors = Color.all.map { |l| [l.color_type, l.id] }
     @data_id = 1
   end
 
@@ -61,20 +70,29 @@ end
     @product.category_id = params[:category_id]
     # @product.size_id = params[:size_id]
     # @product.color_id = params[:color_id]
-    
+    # byebug
+    # @product.product_group = { :discount => {
+
+    #   :product_description => ["500ml with lemon fresh scent", ""],
+    #   :rrp => "2000",
+    #   :whole_sale => "200",
+    #   :moq => ["200", "UMAMI"],
+    #   :moq_description => "10 dozens(120 pieces)",
+
+    # } }
 
     respond_to do |format|
       if @product.save
         # params[:product][:size].each do |size|
         #   puts size[:number].to_i
         #   number = size[:number].to_i
-          
+
         #   while number > 1
         #     ProductSize.create!(:product_id => @product.id, :size_id => size["size_id"])
         #     number = number - 1
         #   end
         # end
-        format.html { redirect_to products_path , noticep: 'Product was successfully created.' }
+        format.html { redirect_to products_path, noticep: "Product was successfully created." }
         format.json { render :show, status: :created, location: @product }
       else
         format.html { render :new }
@@ -91,7 +109,7 @@ end
     @product.color_id = params[:color_id]
     respond_to do |format|
       if @product.update(product_params)
-        format.html { redirect_to products_path, notice: 'Product was successfully updated.' }
+        format.html { redirect_to products_path, notice: "Product was successfully updated." }
         format.json { render :show, status: :ok, location: @product }
       else
         format.html { render :edit }
@@ -102,22 +120,22 @@ end
 
   # POST /product_counter
   def product_counter
-    
     puts params[:product_count]
     @category_id = params[:category_id]
     @product_count = params[:product_count]
-    @colors = Color.where(:category_id => @category_id).map{ |l| [l.color_type, l.id] }
+    @colors = Color.where(:category_id => @category_id).map { |l| [l.color_type, l.id] }
     @sizes = Size.where(:category_id => @category_id)
     respond_to do |format|
       format.js
     end
   end
+
   # DELETE /products/1
   # DELETE /products/1.json
   def destroy
     @product.destroy
     respond_to do |format|
-      format.html { redirect_to products_url, notice: 'Product was successfully destroyed.' }
+      format.html { redirect_to products_url, notice: "Product was successfully destroyed." }
       format.json { head :no_content }
     end
   end
@@ -127,7 +145,7 @@ end
     @data_id = params[:data_id]
     product_id = params[:product_id]
     puts product_id
-    
+
     @product = Product.find(product_id)
     respond_to do |format|
       format.js
@@ -135,13 +153,14 @@ end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_product
-      @product = Product.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def product_params
-      params.require(:product).permit(:product_id, :sku, :id_sku, :vendor_product_id, :product_name, :product_description, :supplier_id, :category_id, :quantity_per_unit, :price, :unit_price, :msrp, :available_size, :available_colors, :size, :color, :discount, :unit_weight, :units_in_stock, :units_on_order, :reorder_level, :product_available, :discount_available, :current_order, :note, :ranking, :product_code, :product_quantity, :size_id, :color_id, images: [], color_ids: [], size_ids: [])
-    end
-  end 
+  # Use callbacks to share common setup or constraints between actions.
+  def set_product
+    @product = Product.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def product_params
+    params.require(:product).permit(:product_id, :sku, :id_sku, :vendor_product_id, :product_name, :product_description, :supplier_id, :category_id, :quantity_per_unit, :price, :unit_price, :msrp, :available_size, :available_colors, :size, :color, :discount, :unit_weight, :units_in_stock, :units_on_order, :reorder_level, :product_available, :discount_available, :current_order, :note, :ranking, :product_code, :product_quantity, :size_id, :color_id, images: [], color_ids: [], size_ids: [], product_group: [])
+  end
+end

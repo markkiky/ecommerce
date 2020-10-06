@@ -110,7 +110,7 @@
                                     </div>
                                     <% current_cart.order.items.each do |order| %>
                                     <ul class="qty">
-                                        <li><%= order.product.product_name %> × <%= order.quantity %> <span><%= number_to_currency(order.price, unit: ' KES ')%></span></li>
+                                        <li><%= order.product.product_name %> × <%= order.quantity %> <span><%= number_to_currency(order.price * order.quantity, unit: ' KES ')%></span></li>
                                         <% end %>
                                     </ul>
                                     <ul class="sub-total">

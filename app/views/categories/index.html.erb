@@ -1,123 +1,126 @@
+<!-- page-wrapper Start-->
+<div class="page-wrapper">
 
+    <!-- Page Header Start-->
+    <%= render 'layouts/admin_header' %>
+    <!-- Page Header Ends -->
 
-    <!-- page-wrapper Start-->
-    <div class="page-wrapper">
+    <!-- Page Body Start-->
+    <div class="page-body-wrapper">
 
-        <!-- Page Header Start-->
-        <%= render 'layouts/admin_header' %>
-        <!-- Page Header Ends -->
+        <!-- Page Sidebar Start-->
+        <%= render 'layouts/admin_sidebar' %>
+        <!-- Page Sidebar Ends-->
 
-        <!-- Page Body Start-->
-        <div class="page-body-wrapper">
+        <!-- Right sidebar Start -->
 
-            <!-- Page Sidebar Start-->
-            <%= render 'layouts/admin_sidebar' %>
-            <!-- Page Sidebar Ends-->
+        <!-- Right sidebar Ends-->
 
-            <!-- Right sidebar Start -->
+        <div class="page-body">
 
-            <!-- Right sidebar Ends-->
+            <!-- Container-fluid starts-->
+            <div class="container-fluid">
+                <div class="page-header">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="page-header-left">
+                                <h3>Categories
+                                    <small>Arigiene Admin Panel</small>
+                                </h3>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <ol class="breadcrumb pull-right">
+                                <li class="breadcrumb-item"><a href="<%= root_url %>"><i data-feather="home"></i></a></li>
+                                <li class="breadcrumb-item">Physical</li>
+                                <li class="breadcrumb-item active">Category</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Container-fluid Ends-->
 
-            <div class="page-body">
-
-                <!-- Container-fluid starts-->
-                <div class="container-fluid">
-                    <div class="page-header">
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <div class="page-header-left">
-                                    <h3>Categories
-                                        <small>Arigiene Admin Panel</small>
-                                    </h3>
+            <!-- Container-fluid starts-->
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>Products Category</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="btn-popup pull-right">
+                                    <%= link_to new_category_path, :class => "btn btn-primary", remote: true do %>
+                                    Add Category
+                                    <%end%>
                                 </div>
                             </div>
-                            <div class="col-lg-6">
-                                <ol class="breadcrumb pull-right">
-                                    <li class="breadcrumb-item"><a href="<%= root_url %>"><i data-feather="home"></i></a></li>
-                                    <li class="breadcrumb-item">Physical</li>
-                                    <li class="breadcrumb-item active">Category</li>
-                                </ol>
+                            <div class="card-body">
+                                <div class="user-status table-responsive latest-order-table">
+                                    <table class="table table-bordernone">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Category Name</th>
+                                                <th> Actions </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <% @categories.reverse.each do |category| %>
+                                            <tr>
+                                                <td><%= category.category_name %></td>
+                                                <td><%= link_to 'Edit', edit_category_path(category), :class => "btn btn-secondary", remote: true %></td>
+                                                <td>
+                                                    <div>
+                                                        <%= link_to "Variants", category_variants_path(category.id), :class => "btn btn-warning d-none" %>
+                                                        <%= link_to 'Delete', category_path(category), method: :delete, data: { confirm: 'Are you sure?'}, :class => "btn btn-primary" %>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <% end %>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <!-- Container-fluid Ends-->
-
-                <!-- Container-fluid starts-->
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h5>Products Category</h5>
-                                </div>
-                                <div class="card-body">
-                                    <div class="btn-popup pull-right">
-                                        <%= link_to new_category_path, :class => "btn btn-primary", remote: true do %>
-                                        Add Category
-                                        <%end%>
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <div class="user-status table-responsive latest-order-table">
-                                        <table class="table table-bordernone">
-                                            <thead>
-                                                <tr>
-                                                    <th scope="col">Category Name</th>
-                                                    <th> Actions </th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <% @categories.reverse.each do |category| %>
-                                                <tr>
-                                                    <td><%= category.category_name %></td>
-                                                    <td><%= link_to 'Edit', edit_category_path(category), :class => "btn btn-secondary", remote: true %></td>
-                                                    <td><%= link_to 'Delete', category_path(category), method: :delete, data: { confirm: 'Are you sure?'}, :class => "btn btn-primary" %></td>
-                                                </tr>
-                                                <% end %>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Container-fluid Ends-->
-                </div>
             </div>
-
-            <!-- footer start-->
-            <%= render 'layouts/admin_footer' %>
-            <!-- footer end-->
-
         </div>
+
+        <!-- footer start-->
+        <%= render 'layouts/admin_footer' %>
+        <!-- footer end-->
 
     </div>
 
-    <!-- latest jquery-->
-    <script src="../resources/js/jquery-3.3.1.min.js"></script>
+</div>
 
-    <!-- Bootstrap js-->
-    <script src="../resources/js/popper.min.js"></script>
-    <script src="../resources/js/bootstrap.js"></script>
+<!-- latest jquery-->
+<script src="../resources/js/jquery-3.3.1.min.js"></script>
 
-    <!-- feather icon js-->
-    <script src="../resources/js/icons/feather-icon/feather.min.js"></script>
-    <script src="../resources/js/icons/feather-icon/feather-icon.js"></script>
+<!-- Bootstrap js-->
+<script src="../resources/js/popper.min.js"></script>
+<script src="../resources/js/bootstrap.js"></script>
 
-    <!-- Sidebar jquery-->
-    <script src="../resources/js/sidebar-menu.js"></script>
+<!-- feather icon js-->
+<script src="../resources/js/icons/feather-icon/feather.min.js"></script>
+<script src="../resources/js/icons/feather-icon/feather-icon.js"></script>
 
-    <!--Customizer admin-->
-    <script src="../resources/js/admin-customizer.js"></script>
+<!-- Sidebar jquery-->
+<script src="../resources/js/sidebar-menu.js"></script>
 
-    <!-- Jsgrid js-->
-    <script src="../resources/js/jsgrid/jsgrid.min.js"></script>
-    <script src="../resources/js/jsgrid/griddata-manage-product.js"></script>
-    <script src="../resources/js/jsgrid/jsgrid-manage-product.js"></script>
+<!--Customizer admin-->
+<script src="../resources/js/admin-customizer.js"></script>
 
-    <!--right sidebar js-->
-    <script src="../resources/js/chat-menu.js"></script>
+<!-- Jsgrid js-->
+<script src="../resources/js/jsgrid/jsgrid.min.js"></script>
+<script src="../resources/js/jsgrid/griddata-manage-product.js"></script>
+<script src="../resources/js/jsgrid/jsgrid-manage-product.js"></script>
 
-    <!--script admin-->
-    <script src="../resources/js/admin-script.js"></script>
+<!--right sidebar js-->
+<script src="../resources/js/chat-menu.js"></script>
+
+<!--script admin-->
+<script src="../resources/js/admin-script.js"></script>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_02_192354) do
+ActiveRecord::Schema.define(version: 2020_10_05_065025) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -272,6 +272,8 @@ ActiveRecord::Schema.define(version: 2020_10_02_192354) do
     t.integer "product_quantity"
     t.integer "size_id"
     t.integer "color_id"
+    t.jsonb "product_group", default: {}, null: false
+    t.index ["product_group"], name: "index_products_on_product_group", using: :gin
   end
 
   create_table "reviews", force: :cascade do |t|
