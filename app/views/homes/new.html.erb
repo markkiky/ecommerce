@@ -36,7 +36,7 @@
                                  <h6>Contact Us</h6>
                              </div>
                              <div class="media-body">
-                                 <p>+254 743 - 041 - 695</p>
+                                 <p><%= AdminConfig[:app_phone]%></p>
                              </div>
                          </li>
                          <li>
@@ -44,8 +44,8 @@
                                  <h6>Address</h6>
                              </div>
                              <div class="media-body">
-                                 <p>Arigiene Ke</p>
-                                 <p>Nairobi, Kenya</p>
+                                 <p><%= AdminConfig[:app_name] %></p>
+                                 <p><%= AdminConfig[:app_location] %></p>
                              </div>
                          </li>
                          <li>
@@ -53,7 +53,7 @@
                                  <h6>Email</h6>
                              </div>
                              <div class="media-body">
-                                 <p>info@arigiene.com</p>
+                                 <p><%= AdminConfig[:app_email]%></p>
                              </div>
                          </li>
                      </ul>
@@ -96,3 +96,5 @@
  <!--Section ends-->
 
  <%= render 'layouts/footer' %>
+
+ <%= javascript_include_tag 'js/lazysizes.min.js' %>
