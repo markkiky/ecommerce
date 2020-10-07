@@ -33,6 +33,7 @@ class OrdersController < ApplicationController
     @order = Order.new
     @categories = Category.all.map { |c| [c.category_name, c.id] }
     respond_to do |format|
+      format.html
       format.js
     end
   end

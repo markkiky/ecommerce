@@ -89,6 +89,7 @@ GEM
       dotenv (= 2.7.6)
       railties (>= 3.2)
     erubi (1.9.0)
+    execjs (2.7.0)
     faraday (1.0.1)
       multipart-post (>= 1.2, < 3)
     ffi (1.13.1)
@@ -125,8 +126,7 @@ GEM
       activerecord
       kaminari-core (= 1.2.1)
     kaminari-core (1.2.1)
-    ledermann-rails-settings (2.5.0)
-      activerecord (>= 4.2)
+    libv8 (8.4.255.0)
     listen (3.2.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
@@ -142,6 +142,8 @@ GEM
     mini_magick (4.10.1)
     mini_mime (1.0.2)
     mini_portile2 (2.4.0)
+    mini_racer (0.3.1)
+      libv8 (~> 8.4.255)
     minitest (5.14.1)
     msgpack (1.3.3)
     multi_json (1.15.0)
@@ -303,6 +305,8 @@ GEM
     turbolinks-source (5.2.0)
     tzinfo (1.2.7)
       thread_safe (~> 0.1)
+    uglifier (4.2.0)
+      execjs (>= 0.3.0, < 3)
     unicode-display_width (1.7.0)
     warden (1.2.8)
       rack (>= 2.0.6)
@@ -324,6 +328,7 @@ GEM
     websocket-extensions (0.1.5)
     xpath (3.2.0)
       nokogiri (~> 1.8)
+    yui-compressor (0.12.0)
     zeitwerk (2.4.0)
 
 PLATFORMS
@@ -339,8 +344,8 @@ DEPENDENCIES
   image_processing (~> 1.2)
   jbuilder (~> 2.7)
   jquery-rails
-  ledermann-rails-settings
   listen (~> 3.2)
+  mini_racer
   mysql2
   omniauth
   omniauth-facebook
@@ -364,9 +369,11 @@ DEPENDENCIES
   tawk_rails
   turbolinks (~> 5)
   tzinfo-data
+  uglifier (~> 4.2)
   web-console (>= 3.3.0)
   webdrivers
   webpacker (~> 4.0)
+  yui-compressor (~> 0.12.0)
 
 RUBY VERSION
    ruby 2.6.0p0
