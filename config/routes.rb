@@ -107,4 +107,10 @@ end
   get "/wishlists", to: "wishlists#index"
   delete 'wishlists/:id(.:format)', :to => 'wishlists#destroy'
 
+  #errors paths
+  get '/404', to: 'errors#not_found'
+  get '/422', to: 'errors#unprocessable'
+  get '/500', to: 'errors#internal_server'
+  get '/204', to: 'errors#no_content'
+  
 end
