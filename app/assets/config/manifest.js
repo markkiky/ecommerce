@@ -82,6 +82,8 @@
 
 //= link js/bootstrap-select.min.js
 
+//= link js/jquery.raty.js
+
 // precompile css
 //= link css/fontawesome.css
 //= link css/slick.css

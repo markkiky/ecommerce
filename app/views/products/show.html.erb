@@ -73,6 +73,10 @@
                     <div class="product-right">
                         <div class="product-right product-description-box">
                             <h2><%= @product.product_name %></h2>
+                             <div class="average-review-rating" data-score=<%= @average_review %>></div>
+                             <a href="<%= product_reviews_path(@product.id) %>"><span class="number-of-reviews">From: <%= @product.reviews.count %> reviews </span> </a>
+                             <div class="border-product">
+                             </div>
                             <h3><%= number_to_currency(@product.price , :unit => ' KES ') %></h3>
                             <ul class="color-variant">
                                 <% @product.colors.uniq.each  do |color| %>
@@ -304,10 +308,6 @@
                         </div>
                         <% end %>
                     </div>
-                    <br>
-                    <h4 class="avg-rating">Average Rating</h4>
-                    <div class="average-review-rating" data-score=<%= @average_review %>></div>
-                    <span class="number-of-reviews">From: <%= @product.reviews.count %> reviews </span>
                 </div>
             </div>
         </div>
@@ -460,6 +460,9 @@
 <!-- fly cart ui jquery-->
 <%= javascript_include_tag 'js/jquery-ui.min.js' %>
 
+<!-- jquery raty -->
+<%= javascript_include_tag 'js/jquery.raty'%>
+
 <!-- exitintent jquery-->
 <%= javascript_include_tag 'js/jquery.exitintent.js' %>
 <%= javascript_include_tag 'js/exit.js' %>
@@ -507,6 +510,22 @@
 </script>
 
 <%= javascript_include_tag 'js/admin-script' %>
+
+
+<script>
+    $('#rating-form').raty({
+        path: '/assets/',
+        scoreName: 'review[rating]'
+    });
+
+   $('.average-review-rating').raty({
+    readOnly: true,
+    score: function() {
+    return $(this).attr('data-score');
+    },
+    path: '/assets/'
+  });
+</script>
 
 <script>
     var color_buttons = document.getElementsByClassName("product-colors")
