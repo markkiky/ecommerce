@@ -42,10 +42,30 @@
 <!-- latest jquery-->
 <%= javascript_include_tag 'js/jquery-3.3.1.min.js' %>
 
-<!-- fly cart ui jquery-->
-<%= javascript_include_tag 'js/jquery-ui.min.js' %>
+<!-- jquery raty  -->
+<%= javascript_include_tag 'js/jquery.raty.js' %>
 
-<%= javascript_include_tag 'js/jquery.raty.js'%>
+<!-- menu js-->
+<%= javascript_include_tag 'js/menu.js'%>
+
+<!-- lazyload js-->
+<%= javascript_include_tag 'js/lazysizes.min.js' %>
+
+<!-- popper js-->
+<%= javascript_include_tag 'js/popper.min.js' %>
+
+<!-- slick js-->
+<%= javascript_include_tag 'js/slick.js' %>
+
+<!-- Bootstrap js-->
+<%= javascript_include_tag 'js/bootstrap.js' %>
+
+<!-- Bootstrap Notification js-->
+<%= javascript_include_tag 'js/bootstrap-notify.min.js' %>
+
+<!-- Theme js-->
+<%= javascript_include_tag 'js/script.js' %>
+
 
 <script>
     $('.review-rating').raty({
@@ -55,4 +75,11 @@
         },
         path: '/assets/'
     });
+    function openSearch() {
+        document.getElementById("search-overlay").style.display = "block";
+    }
+
+    function closeSearch() {
+        document.getElementById("search-overlay").style.display = "none";
+    }
 </script>
