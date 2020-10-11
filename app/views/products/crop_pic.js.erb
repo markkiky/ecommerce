@@ -1,0 +1,4 @@
+$('#cropPicModal').remove();
+
+$('.page-wrapper').append("<%= j render(:partial => 'layouts/admins/crop_pic_modal') %>");
+$("#cropPicModal").modal("show");

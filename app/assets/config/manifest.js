@@ -55,6 +55,9 @@
 //= link js/height-equal.js
 //= link js/admin-script.js
 
+//= link cropper.js
+//= link cropper.css
+
 // require for any view with datatable
 //= link js/datatables/jquery.dataTables.min.js
 //= link js/datatables/custom-basic.js

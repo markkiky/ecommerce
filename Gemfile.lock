@@ -78,6 +78,8 @@ GEM
     concurrent-ruby (1.1.7)
     connection_pool (2.2.3)
     crass (1.0.6)
+    cropper-rails (2.3.2.1)
+      railties (>= 3.1.0)
     devise (4.7.2)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -338,6 +340,7 @@ DEPENDENCIES
   bootsnap (>= 1.4.2)
   byebug
   capybara (>= 2.15)
+  cropper-rails
   devise
   dotenv-rails
   gon (~> 6.4)

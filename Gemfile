@@ -7,6 +7,7 @@ ruby '2.6.0'
 # gem "passenger", ">= 6.0.6", require: "phusion_passenger/rack_handler"
 #jquery
 gem 'jquery-rails'
+gem 'cropper-rails'
 
 gem 'gon', '~> 6.4'
 

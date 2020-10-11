@@ -38,6 +38,7 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
   config.action_cable.url = "ws://localhost:3000/cable"
   config.hosts << "localhost"
+  config.hosts << "10.20.2.9"
 
   config.action_cable.allowed_request_origins = [/http:\/\/*/, /https:\/\/*/]
   config.action_mailer.delivery_method = :sendmail

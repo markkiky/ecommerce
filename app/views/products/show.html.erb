@@ -116,10 +116,10 @@
                                     <%= button_to order_items_path(:product_id => @product.id), { :class => "btn btn-solid", 'data-toggle' => 'modal', 'data-target' => '#addtocart' } do %> add to cart <% end %> </div>
                             </div>
                             <% end %>
-                            <div class="border-product">
+                            <div class="border-product d-none">
                                 <h6 class="product-title">product details</h6>
                                 
-                                    <%= raw(@product.product_description) %>
+                                    <%# raw(@product.product_description) %>
                             
                             </div>
                             <div class="border-product">
@@ -173,7 +173,7 @@
                                 </table>
                             </div>
 
-                            <div class="border-product">
+                            <div class="border-product d-none">
                                 <h6 class="product-title">100% SECURE PAYMENT</h6>
                                 <div class="payment-card-bottom">
                                     <ul>
