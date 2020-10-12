@@ -48,6 +48,17 @@ class SessionsController < ApplicationController
                 sign_in @customer
                 redirect_to root_path
             elsif auth.provider == "twitter"
+                @customer = Customer.from_omniauth(auth)
+                # @customer.first_name = auth.extra.raw_info.given_name
+                # @customer.last_name = auth.extra.raw_info.family_name
+                # @customer.image_url = auth.extra.raw_info.picture
+                @customer.uid = auth.uid
+                @customer.save
+                session[:customer_id] = @customer.id
+                sign_in @customer
+                redirect_to root_path
+                # auth.extra.raw_info.email
+            elsif auth.provider == 'facebook'
 
             end
         end

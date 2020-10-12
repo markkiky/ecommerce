@@ -1,0 +1,79 @@
+<%= include_gon %>
+<!-- Modal -->
+<div class="modal fade" id="cropPicModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <%= image_tag  "slide2.jpeg",:class => "bg-img blur-up lazyload crop_image" , id: 'image' %>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">cancel</button>
+                <button type="button" class="btn btn-primary" id="submit_crop">Crop</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+   
+    var uploaded_image = gon.image
+
+    $("#image").attr('src', uploaded_image)
+    var $image = $('#image');
+    $image.cropper({
+        
+        center: true,
+        modal: true,
+        zoomable: true,
+        minContainerWidth: 500,
+        minContainerHeight: 500,
+        minCanvasWidth: 500,
+        minCanvasHeight: 500,
+        minCropBoxWidth: 736,
+        minCropBoxHeight: 1000,
+        
+        crop: function(event) {
+            console.log("X: " + event.x);
+            console.log("Y: " + event.y);
+            console.log("Width: "+ event.width);
+            console.log("Height: " + event.height);
+            console.log("Rotate: "+event.rotate);
+            console.log("Scale x: " + event.scaleX);
+            console.log("Scale y: "+event.scaleY);
+        }
+    });
+    // Get the Cropper.js instance after initialized
+    var cropper = $image.data('cropper');
+    
+
+    function submit_crop(){
+
+    }
+
+    $('#submit_crop').on('click', function (e) {
+        // debugger
+        var cropped_image = cropper.getCroppedCanvas().toDataURL()
+        // alert(cropped_image);
+        $("#cropPicModal").modal('hide')
+        
+        $("#preview_image").attr('src', cropped_image)
+        $.ajax({
+            method: "POST",
+            url: "/pic_added",
+            dataType: 'script',
+            format: "js",
+            data: {
+                image_data: cropped_image
+            }
+        })
+    })
+</script>

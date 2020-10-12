@@ -36,16 +36,9 @@
             <div class="row">
                 <div class="col-lg-5 col-sm-10 col-xs-12">
                     <div class="product-right-slick">
-                        <% if @product.images.attached? %>
-                        <% @product.images.each  do |product_image| %>
-                        <div>
-                            <%= image_tag (product_image) , :class => "img-fluid blur-up lazyload image_zoom_cls-0" %>
-                        </div>
-                        <%end%>
-                        <%else%>
-                        <div>
-                            <%= image_tag ("default_profile") , :class => "img-fluid blur-up lazyload" %>
-                        </div>
+
+                        <% (0...@product.images.count).each do |image| %>
+                        <%= image_tag(@product.thumbnail(image), class: "") %>
                         <%end%>
                     </div>
                 </div>
@@ -54,16 +47,9 @@
                     <div class="row">
                         <div class="col-12 p-0">
                             <div class="slider-right-nav">
-                                <% if @product.images.attached? %>
-                                <% @product.images.each  do |product_image| %>
-                                <div>
-                                    <%= image_tag (product_image) , :class => "img-fluid blur-up lazyload image_zoom_cls-0" %>
-                                </div>
-                                <%end%>
-                                <%else%>
-                                <div>
-                                    <%= image_tag ("default_profile") , :class => "img-fluid blur-up lazyload" %>
-                                </div>
+                               
+                                <% (0...@product.images.count).each do |image| %>
+                                    <%= image_tag(@product.thumbnail(image), class: "") %>
                                 <%end%>
                             </div>
                         </div>
@@ -120,11 +106,11 @@
                                     <%= button_to order_items_path(:product_id => @product.id), { :class => "btn btn-solid", 'data-toggle' => 'modal', 'data-target' => '#addtocart' } do %> add to cart <% end %> </div>
                             </div>
                             <% end %>
-                            <div class="border-product">
+                            <div class="border-product d-none">
                                 <h6 class="product-title">product details</h6>
-                                
-                                    <%= raw(@product.product_description) %>
-                            
+
+                                <%# raw(@product.product_description) %>
+
                             </div>
                             <div class="border-product">
                                 <h6 class="product-title">share it</h6>
@@ -177,7 +163,7 @@
                                 </table>
                             </div>
 
-                            <div class="border-product">
+                            <div class="border-product d-none">
                                 <h6 class="product-title">100% SECURE PAYMENT</h6>
                                 <div class="payment-card-bottom">
                                     <ul>
@@ -353,7 +339,7 @@
                             <h6><%= product.product_name %></h6>
                         </a>
                         <h4><%= number_to_currency(product.price, :unit => ' KES ') %></h4>
-                       <!--<ul class="color-variant">
+                        <!--<ul class="color-variant">
                             <li class="bg-light0"></li>
                             <li class="bg-light1"></li>
                             <li class="bg-light2"></li>
@@ -540,27 +526,22 @@
         // alert("reached");
         console.log("Color Changed: Make an action here")
     }
-   $(document).ready(function(){
-       reloadPage();
-        function reloadPage(){
-             (function()
-            {
-            if( window.localStorage )
-            {
-                if( !localStorage.getItem('firstLoad') )
-                {
-                localStorage['firstLoad'] = true;
-                window.location.reload();
-                }  
-                else
-                localStorage.removeItem('firstLoad');
-            }
+    $(document).ready(function() {
+        reloadPage();
+
+        function reloadPage() {
+            (function() {
+                if (window.localStorage) {
+                    if (!localStorage.getItem('firstLoad')) {
+                        localStorage['firstLoad'] = true;
+                        window.location.reload();
+                    } else
+                        localStorage.removeItem('firstLoad');
+                }
             })();
         }
-       
+
     });
 
     // location.reload();
-
 </script>
-

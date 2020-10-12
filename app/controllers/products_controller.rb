@@ -49,6 +49,18 @@ end
     @colors = Color.all.map{ |l| [l.color_type, l.id] }
   end
 
+  def crop_pic
+    puts params
+    puts "Cropping"
+
+    gon.image = params[:image_data]
+  end
+
+  def pic_added
+    puts "pic added"
+    gon.image = params[:image_data]
+  end
+
   # GET /products/1/edit
   def edit
     @category = Category.where(:id => @product.category_id)

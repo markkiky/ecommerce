@@ -108,6 +108,11 @@ end
   get "/wishlists", to: "wishlists#index"
   delete 'wishlists/:id(.:format)', :to => 'wishlists#destroy'
 
+  post "/crop_pic", to: "products#crop_pic", as: :crop_pic
+  post "/pic_added", to: "products#pic_added", as: :pic_added
+
+  get "/variants/:id", to: "categories#variants", as: :variants
+
   #errors paths
   get '/404', to: 'errors#not_found'
   get '/422', to: 'errors#unprocessable'

@@ -1,3 +1,4 @@
+<%= javascript_include_tag 'jsoneditor' %>
 <!-- page-wrapper Start-->
 <div class="page-wrapper">
 
@@ -42,7 +43,7 @@
             <!-- Container-fluid Ends-->
 
             <!-- Container-fluid starts-->
-            <div class="container-fluid">
+            <div class="container-fluid d-none">
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="card">
@@ -66,18 +67,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <% @categories.reverse.each do |category| %>
-                                            <tr>
-                                                <td><%= category.category_name %></td>
-                                                <td><%= link_to 'Edit', edit_category_path(category), :class => "btn btn-secondary", remote: true %></td>
-                                                <td>
-                                                    <div>
-                                                        <%= link_to 'variants', variants_path(category), class: "btn btn-primary" %>
-                                                        <%= link_to 'Delete', category_path(category), method: :delete, data: { confirm: 'Are you sure?'}, :class => "btn btn-primary" %>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <% end %>
+
                                         </tbody>
                                     </table>
                                 </div>
@@ -85,7 +75,39 @@
                         </div>
                     </div>
                 </div>
-                <!-- Container-fluid Ends-->
+            </div>
+            <!-- Container-fluid Ends-->
+
+            <div class="container-fluid">
+                <div class="row">
+                    <div>
+                        <div id="jsoneditor" style="width: 500px; height: 500px;"></div>
+
+                        <script>
+                            // create the editor
+                            const container = document.getElementById("jsoneditor")
+                            const options = {}
+                            const editor = new JSONEditor(container, options)
+
+                            // set json
+                            const initialJson = {
+                                "Array": [1, 2, 3],
+                                "Boolean": true,
+                                "Null": null,
+                                "Number": 123,
+                                "Object": {
+                                    "a": "b",
+                                    "c": "d"
+                                },
+                                "String": "Hello World"
+                            }
+                            editor.set(initialJson)
+
+                            // get json
+                            const updatedJson = editor.get()
+                        </script>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -126,4 +148,3 @@
 <script src="../resources/js/admin-script.js"></script>
 
 <!-- include json-editor.js -->
-<%= javascript_include_tag 'jsoneditor' %>
