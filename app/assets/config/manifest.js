@@ -21,6 +21,7 @@
 //= link slider/9.jpg
 //= link parallax/1.jpg
 //= link home-banner/2.jpg
+//= link avtar.jpg
 
 
 // precompile js

@@ -23,7 +23,23 @@
 </div>
 <!-- breadcrumb End -->
 
-<%= render @product.reviews %>
+<!-- section start -->
+<section class="section-b-space blog-detail-page review-page">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <ul class="comment-section">
+                <% if @product.reviews.count == 0 %>
+                    <h2> This product has no reviews! </h2>
+                <% else %>
+                     <%= render @product.reviews.reverse %>
+                <% end %>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- section end -->
 
 <%= render "layouts/tawk" %>
 
