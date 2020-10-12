@@ -57,6 +57,13 @@
 
 //= link cropper.js
 //= link cropper.css
+//= link jsoneditor/dist/jsoneditor.min.js
+//= link jsoneditor/dist/jsoneditor.css
+//= link blueimp-file-upload/js/jquery.fileupload.js
+//= link jquery.ui.widget/jquery.ui.widget.js
+//= link blueimp-file-upload/css/jquery.fileupload.css
+//= link jquery-fileupload.js
+//= link jquery.fileupload.css
 
 // require for any view with datatable
 //= link js/datatables/jquery.dataTables.min.js

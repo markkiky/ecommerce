@@ -51,24 +51,26 @@
                             <%= form_with scope: :product, url: products_path, remote: true do |form| %>
                             <div class="card-body">
                                 <div class="row product-adding">
-                                    <div class="col-lg-5 col-md-5 col-sm-12 pr-2">
+                                    <div class="col-lg-5 col-md-5 col-sm-12 pr-2 d-none">
                                         <div class="add-product">
                                             <div class="row">
-                                                <div class="col-xl-9 xl-50 col-sm-6 col-9">
+                                                <div class="col-xl-9 xl-50 col-sm-6 col-9 d-none">
                                                     <img src="../resources/images/pro3/1.jpg" alt="" class="img-fluid image_zoom_1 blur-up lazyloaded" id="preview_image">
                                                 </div>
-                                                <div class="col-xl-3 xl-50 col-sm-6 col-3">
+                                                <div class="col-xl-12 xl-50 col-sm-12 col-12">
                                                     <ul class="file-upload-product">
                                                         <li>
+                                                            <%= form.label "Upload Products" %>
+                                                            <br>
                                                             <%= form.file_field :images, multiple: true %>
                                                         </li>
-                                                         <li>
+                                                        <!--<li>
                                                             <div class="box-input-file">
-                                                                <% if @product.images.attached? %>
-                                                                <%= image_tag  "filename_with_extension" %>
-                                                                <%else%>
-                                                                <%= form.file_field :images, class: "upload" %><i class="fa fa-plus"></i>
-                                                                <%end%>
+                                                                <%# if @product.images.attached? %>
+                                                                <%# image_tag  "filename_with_extension" %>
+                                                                <%#else%>
+                                                                <%# form.file_field :images, class: "upload" %><i class="fa fa-plus"></i>
+                                                                <%#end%>
                                                             </div>
 
                                                         </li>
@@ -83,7 +85,7 @@
                                                         </li>
                                                         <li>
                                                             <div class="box-input-file"><%# form.file_field :images, multiple: true, class: "upload" %><i class="fa fa-plus"></i></div>
-                                                        </li>
+                                                        </li>-->
                                                     </ul>
                                                 </div>
                                             </div>
@@ -91,6 +93,11 @@
                                     </div>
                                     <div class="col-lg-7 col-md-7 col-sm-12 pl-2">
                                         <div class="form row">
+                                            <div class="form-group col-12 mb-3">
+                                                <%= form.label "Upload Products" %>
+                                                <br>
+                                                <%= form.file_field :images, multiple: true %>
+                                            </div>
                                             <div class="form-group col-12 mb-3">
                                                 <label for="exampleFormControlSelect1" class="">Select Category:</label>
                                                 <%= select_tag :category_id, options_for_select(@categories), :prompt => "Select Category", :class => "form-control input100" %>
@@ -129,6 +136,12 @@
                                                     <%= form.text_area :product_description, :cols => 10, :rows => 4, id: "editor1" %>
 
                                                 </div>
+                                                <div class="fileupload d-none">
+
+                                                    <%# form.label :product_images, "Upload images" %>
+                                                    <%# form.file_field :product_images, multiple: true %>
+
+                                                </div>
                                                 <div class="mt-4">
                                                     <%= form.submit "Add Product", class: "btn btn-primary btn-bg" %>
                                                 </div>
@@ -146,6 +159,7 @@
 
         </div>
 
+
         <!-- footer start-->
         <%= render 'layouts/admin_footer' %>
         <!-- footer end-->
@@ -156,6 +170,8 @@
 
 <!-- latest jquery-->
 <%= javascript_include_tag 'js/jquery-3.3.1.min.js' %>
+
+
 
 
 <!-- Bootstrap js-->
@@ -202,6 +218,10 @@
 
 <!-- Cropper js -->
 <%= javascript_include_tag "cropper" %>
+<%# javascript_include_tag 'jquery.ui.widget/jquery.ui.widget.js' %>
+<!-- Include file uploader -->
+<%= javascript_include_tag 'jquery-fileupload.js' %>
+
 
 <script>
     // $('#product_product_quantity input').on("click", function() {
@@ -245,7 +265,7 @@
             // var image = null
             reader.onload = function(e) {
                 $('.upload').attr('src', e.target.result);
-               
+
                 // send to controller once image is fully uploaded
                 $.ajax({
                     method: "POST",
@@ -263,4 +283,25 @@
 
         }
     }
+</script>
+
+<script id="template-upload" type="text/javascript">
+    // $('#fileupload').fileupload({
+    //      dropZone: $(this),
+    //      uploadTemplateId: null,
+    //      downloadTemplateId: null
+    // });
+
+    $('#fileupload').fileupload({
+        dataType: 'json',
+        done: function(e, data) {
+            alert('done');
+        },
+        add: function(e, data) {
+            // alert('Uploading...');
+        },
+        // uploadTemplateId: null,
+        downloadTemplateId: null
+
+    });
 </script>

@@ -16,7 +16,7 @@
 
     <%= favicon_link_tag 'ArigieneLogo' %>
 
-    <title>Arigiene Kenya Admin</title>
+    <title><%= "#{AdminConfig[:app_name]} Admin "%></title>
 
     <!-- Google font-->
     <link href="https://fonts.googleapis.com/css?family=Work+Sans:100,200,300,400,500,600,700,800,900" rel="stylesheet">
@@ -57,6 +57,17 @@
     <!-- Cropper css -->
     <%= stylesheet_link_tag 'cropper' %>
 
+    <!-- JsonEditor css -->
+    <%= stylesheet_link_tag 'jsoneditor/dist/jsoneditor' %>
+
+    <!-- jquery widgets -->
+    <%# stylesheet_link_tag "" %>
+
+    <!-- file upload -->
+    <%= stylesheet_link_tag 'jquery.fileupload' %>
+
+    
+
       
 </head>
 
@@ -76,7 +87,7 @@
 <html>
 
 <head>
-    <title>Arigiene Kenya</title>
+    <title><%= AdminConfig[:app_name] %></title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">

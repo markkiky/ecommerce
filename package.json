@@ -6,7 +6,10 @@
     "@rails/activestorage": "^6.0.0",
     "@rails/ujs": "^6.0.0",
     "@rails/webpacker": "4.2.2",
+    "blueimp-file-upload": "^10.31.0",
     "jquery": "^3.5.1",
+    "jquery.ui.widget": "^1.10.3",
+    "jsoneditor": "^9.1.1",
     "turbolinks": "^5.2.0"
   },
   "version": "0.1.0",

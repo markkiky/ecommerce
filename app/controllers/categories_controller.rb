@@ -43,6 +43,12 @@ class CategoriesController < ApplicationController
     end
   end
 
+  # GET /variants
+  def variants
+    respond_to do |format|
+      format.html
+    end
+  end
   # POST /categories
   # POST /categories.json
   def create

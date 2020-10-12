@@ -13,4 +13,9 @@ class Product < ApplicationRecord
     
     
     has_many_attached :images
+    # has_many_base64_attached :product_images
+
+    def thumbnail input
+        return self.images[input].variant(resize: "700x1036!").processed
+    end
 end

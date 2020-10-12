@@ -110,4 +110,6 @@ end
   post "/crop_pic", to: "products#crop_pic", as: :crop_pic
   post "/pic_added", to: "products#pic_added", as: :pic_added
 
+  get "/variants/:id", to: "categories#variants", as: :variants
+
 end
