@@ -1,10 +1,19 @@
- <div class="review-rating" data-score="<%= review.rating %>"></div>
-    <p class="review-comment"><%= review.comment %></p>
-    <% if customer_signed_in? %>
-        <% if review.customer_id == current_customer.id %>
+<li>
+  <div class="media"><%= image_tag 'avtar.jpg', :alt => "Avatar image", :width => "65px", :height => "65px", :style => "margin-right: 20px;" %>
+    <div class="media-body">
+      <h6><%= review.customer.first_name %> <%= review.customer.last_name %> <span>( <%= review.created_at.strftime("%d %B %Y at %H:%M%p") %> )</span></h6>
+      <div class="review-rating" data-score="<%= review.rating %>"></div> 
+      <p><%= review.comment %></p>
+      <div style="padding-top: 12px;">
+        <% if customer_signed_in? %>
+          <% if review.customer_id == current_customer.id %>
             <div>
-                <%= link_to "Edit", edit_product_review_path(review.product, review), class: "btn btn-third-col" %>
-                <%= link_to "Delete", product_review_path(review.product, review), method: :delete, data: {confirm: "Are you sure? "}, class: "btn btn-third-col" %>
+              <%= link_to "Edit", edit_product_review_path(review.product, review), class: "btn btn-primary" %>
+              <%= link_to "Delete", product_review_path(review.product, review), method: :delete, data: {confirm: "Are you sure? "}, class: "btn btn-danger" %>
             </div>
+          <% end %>
         <% end %>
-    <% end %>
+      </div>
+    </div>
+  </div>
+</li>

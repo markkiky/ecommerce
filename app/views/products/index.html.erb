@@ -1,128 +1,386 @@
-<!-- page-wrapper Start-->
-<div class="page-wrapper">
 
-    <!-- Page Header Start-->
-    <%= render 'layouts/admin_header' %>
-    <!-- Page Header Ends -->
+<!-- header start -->
+    <%= render 'layouts/header' %>
+<!-- header end -->
 
-    <!-- Page Body Start-->
-    <div class="page-body-wrapper">
-
-        <!-- Page Sidebar Start-->
-        <%= render 'layouts/admin_sidebar' %>
-        <!-- Page Sidebar Ends-->
-
-        <!-- Right sidebar Start-->
-
-        <!-- Right sidebar Ends-->
-
-        <div class="page-body">
-
-            <!-- Container-fluid starts-->
-            <div class="container-fluid">
-                <div class="page-header">
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="page-header-left">
-                                <h3>Products List
-                                    <small><%= AdminConfig[:app_name] %> Admin panel</small>
-                                </h3>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <ol class="breadcrumb pull-right">
-                                <li class="breadcrumb-item"><a href="<%= root_url %>"><i data-feather="home"></i></a></li>
-                                <li class="breadcrumb-item">Physical</li>
-                                <li class="breadcrumb-item active">Product List</li>
-                            </ol>
-                        </div>
+ <!-- breadcrumb start -->
+    <div class="breadcrumb-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="page-title">
+                        <h2>category</h2>
                     </div>
                 </div>
+                <div class="col-sm-6">
+                    <nav aria-label="breadcrumb" class="theme-breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="<%= root_url %>">home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">category</li>
+                        </ol>
+                    </nav>
+                </div>
             </div>
-            <!-- Container-fluid Ends-->
+        </div>
+    </div>
+    <!-- breadcrumb end -->
 
-            <!-- Container-fluid starts-->
-            <div class="container-fluid">
-                <div class="row products-admin ratio_asos">
-                    <% @products.each do | product | %>
-                    <div class="col-xl-3 col-sm-6">
-                        <div class="card">
-                            <div class="card-body product-box">
-                                <div class="img-wrapper">
-                                    <div class="front">
-                                        <% if product.images.count == 0 %>
-                                        <a href="#"><a href="#">
-                                                <P class="img-fluid lazyload bg-img"></p>
-                                                <%else%>
-                                                <a href="#"><a href="/products/<%= product.id %>"><%= image_tag (product.images[0] if product.images.length > 0) , :class => "img-fluid lazyload bg-img" %></a></a>
-                                                <%end%>
-                                                <div class="product-hover">
-                                                    <ul>
-                                                        <li>
-                                                            <%= link_to edit_product_path(product), {:class => "btn", :type => "button", :title => "", 'data-original-title' => "" } do %> <i class="ti-pencil-alt"></i> <% end %>
-                                                        </li>
-                                                        <li>
-                                                            <%= link_to product, method: :delete, data: { confirm: 'Are you sure?', toggle: 'modal', target: '#exampleModalCenter', 'original-title' => "" , :class => "btn", :type => "button"}, remote: true do %>
-                                                            <i class="ti-trash"></i>
-                                                            <% end %>
-                                                        </li>
-                                                    </ul>
-                                                </div>
+
+    <!-- section start -->
+    <section class="section-b-space ratio_asos">
+        <div class="collection-wrapper">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-3 collection-filter">
+                        <!-- side-bar colleps block stat -->
+                        <div class="collection-filter-block">
+                            <!-- brand filter start -->
+                            <div class="collection-mobile-back"><span class="filter-back"><i class="fa fa-angle-left"
+                                        aria-hidden="true"></i> back</span></div>
+                            <div class="collection-collapse-block open">
+                                <h3 class="collapse-block-title">brands</h3>
+                                <div class="collection-collapse-block-content">
+                                    <div class="collection-brand-filter">
+                                    <ul>
+                                    <% Category.all.each do |category| %>
+                                            <li class="<%= 'active' if params[:category] == category.category_name %>"><%= link_to category.category_name, products_path(category: category.category_name) %> <span>(<%= category.products.count %>)</span></li>
+                                    <% end %>
+                                    </ul>
                                     </div>
                                 </div>
-                                <div class="product-detail">
-                                    <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
-                                    <a href="#">
-                                        <h6><%= product.product_name %></h6>
-                                    </a>
-                                    <h4><%= number_to_currency(product.price, :unit => ' KES ') %></h4>
-                                    <!--<ul class="color-variant">
-                                            <li class="bg-light0"></li>
-                                            <li class="bg-light1"></li>
-                                            <li class="bg-light2"></li>
-                                        </ul>-->
+                            </div>
+                        </div>
+                        <!-- silde-bar colleps block end here -->
+                        <!-- side-bar single product slider start -->
+                        <div class="theme-card">
+                            <h5 class="title-border">new product</h5>
+                            <div class="offer-slider slide-1">
+                             <div>
+                                <% Product.all.limit(3).reverse.each do |product| %>
+                                    <div class="media">
+                                        <% if product.images.attached? %>
+                                            <a href="/products/<%= product.id %>"><%= image_tag (product.images[0] if product.images.length > 0) , :class => "img-fluid blur-up lazyload" %></a>
+                                        <% else %>
+                                            <a href="/products/ <%= product.id %>"><%= image_tag "default_profile", :class => "img-fluid blur-up lazyload" %></a>
+                                        <% end %>
+                                        <div class="media-body align-self-center">
+                                            <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
+                                            <a href="product-page(no-sidebar).html">
+                                                <h6><%= product.product_name %></h6>
+                                            </a>
+                                            <h4><%= number_to_currency(product.price, :unit => ' KES ') %></h4>
+                                        </div>
+                                    </div>
+                                <% end %>
+                                </div>
+                                <div>
+                                <% Product.all.limit(3).each do |product| %>
+                                    <div class="media">
+                                        <% if product.images.attached? %>
+                                            <a href="/products/<%= product.id %>"><%= image_tag (product.images[0] if product.images.length > 0) , :class => "img-fluid blur-up lazyload" %></a>
+                                        <% else %>
+                                            <a href="/products/ <%= product.id %>"><%= image_tag "default_profile", :class => "img-fluid blur-up lazyload" %></a>
+                                        <% end %>
+                                        <div class="media-body align-self-center">
+                                            <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
+                                            <a href="product-page(no-sidebar).html">
+                                                <h6><%= product.product_name %></h6>
+                                            </a>
+                                            <h4><%= number_to_currency(product.price, :unit => ' KES ') %></h4>
+                                        </div>
+                                    </div>
+                                <% end %>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- side-bar single product slider end -->
+                        <!-- side-bar banner start here -->
+                        <div class="collection-sidebar-banner">
+                            <a href="#"><img src="../resources/images/side-banner.png" class="img-fluid blur-up lazyload" alt=""></a>
+                        </div>
+                        <!-- side-bar banner end here -->
+                    </div>
+                    <div class="collection-content col">
+                        <div class="page-main-content">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="top-banner-wrapper">
+                                        <a href="#"><img src="../resources/images/mega-menu/2.jpg" class="img-fluid blur-up lazyload" alt=""></a>
+                                        <div class="top-banner-content small-section">
+                                            <h4><%= params[:category] %></h4>
+                                            <h5>Category description. </h5>
+                                            <% if @products.count == 0 %>
+                                                <p>This category has no products </p>
+                                            <% else %>
+                                                <p><%= @products.last.category.description %> </p>
+                                            <% end %>
+                                        </div>
+                                    </div>
+                                    <div class="collection-product-wrapper">
+                                        <div class="product-top-filter">
+                                            <div class="row">
+                                                <div class="col-xl-12">
+                                                    <div class="filter-main-btn"><span class="filter-btn btn btn-theme"><i class="fa fa-filter"
+                                                                aria-hidden="true"></i> Filter</span></div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <div class="product-filter-content">
+                                                        <div class="search-count">
+                                                            <h5>Showing Products 1-24 of 10 Result</h5>
+                                                        </div>
+                                                        <div class="collection-view">
+                                                            <ul>
+                                                                <li><i class="fa fa-th grid-layout-view"></i></li>
+                                                                <li><i class="fa fa-list-ul list-layout-view"></i></li>
+                                                            </ul>
+                                                        </div>
+                                                        <div class="collection-grid-view">
+                                                            <ul>
+                                                                <li><img src="../resources/images/icon/2.png" alt="" class="product-2-layout-view"></li>
+                                                                <li><img src="../resources/images/icon/3.png" alt="" class="product-3-layout-view"></li>
+                                                                <li><img src="../resources/images/icon/4.png" alt="" class="product-4-layout-view"></li>
+                                                                <li><img src="../resources/images/icon/6.png" alt="" class="product-6-layout-view"></li>
+                                                            </ul>
+                                                        </div>
+                                                        <div class="product-page-per-view">
+                                                            <select>
+                                                                <option value="High to low">24 Products Par Page
+                                                                </option>
+                                                                <option value="Low to High">50 Products Par Page
+                                                                </option>
+                                                                <option value="Low to High">100 Products Par Page
+                                                                </option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="product-page-filter">
+                                                            <select>
+                                                                <option value="High to low">Sorting items</option>
+                                                                <option value="Low to High">50 Products</option>
+                                                                <option value="Low to High">100 Products</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <br><br>
+                                        <% if @products.count == 0 %>
+                                                <h2>There are no products in this category</h2>
+                                        <% else %>
+                                        <div class="product-wrapper-grid">
+                                            <div class="row margin-res">
+                                            <% @products.limit(4).reverse.each do | product | %>
+                                                <div class="col-xl-3 col-6 col-grid-box">
+                                                    <div class="product-box">
+                                                        <div class="img-wrapper">
+                                                            <div class="front">
+                                                                <% if product.images.attached? %>
+                                                                    <a href="/products/<%= product.id %>"><%= image_tag (product.images[0] if product.images.length > 0) , :class => "img-fluid blur-up lazyload bg-img" %></a>
+                                                                <% else %>
+                                                                    <a href="/products/<%= product.id %>"><%= image_tag "default_profile", :class => "img-fluid blur-up lazyload bg-img" %></a>
+                                                                <% end %>
+                                                            </div>
+                                                            <div class="back">
+                                                                <% if product.images.attached? %>
+                                                                    <a href="/products/<%= product.id %>"><%= image_tag (product.images[0] if product.images.length > 0) , :class => "img-fluid blur-up lazyload bg-img" %></a>
+                                                                <% else %>
+                                                                    <a href="/products/<%= product.id %>"><%= image_tag "default_profile", :class => "img-fluid blur-up lazyload bg-img" %></a>
+                                                                <% end %>
+                                                            </div>
+                                                            <div class="cart-info cart-wrap">
+                                                                <%= form_tag order_items_path, remote: true do %>
+                                                                <%= hidden_field_tag :product_id, product.id %>
+                                                                <%= hidden_field_tag :quantity, 1 %>
+                                                                <%= button_to order_items_path(:product_id => product.id), {'data-toggle' => 'modal', 'data-target' => '#addtocart', :title => "Add to cart"} do %><i class="ti-shopping-cart"></i><% end %>
+                                                                <% end %>
+                                                            </div>
+                                                        </div>
+                                                        <div class="product-detail">
+                                                            <div>
+                                                                <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
+                                                                <a href="product-page(no-sidebar).html">
+                                                                    <h6><%= product.product_name %></h6>
+                                                                </a>
+                                                                <p><%= product.product_description %>
+                                                                </p>
+                                                                <h4><%= number_to_currency(product.price, :unit => ' KES ') %></h4>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <% end %>
+                                                <% @products.limit(4).reverse.each do | product | %>
+                                                <div class="col-xl-3 col-6 col-grid-box">
+                                                    <div class="product-box">
+                                                        <div class="img-wrapper">
+                                                             <div class="front">
+                                                                <% if product.images.attached? %>
+                                                                    <a href="/products/<%= product.id %>"><%= image_tag (product.images[0] if product.images.length > 0) , :class => "img-fluid blur-up lazyload bg-img" %></a>
+                                                                <% else %>
+                                                                    <a href="/products/<%= product.id %>"><%= image_tag "default_profile", :class => "img-fluid blur-up lazyload bg-img" %></a>
+                                                                <% end %>
+                                                            </div>
+                                                            <div class="back">
+                                                                <% if product.images.attached? %>
+                                                                    <a href="/products/<%= product.id %>"><%= image_tag (product.images[0] if product.images.length > 0) , :class => "img-fluid blur-up lazyload bg-img" %></a>
+                                                                <% else %>
+                                                                    <a href="/products/<%= product.id %>"><%= image_tag "default_profile", :class => "img-fluid blur-up lazyload bg-img" %></a>
+                                                                <% end %>
+                                                            </div>
+                                                            <div class="cart-info cart-wrap">
+                                                                <%= form_tag order_items_path, remote: true do %>
+                                                                <%= hidden_field_tag :product_id, product.id %>
+                                                                <%= hidden_field_tag :quantity, 1 %>
+                                                                <%= button_to order_items_path(:product_id => product.id), {'data-toggle' => 'modal', 'data-target' => '#addtocart', :title => "Add to cart"} do %><i class="ti-shopping-cart"></i><% end %>
+                                                                <% end %>   
+                                                            </div>
+                                                        </div>
+                                                        <div class="product-detail">
+                                                            <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i>
+                                                                <i class="fa fa-star"></i> <i class="fa fa-star"></i>
+                                                            </div>
+                                                            <a href="product-page(no-sidebar).html">
+                                                                <h6><%= product.product_name %></h6>
+                                                            </a>
+                                                            <p><%= product.product_description%>
+                                                            </p>
+                                                            <h4><%= number_to_currency(product.price, :unit => ' KES ') %></h4>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <% end %>
+                                                <% @products.limit(4).reverse.each do | product | %>
+                                                <div class="col-xl-3 col-6 col-grid-box">
+                                                    <div class="product-box">
+                                                        <div class="img-wrapper">
+                                                         <div class="front">
+                                                                <% if product.images.attached? %>
+                                                                    <a href="/products/<%= product.id %>"><%= image_tag (product.images[0] if product.images.length > 0) , :class => "img-fluid blur-up lazyload bg-img" %></a>
+                                                                <% else %>
+                                                                    <a href="/products/<%= product.id %>"><%= image_tag "default_profile", :class => "img-fluid blur-up lazyload bg-img" %></a>
+                                                                <% end %>
+                                                            </div>
+                                                            <div class="back">
+                                                                <% if product.images.attached? %>
+                                                                    <a href="/products/<%= product.id %>"><%= image_tag (product.images[0] if product.images.length > 0) , :class => "img-fluid blur-up lazyload bg-img" %></a>
+                                                                <% else %>
+                                                                    <a href="/products/<%= product.id %>"><%= image_tag "default_profile", :class => "img-fluid blur-up lazyload bg-img" %></a>
+                                                                <% end %>
+                                                            </div>
+                                                            <div class="cart-info cart-wrap">
+                                                                 <%= form_tag order_items_path, remote: true do %>
+                                                                <%= hidden_field_tag :product_id, product.id %>
+                                                                <%= hidden_field_tag :quantity, 1 %>
+                                                                <%= button_to order_items_path(:product_id => product.id), {'data-toggle' => 'modal', 'data-target' => '#addtocart', :title => "Add to cart"} do %><i class="ti-shopping-cart"></i><% end %>
+                                                                <% end %>   
+                                                            </div>
+                                                        </div>
+                                                        <div class="product-detail">
+                                                            <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i>
+                                                                <i class="fa fa-star"></i> <i class="fa fa-star"></i>
+                                                            </div>
+                                                            <a href="product-page(no-sidebar).html">
+                                                                <h6><%= product.product_name %></h6>
+                                                            </a>
+                                                            <p><%= product.product_description %>
+                                                            </p>
+                                                            <h4><%= number_to_currency(product.price, :unit => ' KES ') %></h4>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <% end %>
+                                            </div>
+                                        </div>
+                                        <% end %>
+                                        <div class="product-pagination">
+                                            <div class="theme-paggination-block">
+                                                <div class="row">
+                                                    <div class="col-xl-6 col-md-6 col-sm-12">
+                                                        <nav aria-label="Page navigation">
+                                                            <ul class="pagination">
+                                                                <li class="page-item"><a class="page-link" href="#" aria-label="Previous"><span
+                                                                            aria-hidden="true"><i
+                                                                                class="fa fa-chevron-left"
+                                                                                aria-hidden="true"></i></span> <span
+                                                                            class="sr-only">Previous</span></a></li>
+                                                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                                                <li class="page-item"><a class="page-link" href="#" aria-label="Next"><span aria-hidden="true"><i
+                                                                                class="fa fa-chevron-right"
+                                                                                aria-hidden="true"></i></span> <span
+                                                                            class="sr-only">Next</span></a></li>
+                                                            </ul>
+                                                        </nav>
+                                                    </div>
+                                                    <div class="col-xl-6 col-md-6 col-sm-12">
+                                                        <div class="product-search-count-bottom">
+                                                            <h5>Showing Products 1-24 of 10 Result</h5>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-                    <% end %>
                 </div>
             </div>
-            <!-- Container-fluid Ends-->
-
         </div>
+    </section>
+    <!-- section End -->
 
-        <!-- footer start-->
-        <%= render 'layouts/admin_footer' %>
-        <!-- footer end-->
 
+    <!-- footer start -->
+        <%= render 'layouts/footer' %>
+    <!-- footer end -->
+
+    <!-- tap to top start -->
+    <div class="tap-top">
+        <div><i class="fa fa-angle-double-up"></i></div>
     </div>
+    <!-- tap to top end -->
 
-</div>
 
-<!-- latest jquery-->
-<%= javascript_include_tag 'js/jquery-3.3.1.min.js' %>
+    <!-- latest jquery-->
+    <script src="../resources/js/jquery-3.3.1.min.js"></script>
 
-<%= javascript_include_tag 'js/popper.min.js' %>
+    <!-- menu js-->
+    <script src="../resources/js/menu.js"></script>
 
-<%= javascript_include_tag 'js/bootstrap.js' %>
+    <!-- lazyload js-->
+    <script src="../resources/js/lazysizes.min.js"></script>
 
-<!-- feather icon js-->
-<%= javascript_include_tag 'js/icons/feather-icon/feather.min.js' %>
-<%= javascript_include_tag 'js/icons/feather-icon/feather-icon.js' %>
+    <!-- popper js-->
+    <script src="../resources/js/popper.min.js"></script>
 
-<!-- Sidebar jquery-->
-<%= javascript_include_tag 'js/sidebar-menu' %>
+    <!-- price range js -->
+    <script src="../resources/js/price-range.js"></script>
 
-<!-- Sidebar jquery-->
-<%= javascript_include_tag 'js/admin-customizer' %>
+    <!-- slick js-->
+    <script src="../resources/js/slick.js"></script>
 
-<!-- lazyload js-->
-<%= javascript_include_tag 'js/lazysizes.min.js' %>
+    <!-- Bootstrap js-->
+    <script src="../resources/js/bootstrap.js"></script>
 
-<!--right sidebar js-->
-<%= javascript_include_tag 'js/chat-menu.js' %>
+    <!-- Bootstrap Notification js-->
+    <script src="../resources/js/bootstrap-notify.min.js"></script>
 
-<!--script admin-->
-<%= javascript_include_tag 'js/admin-script' %>
+    <!-- Theme js-->
+    <script src="../resources/js/script.js"></script>
+
+    <script>
+        function openSearch() {
+            document.getElementById("search-overlay").style.display = "block";
+        }
+
+        function closeSearch() {
+            document.getElementById("search-overlay").style.display = "none";
+        }
+    </script>
+
+</html>

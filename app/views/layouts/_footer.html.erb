@@ -17,9 +17,9 @@
                             ut labore et dolore magna aliqua. Ut enim ad minim veniam,</p>-->
                         <div class="footer-social">
                             <ul>
-                                <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                                <li><a href="<%= AdminConfig[:app_facebook] %>" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                                <li><a href="<%= AdminConfig[:app_twitter] %>" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                                <li><a href="<%= AdminConfig[:app_instagram]%>" target="_blank"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
                             </ul>
                         </div>
                     </div>
@@ -88,10 +88,10 @@
                                 <a href="https://www.safaricom.co.ke/personal/m-pesa" target="_blank"><%= image_tag "mpesa.png", :width => "30px", :height => "30px"%></a>
                             </li>
                             <li>
-                                <a href="https://www.visa.co.ke/" target="_blank"><img src="../resources/images/icon/visa.png" alt="" width="30px" height="30px"></a>
+                                <a href="https://www.visa.co.ke/" target="_blank"><%= image_tag "icon/visa.png", :width => "30px", :height => "30px"%></a>
                             </li>
                             <li>
-                                <a href="https://www.mastercard.us/en-us.html" target="_blank"><img src="../resources/images/icon/mastercard.png" alt="" width="30px" height="30px"></a>
+                                <a href="https://www.mastercard.us/en-us.html" target="_blank"><%= image_tag "icon/mastercard.png", :width => "30px", :height => "30px"%></a>
                             </li>
                         </ul>
                     </div>

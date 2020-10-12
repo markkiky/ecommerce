@@ -55,6 +55,7 @@ Rails.application.routes.draw do
     resources :reviews 
     
   end 
+  get '/admin/products', to: 'products#index_admin'
 
   # Add color ajax
   get "/add_color", to: 'categories#add_color', as: :add_color
@@ -112,4 +113,10 @@ end
 
   get "/variants/:id", to: "categories#variants", as: :variants
 
+  #errors paths
+  get '/404', to: 'errors#not_found'
+  get '/422', to: 'errors#unprocessable'
+  get '/500', to: 'errors#internal_server'
+  get '/204', to: 'errors#no_content'
+  
 end

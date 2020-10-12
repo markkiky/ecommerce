@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_admin!, only: [:index, :new, :edit]
+  before_action :authenticate_admin!, only: [:new, :edit, :index_admin]
 
   # skip_before_action :verify_authenticity_token, only: [:product_counter, :change_product]
 
@@ -14,6 +14,12 @@ class ProductsController < ApplicationController
       @products = Product.where(:category_id => @category_id).order("created_at DESC")
    end 
  end 
+
+ def index_admin
+    @products = Product.all.order("created_at DESC")
+ end
+
+
 
  def search 
   if params[:q].blank?  
@@ -29,8 +35,8 @@ end
     # console
     if @product.reviews.blank?
       @average_review = 0
-  #  else
-  #     @average_review = @product.reviews.average(:rating).round(2)
+   else
+      @average_review = @product.reviews.average(:rating).round(2)
    end
     @wishlist_exists = Wishlist.where(product: @product, customer: current_customer) == [] ? false : true
   end
@@ -85,7 +91,7 @@ end
         #     number = number - 1
         #   end
         # end
-        format.html { redirect_to products_path , noticep: 'Product was successfully created.' }
+        format.html { redirect_to admin_products_path , noticep: 'Product was successfully created.' }
         format.json { render :show, status: :created, location: @product }
       else
         format.html { render :new }
@@ -102,7 +108,7 @@ end
     @product.color_id = params[:color_id]
     respond_to do |format|
       if @product.update(product_params)
-        format.html { redirect_to products_path, notice: 'Product was successfully updated.' }
+        format.html { redirect_to admin_products_path, notice: 'Product was successfully updated.' }
         format.json { render :show, status: :ok, location: @product }
       else
         format.html { render :edit }
@@ -128,7 +134,7 @@ end
   def destroy
     @product.destroy
     respond_to do |format|
-      format.html { redirect_to products_url, notice: 'Product was successfully destroyed.' }
+      format.html { redirect_to admin_products_path, notice: 'Product was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
