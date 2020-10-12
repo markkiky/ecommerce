@@ -55,6 +55,7 @@ Rails.application.routes.draw do
     resources :reviews 
     
   end 
+  get '/admin/products', to: 'products#index_admin'
 
   # Add color ajax
   get "/add_color", to: 'categories#add_color', as: :add_color
