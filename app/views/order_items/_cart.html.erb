@@ -27,15 +27,19 @@
 <% end %>
 <li>
     <% if current_cart.order.items.count == 0 %>
-    <h5> Your cart is empty! </h5>
+     <h5> Your cart is empty! </h5>
     <div class="buttons"><a href="<%= root_path %>" class="checkout">continue shopping</a></div>
-    <% else %>
+</li>
+<% else %>
 <li>
     <div class="total">
         <h5>subtotal : <span><%= number_to_currency(current_cart.order_subtotal, :unit => ' KES ') %></span></h5>
     </div>
 </li>
-<div class="buttons"><a href="<%= cart_path %>" class="view-cart">view cart</a>
-    <a href="<%= checkout_path %>" class="checkout">checkout</a></div>
+<li>
+    <div class="buttons">
+        <a href="<%= cart_path %>" class="view-cart">view cart</a>
+        <a href="<%= checkout_path %>" class="checkout">checkout</a>
+    </div>
 </li>
 <% end %>
