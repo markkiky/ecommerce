@@ -1,20 +1,65 @@
-<div class="container">
-<%= form_for ([@product, @review]) do | f | %>
-    <h1> Edit Review </h1>
-    <br>
-    <p> Rate </p>
-    <div id="rating-form"> </div>
-    <br>
-    <%= f.label :comment %>
-    <%= f.text_area :comment, class: "form-control placeholder-fix", rows: "4"  %>
-    <br>
+<!-- header start -->
+    <%= render 'layouts/header' %>
+<!-- header end -->
 
-    <br>
-    <%= f.submit "UPDATE REVIEW", class: "btn btn-third-col" %>
-    <br>
-    <br>
-<% end %>
+<!-- breadcrumb start -->
+<div class="breadcrumb-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="page-title">
+                    <h2>edit review</h2>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <nav aria-label="breadcrumb" class="theme-breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="<%= root_url %>">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">edit review</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
 </div>
+<!-- breadcrumb End -->
+
+<!-- section start -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <%= form_for ([@product, @review]) do | f | %>
+                <div class="form-group">
+                    <br>
+                    <label> Rating </label>
+                    <div id="rating-form"> </div>
+                </div>
+                <div class="form-group">
+                    <label> Comment </label>
+                    <%= f.text_area :comment, class: "form-control placeholder-fix", rows: "4"  %>
+                </div>
+                <div class="form-group">
+                    <%= f.submit "Update Review", class: "btn btn-warning", style: "color: white;" %>
+                </div>
+            <% end %>
+        </div>
+    </div>
+</div>
+<!-- section end -->
+
+<%= render "layouts/tawk" %>
+
+
+<!-- footer start -->
+<%= render 'layouts/footer' %>
+<!-- footer end -->
+
+
+<!-- tap to top start -->
+<div class="tap-top">
+    <div><i class="fa fa-angle-double-up"></i></div>
+</div>
+<!-- tap to top end -->
 
 <!-- latest jquery-->
 <%= javascript_include_tag 'js/jquery-3.3.1.min.js' %>
@@ -22,7 +67,29 @@
 <!-- fly cart ui jquery-->
 <%= javascript_include_tag 'js/jquery-ui.min.js' %>
 
+<!-- jquery raty  -->
 <%= javascript_include_tag 'js/jquery.raty.js'%>
+
+<!-- menu js-->
+<%= javascript_include_tag 'js/menu.js'%>
+
+<!-- lazyload js-->
+<%= javascript_include_tag 'js/lazysizes.min.js' %>
+
+<!-- popper js-->
+<%= javascript_include_tag 'js/popper.min.js' %>
+
+<!-- slick js-->
+<%= javascript_include_tag 'js/slick.js' %>
+
+<!-- Bootstrap js-->
+<%= javascript_include_tag 'js/bootstrap.js' %>
+
+<!-- Bootstrap Notification js-->
+<%= javascript_include_tag 'js/bootstrap-notify.min.js' %>
+
+<!-- Theme js-->
+<%= javascript_include_tag 'js/script.js' %>
 
 
 <script>
@@ -30,4 +97,12 @@
         path: '/assets/',
         scoreName: 'review[rating]'
     });
+
+    function openSearch() {
+        document.getElementById("search-overlay").style.display = "block";
+    }
+
+    function closeSearch() {
+        document.getElementById("search-overlay").style.display = "none";
+    }
 </script>
