@@ -30,13 +30,11 @@
                             <h4>our products</h4>
                         </div>
                         <div class="footer-contant">
+                        <% Product.all.limit(5).reverse.each do | product | %>
                             <ul>
-                                <li>Dish Washing Soap</li>
-                                <li>Liquid Sanitizer</li>
-                                <li>Multipurpose Liquid Soap</li>
-                                <li>Surface Disinfectant</li>
-                                <li>Hand wash</li>
+                                <li><%= product.product_name %></li>
                             </ul>
+                        <% end %>
                         </div>
                     </div>
                 </div>
