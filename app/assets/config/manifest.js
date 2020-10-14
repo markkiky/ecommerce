@@ -57,6 +57,7 @@
 //= link js/height-equal.js
 //= link js/admin-script.js
 
+
 //= link cropper.js
 //= link cropper.css
 //= link jsoneditor/dist/jsoneditor.min.js
@@ -81,10 +82,12 @@
 //= link js/touchspin/touchspin.js
 //= link js/touchspin/input-groups.min.js
 
-//= link js/editor/ckeditor/ckeditor.js
-//= link js/editor/ckeditor/styles.js
-//= link js/editor/ckeditor/adapters/jquery.js
-//= link js/editor/ckeditor/ckeditor.custom.js
+//= link js/ckeditor/config.js
+//= link js/ckeditor/ckeditor/config.js
+//= link js/ckeditor/ckeditor.js
+//= link js/ckeditor/styles.js
+//= link js/ckeditor/adapters/jquery.js
+//= link js/ckeditor/ckeditor.custom.js
 
 // require for pages with a form
 //= link js/dashboard/form-validation-custom.js

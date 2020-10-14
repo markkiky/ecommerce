@@ -47,6 +47,11 @@
             $(".unpaid").addClass('d-none')
             $(".failed").addClass("d-none")
             break;
+        case '404':
+            $("#paymentModalLabel").text("Its not you. its us!");
+            $(".unpaid").addClass('d-none');
+            $(".paid").addClass("d-none");
+            $(".pending").addClass('d-none');
         default:
             // failed to send push 
             $("#paymentModalLabel").text(response_json);

@@ -2,13 +2,14 @@ class CreateProducts < ActiveRecord::Migration[6.0]
   def change
     create_table :products do |t|
       t.string :product_id
+      t.string :category_id
+      t.string :sub_category_id
       t.string :sku
       t.string :id_sku
       t.string :vendor_product_id
       t.string :product_name
       t.text :product_description
       t.string :supplier_id
-      t.string :category_id
       t.string :quantity_per_unit
       t.decimal :price
       t.decimal :unit_price

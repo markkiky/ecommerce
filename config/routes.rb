@@ -43,6 +43,7 @@ Rails.application.routes.draw do
   get 'card', to: 'orders#card_payment', as: :card
 
   
+  get "subcategories", to: "products#get_sub_categories", as: :get_sub_categories
   
   # catgory paths
   resources :categories
