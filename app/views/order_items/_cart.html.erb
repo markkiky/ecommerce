@@ -11,7 +11,7 @@
         </div>
         <% end %>
         <div class="media-body">
-            <a href="/products/<%= item.product.id %>"">
+            <a href="/products/<%= item.product.id %>">
                 <h4><%= item.product.product_name %></h4>
             </a>
             <h4><span><%= item.quantity %> x <%= number_to_currency(item.price , :unit => ' KES ') %></span></h4>
@@ -19,9 +19,8 @@
     </div>
     <div class=" close-circle">
                 <!--<a href="#"><i class="fa fa-times" aria-hidden="true"></i></a>-->
-                <%= form_for item, method: :delete, remote: true do |f| %>
-                <%= f.submit 'X' %>
-                <% end %>
+                <a href="/cart/items/<%= item.id %>" data-method="delete" id="item_destroy" data-remote="true"><i class="fa fa-times" aria-hidden="true"></i></a>
+
         </div>
 </li>
 <% end %>

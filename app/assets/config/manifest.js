@@ -22,6 +22,19 @@
 //= link parallax/1.jpg
 //= link home-banner/2.jpg
 //= link avtar.jpg
+//= link 49.jpg
+//= link 3.png
+//= link 4.png
+//= link 1.png
+//= link 50.jpg
+//= link category.jpg
+//= link category1.jpg
+//= link category2.jpg
+//= link category3.jpg
+//= link category4.jpg
+//= link parallax.jpg
+//= link banner.jpg
+//= link footer.jpg
 
 
 // precompile js
