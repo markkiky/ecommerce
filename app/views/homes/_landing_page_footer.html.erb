@@ -1,0 +1,102 @@
+<footer class="sticky-footer  blur-up lazyload">
+        <section class="section-b-space darken-layout">
+            <div class="container">
+                <div class="row footer-theme partition-f">
+                    <div class="col-lg-4 col-md-6">
+                        <div class="footer-title footer-mobile-title">
+                            <h4>about</h4>
+                        </div>
+                        <div class="footer-contant">
+                            <div class="footer-logo">
+                                <img src="../resources/images/icon/layout4/footerlogo.png" alt="">
+                            </div>
+                            <p> Looking to purchase high quality auto spare parts in Nairobi - Kenya, then get in touch with UAE Auto Parts today!</p>
+                            <div class="footer-social">
+                                <ul>
+                                    <li>
+                                        <a href="<%= AdminConfig[:app_facebook] %>" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                                    </li>
+                                    <li>
+                                        <a href="<%= AdminConfig[:app_twitter] %>" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                                    </li>
+                                    <li>
+                                        <a href="<%= AdminConfig[:app_instagram]%>" target="_blank"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col offset-xl-1 ">
+                        <div class="sub-title">
+                            <div class="footer-title">
+                                <h4>our products</h4>
+                            </div>
+                            <div class="footer-contant">
+                            <% Product.all.limit(5).reverse.each do | product | %>
+                                <ul>
+                                    <li><a href="/products/<%= product.id %>"><%= product.product_name %></a></li>
+                                </ul>
+                            <% end %>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="sub-title">
+                            <div class="footer-title">
+                                <h4>why we choose</h4>
+                            </div>
+                            <div class="footer-contant">
+                                <ul>
+                                    <li>shipping & return</li>
+                                    <li>secure shopping</li>
+                                    <li>affiliates</li>
+                                    <li><a href="<%= contact_path %>">contacts</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="sub-title">
+                            <div class="footer-title">
+                                <h4>store information</h4>
+                            </div>
+                            <div class="footer-contant">
+                                <ul class="contact-list">
+                                    <li><i class="fa fa-map-marker"></i><%= AdminConfig[:app_name]%></li>
+                                    <li><i class="fa fa-phone"></i><a href="tel:+(254) 743 041 695">Call Us: <%= AdminConfig[:app_phone] %></a></li>
+                                    <li><i class="fa fa-envelope-o"></i><a href="mailto:info@arigiene.com">Email: <%= AdminConfig[:app_email]%></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="sub-footer dark-subfooter">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-6 col-md-6 col-sm-12">
+                        <div class="footer-end">
+                            <p><i class="fa fa-copyright" aria-hidden="true"></i> 2020 Powered by
+                            Nouveta.</p>
+                        </div>
+                    </div>
+                    <div class="col-xl-6 col-md-6 col-sm-12">
+                        <div class="payment-card-bottom">
+                            <ul>
+                                <li>
+                                    <a href="https://www.safaricom.co.ke/personal/m-pesa" target="_blank"><%= image_tag "mpesa.png", :width => "30px", :height => "30px"%></a>
+                                </li>
+                                <li>
+                                    <a href="https://www.visa.co.ke/" target="_blank"><%= image_tag "icon/visa.png", :width => "30px", :height => "30px"%></a>
+                                </li>
+                                <li>
+                                    <a href="https://www.mastercard.us/en-us.html" target="_blank"><%= image_tag "icon/mastercard.png", :width => "30px", :height => "30px"%></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>

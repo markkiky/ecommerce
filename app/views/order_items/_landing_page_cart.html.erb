@@ -1,0 +1,47 @@
+ 
+<ul class="cart_product">
+  <%  current_cart.order.items.each do |item| %>
+    <li>
+      <div class="media">
+        <% if item.product.images.attached? %>
+          <a href="/products/<%= item.product.id %>"><%= image_tag item.product.images[0] if item.product.images.length > 0 %></a>
+        <% else %>
+          <a href="/products/ <%= item.product.id %>"><%= image_tag "default_profile", :class => "img-fluid blur-up lazyload bg-img" %></a>
+        <% end %>
+        <div class="media-body">
+          <a href="/products/<%= item.product.id %>">
+            <h4><%= item.product.product_name %></h4>
+          </a>
+          <h4>
+            <span><%= item.quantity %> x <%= number_to_currency(item.price , :unit => ' KES ') %></span>
+          </h4>
+        </div>
+      </div>
+      <div class="close-circle">
+        <a href="/cart/items/<%= item.id %>" data-method="delete" id="item_destroy" data-remote="true"><i class="ti-trash" aria-hidden="true"></i></a>
+      </div>
+    </li>
+  <% end %>
+</ul>
+<ul class="cart_total">
+  <li>
+    <% if current_cart.order.items.count == 0 %>
+      <h3> Your cart is empty! </h3>
+      <br>
+      <br>
+      <a href="<%= products_path %>" class="btn btn-solid btn-xs view-cart">start shopping</a>
+    </li>
+  <% else %>
+    <li>
+      <div class="total">
+        <h5>subtotal : <span><%= number_to_currency(current_cart.order_subtotal, :unit => ' KES ') %></span></h5>
+      </div>
+    </li>
+    <li>
+      <div class="buttons">
+        <a href="<%= cart_path %>" class="btn btn-solid btn-xs view-cart">view cart</a>
+        <a href="<%= checkout_path %>" class="btn btn-solid btn-xs checkout">checkout</a>
+      </div>
+    </li>
+  <% end %>
+</ul>

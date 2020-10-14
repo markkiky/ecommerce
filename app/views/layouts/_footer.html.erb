@@ -13,8 +13,7 @@
                     </div>
                     <div class="footer-contant">
                         <div class="footer-logo"><%= image_tag "logo-black-horizontal", :width => "250px", :height => "auto", :alt => "logo" %></div>
-                        <!--<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                            ut labore et dolore magna aliqua. Ut enim ad minim veniam,</p>-->
+                        <p>Looking to purchase high quality auto spare parts in Nairobi - Kenya, then get in touch with UAE Auto Parts today!</p>
                         <div class="footer-social">
                             <ul>
                                 <li><a href="<%= AdminConfig[:app_facebook] %>" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
@@ -32,7 +31,7 @@
                         <div class="footer-contant">
                         <% Product.all.limit(5).reverse.each do | product | %>
                             <ul>
-                                <li><%= product.product_name %></li>
+                                <li><a href="/products/<%= product.id %>"><%= product.product_name %></a></li>
                             </ul>
                         <% end %>
                         </div>

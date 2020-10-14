@@ -26,7 +26,7 @@
 
                             </ul>
                             <%elsif %>
-                            <%= current_customer.first_name %>
+                            <%= current_customer.first_name %> <%= current_customer.last_name %>
                             <ul class="onhover-show-div">
 
                                 <li>
@@ -72,7 +72,6 @@
                             <%= link_to root_path, :class => "img-fluid blur-up lazyload", :width => "2500px", :height => "34px" do %>
                             <%= image_tag "logo-green-horizontal", :class => "img-fluid blur-up lazyload", :alt => "logo", :width => "250px", :height => "34px" %>
                             <%end%>
-                            <a href=""><%# image_tag "full-color.png", :class => "img-fluid blur-up lazyload", :alt => "logo", :width => "179px", :height => "34px" %></a>
                         </div>
                     </div>
                     <div class="menu-right pull-right">
@@ -84,12 +83,21 @@
                                         <div class="mobile-back text-right">Back<i class="fa fa-angle-right pl-2" aria-hidden="true"></i></div>
                                     </li>
                                     <li>
-
-                                        <%= link_to 'Home', root_path %>
-                                    </li>
-                                    <li>
-                                        <%= link_to 'contact', contact_path %>
-                                    </li>
+                                                <a href="<%= root_path %>">Home</a>
+                                            </li>
+                                            <li>
+                                                <a href="<%= products_path %>">shop</a>
+                                                <ul>
+                                                   <% Category.all.reverse.each do | category | %>
+                                                    <li class="<%= 'active' if params[:category] == category.category_name %>">
+                                                        <%= link_to category.category_name, products_path(category: category.category_name), class: "link" %>
+                                                    </li>
+                                                <% end %>
+                                                </ul>
+                                            </li>
+                                            <li>
+                                                <a href="<%= contact_path %>">contact</a>
+                                            </li>
                                 </ul>
                             </nav>
                         </div>
