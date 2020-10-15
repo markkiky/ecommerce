@@ -35,6 +35,8 @@
 //= link parallax.jpg
 //= link banner.jpg
 //= link footer.jpg
+//= link icon/phone.png
+//= link icon/email.png
 
 
 // precompile js
