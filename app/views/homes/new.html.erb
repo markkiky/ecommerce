@@ -72,24 +72,24 @@
                  <%= form_with scope: :home, url: contact_path, local: true do |form| %>
                  <div class="form-row">
                      <div class="col-md-6">
-                         <label for="name">First Name</label>
-                         <%= form.text_field :notification_first_name, required: true, :class => "form-control" %>
+                         <b><label for="name">First Name</label></b>
+                         <%= form.text_field :notification_first_name, required: true, :class => "form-control", :placeholder => "First Name" %>
                      </div>
                      <div class="col-md-6">
-                         <label for="name">Last Name</label>
-                         <%= form.text_field :notification_last_name, required: true, :class => "form-control" %>
+                        <b><label for="name">Last Name</label></b>
+                         <%= form.text_field :notification_last_name, required: true, :class => "form-control", :placeholder => "Last Name" %>
                      </div>
-                     <div class="col-md-6">
-                         <label for="review">Phone number</label>
-                         <%= form.number_field :notification_phone_number, :class => "form-control" %>
+                     <div class="col-md-6"> <br>
+                        <b><label for="review">Phone number</label></b>
+                         <%= form.number_field :notification_phone_number, :class => "form-control", :placeholder => "Phone Number"%>
                      </div>
-                     <div class="col-md-6">
-                         <label for="email">Email</label>
-                         <%= form.email_field :notification_email, required: true, :class => "form-control" %>
+                     <div class="col-md-6"> <br>
+                         <b><label for="email">Email</label></b>
+                         <%= form.email_field :notification_email, required: true, :class => "form-control", :placeholder => "Email" %>
                      </div>
-                     <div class="col-md-12">
-                        <label for="review">Write Your Message</label>
-                        <%= form.text_area :notification_message, required: true, :class => "form-control", :rows => 6 %>
+                     <div class="col-md-12"> <br>
+                        <b><label for="review">Write Your Message</label></b>
+                        <%= form.text_area :notification_message, required: true, :class => "form-control", :rows => 6, :placeholder => "Write your Message" %>
                      </div>
                      <div class="col-md-12"> <br> 
                          <%= form.submit "Send Your Message", :class => "btn btn-solid" %>
