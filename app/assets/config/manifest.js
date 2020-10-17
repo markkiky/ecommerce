@@ -35,7 +35,12 @@
 //= link parallax.jpg
 //= link banner.jpg
 //= link footer.jpg
-
+//= link icon/phone.png
+//= link icon/email.png
+//= link icon/2.png
+//= link icon/3.png
+//= link icon/4.png
+//= link icon/6.png
 
 // precompile js
 //= link application.js
@@ -69,6 +74,9 @@
 //= link js/chat-menu.js
 //= link js/height-equal.js
 //= link js/admin-script.js
+//= link js/parallax-effect.js
+//= link js/footer-reveal.min.js
+//= link js/price-range.js
 
 
 //= link cropper.js
@@ -89,6 +97,10 @@
 //= link js/jsgrid/jsgrid.min.js
 //= link js/jsgrid/griddata-transactions.js
 //= link js/jsgrid/jsgrid-transactions.js
+//= link js/jsgrid/griddata-invoice.js
+//= link js/jsgrid/jsgrid-invoice.js
+//= link js/jsgrid/griddata-manage-product.js
+//= link js/jsgrid/jsgrid-manage-product.js
 
 //require for pages with an editor
 //= link js/touchspin/vendors.min.js
@@ -126,6 +138,7 @@
 //= link css/chartist.css
 //= link css/admin.css
 //= link css/bootstrap-select.min.css
+//= link css/themify.css
 
 // require for any view with datatable
 //= link css/datatables.css

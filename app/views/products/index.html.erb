@@ -50,6 +50,17 @@
                                 </div>
                             </div>
                         </div>
+                        <!-- price filter start here -->
+                           <!--<div class="collection-collapse-block border-0 open">
+                                <h3 class="collapse-block-title">price</h3>
+                                <div class="collection-collapse-block-content">
+                                    <div class="wrapper mt-3">
+                                        <div class="range-slider">
+                                            <input type="text" class="js-range-slider" value="" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>-->
                         <!-- silde-bar colleps block end here -->
                         <!-- side-bar single product slider start -->
                         <div class="theme-card">
@@ -138,10 +149,10 @@
                                                         </div>
                                                         <div class="collection-grid-view">
                                                             <ul>
-                                                                <li><img src="../resources/images/icon/2.png" alt="" class="product-2-layout-view"></li>
-                                                                <li><img src="../resources/images/icon/3.png" alt="" class="product-3-layout-view"></li>
-                                                                <li><img src="../resources/images/icon/4.png" alt="" class="product-4-layout-view"></li>
-                                                                <li><img src="../resources/images/icon/6.png" alt="" class="product-6-layout-view"></li>
+                                                                <li><%= image_tag 'icon/2.png', :class => "product-2-layout-view" %></li>
+                                                                <li><%= image_tag 'icon/3.png', :class => "product-3-layout-view" %></li>
+                                                                <li><%= image_tag 'icon/4.png', :class => "product-4-layout-view" %></li>
+                                                                <li><%= image_tag 'icon/6.png', :class => "product-6-layout-view" %></li>
                                                             </ul>
                                                         </div>
                                                         <div class="product-page-per-view">
@@ -350,31 +361,31 @@
 
 
     <!-- latest jquery-->
-    <script src="../resources/js/jquery-3.3.1.min.js"></script>
+    <%= javascript_include_tag 'js/jquery-3.3.1.min.js' %>
 
     <!-- menu js-->
-    <script src="../resources/js/menu.js"></script>
+    <%= javascript_include_tag 'js/menu.js' %>
 
     <!-- lazyload js-->
-    <script src="../resources/js/lazysizes.min.js"></script>
+    <%= javascript_include_tag 'js/lazysizes.min.js' %>
 
     <!-- popper js-->
-    <script src="../resources/js/popper.min.js"></script>
+    <%= javascript_include_tag 'js/popper.min.js' %>
 
     <!-- price range js -->
-    <script src="../resources/js/price-range.js"></script>
+    <%= javascript_include_tag 'js/price-range.js' %>
 
     <!-- slick js-->
-    <script src="../resources/js/slick.js"></script>
+    <%= javascript_include_tag 'js/slick.js' %>
 
     <!-- Bootstrap js-->
-    <script src="../resources/js/bootstrap.js"></script>
+    <%= javascript_include_tag 'js/bootstrap.js' %>
 
     <!-- Bootstrap Notification js-->
-    <script src="../resources/js/bootstrap-notify.min.js"></script>
+    <%= javascript_include_tag 'js/bootstrap-notify.min.js' %>
 
     <!-- Theme js-->
-    <script src="../resources/js/script.js"></script>
+    <%= javascript_include_tag 'js/script.js' %>
 
     <script>
         function openSearch() {
@@ -386,4 +397,3 @@
         }
     </script>
 
-</html>
