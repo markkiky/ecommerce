@@ -17,7 +17,12 @@
         <!-- Right sidebar Ends-->
 
         <div class="page-body">
-
+            <% if notice %>
+            <p class="alert alert-success"><%= notice %></p>
+            <% end %>
+            <% if alert %>
+            <p class="alert alert-danger"><%= alert %></p>
+            <% end %>
             <!-- Container-fluid starts-->
             <div class="container-fluid">
                 <div class="page-header">
@@ -79,26 +84,26 @@
                                                 <td>
                                                     <div>
                                                         <%= link_to 'variants', variants_path(category), class: "btn btn-primary d-none" %>
-                                                        <%= link_to "#" do %>
+                                                        <%= link_to show_sub_category_path(category), remote: true do %>
 
                                                         show
                                                         <i class="fa fa-eye" aria-hidden="true"></i>
 
                                                         <%end%>
-                                                        <%= link_to  "#" do %>
+                                                        <%= link_to  new_sub_category_path(category), remote: true do %>
                                                         add
                                                         <i class="fa fa-plus" aria-hidden="true"></i>
 
                                                         <%end%>
 
-                                                        <%= link_to  "#" do %>
+                                                        <%= link_to  edit_sub_category_path(category), remote: true do %>
                                                         edit
                                                         <i class="fa fa-pencil" aria-hidden="true"></i>
 
 
                                                         <%end%>
 
-                                                        <%= link_to  "#" do %>
+                                                        <%= link_to  delete_sub_category_path(category), remote: true do %>
                                                         delete
                                                         <i class="fa fa-trash" aria-hidden="true"></i>
 

@@ -48,7 +48,7 @@
                             <div class="card-header">
                                 <h5>Add Product</h5>
                             </div>
-                            <%= form_with scope: :product, url: products_path, remote: false do |form| %>
+                            <%= form_with scope: :product, url: products_path, local: true do |form| %>
                             <div class="card-body">
                                 <div class="row product-adding">
                                     <div class="col-lg-5 col-md-5 col-sm-12 pr-2 d-none">
@@ -130,6 +130,10 @@
                                             <div class="form-group col-12 mb-3">
                                                 <label for="validationCustomUsername" class=""> <strong> Product Code : </strong> </label>
                                                 <%= form.text_field :product_code, :class => "form-control input100", required: false %>
+                                            </div>
+                                            <div class="form-group col-12 mb-3">
+                                                <label for="validationCustomUsername" class=""> <strong> Year : </strong> </label>
+                                                <%= form.text_field :year, :class => "form-control input100", required: false %>
                                             </div>
                                             <div class="form-group col-12 mb-3">
                                                 <label class="required"><strong>Total Products :</strong></label>
