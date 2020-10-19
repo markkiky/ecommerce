@@ -43,6 +43,7 @@ Rails.application.routes.draw do
   get 'card', to: 'orders#card_payment', as: :card
 
   
+  get "subcategories", to: "products#get_sub_categories", as: :get_sub_categories
   
   # catgory paths
   resources :categories
@@ -102,6 +103,7 @@ end
 
   #search path
   get "search", to: "products#search"
+  post "search", to: "homes#advanced_search", as: :advanced_search
 
   #wishlist path
   get "wishlists/update"
@@ -118,5 +120,15 @@ end
   get '/422', to: 'errors#unprocessable'
   get '/500', to: 'errors#internal_server'
   get '/204', to: 'errors#no_content'
+
+  #subcategories
+  get "/subcategories:id", to: 'categories#show_sub_category', as: :show_sub_category
+  get "/new_subcategory:id", to: "categories#new_sub_category", as: :new_sub_category
+  post '/add_subcategory', to: "categories#create_subcategory", as: :create_subcategory
+  get '/edit_subcategory:id', to: "categories#edit_sub_category", as: :edit_sub_category
+  patch '/update_subcategory', to: "categories#update_subcategory", as: :update_subcategory
+  get '/delete_subcategory:id', to: 'categories#delete_sub_category', as: :delete_sub_category
+  delete "/delete_subcategory", to: "categories#delete_subcategory", as: :delete_subcategory
+
   
 end

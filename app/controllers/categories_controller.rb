@@ -171,6 +171,76 @@ class CategoriesController < ApplicationController
     end
   end
 
+  # sub category actions 
+  # show
+  def show_sub_category
+    params[:id]
+    @category = Category.find(params[:id])
+    @subcategories = SubCategory.where(:category_id => params[:id])
+  end
+
+  # new subcategory
+  def new_sub_category
+    @category = Category.find(params[:id])
+    @sub_category = SubCategory.new
+  end
+
+  # Create subcategory
+  def create_subcategory
+    @sub_category = SubCategory.new(sub_category_params)
+    respond_to do |format|
+      if @sub_category.save
+        format.html { redirect_to categories_path, notice: "Sub Category was successfully created." }
+        format.json { render :show, status: :created, location: @sub_category }
+      else
+        format.html { render :new }
+        format.json { render json: @sub_category.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # GET EDIT SUBCATEGORY
+  def edit_sub_category
+    @category = Category.find(params[:id])
+    @sub_category = SubCategory.last
+    @subcategories = SubCategory.where(:category_id => @category.id)
+    puts @subcategories.name
+    
+  end
+
+  # PATCH UPDATE SUBCATEGORY
+  def update_subcategory
+    
+    @category = Category.find(sub_category_params[:category_id])
+    count = 0
+    sub_category_params[:sub_category_id].each do |sub_category|
+      @sub_category = SubCategory.find(sub_category)
+      @sub_category.update(:name => sub_category_params[:name][count])
+      count += 1 
+    end
+
+    
+    # respond_to do |format|
+    #   if @sub_category.update(category_params)
+    #     format.html { redirect_to categories_path, notice: "Category was successfully updated." }
+    #     format.json { render :show, status: :ok, location: @category }
+    #   else
+    #     format.html { render :edit }
+    #     format.json { render json: @category.errors, status: :unprocessable_entity }
+    #   end
+    # end
+  end
+
+  # GET SUBCATEGORY DELETE VIEW
+  def delete_sub_category
+    params[:category_id]
+  end
+
+  # DELETE SUBCATEGORY
+  def delete_subcategory
+
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
@@ -180,6 +250,10 @@ class CategoriesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def category_params
-    params.require(:category).permit(:category_id, :category_name, :description, :active, color: [])
+    params.require(:category).permit(:category_id, :category_name, :description, :active,:image , color: [])
+  end
+
+  def sub_category_params
+    params.require(:sub_category).permit(:name, :category_id, name: [], sub_category_id: [])
   end
 end

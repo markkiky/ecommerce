@@ -55,7 +55,7 @@
     <%= stylesheet_link_tag 'css/admin' %>
 
     <!-- Cropper css -->
-    <%= stylesheet_link_tag 'cropper' %>
+    <%# stylesheet_link_tag 'cropper' %>
 
     <!-- JsonEditor css -->
     <%= stylesheet_link_tag 'jsoneditor/dist/jsoneditor' %>
@@ -72,6 +72,13 @@
 </head>
 
 <body>
+    <% if notice %>
+    <p class="alert alert-success"><%= notice %>porn</p>
+    <% end %>
+    <% if alert %>
+    <p class="alert alert-danger"><%= alert %></p>
+    <% end %>
+    
     <%= yield %>
 
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>

@@ -13,9 +13,23 @@ class Product < ApplicationRecord
     
     
     has_many_attached :images
+
+    # validate :image_presence
     # has_many_base64_attached :product_images
 
     def thumbnail input
         return self.images[input].variant(resize: "700x1036!").processed
+    end
+
+    private
+    def image_presence
+        if images.attached? == false
+            errors.add(:images, "are missing")
+        end
+        images.each do |image|
+            if !image.content_type.in?(%('image/jpeg image/png'))
+                error.add(:images, "needs to be JPEG or PNG")
+            end
+        end
     end
 end

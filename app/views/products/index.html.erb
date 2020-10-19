@@ -123,7 +123,7 @@
                                             <% if @products.count == 0 %>
                                                 <p>This category has no products </p>
                                             <% else %>
-                                                <p><%= @products.last.category.description %> </p>
+                                                <p><%= Category.find_by(@products.last.category_id).description %> </p>
                                             <% end %>
                                         </div>
                                     </div>

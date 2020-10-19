@@ -11,14 +11,18 @@
 
                 <div class="form">
                     <div class="form-group">
-                        <%= form.label :category_name, :class => "mb-1" %>
-                        <%= form.text_field :category_name, :class => "form-control" %>
+                        <%= form.label :category_name, :class => "required mb-1" %>
+                        <%= form.text_field :category_name, :class => "form-control", required: true %>
                         <%= puts "#{@category.category_name} Printing" %>
                     </div>
                      <div class="form-group">
-                        <%= form.label :description, :class => "mb-1" %>
-                        <%= form.text_field :description, :class => "form-control" %>
+                        <%= form.label :description, :class => "required mb-1" %>
+                        <%= form.text_field :description, :class => "form-control", required: true %>
                         <%= puts "#{@category.category_name} Printing" %>
+                    </div>
+                    <div class="form-group">
+                        <%= form.label :image, :class => "required mb-1" %>
+                        <%= form.file_field :image, :class => "form-control", required: true %>
                     </div>
                     <%= form.fields_for(:color, :html => {:id => 'color_form', class: "d-none"}) do |c| %>
                     <div class="color_class d-none">

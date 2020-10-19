@@ -17,7 +17,12 @@
         <!-- Right sidebar Ends-->
 
         <div class="page-body">
-
+            <% if notice %>
+            <p class="alert alert-success"><%= notice %></p>
+            <% end %>
+            <% if alert %>
+            <p class="alert alert-danger"><%= alert %></p>
+            <% end %>
             <!-- Container-fluid starts-->
             <div class="container-fluid">
                 <div class="page-header">
@@ -63,17 +68,47 @@
                                             <tr>
                                                 <th scope="col">Category Name</th>
                                                 <th> Actions </th>
+                                                <th>SubCategories</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <% @categories.reverse.each do |category| %>
                                             <tr>
                                                 <td><%= category.category_name %></td>
-                                                <td><%= link_to 'Edit', edit_category_path(category), :class => "btn btn-secondary", remote: true %></td>
                                                 <td>
                                                     <div>
-                                                        <%= link_to 'variants', variants_path(category), class: "btn btn-primary" %>
+                                                        <%= link_to 'Edit', edit_category_path(category), :class => "btn btn-secondary", remote: true %>
                                                         <%= link_to 'Delete', category_path(category), method: :delete, data: { confirm: 'Are you sure?'}, :class => "btn btn-primary" %>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div>
+                                                        <%= link_to 'variants', variants_path(category), class: "btn btn-primary d-none" %>
+                                                        <%= link_to show_sub_category_path(category), remote: true do %>
+
+                                                        show
+                                                        <i class="fa fa-eye" aria-hidden="true"></i>
+
+                                                        <%end%>
+                                                        <%= link_to  new_sub_category_path(category), remote: true do %>
+                                                        add
+                                                        <i class="fa fa-plus" aria-hidden="true"></i>
+
+                                                        <%end%>
+
+                                                        <%= link_to  edit_sub_category_path(category), remote: true do %>
+                                                        edit
+                                                        <i class="fa fa-pencil" aria-hidden="true"></i>
+
+
+                                                        <%end%>
+
+                                                        <%= link_to  delete_sub_category_path(category), remote: true do %>
+                                                        delete
+                                                        <i class="fa fa-trash" aria-hidden="true"></i>
+
+
+                                                        <%end%>
                                                     </div>
                                                 </td>
                                             </tr>

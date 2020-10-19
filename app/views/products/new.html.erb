@@ -48,7 +48,7 @@
                             <div class="card-header">
                                 <h5>Add Product</h5>
                             </div>
-                            <%= form_with scope: :product, url: products_path, remote: true do |form| %>
+                            <%= form_with scope: :product, url: products_path, local: true do |form| %>
                             <div class="card-body">
                                 <div class="row product-adding">
                                     <div class="col-lg-5 col-md-5 col-sm-12 pr-2 d-none">
@@ -60,9 +60,9 @@
                                                 <div class="col-xl-12 xl-50 col-sm-12 col-12">
                                                     <ul class="file-upload-product">
                                                         <li>
-                                                            <%= form.label "Upload Products" %>
+                                                            <%# form.label "Upload Products", class: 'required' %>
                                                             <br>
-                                                            <%= form.file_field :images, multiple: true %>
+                                                            <%# form.file_field :images, multiple: true %>
                                                         </li>
                                                         <!--<li>
                                                             <div class="box-input-file">
@@ -94,30 +94,49 @@
                                     <div class="col-lg-7 col-md-7 col-sm-12 pl-2">
                                         <div class="form row">
                                             <div class="form-group col-12 mb-3">
-                                                <%= form.label "Upload Products" %>
+                                                <strong> <%= form.label "Upload Products", class: 'required' %> </strong>
                                                 <br>
-                                                <%= form.file_field :images, multiple: true %>
+                                                <%= form.file_field :images, multiple: true, class: " btn", required: true %>
                                             </div>
                                             <div class="form-group col-12 mb-3">
-                                                <label for="exampleFormControlSelect1" class="">Select Category:</label>
-                                                <%= select_tag :category_id, options_for_select(@categories), :prompt => "Select Category", :class => "form-control input100" %>
+                                                <strong> <%= form.label "Select Category", class: 'required' %> </strong>
+                                                <%= form.collection_select :category_id, @categories, :id, :category_name, {:prompt => "Select Category"}, {:class => "form-control input100", :required => true} %>
                                             </div>
                                             <div class="form-group col-12 mb-3">
-                                                <label> <strong><%= form.label "Product Name :", class: "" %></strong></label>
-                                                <%= form.text_field :product_name, class: "form-control input100" %>
+                                                <strong> <%= form.label "Select Sub Category"%> </strong>
+                                                <%= select_tag :sub_category_id, options_for_select(@subcategories), :prompt => "Select Sub Category", :class => "form-control input100 d-none" %>
+                                                <%= form.collection_select :sub_category_id, @subcategories, :id, :name, {:prompt => "Select a Sub Category"}, {:class=>"sub_category_selection form-control input100"} %>
                                             </div>
                                             <div class="form-group col-12 mb-3">
-                                                <label> <strong> <%= form.label "Price :", class: "" %> </strong> </label>
-                                                <%= form.number_field :price, class: "form-control input100"  %>
+                                                <label> <strong><%= form.label "Product Name", class: "required" %></strong></label>
+                                                <%= form.text_field :product_name, class: "form-control input100", :prompt => "Enter Products Name", required: true %>
+                                            </div>
+                                            <div class="form-group col-12 mb-3">
+                                                <label> <strong> <%= form.label "Discount Available :", class: "" %> </strong> </label>
+                                                <%= form.check_box :discount_available, class: ""  %>
+                                            </div>
+                                            <div class="form-group col-4 mb-3">
+                                                <label> <strong> <%= form.label "Price :", class: "required" %> </strong> </label>
+                                                <%= form.number_field :price, class: "form-control input100", required: true  %>
+                                            </div>
+                                            <div class="form-group col-4 mb-3">
+                                                <label> <strong> <%= form.label "Discount :", class: "" %> </strong> </label>
+                                                <%= form.text_field :discount, class: "form-control input100"  %>
+                                            </div>
+                                            <div class="form-group col-4 mb-3">
+                                                <label> <strong> <%= form.label "New Price :", class: "" %> </strong> </label>
+                                                <%= form.number_field :unit_price, class: "form-control input100"  %>
                                             </div>
                                             <div class="form-group col-12 mb-3">
                                                 <label for="validationCustomUsername" class=""> <strong> Product Code : </strong> </label>
-                                                <!--<input class="form-control col-xl-8 col-sm-7" id="validationCustomUsername" type="text" required="">
-                                                <div class="invalid-feedback offset-sm-4 offset-xl-3">Please choose Valid Code.</div>-->
-                                                <%= form.text_field :product_code, :class => "form-control input100", required: true %>
+                                                <%= form.text_field :product_code, :class => "form-control input100", required: false %>
                                             </div>
                                             <div class="form-group col-12 mb-3">
-                                                <label class=""><strong>Total Products :</strong></label>
+                                                <label for="validationCustomUsername" class=""> <strong> Year : </strong> </label>
+                                                <%= form.text_field :year, :class => "form-control input100", required: false %>
+                                            </div>
+                                            <div class="form-group col-12 mb-3">
+                                                <label class="required"><strong>Total Products :</strong></label>
                                                 <fieldset class="qty-box pl-0">
                                                     <div class="input-group">
                                                         <!--<input class="touchspin" type="text" value="1">-->
@@ -130,7 +149,7 @@
                                             <div id="variants d-none">
                                             </div>
                                             <div class="form-group col-12 mb-3">
-                                                <label class=""><strong>Add Description :</strong></label>
+                                                <label class="required"><strong>Add Description :</strong></label>
                                                 <div class="description-sm">
                                                     <!--<textarea id="editor1" name="editor1" cols="10" rows="4"></textarea>-->
                                                     <%= form.text_area :product_description, :cols => 10, :rows => 4, id: "editor1" %>
@@ -148,9 +167,10 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <% end %>
+                                    
                                 </div>
                             </div>
+                            <% end %>
                         </div>
                     </div>
                 </div>
@@ -193,12 +213,24 @@
 <!-- form validation js-->
 <%= javascript_include_tag 'js/dashboard/form-validation-custom.js' %>
 
+<script>
+    window.CKEDITOR_BASEPATH = '/assets/js/ckeditor/';
+</script>
 <!-- ckeditor js-->
-<%# javascript_include_tag 'js/editor/ckeditor/ckeditor.js' %>
-<script src="../../../resources/js/editor/ckeditor/ckeditor.js"></script>
-<%= javascript_include_tag 'js/editor/ckeditor/styles.js' %>
-<%= javascript_include_tag 'js/editor/ckeditor/adapters/jquery.js' %>
-<%= javascript_include_tag 'js/editor/ckeditor/ckeditor.custom.js' %>
+<%= javascript_include_tag 'js/ckeditor/ckeditor.js' %>
+<%= javascript_include_tag 'js/ckeditor/ckeditor/config.js' %>
+<%= javascript_include_tag 'js/ckeditor/config.js' %>
+
+
+<%
+=begin%>
+ <script src="../../../resources/js/editor/ckeditor/ckeditor.js"></script>  
+<%
+=end%>
+
+<%= javascript_include_tag 'js/ckeditor/styles.js' %>
+<%= javascript_include_tag 'js/ckeditor/adapters/jquery.js' %>
+<%= javascript_include_tag 'js/ckeditor/ckeditor.custom.js' %>
 
 <!-- Zoom js-->
 <%= javascript_include_tag 'js/jquery.elevatezoom.js' %>
@@ -228,20 +260,25 @@
     //     alert("clicked");
     // });
     // var product_counter = document.getElementById("product_product_quantity")
-    // var category = document.getElementById("category_id")
+    var category = document.getElementById("product_category_id")
 
-    // // removing this temporarily
-    // category.addEventListener('change', function (evt) {
-    //     // alert("reached");
-    //     console.log(evt);
-    //     $.post("/product_counter",
-    //     {
-    //         product_count: product_counter.value,
-    //         category_id: category.value
-    //     }
+    // removing this temporarily
+    category.addEventListener('change', function (evt) {
+        // alert("reached");
+        console.log(evt);
+        // debugger
+        // $.post("/product_counter",
+        // {
+        //     product_count: product_counter.value,
+        //     category_id: category.value
+        // }
 
-    //     );
-    // })
+        // );
+        $.get("/subcategories",
+        {
+            category_id: evt.target.value
+        });
+    })
     // product_counter.addEventListener('input', function(evt) {
     //     // alert("reached");
     //     console.log(evt);
@@ -292,16 +329,16 @@
     //      downloadTemplateId: null
     // });
 
-    $('#fileupload').fileupload({
-        dataType: 'json',
-        done: function(e, data) {
-            alert('done');
-        },
-        add: function(e, data) {
-            // alert('Uploading...');
-        },
-        // uploadTemplateId: null,
-        downloadTemplateId: null
+    // $('#fileupload').fileupload({
+    //     dataType: 'json',
+    //     done: function(e, data) {
+    //         alert('done');
+    //     },
+    //     add: function(e, data) {
+    //         // alert('Uploading...');
+    //     },
+    //     // uploadTemplateId: null,
+    //     downloadTemplateId: null
 
-    });
+    // });
 </script>

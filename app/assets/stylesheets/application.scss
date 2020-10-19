@@ -451,3 +451,8 @@ input[type="number"] {
   max-width: 100%;
 }
 
+//Style required asterick
+.required:after {
+  content:" *";
+  color: red;
+}

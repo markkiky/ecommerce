@@ -313,7 +313,19 @@ class OrdersController < ApplicationController
             # byebug
             puts response_json
             if response_json["success"] == false
-              sleep(@@mpesa_retry)
+              count = 0
+              while response_json["success"] == false
+                count += 1
+                response = https.request(request)
+                # puts response.read_body
+                response_json = JSON.parse(response.read_body)
+                sleep(@@mpesa_retry)
+                if count > 3
+                  receipt_response = true
+                  break
+                end
+              end
+              
             else
               if response_json["data"]["callback_returned"] == "PENDING"
                 sleep(@@mpesa_retry)
@@ -333,6 +345,9 @@ class OrdersController < ApplicationController
           gon.status = response_json["data"]["callback_returned"].downcase
           gon.order_id = params[:id]
         else
+          gon.response_json = "Failed to send push request"
+          gon.status = "404"
+          gon.order_id = params[:id]
         end
         # order_controller = OrdersController.new
         after_check_payment(@order.id, response_json)
