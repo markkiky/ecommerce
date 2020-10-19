@@ -4,27 +4,31 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="multikart">
-    <meta name="keywords" content="multikart">
-    <meta name="author" content="multikart">
-    <link rel="icon" href="../resources/images/ArigieneLogo.jpg" type="image/x-icon" />
-    <link rel="shortcut icon" href="../resources/images/ArigieneLogo.jpg" type="image/x-icon" />
     <title>We're sorry, but something went wrong(500)</title>
     <!--Google font-->
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900" rel="stylesheet">
+    <!--Google font-->
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900" rel="stylesheet">
     <!-- Icons -->
-    <link rel="stylesheet" type="text/css" href="../resources/css/fontawesome.css">
+    <%= stylesheet_link_tag "css/fontawesome.css" %>
+
     <!--Slick slider css-->
-    <link rel="stylesheet" type="text/css" href="../resources/css/slick.css">
-    <link rel="stylesheet" type="text/css" href="../resources/css/slick-theme.css">
+    <%= stylesheet_link_tag "css/slick.css" %>
+    <%= stylesheet_link_tag "css/slick-theme.css" %>
+
     <!-- Animate icon -->
-    <link rel="stylesheet" type="text/css" href="../resources/css/animate.css">
+    <%= stylesheet_link_tag "css/animate.css" %>
+
     <!-- Themify icon -->
-    <link rel="stylesheet" type="text/css" href="../resources/css/themify-icons.css">
+    <%= stylesheet_link_tag "css/themify-icons.css" %>
+
     <!-- Bootstrap css -->
-    <link rel="stylesheet" type="text/css" href="../resources/css/bootstrap.css">
+    <%= stylesheet_link_tag "css/bootstrap" %>
+
     <!-- Theme css -->
-    <link rel="stylesheet" type="text/css" href="../resources/css/color1.css" media="screen" id="color">
+    <%= stylesheet_link_tag "css/color1.css", :media => "screen", :id => "color" %>
+
+    <%= favicon_link_tag 'logo-green-horizontal.png' %>
   </head>
   <body>
     <!-- header start -->
@@ -80,21 +84,21 @@
   <!-- theme setting -->
   <!-- theme setting -->
   <!-- latest jquery-->
-  <script src="../resources/js/jquery-3.3.1.min.js"></script>
+  <%= javascript_include_tag 'js/jquery-3.3.1.min.js' %>
   <!-- menu js-->
-  <script src="../resources/js/menu.js"></script>
+  <%= javascript_include_tag 'js/menu.js' %>
   <!-- lazyload js-->
-  <script src="../resources/js/lazysizes.min.js"></script>
+  <%= javascript_include_tag 'js/lazysizes.min.js' %>
   <!-- popper js-->
-  <script src="../resources/js/popper.min.js"></script>
+  <%= javascript_include_tag 'js/popper.min.js' %>
   <!-- slick js-->
-  <script src="../resources/js/slick.js"></script>
+  <%= javascript_include_tag 'js/slick.js' %>
   <!-- Bootstrap js-->
-  <script src="../resources/js/bootstrap.js"></script>
+  <%= javascript_include_tag 'js/bootstrap.js' %>
   <!-- Bootstrap Notification js-->
-  <script src="../resources/js/bootstrap-notify.min.js"></script>
+  <%= javascript_include_tag 'js/bootstrap-notify.min.js' %>
   <!-- Theme js-->
-  <script src="../resources/js/script.js"></script>
+  <%= javascript_include_tag 'js/script.js' %>
   <script>
     function openSearch() {
         document.getElementById("search-overlay").style.display = "block";

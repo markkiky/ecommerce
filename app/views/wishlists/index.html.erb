@@ -35,6 +35,17 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-12">
+                <% if current_customer.wishlists.count == 0 %>
+                <div class="row cart-buttons wishlist-grid--empty-list">
+                    <div class="col-12">
+                            <div class="text-center">
+                            <%= image_tag 'empty-search.jpg', :alt => "Wishlist loading" %>
+                            <h5 class="title-font mb-3 empty-list--text " data-trans-key="general.wishlist.empty_wishlist">Your wish list is currently empty.</h5>
+                            <a href="<%= root_url %>" class="btn btn-solid">Start Shopping</a>
+                            </div>
+                        </div>
+                        </div>
+                 <% else %>
                     <table class="table cart-table table-responsive-xs">
                         <thead>
                             <tr class="table-head">
@@ -97,6 +108,7 @@
             <div class="row wishlist-buttons">
                 <div class="col-12"><a href="<%= root_url %>" class="btn btn-solid">continue shopping</a> <a href="<%= checkout_path %>" class="btn btn-solid">check out</a></div>
             </div>
+            <% end %>
         </div>
     </section>
     <!--section end-->
@@ -126,7 +138,7 @@
     <%= javascript_include_tag 'js/menu.js' %>
 
     <!-- lazyload js-->
-    <%= javascript_include_tag 'js/menu.js' %>
+    <%= javascript_include_tag 'js/lazysizes.min.js' %>
 
     <!-- popper js-->
     <%= javascript_include_tag 'js/popper.min.js' %>
