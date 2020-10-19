@@ -107,7 +107,7 @@
                         <!-- side-bar single product slider end -->
                         <!-- side-bar banner start here -->
                         <div class="collection-sidebar-banner">
-                            <a href="#"><img src="../resources/images/side-banner.png" class="img-fluid blur-up lazyload" alt=""></a>
+                            <a href="#"><img src="../resources/images/side-banner.png" class="img-fluid blur-up lazyload d-none" alt=""></a>
                         </div>
                         <!-- side-bar banner end here -->
                     </div>
@@ -116,7 +116,18 @@
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="top-banner-wrapper">
-                                        <a href="#"><img src="../resources/images/mega-menu/2.jpg" class="img-fluid blur-up lazyload" alt=""></a>
+                                        <a href="#">
+                                        <% if @category != nil %>
+                                            <%if @category.image.attached? %>
+                                            <%= image_tag  @category.image.variant(resize_to_limit: [1370,385]), class: "img-fluid blur-up lazyload" %>
+                                            <%end%>
+                                        <%else%>
+                                        <%
+=begin%>
+ <img src="../resources/images/mega-menu/2.jpg" class="img-fluid blur-up lazyload" alt=""></a> 
+<%
+=end%>
+                                        <%end%>
                                         <div class="top-banner-content small-section">
                                             <h4><%= params[:category] %></h4>
                                             <h5>Category description. </h5>

@@ -11,6 +11,7 @@ class ProductsController < ApplicationController
       @products = Product.all.order("created_at DESC")
    else 
       @category_id = Category.find_by(category_name: params[:category]).id
+      @category = Category.find_by(category_name: params[:category])
       @products = Product.where(:category_id => @category_id).order("created_at DESC")
    end 
  end 
