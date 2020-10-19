@@ -130,5 +130,5 @@ end
   get '/delete_subcategory:id', to: 'categories#delete_sub_category', as: :delete_sub_category
   delete "/delete_subcategory", to: "categories#delete_subcategory", as: :delete_subcategory
 
-  
+  get "/years", to: "homes#get_years", as: :get_years
 end

@@ -328,9 +328,7 @@
                                 </div>
                                 
                                 <div class="search-box">
-                                    <select name="year" class="form-control">
-                                        <option value="">Select Year</option>
-                                    </select>
+                                    <%= form.collection_select :year, @years, :id, :category_name, {:prompt => "Select a year"}, {:class=>"year_selection form-control input100"} %>
                                 </div>
                                 <div class="search-button">
                                     
@@ -808,6 +806,9 @@
             console.log(evt);
             
             $.get("/subcategories", {
+                category_id: evt.target.value
+            });
+            $.get("/years", {
                 category_id: evt.target.value
             });
         })

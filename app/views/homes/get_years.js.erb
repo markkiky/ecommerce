@@ -1,0 +1,10 @@
+$('.year_selection').empty();
+
+<% if @years.count < 1 %>
+    $('.year_selection').append( $('<option>No years Found</option>'));
+<%else%>
+    $('.year_selection').append( $('<option>Select the product year</option>'));
+    <% @years.each do |year| %>
+    $('.year_selection').append($('<option value="<%= year %>"><%= year %></option>'));
+    <% end %>
+<%end%>

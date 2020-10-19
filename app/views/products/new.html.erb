@@ -127,13 +127,10 @@
                                                 <label> <strong> <%= form.label "New Price :", class: "" %> </strong> </label>
                                                 <%= form.number_field :unit_price, class: "form-control input100"  %>
                                             </div>
+                                            
                                             <div class="form-group col-12 mb-3">
-                                                <label for="validationCustomUsername" class=""> <strong> Product Code : </strong> </label>
-                                                <%= form.text_field :product_code, :class => "form-control input100", required: false %>
-                                            </div>
-                                            <div class="form-group col-12 mb-3">
-                                                <label for="validationCustomUsername" class=""> <strong> Year : </strong> </label>
-                                                <%= form.text_field :year, :class => "form-control input100", required: false %>
+                                                <label for="validationCustomUsername" class="required"> <strong> Year : </strong> </label>
+                                                <%= form.text_field :year, :class => "form-control input100", required: true %>
                                             </div>
                                             <div class="form-group col-12 mb-3">
                                                 <label class="required"><strong>Total Products :</strong></label>
@@ -147,6 +144,10 @@
                                             </div>
                                             <!-- displays size and color variants -->
                                             <div id="variants d-none">
+                                            </div>
+                                            <div class="form-group col-12 mb-3">
+                                                <label for="validationCustomUsername" class=""> <strong> Product Code : </strong> </label>
+                                                <%= form.text_field :product_code, :class => "form-control input100", required: false %>
                                             </div>
                                             <div class="form-group col-12 mb-3">
                                                 <label class="required"><strong>Add Description :</strong></label>
