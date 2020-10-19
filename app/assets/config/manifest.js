@@ -41,6 +41,7 @@
 //= link icon/3.png
 //= link icon/4.png
 //= link icon/6.png
+//= link empty-search.jpg
 
 // precompile js
 //= link application.js
