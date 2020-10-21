@@ -36,9 +36,22 @@
             <div class="row">
                 <div class="col-lg-5 col-sm-10 col-xs-12">
                     <div class="product-right-slick">
-
+                        <!--- Image with thumbnail -->
                         <% (0...@product.images.count).each do |image| %>
-                        <%= image_tag(@product.thumbnail(image), class: "") %>
+                        <% image_tag(@product.thumbnail(image), class: "") %>
+                        <%end%>
+                        <!--- image with thumbnail -->
+
+                        <% if @product.images.attached? %>
+                        <% @product.images.each  do |product_image| %>
+                        <div>
+                            <%= image_tag (product_image) , :class => "img-fluid blur-up lazyload image_zoom_cls-0" %>
+                        </div>
+                        <%end%>
+                        <%else%>
+                        <div>
+                            <%= image_tag ("default_profile") , :class => "img-fluid blur-up lazyload" %>
+                        </div>
                         <%end%>
                     </div>
                 </div>
@@ -47,9 +60,23 @@
                     <div class="row">
                         <div class="col-12 p-0">
                             <div class="slider-right-nav">
-                               
+
+                                <!--- Image with thumbnail -->
                                 <% (0...@product.images.count).each do |image| %>
-                                    <%= image_tag(@product.thumbnail(image), class: "") %>
+                                <% image_tag(@product.thumbnail(image), class: "") %>
+                                <%end%>
+                                <!--- image with thumbnail -->
+
+                                <% if @product.images.attached? %>
+                                <% @product.images.each  do |product_image| %>
+                                <div>
+                                    <%= image_tag (product_image) , :class => "img-fluid blur-up lazyload image_zoom_cls-0" %>
+                                </div>
+                                <%end%>
+                                <%else%>
+                                <div>
+                                    <%= image_tag ("default_profile") , :class => "img-fluid blur-up lazyload" %>
+                                </div>
                                 <%end%>
                             </div>
                         </div>
@@ -59,10 +86,10 @@
                     <div class="product-right">
                         <div class="product-right product-description-box">
                             <h2><%= @product.product_name %></h2>
-                             <div class="average-review-rating" data-score=<%= @average_review %>></div>
-                             <a href="<%= product_reviews_path(@product.id) %>"><span class="number-of-reviews">From: <%= @product.reviews.count %> reviews </span> </a>
-                             <div class="border-product">
-                             </div>
+                            <div class="average-review-rating" data-score=<%= @average_review %>></div>
+                            <a href="<%= product_reviews_path(@product.id) %>"><span class="number-of-reviews">From: <%= @product.reviews.count %> reviews </span> </a>
+                            <div class="border-product">
+                            </div>
                             <h3><%= number_to_currency(@product.price , :unit => ' KES ') %></h3>
                             <ul class="color-variant">
                                 <% @product.colors.uniq.each  do |color| %>
@@ -504,13 +531,13 @@
         scoreName: 'review[rating]'
     });
 
-   $('.average-review-rating').raty({
-    readOnly: true,
-    score: function() {
-    return $(this).attr('data-score');
-    },
-    path: '/assets/'
-  });
+    $('.average-review-rating').raty({
+        readOnly: true,
+        score: function() {
+            return $(this).attr('data-score');
+        },
+        path: '/assets/'
+    });
 </script>
 
 <script>
