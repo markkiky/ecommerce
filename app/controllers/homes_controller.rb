@@ -1,7 +1,7 @@
 class HomesController < ApplicationController
   def index
     @notifications = Home.all
-    console
+    # console
     if params[:category].blank?
       @products = Product.all.order("created_at DESC")
       @categories = Category.all
