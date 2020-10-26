@@ -1,4 +1,5 @@
 class OrdersController < ApplicationController
+  require "business_time"
   require "resolv-replace"
   require "uri"
   require "net/http"
