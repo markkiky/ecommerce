@@ -31,3 +31,5 @@ ApiUrl.create(:key => "app_location", :value => "Foremost Auto Centre" + "\n" + 
 ApiUrl.create(:key => "app_facebook", :value => "https://www.facebook.com/UAE-Auto-Spares-113557460514133/")
 ApiUrl.create(:key => "app_twitter", :value => "https://twitter.com/uaeautospares")
 ApiUrl.create(:key => "app_instagram", :value => "https://www.instagram.com/uaeautospares/")
+ApiUrl.create(:key => "default_url_options", :value => "localhost:3000")
+ApiUrl.create(:key => "mpesa_error_detection", :value => "6")

@@ -321,7 +321,7 @@ class OrdersController < ApplicationController
                 # puts response.read_body
                 response_json = JSON.parse(response.read_body)
                 sleep(@@mpesa_retry)
-                if count > 3
+                if count > AdminConfig[:mpesa_error_detection].to_i
                   receipt_response = true
                   break
                 end
@@ -359,7 +359,7 @@ class OrdersController < ApplicationController
       gon.status = "failed"
       gon.order_id = params[:id]
     end
-
+    
     respond_to do |format|
       format.js
     end
