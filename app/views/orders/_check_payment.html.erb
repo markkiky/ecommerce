@@ -9,6 +9,7 @@
     var status = gon.status;
     var order_id = gon.order_id;
     var response_json = gon.response_json;
+    var base_url = "<%= AdminConfig[:default_url_options] %>";
 
     // js variables for easier consumption
     var payment_info = null;
@@ -33,7 +34,7 @@
             $("#paybill").text(paybill)
             $("#phone").text(phone)
             $("#transaction_code").text(transaction_code)
-            $("#order_success_btn").attr('href', "https://shop.arigiene.com/order_success/" + order_id);
+            $("#order_success_btn").attr('href', base_url + "/order_success/" + order_id);
             // $("#paid").addClass("d-none")
             $(".unpaid").addClass('d-none')
             $(".failed").addClass("d-none")
