@@ -1,3 +1,6 @@
+<% if AdminConfig[:shop_number] == "1" %>   
+    <%= render "defaults/home_page" %>
+<%else%>
     <!DOCTYPE html>
 
     <body class="tools-bg">
@@ -670,8 +673,6 @@
         </section>
         <!-- product section end -->
 
-        <!-- render tawk live chat -->
-        <%= render "layouts/tawk" %>
 
         <!-- logo section -->
         <section class="section-b-space tools-brand">
@@ -845,3 +846,5 @@
     </body>
 
     </html>
+
+    <%end%>

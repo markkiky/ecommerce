@@ -146,7 +146,11 @@
     <%# render "layouts/theme_setting" %>
     <%= yield %>
 
+    <% if AdminConfig["shop_number"] == "1" %>
     <%= render "layouts/tawk" %>
+    <%else%>
+    <%= render 'layouts/whatsapp' %>
+    <%end%>
 
 </body>
 

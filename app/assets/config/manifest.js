@@ -146,3 +146,7 @@
 
 //require for pages with a jsgrid
 //= link css/jsgrid.css
+
+// require whatsapp files
+//= link js/whatsapp/floating-wpp.min.js
+//= link whatsapp/floating-wpp.min.css
