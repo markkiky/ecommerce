@@ -45,3 +45,5 @@ yarn-debug.log*
 /.bundle
 /vendor/bundle/
 /vendor/ruby/
+# Ignore application configuration
+/config/application.yml

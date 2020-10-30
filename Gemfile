@@ -43,6 +43,8 @@ gem 'omniauth-twitter'
 # Use ActiveRecord Sessions
 # gem 'activerecord-session_store', '~> 1.0'
 
+gem 'figaro'
+
 gem 'sprockets-rails', :require => 'sprockets/railtie'
 
 # Use SCSS for stylesheets
