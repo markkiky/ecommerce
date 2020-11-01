@@ -16,7 +16,7 @@ class ReviewsController < ApplicationController
         @review.customer_id = current_customer.id
 
         if @review.save 
-            redirect_to product_path(@product)
+            redirect_to product_reviews_path(@product.id), notice: "Review Created Successfully!"
         else
             render 'new'        
         end
@@ -27,7 +27,7 @@ class ReviewsController < ApplicationController
 
     def update
         if @review.update(review_params)
-            redirect_to product_path(@product)
+            redirect_to product_reviews_path(@product.id), notice: "Review Updated Successfully!"
         else 
             render 'edit'
         end
@@ -35,7 +35,7 @@ class ReviewsController < ApplicationController
 
     def destroy
         @review.destroy
-        redirect_to product_path(@product)
+        redirect_to product_reviews_path(@product.id), notice: "Review Deleted Successfully!"
     end
 
     private

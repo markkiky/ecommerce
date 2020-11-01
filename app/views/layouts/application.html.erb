@@ -14,9 +14,9 @@
     <meta name="keywords" content="admin template, Multikart admin template, dashboard template, flat admin template, responsive admin template, web app">
     <meta name="author" content="pixelstrap">
 
-    <%= favicon_link_tag 'ArigieneLogo' %>
+    <%= favicon_link_tag 'logo-green-horizontal.png' %>
 
-    <title>Arigiene Kenya Admin</title>
+    <title><%= "#{AdminConfig[:app_name]} Admin "%></title>
 
     <!-- Google font-->
     <link href="https://fonts.googleapis.com/css?family=Work+Sans:100,200,300,400,500,600,700,800,900" rel="stylesheet">
@@ -54,11 +54,31 @@
     <!-- App css-->
     <%= stylesheet_link_tag 'css/admin' %>
 
+    <!-- Cropper css -->
+    <%# stylesheet_link_tag 'cropper' %>
+
+    <!-- JsonEditor css -->
+    <%= stylesheet_link_tag 'jsoneditor/dist/jsoneditor' %>
+
+    <!-- jquery widgets -->
+    <%# stylesheet_link_tag "" %>
+
+    <!-- file upload -->
+    <%= stylesheet_link_tag 'jquery.fileupload' %>
+
+    
 
       
 </head>
 
 <body>
+    <% if notice %>
+    <p class="alert alert-success"><%= notice %>porn</p>
+    <% end %>
+    <% if alert %>
+    <p class="alert alert-danger"><%= alert %></p>
+    <% end %>
+    
     <%= yield %>
 
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
@@ -74,7 +94,7 @@
 <html>
 
 <head>
-    <title>Arigiene Kenya</title>
+    <title><%= AdminConfig[:app_name] %></title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -105,8 +125,10 @@
     <!-- <link rel="stylesheet" type="text/css" href="../resources/css/color1.css" media="screen" id="color">-->
     <%= stylesheet_link_tag "css/color1.css" %>
 
+    <!-- Cropper css -->
+    <%# stylesheet_link_tag 'cropper' %>
 
-    <%= favicon_link_tag 'ArigieneLogo' %>
+    <%= favicon_link_tag 'logo-green-horizontal.png' %>
 </head>
 
 <body>
@@ -124,7 +146,11 @@
     <%# render "layouts/theme_setting" %>
     <%= yield %>
 
+    <% if AdminConfig["shop_number"] == "1" %>
     <%= render "layouts/tawk" %>
+    <%else%>
+    <%= render 'layouts/whatsapp' %>
+    <%end%>
 
 </body>
 

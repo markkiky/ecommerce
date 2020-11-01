@@ -1,0 +1,131 @@
+<!-- page-wrapper Start-->
+<div class="page-wrapper">
+
+    <!-- Page Header Start-->
+    <%= render 'layouts/admin_header' %>
+    <!-- Page Header Ends -->
+
+    <!-- Page Body Start-->
+    <div class="page-body-wrapper">
+
+        <!-- Page Sidebar Start-->
+        <%= render 'layouts/admin_sidebar' %>
+        <!-- Page Sidebar Ends-->
+
+        <!-- Right sidebar Start-->
+
+        <!-- Right sidebar Ends-->
+
+        <div class="page-body">
+
+            <!-- Container-fluid starts-->
+            <div class="container-fluid">
+                <div class="page-header">
+                    <div class="row">
+                        <div class="col-lg-12">
+                        <%= render 'layouts/notice_and_alerts' %>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="page-header-left">
+                                <h3>Products List
+                                    <small><%= AdminConfig[:app_name] %> Admin panel</small>
+                                </h3>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <ol class="breadcrumb pull-right">
+                                <li class="breadcrumb-item"><a href="<%= root_url %>"><i data-feather="home"></i></a></li>
+                                <li class="breadcrumb-item">Physical</li>
+                                <li class="breadcrumb-item active">Product List</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Container-fluid Ends-->
+
+            <!-- Container-fluid starts-->
+            <div class="container-fluid">
+                <div class="row products-admin ratio_asos">
+                    <% @products.each do | product | %>
+                    <div class="col-xl-3 col-sm-6">
+                        <div class="card">
+                            <div class="card-body product-box">
+                                <div class="img-wrapper">
+                                    <div class="front">
+                                        <% if product.images.count == 0 %>
+                                        <a href="#"><a href="#">
+                                                <P class="img-fluid lazyload bg-img"></p>
+                                                <%else%>
+                                                <a href="#"><a href="/products/<%= product.id %>"><%= image_tag (product.images[0] if product.images.length > 0) , :class => "img-fluid lazyload bg-img" %></a></a>
+                                                <%end%>
+                                                <div class="product-hover">
+                                                    <ul>
+                                                        <li>
+                                                            <%= link_to edit_product_path(product), {:class => "btn", :type => "button", :title => "", 'data-original-title' => "" } do %> <i class="ti-pencil-alt"></i> <% end %>
+                                                        </li>
+                                                        <li>
+                                                            <%= link_to product, method: :delete, data: { confirm: 'Are you sure?', toggle: 'modal', target: '#exampleModalCenter', 'original-title' => "" , :class => "btn", :type => "button"}, remote: true do %>
+                                                            <i class="ti-trash"></i>
+                                                            <% end %>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                    </div>
+                                </div>
+                                <div class="product-detail">
+                                    <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
+                                    <a href="#">
+                                        <h6><%= product.product_name %></h6>
+                                    </a>
+                                    <h4><%= number_to_currency(product.price, :unit => ' KES ') %></h4>
+                                    <!--<ul class="color-variant">
+                                            <li class="bg-light0"></li>
+                                            <li class="bg-light1"></li>
+                                            <li class="bg-light2"></li>
+                                        </ul>-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <% end %>
+                </div>
+            </div>
+            <!-- Container-fluid Ends-->
+
+        </div>
+
+        <!-- footer start-->
+        <%= render 'layouts/admin_footer' %>
+        <!-- footer end-->
+
+    </div>
+
+</div>
+
+<!-- latest jquery-->
+<%= javascript_include_tag 'js/jquery-3.3.1.min.js' %>
+
+<%= javascript_include_tag 'js/popper.min.js' %>
+
+<%= javascript_include_tag 'js/bootstrap.js' %>
+
+<!-- feather icon js-->
+<%= javascript_include_tag 'js/icons/feather-icon/feather.min.js' %>
+<%= javascript_include_tag 'js/icons/feather-icon/feather-icon.js' %>
+
+<!-- Sidebar jquery-->
+<%= javascript_include_tag 'js/sidebar-menu' %>
+
+<!-- Sidebar jquery-->
+<%= javascript_include_tag 'js/admin-customizer' %>
+
+<!-- lazyload js-->
+<%= javascript_include_tag 'js/lazysizes.min.js' %>
+
+<!--right sidebar js-->
+<%= javascript_include_tag 'js/chat-menu.js' %>
+
+<!--script admin-->
+<%= javascript_include_tag 'js/admin-script' %>

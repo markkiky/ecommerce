@@ -58,8 +58,7 @@
                                         <div class="col-xs-3">
                                             <div class="qty-box">
                                                 <div class="input-group">
-                                                    <input type="text" name="quantity" class="form-control input-number" value="1">
-                                                    <%= item.quantity %>
+                                                    <input type="text" name="quantity" class="form-control input-number" value="<%= item.quantity %>">
                                                 </div>
                                             </div>
                                         </div>
@@ -67,7 +66,7 @@
                                             <h2 class="td-color"> <%= number_to_currency(item.price, unit: ' KES ') %> </h2>
                                         </div>
                                         <div class="col-xs-3">
-                                            <h2 class="td-color"><a href="#" class="icon"><i class="ti-close"></i></a>
+                                            <h2 class="td-color"><a href="/cart/items/<%= item.id %>" data-method="delete" id="item_destroy" data-remote="true"><i class="ti-close"></i></a>
                                             </h2>
                                         </div>
                                     </div>
@@ -86,9 +85,7 @@
                                 </td>
                                 <td>
                                 <!--<a href="#" class="icon"><i class="ti-close"></i></a>-->
-                                    <%= form_for item, method: :delete, remote: true do |f| %>
-                                    <%= f.submit "X" %>
-                                    <% end %>
+                                    <a href="/cart/items/<%= item.id %>" data-method="delete" id="item_destroy" data-remote="true"><i class="ti-close"></i></a>
                                 </td>
                                 <td>
                                     <h2 class="td-color"><%= number_to_currency(item.order_total, unit: ' KES ') %></h2>
@@ -134,28 +131,28 @@
     </div>
 
     <!-- latest jquery-->
-    <script src="../resources/js/jquery-3.3.1.min.js"></script>
+    <%= javascript_include_tag 'js/jquery-3.3.1.min.js' %>
 
     <!-- menu js-->
-    <script src="../resources/js/menu.js"></script>
+    <%= javascript_include_tag 'js/menu.js' %>
 
     <!-- lazyload js-->
-    <script src="../resources/js/lazysizes.min.js"></script>
+    <%= javascript_include_tag 'js/lazysizes.min.js' %>
 
     <!-- popper js-->
-    <script src="../resources/js/popper.min.js"></script>
+    <%= javascript_include_tag 'js/popper.min.js' %>
 
     <!-- slick js-->
-    <script src="../resources/js/slick.js"></script>
+    <%= javascript_include_tag 'js/slick.js' %>
 
     <!-- Bootstrap js-->
-    <script src="../resources/js/bootstrap.js"></script>
+    <%= javascript_include_tag 'js/bootstrap.js' %>
 
     <!-- Bootstrap Notification js-->
-    <script src="../resources/js/bootstrap-notify.min.js"></script>
+    <%= javascript_include_tag 'js/bootstrap-notify.min.js' %>
 
     <!-- Theme js-->
-    <script src="../resources/js/script.js"></script>
+    <%= javascript_include_tag 'js/script.js' %>
 
     <script>
         function openSearch() {

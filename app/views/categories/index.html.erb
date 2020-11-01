@@ -17,7 +17,12 @@
         <!-- Right sidebar Ends-->
 
         <div class="page-body">
-
+            <% if notice %>
+            <p class="alert alert-success"><%= notice %></p>
+            <% end %>
+            <% if alert %>
+            <p class="alert alert-danger"><%= alert %></p>
+            <% end %>
             <!-- Container-fluid starts-->
             <div class="container-fluid">
                 <div class="page-header">
@@ -25,7 +30,7 @@
                         <div class="col-lg-6">
                             <div class="page-header-left">
                                 <h3>Categories
-                                    <small>Arigiene Admin Panel</small>
+                                    <small><%= AdminConfig[:app_name] %> Admin Panel</small>
                                 </h3>
                             </div>
                         </div>
@@ -63,17 +68,47 @@
                                             <tr>
                                                 <th scope="col">Category Name</th>
                                                 <th> Actions </th>
+                                                <th>SubCategories</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <% @categories.reverse.each do |category| %>
                                             <tr>
                                                 <td><%= category.category_name %></td>
-                                                <td><%= link_to 'Edit', edit_category_path(category), :class => "btn btn-secondary", remote: true %></td>
                                                 <td>
                                                     <div>
-                                                        <%= link_to "Variants", category_variants_path(category.id), :class => "btn btn-warning d-none" %>
+                                                        <%= link_to 'Edit', edit_category_path(category), :class => "btn btn-secondary", remote: true %>
                                                         <%= link_to 'Delete', category_path(category), method: :delete, data: { confirm: 'Are you sure?'}, :class => "btn btn-primary" %>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div>
+                                                        <%= link_to 'variants', variants_path(category), class: "btn btn-primary d-none" %>
+                                                        <%= link_to show_sub_category_path(category), remote: true do %>
+
+                                                        show
+                                                        <i class="fa fa-eye" aria-hidden="true"></i>
+
+                                                        <%end%>
+                                                        <%= link_to  new_sub_category_path(category), remote: true do %>
+                                                        add
+                                                        <i class="fa fa-plus" aria-hidden="true"></i>
+
+                                                        <%end%>
+
+                                                        <%= link_to  edit_sub_category_path(category), remote: true do %>
+                                                        edit
+                                                        <i class="fa fa-pencil" aria-hidden="true"></i>
+
+
+                                                        <%end%>
+
+                                                        <%= link_to  delete_sub_category_path(category), remote: true, class: "d-none" do %>
+                                                        delete
+                                                        <i class="fa fa-trash" aria-hidden="true"></i>
+
+
+                                                        <%end%>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -98,29 +133,32 @@
 </div>
 
 <!-- latest jquery-->
-<script src="../resources/js/jquery-3.3.1.min.js"></script>
+<%= javascript_include_tag 'js/jquery-3.3.1.min.js' %>
 
 <!-- Bootstrap js-->
-<script src="../resources/js/popper.min.js"></script>
-<script src="../resources/js/bootstrap.js"></script>
+<%= javascript_include_tag 'js/popper.min.js' %>
+<%= javascript_include_tag 'js/bootstrap.js' %>
 
 <!-- feather icon js-->
-<script src="../resources/js/icons/feather-icon/feather.min.js"></script>
-<script src="../resources/js/icons/feather-icon/feather-icon.js"></script>
+<%= javascript_include_tag 'js/icons/feather-icon/feather.min.js' %>
+<%= javascript_include_tag 'js/icons/feather-icon/feather-icon.js' %>
 
 <!-- Sidebar jquery-->
-<script src="../resources/js/sidebar-menu.js"></script>
+<%= javascript_include_tag 'js/sidebar-menu.js' %>
 
 <!--Customizer admin-->
-<script src="../resources/js/admin-customizer.js"></script>
+<%= javascript_include_tag 'js/admin-customizer.js' %>
 
 <!-- Jsgrid js-->
-<script src="../resources/js/jsgrid/jsgrid.min.js"></script>
-<script src="../resources/js/jsgrid/griddata-manage-product.js"></script>
-<script src="../resources/js/jsgrid/jsgrid-manage-product.js"></script>
+<%= javascript_include_tag 'js/jsgrid/jsgrid.min.js' %>
+<%= javascript_include_tag 'js/jsgrid/griddata-manage-product.js' %>
+<%= javascript_include_tag 'js/jsgrid/jsgrid-manage-product.js' %>
 
 <!--right sidebar js-->
-<script src="../resources/js/chat-menu.js"></script>
+<%= javascript_include_tag 'js/chat-menu.js' %>
 
 <!--script admin-->
-<script src="../resources/js/admin-script.js"></script>
+<%= javascript_include_tag 'js/admin-script.js' %>
+
+<!-- include json-editor.js -->
+<%# javascript_include_tag 'jsoneditor' %>

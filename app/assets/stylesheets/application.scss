@@ -128,7 +128,7 @@ input[type="number"] {
   width: 6px;
   height: 18px;
   border-radius: 20%;
-  background: #066;
+  background: #0f1c97;
 }
 
 /*flash*/
@@ -447,4 +447,15 @@ input[type="number"] {
     margin-right: 0.5rem;
     cursor: pointer;
   }
+}
+
+.crop_image{
+  display: block;
+  max-width: 100%;
+}
+
+//Style required asterick
+.required:after {
+  content:" *";
+  color: red;
 }

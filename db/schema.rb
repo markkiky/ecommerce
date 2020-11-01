@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_05_065025) do
+ActiveRecord::Schema.define(version: 2020_10_17_185552) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -75,7 +75,7 @@ ActiveRecord::Schema.define(version: 2020_10_05_065025) do
     t.string "category_id"
     t.string "category_name"
     t.text "description"
-    t.boolean "active"
+    t.boolean "active", default: true
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "admin_id"
@@ -240,13 +240,14 @@ ActiveRecord::Schema.define(version: 2020_10_05_065025) do
 
   create_table "products", force: :cascade do |t|
     t.string "product_id"
+    t.string "category_id"
+    t.string "sub_category_id"
     t.string "sku"
     t.string "id_sku"
     t.string "vendor_product_id"
     t.string "product_name"
     t.text "product_description"
     t.string "supplier_id"
-    t.string "category_id"
     t.string "quantity_per_unit"
     t.decimal "price"
     t.decimal "unit_price"
@@ -273,6 +274,7 @@ ActiveRecord::Schema.define(version: 2020_10_05_065025) do
     t.integer "size_id"
     t.integer "color_id"
     t.jsonb "product_group", default: {}, null: false
+    t.string "year"
     t.index ["product_group"], name: "index_products_on_product_group", using: :gin
   end
 
@@ -309,6 +311,13 @@ ActiveRecord::Schema.define(version: 2020_10_05_065025) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "admin_id"
     t.string "category_id"
+  end
+
+  create_table "sub_categories", force: :cascade do |t|
+    t.string "name"
+    t.string "category_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "transactions", force: :cascade do |t|

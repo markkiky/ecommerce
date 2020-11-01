@@ -1,0 +1,151 @@
+<%= javascript_include_tag 'jsoneditor' %>
+<!-- page-wrapper Start-->
+<div class="page-wrapper">
+
+    <!-- Page Header Start-->
+    <%= render 'layouts/admin_header' %>
+    <!-- Page Header Ends -->
+
+    <!-- Page Body Start-->
+    <div class="page-body-wrapper">
+
+        <!-- Page Sidebar Start-->
+        <%= render 'layouts/admin_sidebar' %>
+        <!-- Page Sidebar Ends-->
+
+        <!-- Right sidebar Start -->
+
+        <!-- Right sidebar Ends-->
+
+        <div class="page-body">
+
+            <!-- Container-fluid starts-->
+            <div class="container-fluid">
+                <div class="page-header">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="page-header-left">
+                                <h3>Categories
+                                    <small><%= AdminConfig[:app_name] %> Admin Panel</small>
+                                </h3>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <ol class="breadcrumb pull-right">
+                                <li class="breadcrumb-item"><a href="<%= root_url %>"><i data-feather="home"></i></a></li>
+                                <li class="breadcrumb-item">Physical</li>
+                                <li class="breadcrumb-item active">Category</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Container-fluid Ends-->
+
+            <!-- Container-fluid starts-->
+            <div class="container-fluid d-none">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>Products Category</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="btn-popup pull-right">
+                                    <%= link_to new_category_path, :class => "btn btn-primary", remote: true do %>
+                                    Add Category
+                                    <%end%>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="user-status table-responsive latest-order-table">
+                                    <table class="table table-bordernone">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Category Name</th>
+                                                <th> Actions </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Container-fluid Ends-->
+
+            <div class="container-fluid">
+                <div class="row">
+                    <div>
+                        <div id="jsoneditor" style="width: 500px; height: 500px;"></div>
+
+                        <script>
+                            // create the editor
+                            const container = document.getElementById("jsoneditor")
+                            const options = {}
+                            const editor = new JSONEditor(container, options)
+
+                            // set json
+                            const initialJson = {
+                                "Array": [1, 2, 3],
+                                "Boolean": true,
+                                "Null": null,
+                                "Number": 123,
+                                "Object": {
+                                    "a": "b",
+                                    "c": "d"
+                                },
+                                "String": "Hello World"
+                            }
+                            editor.set(initialJson)
+
+                            // get json
+                            const updatedJson = editor.get()
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- footer start-->
+        <%= render 'layouts/admin_footer' %>
+        <!-- footer end-->
+
+    </div>
+
+</div>
+
+<!-- latest jquery-->
+<%= javascript_include_tag 'js/jquery-3.3.1.min.js' %>
+
+<!-- Bootstrap js-->
+<%= javascript_include_tag 'js/popper.min.js' %>
+<%= javascript_include_tag 'js/bootstrap.js' %>
+
+<!-- feather icon js-->
+<%= javascript_include_tag 'js/icons/feather-icon/feather.min.js' %>
+<%= javascript_include_tag 'js/icons/feather-icon/feather-icon.js' %>
+
+<!-- Sidebar jquery-->
+<%= javascript_include_tag 'js/sidebar-menu.js' %>
+
+<!--Customizer admin-->
+<%= javascript_include_tag 'js/admin-customizer.js' %>
+
+<!-- Jsgrid js-->
+<%= javascript_include_tag 'js/jsgrid/jsgrid.min.js' %>
+<%= javascript_include_tag 'js/jsgrid/griddata-manage-product.js' %>
+<%= javascript_include_tag 'js/jsgrid/jsgrid-manage-product.js' %>
+
+<!--right sidebar js-->
+<%= javascript_include_tag 'js/chat-menu.js' %>
+
+<!--script admin-->
+<%= javascript_include_tag 'js/admin-script.js' %>
+
+<!-- include json-editor.js -->
+<%= javascript_include_tag 'jsoneditor' %>

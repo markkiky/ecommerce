@@ -24,7 +24,7 @@ test:
 
 production:
   <<: *default
-  database: melon_coco
+  database: melon_coco_prod
 # SQLite. Versions 3.8.0 and up are supported.
 #   gem install sqlite3
 

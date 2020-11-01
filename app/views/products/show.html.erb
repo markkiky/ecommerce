@@ -1,3 +1,7 @@
+<% if AdminConfig[:shop_number] == "1" %>
+
+    <%= render "defaults/products_show" %>
+<%else%>
 <!-- loader start -->
 <!-- loader end -->
 <%= include_gon %>
@@ -36,6 +40,12 @@
             <div class="row">
                 <div class="col-lg-5 col-sm-10 col-xs-12">
                     <div class="product-right-slick">
+                        <!--- Image with thumbnail -->
+                        <% (0...@product.images.count).each do |image| %>
+                        <% image_tag(@product.thumbnail(image), class: "") %>
+                        <%end%>
+                        <!--- image with thumbnail -->
+
                         <% if @product.images.attached? %>
                         <% @product.images.each  do |product_image| %>
                         <div>
@@ -54,6 +64,13 @@
                     <div class="row">
                         <div class="col-12 p-0">
                             <div class="slider-right-nav">
+
+                                <!--- Image with thumbnail -->
+                                <% (0...@product.images.count).each do |image| %>
+                                <% image_tag(@product.thumbnail(image), class: "") %>
+                                <%end%>
+                                <!--- image with thumbnail -->
+
                                 <% if @product.images.attached? %>
                                 <% @product.images.each  do |product_image| %>
                                 <div>
@@ -89,7 +106,13 @@
                             <h3 id="whole_sale"><%= number_to_currency(@product.price , :unit => ' KES ') %></h3>
                             <%end%>
                             <br />
-                            <ul class="color-variant d-flex">
+                           
+                            <div class="average-review-rating" data-score=<%= @average_review %>></div>
+                            <a href="<%= product_reviews_path(@product.id) %>"><span class="number-of-reviews">From: <%= @product.reviews.count %> reviews </span> </a>
+                            <div class="border-product">
+                            </div>
+                            <h3><%= number_to_currency(@product.price , :unit => ' KES ') %></h3>
+                            <ul class="color-variant">
                                 <% @product.colors.uniq.each  do |color| %>
                                 <li class="product-colors" style="background-color:<%= color.color_code %>" value="<%= color.color_type %>"></li>
                                 <%end%>
@@ -101,7 +124,7 @@
                                     <div class="modal fade" id="sizemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-centered" role="document">
                                             <div class="modal-content">
-                                                <div class="modal-header">
+                                              Home  <div class="modal-header">
                                                     <h5 class="modal-title" id="exampleModalLabel">Sheer Straight Kurta</h5>
                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                                 </div>
@@ -153,9 +176,11 @@
                                 </div>
                             </div>
                             <% end %>
-                            <div class="border-product">
+                            <div class="border-product d-none">
                                 <h6 class="product-title">product details</h6>
-                                <p><%= @product.product_description %></p>
+
+                                <%# raw(@product.product_description) %>
+
                             </div>
                             <div class="border-product">
                                 <h6 class="product-title">share it</h6>
@@ -208,7 +233,7 @@
                                 </table>
                             </div>
 
-                            <div class="border-product">
+                            <div class="border-product d-none">
                                 <h6 class="product-title">100% SECURE PAYMENT</h6>
                                 <div class="payment-card-bottom">
                                     <ul>
@@ -277,7 +302,7 @@
 </section>
 <!-- Section ends -->
 
-<%= render "layouts/tawk" %>
+<%# render "layouts/tawk" %>
 
 <!-- product-tab starts -->
 <section class="tab-product m-0">
@@ -297,7 +322,7 @@
                 </ul>
                 <div class="tab-content nav-material" id="top-tabContent">
                     <div class="tab-pane fade show active" id="top-home" role="tabpanel" aria-labelledby="top-home-tab">
-                        <p><%= @product.product_code %> </p>
+                        <p><%= raw(@product.product_description) %> </p>
                     </div>
                     <div class="tab-pane fade" id="top-profile" role="tabpanel" aria-labelledby="profile-top-tab">
                         <p><%= @product.product_code %></p>
@@ -339,10 +364,6 @@
                         </div>
                         <% end %>
                     </div>
-                    <br>
-                    <h4 class="avg-rating">Average Rating</h4>
-                    <div class="average-review-rating" data-score=<%= @average_review %>></div>
-                    <span class="number-of-reviews">From: <%= @product.reviews.count %> reviews </span>
                 </div>
             </div>
         </div>
@@ -388,7 +409,11 @@
                             <h6><%= product.product_name %></h6>
                         </a>
                         <h4><%= number_to_currency(product.price, :unit => ' KES ') %></h4>
-
+                        <!--<ul class="color-variant">
+                            <li class="bg-light0"></li>
+                            <li class="bg-light1"></li>
+                            <li class="bg-light2"></li>
+                        </ul> -->
                     </div>
                 </div>
             </div>
@@ -491,6 +516,9 @@
 <!-- fly cart ui jquery-->
 <%= javascript_include_tag 'js/jquery-ui.min.js' %>
 
+<!-- jquery raty -->
+<%= javascript_include_tag 'js/jquery.raty'%>
+
 <!-- exitintent jquery-->
 <%= javascript_include_tag 'js/jquery.exitintent.js' %>
 <%= javascript_include_tag 'js/exit.js' %>
@@ -538,6 +566,22 @@
 </script>
 
 <%= javascript_include_tag 'js/admin-script' %>
+
+
+<script>
+    $('#rating-form').raty({
+        path: '/assets/',
+        scoreName: 'review[rating]'
+    });
+
+    $('.average-review-rating').raty({
+        readOnly: true,
+        score: function() {
+            return $(this).attr('data-score');
+        },
+        path: '/assets/'
+    });
+</script>
 
 <script>
     $(document).ready(function() {
@@ -606,4 +650,24 @@
     // $("#to_cart").setEnabled(false)
     
     // location.reload();
+
+    // $(document).ready(function() {
+    //     reloadPage();
+
+    //     function reloadPage() {
+    //         (function() {
+    //             if (window.localStorage) {
+    //                 if (!localStorage.getItem('firstLoad')) {
+    //                     localStorage['firstLoad'] = true;
+    //                     window.location.reload();
+    //                 } else
+    //                     localStorage.removeItem('firstLoad');
+    //             }
+    //         })();
+    //     }
+
+    // });
+
+    // location.reload();
 </script>
+<%end%>

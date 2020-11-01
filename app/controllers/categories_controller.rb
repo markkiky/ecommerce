@@ -43,6 +43,12 @@ class CategoriesController < ApplicationController
     end
   end
 
+  # GET /variants
+  def variants
+    respond_to do |format|
+      format.html
+    end
+  end
   # POST /categories
   # POST /categories.json
   def create
@@ -81,15 +87,15 @@ class CategoriesController < ApplicationController
     # end
     @category = current_admin.categories.build(category_params)
     # Category.create(:category_name => "MIMI", :variants => {:moq => "5l"})
-    # @category.variants = {
+    @category.variants = {
 
-    #   :product_description => ["50ml with mint scent", "100ml with mint scent", "5L with mint scent", "20L with mint scent"],
-    #   :rrp => ["100", "180", "2050", "8000"],
-    #   :whole_sale => ["80", "140", "2060", "8000"],
-    #   :moq => ["240", "240", "2", "1"],
-    #   :moq_description => ["10 dozens (240 pieces)", "10 dozens (240 pieces)", "2 jericans", "1 Jerican"],
-    #   :name => ['50ml', '100ml', '5L', '20L']
-    # } 
+      :product_description => ["50ml with mint scent", "100ml with mint scent", "5L with mint scent", "20L with mint scent"],
+      :rrp => ["100", "180", "2060", "8000"],
+      :whole_sale => ["80", "140", "2060", "8000"],
+      :moq => ["240", "240", "2", "1"],
+      :moq_description => ["10 dozens (240 pieces)", "10 dozens (240 pieces)", "2 jericans", "1 Jerican"],
+      :name => ['50ml', '100ml', '5L', '20L']
+    } 
     respond_to do |format|
       if @category.save
         format.html { redirect_to categories_path, notice: "Category was successfully created." }
@@ -196,6 +202,76 @@ class CategoriesController < ApplicationController
     end
   end
 
+  # sub category actions 
+  # show
+  def show_sub_category
+    params[:id]
+    @category = Category.find(params[:id])
+    @subcategories = SubCategory.where(:category_id => params[:id])
+  end
+
+  # new subcategory
+  def new_sub_category
+    @category = Category.find(params[:id])
+    @sub_category = SubCategory.new
+  end
+
+  # Create subcategory
+  def create_subcategory
+    @sub_category = SubCategory.new(sub_category_params)
+    respond_to do |format|
+      if @sub_category.save
+        format.html { redirect_to categories_path, notice: "Sub Category was successfully created." }
+        format.json { render :show, status: :created, location: @sub_category }
+      else
+        format.html { render :new }
+        format.json { render json: @sub_category.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # GET EDIT SUBCATEGORY
+  def edit_sub_category
+    @category = Category.find(params[:id])
+    @sub_category = SubCategory.last
+    @subcategories = SubCategory.where(:category_id => @category.id)
+    puts @subcategories.name
+    
+  end
+
+  # PATCH UPDATE SUBCATEGORY
+  def update_subcategory
+    
+    @category = Category.find(sub_category_params[:category_id])
+    count = 0
+    sub_category_params[:sub_category_id].each do |sub_category|
+      @sub_category = SubCategory.find(sub_category)
+      @sub_category.update(:name => sub_category_params[:name][count])
+      count += 1 
+    end
+
+    
+    # respond_to do |format|
+    #   if @sub_category.update(category_params)
+    #     format.html { redirect_to categories_path, notice: "Category was successfully updated." }
+    #     format.json { render :show, status: :ok, location: @category }
+    #   else
+    #     format.html { render :edit }
+    #     format.json { render json: @category.errors, status: :unprocessable_entity }
+    #   end
+    # end
+  end
+
+  # GET SUBCATEGORY DELETE VIEW
+  def delete_sub_category
+    params[:category_id]
+  end
+
+  # DELETE SUBCATEGORY
+  def delete_subcategory
+
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
@@ -205,6 +281,10 @@ class CategoriesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def category_params
-    params.require(:category).permit(:category_id, :category_name, :description, :active, color: [], variants: [])
+    params.require(:category).permit(:category_id, :category_name, :description, :active, :image , color: [], variants: [])
+  end
+
+  def sub_category_params
+    params.require(:sub_category).permit(:name, :category_id, name: [], sub_category_id: [])
   end
 end

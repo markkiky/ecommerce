@@ -1,0 +1,20 @@
+<%= javascript_include_tag 'js/whatsapp/floating-wpp.min.js' %>
+<%= stylesheet_link_tag 'whatsapp/floating-wpp.min.css' %>
+<div id="myDiv"></div>
+
+<script type="text/javascript">
+    var business_contact = "<%= AdminConfig[:whatsapp_contact] %>"
+    $(function() {
+        $('#myDiv').floatingWhatsApp({
+            phone: business_contact,
+            popupMessage: 'Hi there, How can I help?',
+            message: "",
+            showPopup: true,
+            showOnIE: false,
+            headerTitle: 'Whatsapp chat',
+            headerColor: 'blue',
+            backgroundColor: 'crimson'
+
+        });
+    });
+</script>

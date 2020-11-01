@@ -49,10 +49,11 @@ Rails.application.routes.draw do
   get 'card', to: 'orders#card_payment', as: :card
 
   
+  get "subcategories", to: "products#get_sub_categories", as: :get_sub_categories
   
   # catgory paths
   resources :categories
-  # mount ActionCable.server => '/cable'
+  mount ActionCable.server => '/cable'
   
   #products path
   resources :products do 
@@ -61,6 +62,7 @@ Rails.application.routes.draw do
     resources :reviews 
     
   end 
+  get '/admin/products', to: 'products#index_admin'
 
   # Add color ajax
   get "/add_color", to: 'categories#add_color', as: :add_color
@@ -107,10 +109,32 @@ end
 
   #search path
   get "search", to: "products#search"
+  post "search", to: "homes#advanced_search", as: :advanced_search
 
   #wishlist path
   get "wishlists/update"
   get "/wishlists", to: "wishlists#index"
   delete 'wishlists/:id(.:format)', :to => 'wishlists#destroy'
 
+  post "/crop_pic", to: "products#crop_pic", as: :crop_pic
+  post "/pic_added", to: "products#pic_added", as: :pic_added
+
+  get "/variants/:id", to: "categories#variants", as: :variants
+
+  #errors paths
+  get '/404', to: 'errors#not_found'
+  get '/422', to: 'errors#unprocessable'
+  get '/500', to: 'errors#internal_server'
+  get '/204', to: 'errors#no_content'
+
+  #subcategories
+  get "/subcategories:id", to: 'categories#show_sub_category', as: :show_sub_category
+  get "/new_subcategory:id", to: "categories#new_sub_category", as: :new_sub_category
+  post '/add_subcategory', to: "categories#create_subcategory", as: :create_subcategory
+  get '/edit_subcategory:id', to: "categories#edit_sub_category", as: :edit_sub_category
+  patch '/update_subcategory', to: "categories#update_subcategory", as: :update_subcategory
+  get '/delete_subcategory:id', to: 'categories#delete_sub_category', as: :delete_sub_category
+  delete "/delete_subcategory", to: "categories#delete_subcategory", as: :delete_subcategory
+
+  get "/years", to: "homes#get_years", as: :get_years
 end

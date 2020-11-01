@@ -13,13 +13,12 @@
                     </div>
                     <div class="footer-contant">
                         <div class="footer-logo"><%= image_tag "logo-black-horizontal", :width => "250px", :height => "auto", :alt => "logo" %></div>
-                        <!--<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                            ut labore et dolore magna aliqua. Ut enim ad minim veniam,</p>-->
+                        <p>Looking to purchase high quality auto spare parts in Nairobi - Kenya, then get in touch with UAE Auto Parts today!</p>
                         <div class="footer-social">
                             <ul>
-                                <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                                <li><a href="<%= AdminConfig[:app_facebook] %>" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                                <li><a href="<%= AdminConfig[:app_twitter] %>" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                                <li><a href="<%= AdminConfig[:app_instagram]%>" target="_blank"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
                             </ul>
                         </div>
                     </div>
@@ -30,13 +29,11 @@
                             <h4>our products</h4>
                         </div>
                         <div class="footer-contant">
+                        <% Product.all.limit(5).reverse.each do | product | %>
                             <ul>
-                                <li>Dish Washing Soap</li>
-                                <li>Liquid Sanitizer</li>
-                                <li>Multipurpose Liquid Soap</li>
-                                <li>Surface Disinfectant</li>
-                                <li>Hand wash</li>
+                                <li><a href="/products/<%= product.id %>"><%= product.product_name %></a></li>
                             </ul>
+                        <% end %>
                         </div>
                     </div>
                 </div>
@@ -62,9 +59,9 @@
                         </div>
                         <div class="footer-contant">
                             <ul class="contact-list">
-                                <li><i class="fa fa-map-marker"></i>Arigiene Ke - Nairobi, Kenya </li>
-                                <li><i class="fa fa-phone"></i><a href="tel:+(254) 743 041 695">Call Us: (254) 743 041 695</a></li>
-                                <li><i class="fa fa-envelope-o"></i><a href="mailto:info@arigiene.com">Email: info@arigiene.com</a></li>
+                                <li><i class="fa fa-map-marker"></i><%= AdminConfig[:app_name]%></li>
+                                <li><i class="fa fa-phone"></i><a href="tel:+(254) 743 041 695">Call Us: <%= AdminConfig[:app_phone] %></a></li>
+                                <li><i class="fa fa-envelope-o"></i><a href="mailto:info@arigiene.com">Email: <%= AdminConfig[:app_email]%></a></li>
                             </ul>
                         </div>
                     </div>
@@ -88,10 +85,10 @@
                                 <a href="https://www.safaricom.co.ke/personal/m-pesa" target="_blank"><%= image_tag "mpesa.png", :width => "30px", :height => "30px"%></a>
                             </li>
                             <li>
-                                <a href="https://www.visa.co.ke/" target="_blank"><img src="../resources/images/icon/visa.png" alt="" width="30px" height="30px"></a>
+                                <a href="https://www.visa.co.ke/" target="_blank"><%= image_tag "icon/visa.png", :width => "30px", :height => "30px"%></a>
                             </li>
                             <li>
-                                <a href="https://www.mastercard.us/en-us.html" target="_blank"><img src="../resources/images/icon/mastercard.png" alt="" width="30px" height="30px"></a>
+                                <a href="https://www.mastercard.us/en-us.html" target="_blank"><%= image_tag "icon/mastercard.png", :width => "30px", :height => "30px"%></a>
                             </li>
                         </ul>
                     </div>

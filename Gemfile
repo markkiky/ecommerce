@@ -5,8 +5,12 @@ ruby '2.6.0'
 
 #gem passenger
 # gem "passenger", ">= 6.0.6", require: "phusion_passenger/rack_handler"
+
+gem 'business_time'
+
 #jquery
 gem 'jquery-rails'
+gem 'cropper-rails'
 
 gem 'gon', '~> 6.4'
 
@@ -44,6 +48,8 @@ gem 'omniauth-twitter'
 # Use ActiveRecord Sessions
 # gem 'activerecord-session_store', '~> 1.0'
 
+gem 'figaro'
+
 gem 'sprockets-rails', :require => 'sprockets/railtie'
 
 # Use SCSS for stylesheets
@@ -66,6 +72,10 @@ gem 'redis', '~> 4.0'
 
 # Use Active Storage variant
 gem 'image_processing', '~> 1.2'
+gem 'active_storage_base64'
+gem "mini_magick"
+
+# gem 'jquery-fileupload-rails', '~> 0.4.7'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
@@ -83,7 +93,7 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
-
+  gem 'rails_db'
   #real favicon gem
    gem 'rails_real_favicon'
 end
@@ -94,6 +104,13 @@ group :test do
   gem 'selenium-webdriver'
   # Easy installation and use of web drivers to run system tests with browsers
   gem 'webdrivers'
+end
+
+group :production do 
+  # Compile javascripts and css in production
+  gem 'mini_racer'
+  gem 'uglifier', '~> 4.2'
+  gem 'yui-compressor', '~> 0.12.0'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

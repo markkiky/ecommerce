@@ -4,23 +4,44 @@
 //= link favicon/site.webmanifest
 //= link dashboard/man.png
 //= link dashboard/user2.jpg
-// link dashboard/user1.jpg
-// link dashboard/designer.jpg
+//= link dashboard/user1.jpg
+//= link dashboard/designer.jpg
 //= link dashboard/favicon.png
-// link icon/cart.png
-// link icon/mastercard.png
-// link icon/search.png
-// link icon/visa.png
-// link slider/2.jpg
-// link slider/3.jpg
-// link slider/4.jpg
-// link slider/6.jpg
-// link slider/7.jpg
-// link slider/8.jpg
-// link slider/9.jpg
-// link parallax/1.jpg
-// link home-banner/2.jpg
-
+//= link icon/cart.png
+//= link icon/mastercard.png
+//= link icon/visa.png
+//= link icon/search.png
+//= link icon/visa.png
+//= link slider/2.jpg
+//= link slider/3.jpg
+//= link slider/4.jpg
+//= link slider/6.jpg
+//= link slider/7.jpg
+//= link slider/8.jpg
+//= link slider/9.jpg
+//= link parallax/1.jpg
+//= link home-banner/2.jpg
+//= link avtar.jpg
+//= link 49.jpg
+//= link 3.png
+//= link 4.png
+//= link 1.png
+//= link 50.jpg
+//= link category.jpg
+//= link category1.jpg
+//= link category2.jpg
+//= link category3.jpg
+//= link category4.jpg
+//= link parallax.jpg
+//= link banner.jpg
+//= link footer.jpg
+//= link icon/phone.png
+//= link icon/email.png
+//= link icon/2.png
+//= link icon/3.png
+//= link icon/4.png
+//= link icon/6.png
+//= link empty-search.jpg
 
 // precompile js
 //= link application.js
@@ -54,6 +75,20 @@
 //= link js/chat-menu.js
 //= link js/height-equal.js
 //= link js/admin-script.js
+//= link js/parallax-effect.js
+//= link js/footer-reveal.min.js
+//= link js/price-range.js
+
+
+//= link cropper.js
+//= link cropper.css
+//= link jsoneditor/dist/jsoneditor.min.js
+//= link jsoneditor/dist/jsoneditor.css
+//= link blueimp-file-upload/js/jquery.fileupload.js
+//= link jquery.ui.widget/jquery.ui.widget.js
+//= link blueimp-file-upload/css/jquery.fileupload.css
+//= link jquery-fileupload.js
+//= link jquery.fileupload.css
 
 // require for any view with datatable
 //= link js/datatables/jquery.dataTables.min.js
@@ -63,16 +98,22 @@
 //= link js/jsgrid/jsgrid.min.js
 //= link js/jsgrid/griddata-transactions.js
 //= link js/jsgrid/jsgrid-transactions.js
+//= link js/jsgrid/griddata-invoice.js
+//= link js/jsgrid/jsgrid-invoice.js
+//= link js/jsgrid/griddata-manage-product.js
+//= link js/jsgrid/jsgrid-manage-product.js
 
 //require for pages with an editor
 //= link js/touchspin/vendors.min.js
 //= link js/touchspin/touchspin.js
 //= link js/touchspin/input-groups.min.js
 
-//= link js/editor/ckeditor/ckeditor.js
-//= link js/editor/ckeditor/styles.js
-//= link js/editor/ckeditor/adapters/jquery.js
-//= link js/editor/ckeditor/ckeditor.custom.js
+//= link js/ckeditor/config.js
+//= link js/ckeditor/ckeditor/config.js
+//= link js/ckeditor/ckeditor.js
+//= link js/ckeditor/styles.js
+//= link js/ckeditor/adapters/jquery.js
+//= link js/ckeditor/ckeditor.custom.js
 
 // require for pages with a form
 //= link js/dashboard/form-validation-custom.js
@@ -81,6 +122,8 @@
 //= link js/zoom-scripts.js
 
 //= link js/bootstrap-select.min.js
+
+//= link js/jquery.raty.js
 
 // precompile css
 //= link css/fontawesome.css
@@ -96,9 +139,14 @@
 //= link css/chartist.css
 //= link css/admin.css
 //= link css/bootstrap-select.min.css
+//= link css/themify.css
 
 // require for any view with datatable
 //= link css/datatables.css
 
 //require for pages with a jsgrid
 //= link css/jsgrid.css
+
+// require whatsapp files
+//= link js/whatsapp/floating-wpp.min.js
+//= link whatsapp/floating-wpp.min.css

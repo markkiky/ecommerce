@@ -1,4 +1,5 @@
 class OrdersController < ApplicationController
+  require "business_time"
   require "resolv-replace"
   require "uri"
   require "net/http"
@@ -33,6 +34,7 @@ class OrdersController < ApplicationController
     @order = Order.new
     @categories = Category.all.map { |c| [c.category_name, c.id] }
     respond_to do |format|
+      format.html
       format.js
     end
   end
@@ -312,7 +314,19 @@ class OrdersController < ApplicationController
             # byebug
             puts response_json
             if response_json["success"] == false
-              sleep(@@mpesa_retry)
+              count = 0
+              while response_json["success"] == false
+                count += 1
+                response = https.request(request)
+                # puts response.read_body
+                response_json = JSON.parse(response.read_body)
+                sleep(@@mpesa_retry)
+                if count > AdminConfig[:mpesa_error_detection].to_i
+                  receipt_response = true
+                  break
+                end
+              end
+              
             else
               if response_json["data"]["callback_returned"] == "PENDING"
                 sleep(@@mpesa_retry)
@@ -332,6 +346,9 @@ class OrdersController < ApplicationController
           gon.status = response_json["data"]["callback_returned"].downcase
           gon.order_id = params[:id]
         else
+          gon.response_json = "Failed to send push request"
+          gon.status = "404"
+          gon.order_id = params[:id]
         end
         # order_controller = OrdersController.new
         after_check_payment(@order.id, response_json)
@@ -342,7 +359,7 @@ class OrdersController < ApplicationController
       gon.status = "failed"
       gon.order_id = params[:id]
     end
-
+    
     respond_to do |format|
       format.js
     end
@@ -368,12 +385,7 @@ class OrdersController < ApplicationController
         # Create a new transaction for the received data
         # check if order exists
         # if order = Order.where(:order_number => payment_data["ref"])
-        if order = Order.find(order_id)
-          order_id = order.id
-        else
-          # place in order number
-          order_id = 1
-        end
+        
         transaction_params = {
           "paybill_number" => payment_data["account_to"],
           "phone_number" => payment_data["account_from"],
@@ -388,6 +400,8 @@ class OrdersController < ApplicationController
         }
         @transaction = Transaction.new(transaction_params)
         @transaction.save
+
+        @order.update(:payment_status => "paid", :reducing_balance => 0, :payment_method => "MPESA", :order_status => "payment_received", :payment_date => @transaction.date, :paid => true)
         # save_payment(order_id, response_json)
 
         # ActionCable.server.broadcast "test_channel", message: "Payment Received"

@@ -56,9 +56,9 @@
                             <br>
                             <li> <%= button_to  '/auth/google_oauth2', :class => "btn social-btn btn-twitter d-inline-block" do %> <i class="fa fa-google"></i> <% end %>
                             </li>
-                            <li> <%= button_to  '/auth/facebook', :class => "btn social-btn btn-twitter d-inline-block" do %> <i class="fa fa-facebook"></i> <% end %>
+                            <li class="d-none"> <%= button_to  '/auth/facebook', :class => "btn social-btn btn-twitter d-inline-block" do %> <i class="fa fa-facebook"></i> <% end %>
                             </li>
-                            <li> <%= button_to  '/users/auth/twitter', :class => "btn social-btn btn-twitter d-inline-block" do %> <i class="fa fa-twitter"></i> <% end %>
+                            <li class=""> <%= button_to  '/auth/twitter', :class => "btn social-btn btn-twitter d-inline-block" do %> <i class="fa fa-twitter"></i> <% end %>
                             </li>
                         </ul>
                     </div>
@@ -82,8 +82,34 @@
 </section>
 <!--Section ends-->
 
+<!-- render tawk live chat -->
+<%= render "layouts/tawk" %>
 
 <%= render "layouts/footer" %>
+
+<!-- latest jquery-->
+<%= javascript_include_tag 'js/jquery-3.3.1.min.js' %>
+
+<!-- menu js-->
+<%= javascript_include_tag 'js/menu.js' %>
+
+<!-- lazyload js-->
+<%= javascript_include_tag 'js/lazysizes.min.js' %>
+
+<!-- popper js-->
+<%= javascript_include_tag 'js/popper.min.js' %>
+
+<!-- slick js-->
+<%= javascript_include_tag 'js/slick.js' %>
+
+<!-- Bootstrap js-->
+<%= javascript_include_tag 'js/bootstrap.js' %>
+
+<!-- Bootstrap Notification js-->
+<%= javascript_include_tag 'js/bootstrap-notify.min.js' %>
+
+<!-- Theme js-->
+<%= javascript_include_tag 'js/script.js' %>
 
 
 <script>

@@ -1,0 +1,171 @@
+ <header class="header-tools">
+        <div class="mobile-fix-option"></div>
+        <div class="top-header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="header-contact">
+                            <ul>
+                               <li>Welcome to Our Online Store <%= AdminConfig[:app_name] %></li>
+                                <li><i class="fa fa-phone" aria-hidden="true"></i>Call Us: <%= AdminConfig[:app_phone]%></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 text-right">
+                        <ul class="header-dropdown">
+                            <li class="mobile-wishlist"><a href="<%= wishlists_path %>"><i class="fa fa-heart" aria-hidden="true"></i></a>
+                            </li>
+                            <li class="onhover-dropdown mobile-account">
+                                <i class="fa fa-user" aria-hidden="true"></i> 
+                                <% if current_customer == nil %>
+                                My Account
+                                <ul class="onhover-show-div">
+                                    <li>
+                                        <%= link_to "Login", new_customer_session_path %>
+                                    </li>
+                                </ul>
+                                <% elsif %>
+                                <%= current_customer.first_name %> <%= current_customer.last_name %>
+                                <ul class="onhover-show-div">
+                                    <li>
+                                        <%= link_to 'Log Out', destroy_customer_session_path, method: :delete %>
+                                    </li>
+                                </ul>
+                                <% end %>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="logo-menu-part">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="main-menu">
+                            <div class="menu-left">
+                                <div class="navbar">
+                                    <a href="javascript:void(0)" onclick="openNav()">
+                                        <div class="bar-style"> <i class="fa fa-bars sidebar-bar"
+                                                aria-hidden="true"></i></div>
+                                    </a>
+                                    <div id="mySidenav" class="sidenav">
+                                        <a href="javascript:void(0)" class="sidebar-overlay" onclick="closeNav()"></a>
+                                        <nav>
+                                            <div onclick="closeNav()">
+                                                <div class="sidebar-back text-left">
+                                                    <i class="fa fa-angle-left pr-2" aria-hidden="true"></i> Back
+                                                </div>
+                                            </div>
+                                            <!-- Vertical Menu -->
+                                            <ul id="sub-menu" class="sm pixelstrap sm-vertical">
+                                                <% Category.all.reverse.each do | category | %>
+                                                <li class="<%= 'active' if params[:category] == category.category_name %>">
+                                                    <%= link_to category.category_name, products_path(category: category.category_name), class: "link" %>
+                                                </li>
+                                                <% end %>
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                </div>
+                                <div class="brand-logo">
+                                    <a href="<%= root_url %>">
+                                        <%= image_tag 'logo-green-horizontal.png', :class => "img-fluid blur-up lazyload", :alt => "logo", :width => "100px", :height => "auto" %>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="menu-right pull-right">
+                                <div>
+                                    <nav id="main-nav">
+                                        <div class="toggle-nav">
+                                            <i class="fa fa-bars sidebar-bar"></i>
+                                        </div>
+                                        <!-- Horizontal menu -->
+                                        <ul id="main-menu" class="sm pixelstrap sm-horizontal">
+                                            <li>
+                                                <div class="mobile-back text-right">Back<i
+                                                        class="fa fa-angle-right pl-2" aria-hidden="true"></i></div>
+                                            </li>
+                                            <li>
+                                                <a href="<%= root_path %>">Home</a>
+                                            </li>
+                                            <li>
+                                                <a href="<%= products_path %>">shop</a>
+                                                <ul>
+                                                   <% Category.all.reverse.each do | category | %>
+                                                    <li class="<%= 'active' if params[:category] == category.category_name %>">
+                                                        <%= link_to category.category_name, products_path(category: category.category_name), class: "link" %>
+                                                    </li>
+                                                <% end %>
+                                                </ul>
+                                            </li>
+                                            <!--<li>
+                                                <a href="<%= products_path %>">product</a>
+                                                <% Product.all.limit(5).reverse.each do | product| %>
+                                                <ul>
+                                                    <li><a href="/products/<%= product.id %>"><%= product.product_name %><span
+                                                                class="new-tag">new</span></a></li>
+                                                </ul>
+                                                <% end %>
+                                            </li>
+                                            <li><a>pages</a>
+                                                <ul>
+                                                            <li><a href="<%= wishlists_path %>">wishlist</a></li>
+                                                            <li><a href="<%= cart_path %>">cart</a></li>
+                                                            <li><a href="<%= new_customer_session_path %>">login</a></li>
+                                                            <li><a href="<%= new_customer_registration_path %>">register</a></li>
+                                                            <li><a href="<%= checkout_path %>">checkout</a></li>
+                                                        </ul>
+                                                
+                                            </li>-->
+                                            <li>
+                                                <a href="<%= contact_path %>">contact</a>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                                <div>
+                                    <div class="icon-nav">
+                                        <ul>
+                                            <li class="onhover-div mobile-search">
+                                                <div><%= image_tag "icon/search.png", onclick: "openSearch()", :class => "img-fluid blur-up lazyload" %>
+                                                    <i class="ti-search" onclick="openSearch()"></i></div>
+                                                <div id="search-overlay" class="search-overlay">
+                                                    <div>
+                                                        <span class="closebtn" onclick="closeSearch()"
+                                                            title="Close Overlay">×</span>
+                                                        <div class="overlay-content">
+                                                            <div class="container">
+                                                                <div class="row">
+                                                                    <div class="col-xl-12">
+                                                                        <form action="/search">
+                                                                            <div class="form-group">
+                                                                                <input type="text" name="q" class="form-control"
+                                                                                    id="exampleInputPassword1"
+                                                                                    placeholder="Search a Product">
+                                                                            </div>
+                                                                            <button type="submit"
+                                                                                class="btn btn-primary"><i
+                                                                                    class="fa fa-search"></i></button>
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="onhover-div mobile-cart">
+                                                <div href="javascript:void(0)" onclick="openCart()"><%= image_tag "icon/cart.png", :class => "img-fluid blur-up lazyload" %>
+                                                    <i class="ti-shopping-cart"></i><span id="items_count"><%= render "order_items/items_count" %></span></div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>

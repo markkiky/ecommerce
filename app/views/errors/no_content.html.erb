@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The page you wanted has no content(204)</title>
+    <!--Google font-->
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900" rel="stylesheet">
+    <!-- Icons -->
+    <%= stylesheet_link_tag "css/fontawesome.css" %>
+
+    <!--Slick slider css-->
+    <%= stylesheet_link_tag "css/slick.css" %>
+    <%= stylesheet_link_tag "css/slick-theme.css" %>
+
+    <!-- Animate icon -->
+    <%= stylesheet_link_tag "css/animate.css" %>
+
+    <!-- Themify icon -->
+    <%= stylesheet_link_tag "css/themify-icons.css" %>
+
+    <!-- Bootstrap css -->
+    <%= stylesheet_link_tag "css/bootstrap" %>
+
+    <!-- Theme css -->
+    <%= stylesheet_link_tag "css/color1.css", :media => "screen", :id => "color" %>
+
+    <%= favicon_link_tag 'logo-green-horizontal.png' %>
+  </head>
+  <body>
+    <!-- header start -->
+    <%= render 'layouts/header'%>
+  <!-- header end -->
+  <!-- breadcrumb start -->
+  <div class="breadcrumb-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="page-title">
+            <h2>204 page</h2>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <nav aria-label="breadcrumb" class="theme-breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="<%= root_url %>">Home</a></li>
+              <li class="breadcrumb-item active" aria-current="page">204 page</li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- breadcrumb End -->
+  <!-- section start -->
+  <section class="p-0">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="error-section">
+            <h1>204</h1>
+            <h2>no content</h2>
+            <p>The page you requested has no content.</p>
+            <a href="<%= root_url %>" class="btn btn-solid">back to home</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Section ends -->
+  <!-- footer start -->
+  <%= render 'layouts/footer'%>
+  <!-- footer end -->
+  <!-- tap to top -->
+  <div class="tap-top">
+    <div>
+      <i class="fa fa-angle-double-up"></i>
+    </div>
+  </div>
+  <!-- tap to top End -->
+  <!-- theme setting -->
+  <!-- theme setting -->
+   <!-- latest jquery-->
+  <%= javascript_include_tag 'js/jquery-3.3.1.min.js' %>
+  <!-- menu js-->
+  <%= javascript_include_tag 'js/menu.js' %>
+  <!-- lazyload js-->
+  <%= javascript_include_tag 'js/lazysizes.min.js' %>
+  <!-- popper js-->
+  <%= javascript_include_tag 'js/popper.min.js' %>
+  <!-- slick js-->
+  <%= javascript_include_tag 'js/slick.js' %>
+  <!-- Bootstrap js-->
+  <%= javascript_include_tag 'js/bootstrap.js' %>
+  <!-- Bootstrap Notification js-->
+  <%= javascript_include_tag 'js/bootstrap-notify.min.js' %>
+  <!-- Theme js-->
+  <%= javascript_include_tag 'js/script.js' %>
+  <script>
+    function openSearch() {
+        document.getElementById("search-overlay").style.display = "block";
+    }
+    
+    function closeSearch() {
+        document.getElementById("search-overlay").style.display = "none";
+    }
+  </script>
+</body>
+</html>

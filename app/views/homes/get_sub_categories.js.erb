@@ -1,0 +1,10 @@
+$('.sub_category_selection').empty();
+
+<% if @subcategories.count < 1 %>
+    $('.sub_category_selection').append( $('<option>No Sub Categories Found</option>'));
+<%else%>
+    $('.sub_category_selection').append( $('<option>Select the Sub Category</option>'));
+    <% @subcategories.each do |subcategory| %>
+    $('.sub_category_selection').append($('<option value="<%= subcategory.id %>"><%= subcategory.name %></option>'));
+    <% end %>
+<%end%>

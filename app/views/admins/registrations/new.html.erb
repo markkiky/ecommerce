@@ -1,13 +1,4 @@
 <%= devise_error_messages! %>
-<head>
-
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Multikart admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
-    <meta name="keywords" content="admin template, Multikart admin template, dashboard template, flat admin template, responsive admin template, web app">
-    <meta name="author" content="pixelstrap">
-    <%= favicon_link_tag 'ArigieneLogo' %>
 
 
     <!-- Google font-->
@@ -15,25 +6,25 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
     <!-- Font Awesome-->
-    <link rel="stylesheet" type="text/css" href="../resources/css/fontawesome.css">
+    <%= stylesheet_link_tag 'css/fontawesome.css' %>
 
     <!-- Flag icon-->
-    <link rel="stylesheet" type="text/css" href="../resources/css/themify.css">
+    <%= stylesheet_link_tag 'css/themify.css' %>
 
     <!-- slick icon-->
-    <link rel="stylesheet" type="text/css" href="../resources/css/slick.css">
-    <link rel="stylesheet" type="text/css" href="../resources/css/slick-theme.css">
+   
+    <%= stylesheet_link_tag 'css/slick.css' %>
+    <%= stylesheet_link_tag 'css/slick-theme.css' %>
 
     <!-- jsgrid css-->
-    <link rel="stylesheet" type="text/css" href="../resources/css/jsgrid.css">
+    <%= stylesheet_link_tag 'css/jsgrid.css' %>
 
     <!-- Bootstrap css-->
-    <link rel="stylesheet" type="text/css" href="../resources/css/bootstrap.css">
+    <%= stylesheet_link_tag 'css/bootstrap.css' %>
 
     <!-- App css-->
-    <link rel="stylesheet" type="text/css" href="../resources/css/admin.css">
+    <%= stylesheet_link_tag 'css/admin.css' %>
 
-</head>
 
 <!-- page-wrapper Start-->
 <div class="page-wrapper">
@@ -136,20 +127,20 @@
                         <div class="single-item">
                             <div>
                                 <div>
-                                    <h3>Welcome to Arigiene</h3>
-                                    <p>Enhancing Hygiene. For A Healthier Society</p>
+                                    <h3>Welcome to <%= AdminConfig[:app_name] %></h3>
+                                    <p><%= AdminConfig[:app_motto] %></p>
                                 </div>
                             </div>
                             <div>
                                 <div>
-                                    <h3>Welcome to Arigiene</h3>
-                                    <p>Enhancing Hygiene. For A Healthier Society</p>
+                                    <h3>Welcome to <%= AdminConfig[:app_name] %></h3>
+                                    <p><%= AdminConfig[:app_motto] %></p>
                                 </div>
                             </div>
                             <div>
                                 <div>
-                                    <h3>Welcome to Arigiene</h3>
-                                    <p>Enhancing Hygiene. For A Healthier Society</p>
+                                    <h3>Welcome to <%= AdminConfig[:app_name] %></h3>
+                                    <p><%= AdminConfig[:app_motto] %></p>
                                 </div>
                             </div>
                         </div>
@@ -239,33 +230,36 @@
 </div>
 
 <!-- latest jquery-->
-<script src="../resources/js/jquery-3.3.1.min.js"></script>
+<%= javascript_include_tag 'js/jquery-3.3.1.min.js' %>
 
 <!-- Bootstrap js-->
-<script src="../resources/js/popper.min.js"></script>
-<script src="../resources/js/bootstrap.js"></script>
+<%= javascript_include_tag 'js/popper.min.js' %>
+<%= javascript_include_tag 'js/bootstrap.js' %>
 
 <!-- feather icon js-->
-<script src="../resources/js/icons/feather-icon/feather.min.js"></script>
-<script src="../resources/js/icons/feather-icon/feather-icon.js"></script>
+<%= javascript_include_tag 'js/icons/feather-icon/feather.min.js' %>
+<%= javascript_include_tag 'js/icons/feather-icon/feather-icon.js' %>
 
 <!-- Sidebar jquery-->
-<script src="../resources/js/sidebar-menu.js"></script>
-<script src="../resources/js/slick.js"></script>
+<%= javascript_include_tag 'js/sidebar-menu.js' %>
+<%= javascript_include_tag 'js/slick.js' %>
 
 <!-- Jsgrid js-->
-<script src="../resources/js/jsgrid/jsgrid.min.js"></script>
-<script src="../resources/js/jsgrid/griddata-invoice.js"></script>
-<script src="../resources/js/jsgrid/jsgrid-invoice.js"></script>
+<%= javascript_include_tag 'js/jsgrid/jsgrid.min.js' %>
+<%= javascript_include_tag 'js/jsgrid/griddata-invoice.js' %>
+<%= javascript_include_tag 'js/jsgrid/jsgrid-invoice.js' %>
+
 
 <!-- lazyload js-->
-<script src="../resources/js/lazysizes.min.js"></script>
+<%= javascript_include_tag 'js/lazysizes.min.js' %>
 
 <!--right sidebar js-->
 <script src="../resources/js/chat-menu.js"></script>
+<%= javascript_include_tag 'js/chat-menu.js' %>
 
 <!--script admin-->
-<script src="../resources/js/admin-script.js"></script>
+<%= javascript_include_tag 'js/admin-script.js' %>
+
 <script>
     $('.single-item').slick({
         arrows: false,

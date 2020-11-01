@@ -35,6 +35,17 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-12">
+                <% if current_customer.wishlists.count == 0 %>
+                <div class="row cart-buttons wishlist-grid--empty-list">
+                    <div class="col-12">
+                            <div class="text-center">
+                            <%= image_tag 'empty-search.jpg', :alt => "Wishlist loading" %>
+                            <h5 class="title-font mb-3 empty-list--text " data-trans-key="general.wishlist.empty_wishlist">Your wish list is currently empty.</h5>
+                            <a href="<%= root_url %>" class="btn btn-solid">Start Shopping</a>
+                            </div>
+                        </div>
+                        </div>
+                 <% else %>
                     <table class="table cart-table table-responsive-xs">
                         <thead>
                             <tr class="table-head">
@@ -97,19 +108,21 @@
             <div class="row wishlist-buttons">
                 <div class="col-12"><a href="<%= root_url %>" class="btn btn-solid">continue shopping</a> <a href="<%= checkout_path %>" class="btn btn-solid">check out</a></div>
             </div>
+            <% end %>
         </div>
     </section>
     <!--section end-->
 
+    
+    <!-- render tawk live chat -->
+    <%= render "layouts/tawk" %>
 
     <!-- footer start -->
     <%= render "layouts/footer" %>
     <!-- footer end -->
 
 
-    <!-- theme setting -->
-    <!-- theme setting -->
-
+   
 
     <!-- tap to top start -->
     <div class="tap-top">
@@ -119,28 +132,28 @@
 
 
     <!-- latest jquery-->
-    <script src="../resources/js/jquery-3.3.1.min.js"></script>
+    <%= javascript_include_tag 'js/jquery-3.3.1.min.js' %>
 
     <!-- menu js-->
-    <script src="../resources/js/menu.js"></script>
+    <%= javascript_include_tag 'js/menu.js' %>
 
     <!-- lazyload js-->
-    <script src="../resources/js/lazysizes.min.js"></script>
+    <%= javascript_include_tag 'js/lazysizes.min.js' %>
 
     <!-- popper js-->
-    <script src="../resources/js/popper.min.js"></script>
+    <%= javascript_include_tag 'js/popper.min.js' %>
 
     <!-- slick js-->
-    <script src="../resources/js/slick.js"></script>
+    <%= javascript_include_tag 'js/slick.js' %>
 
     <!-- Bootstrap js-->
-    <script src="../resources/js/bootstrap.js"></script>
+    <%= javascript_include_tag 'js/bootstrap.js' %>
 
     <!-- Bootstrap Notification js-->
-    <script src="../resources/js/bootstrap-notify.min.js"></script>
+    <%= javascript_include_tag 'js/bootstrap-notify.min.js' %>
 
     <!-- Theme js-->
-    <script src="../resources/js/script.js"></script>
+    <%= javascript_include_tag 'js/script.js' %>
 
     <script>
         function openSearch() {

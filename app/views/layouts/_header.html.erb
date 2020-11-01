@@ -7,8 +7,8 @@
                 <div class="col-lg-6">
                     <div class="header-contact">
                         <ul>
-                            <li>Welcome to Our Online Store Arigiene Kenya</li>
-                            <li><i class="fa fa-phone" aria-hidden="true"></i>Call Us: (254) 743 041 695</li>
+                            <li>Welcome to Our Online Store <%= AdminConfig[:app_name] %></li>
+                            <li><i class="fa fa-phone" aria-hidden="true"></i>Call Us: <%= AdminConfig[:app_phone]%></li>
                         </ul>
                     </div>
                 </div>
@@ -26,7 +26,7 @@
 
                             </ul>
                             <%elsif %>
-                            <%= current_customer.first_name %>
+                            <%= current_customer.first_name %> <%= current_customer.last_name %>
                             <ul class="onhover-show-div">
 
                                 <li>
@@ -60,17 +60,18 @@
                                     </div>
                                     <ul id="sub-menu" class="sm pixelstrap sm-vertical">
                                         <% Category.all.reverse.each do | category | %>
-                                        <li><a><%= category.category_name %></a></li>
+                                        <li class="<%= 'active' if params[:category] == category.category_name %>">
+                                            <%= link_to category.category_name, products_path(category: category.category_name), class: "link" %>
+                                        </li>
                                         <% end %>
                                     </ul>
                                 </nav>
                             </div>
                         </div>
                         <div class="brand-logo">
-                            <%= link_to root_path, :class => "img-fluid blur-up lazyload", :width => "2500px", :height => "34px" do %>
+                            <%= link_to root_path, :class => "img-fluid blur-up lazyload", :width => "250px", :height => "34px" do %>
                             <%= image_tag "logo-green-horizontal", :class => "img-fluid blur-up lazyload", :alt => "logo", :width => "250px", :height => "34px" %>
                             <%end%>
-                            <a href=""><%# image_tag "full-color.png", :class => "img-fluid blur-up lazyload", :alt => "logo", :width => "179px", :height => "34px" %></a>
                         </div>
                     </div>
                     <div class="menu-right pull-right">
@@ -82,12 +83,21 @@
                                         <div class="mobile-back text-right">Back<i class="fa fa-angle-right pl-2" aria-hidden="true"></i></div>
                                     </li>
                                     <li>
-
-                                        <%= link_to 'Home', root_path %>
-                                    </li>
-                                    <li>
-                                        <%= link_to 'contact', contact_path %>
-                                    </li>
+                                                <a href="<%= root_path %>">Home</a>
+                                            </li>
+                                            <li>
+                                                <a href="<%= products_path %>">shop</a>
+                                                <ul>
+                                                   <% Category.all.reverse.each do | category | %>
+                                                    <li class="<%= 'active' if params[:category] == category.category_name %>">
+                                                        <%= link_to category.category_name, products_path(category: category.category_name), class: "link" %>
+                                                    </li>
+                                                <% end %>
+                                                </ul>
+                                            </li>
+                                            <li>
+                                                <a href="<%= contact_path %>">contact</a>
+                                            </li>
                                 </ul>
                             </nav>
                         </div>
@@ -95,7 +105,8 @@
                             <div class="icon-nav">
                                 <ul>
                                     <li class="onhover-div mobile-search">
-                                        <div><img src="../resources/images/icon/search.png" onclick="openSearch()" class="img-fluid blur-up lazyload" alt=""> <i class="ti-search" onclick="openSearch()"></i></div>
+                                        <div><%= image_tag "icon/search.png", onclick: "openSearch()", :class => "img-fluid blur-up lazyload" %>
+                                        <i class="ti-search" onclick="openSearch()"></i></div>
                                         <div id="search-overlay" class="search-overlay">
                                             <div> <span class="closebtn" onclick="closeSearch()" title="Close Overlay">×</span>
                                                 <div class="overlay-content">
@@ -116,7 +127,8 @@
                                         </div>
                                     </li>
                                     <li class="onhover-div mobile-cart">
-                                        <div><img src="../resources/images/icon/cart.png" class="img-fluid blur-up lazyload" alt=""> <i class="ti-shopping-cart"></i></div>
+                                        <div> <%= image_tag "icon/cart.png", :class => "img-fluid blur-up lazyload" %>
+                                        <i class="ti-shopping-cart"></i><span id="items_count"><%= render "order_items/items_count" %></span></div> 
                                         <ul class="show-div shopping-cart" id="cart">
                                             <%= render "order_items/cart" %>
                                         </ul>

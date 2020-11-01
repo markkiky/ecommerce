@@ -1,0 +1,48 @@
+<!-- Category Modal-->
+<div class="modal fade" id="subCategoryModalEdit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <%= form_for(setup_sub_category(@sub_category), url: update_subcategory_path, method: :patch, remote: true) do |form| %>
+            <div class="modal-header">
+                <h5 class="modal-title f-w-600" id="exampleModalLabel">Add Sub Category</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+            </div>
+            <div class="modal-body">
+                <!--<form class="needs-validation">-->
+
+                <div class="form">
+                    <%= form.hidden_field :category_id, :value => @category.id %>
+                    <%# form.fields_for @subcategories do |cat|%>
+                    <% if @subcategories.count < 1 %>
+                        <p> No subcategories present</p>
+                    <%else %>
+                    <% @subcategories.each do |subcategory| %>
+                    <div class="form-group">
+                        <%= form.label :name, :class => "required mb-1", name: "sub_category[name][]" %>
+                        <%= form.text_field :name, :class => "form-control", required: true, value: subcategory.name, name: "sub_category[name][]" %>
+                        <%= form.hidden_field :sub_category_id, :value => subcategory.id, name: "sub_category[sub_category_id][]" %>
+                        <%# puts "#{@sub_category.name} Printing" %>
+                    </div>
+                    <%end%>
+                    <%end%>
+
+
+                </div>
+
+                <!--</form>-->
+
+            </div>
+            <div class="modal-footer">
+                <%= form.submit "Save", :class => "btn btn-primary"  %>
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Close</button>
+            </div>
+
+            <%end%>
+
+        </div>
+    </div>
+</div>
+
+<script>
+
+</script>

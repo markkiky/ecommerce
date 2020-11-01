@@ -2,6 +2,8 @@
 
     <%= form.label :category_name %><br />
     <%= form.text_field :category_name %>
+    <%= form.label :description %><br />
+    <%= form.text_field :description %>
 
     <%= form.submit "Update Category" %> | <%= link_to 'Back', categories_path %>
 <% end %>

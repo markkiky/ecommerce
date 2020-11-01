@@ -94,3 +94,8 @@ Rails.application.configure do
   }
   ActionMailer::Base.raise_delivery_errors = true
 end
+
+Rails.application.configure do
+  config.hosts.clear
+end
+
