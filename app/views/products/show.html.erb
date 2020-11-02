@@ -155,11 +155,11 @@
                                     <% if customer_signed_in? %>
                                     <% if @wishlist_exists == true %>
                                     <%= link_to wishlists_update_path(product: @product), :class => "wishlist-btn", remote: true do %>
-                                    <i class="fa fa-heart" style="color:#ff4c3b;"></i><span id="wishlist_link" class="title-font" style="color:#ff4c3b;">Remove from Wishlist</span>
+                                    <i class="fa fa-heart" style="color:#0f1c97;"></i><span id="wishlist_link" class="title-font" style="color:#0f1c97;">Remove from Wishlist</span>
                                     <% end %>
                                     <% else %>
                                     <%= link_to wishlists_update_path(product: @product), :class => "wishlist-btn", remote: true do %>
-                                    <i class="fa fa-heart" style="color:#ff4c3b;"></i><span id="wishlist_link" class="title-font" style="color:#ff4c3b; ">Add To WishList</span>
+                                    <i class="fa fa-heart" style="color:#0f1c97;"></i><span id="wishlist_link" class="title-font" style="color:#0f1c97; ">Add To WishList</span>
                                     <% end %>
                                     <% end %>
                                     <% else %>
@@ -263,7 +263,7 @@
 </section>
 <!-- Section ends -->
 
-<%= render "layouts/tawk" %>
+<%# <%= render "layouts/tawk" %> 
 
 <!-- product-tab starts -->
 <section class="tab-product m-0">
