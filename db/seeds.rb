@@ -33,5 +33,6 @@ ApiUrl.create(:key => "app_twitter", :value => "https://twitter.com/uaeautospare
 ApiUrl.create(:key => "app_instagram", :value => "https://www.instagram.com/uaeautospares/")
 ApiUrl.create(:key => "default_url_options", :value => "localhost:3000")
 ApiUrl.create(:key => "mpesa_error_detection", :value => "6")
-ApiUrl.create(:key => "shop_number", :value => "2")
+ApiUrl.create(:key => "shop_number", :value => "1")
 ApiUrl.create(:key => 'whatsapp_contact', :value => '0714420943')
+ApiUrl.create(:key => 'admin_footer', :value => "This is arigiene shop")

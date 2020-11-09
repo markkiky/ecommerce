@@ -108,7 +108,7 @@ end
 
 group :production do 
   # Compile javascripts and css in production
-  gem 'mini_racer'
+  # gem 'mini_racer'
   gem 'uglifier', '~> 4.2'
   gem 'yui-compressor', '~> 0.12.0'
 end
