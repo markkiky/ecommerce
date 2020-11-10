@@ -72,8 +72,11 @@
                 <div class="col-lg-6 rtl-text">
                     <div class="product-right">
                         <div class="product-right product-description-box">
+                            <div class="average-review-rating" data-score=<%= @average_review %>></div>
+                            <a href="<%= product_reviews_path(@product.id) %>"><span class="number-of-reviews">From: <%= @product.reviews.count %> reviews </span> </a>
+                            <div class="border-product">
+                            </div>
                             <h2 id="product_name"><%= @product.product_name %></h2>
-
                             <p>Retail Price</p>
                             <% if @product.product_group.keys.count > 3 %>
                             <h3 id="rrp"><%= number_to_currency(@product.rrp.first , :unit => ' KES ') %></h3>
@@ -153,10 +156,10 @@
                                 </div>
                             </div>
                             <% end %>
-                            <div class="border-product">
+                            <!--<div class="border-product">
                                 <h6 class="product-title">product details</h6>
                                 <p><%= @product.product_description %></p>
-                            </div>
+                            </div>-->
                             <div class="border-product">
                                 <h6 class="product-title">share it</h6>
                                 <div class="product-icon">
@@ -297,24 +300,15 @@
                 </ul>
                 <div class="tab-content nav-material" id="top-tabContent">
                     <div class="tab-pane fade show active" id="top-home" role="tabpanel" aria-labelledby="top-home-tab">
-                        <p><%= @product.product_code %> </p>
+                        <p><%= raw(@product.product_description) %> </p>
                     </div>
                     <div class="tab-pane fade" id="top-profile" role="tabpanel" aria-labelledby="profile-top-tab">
-                        <p><%= @product.product_code %></p>
                         <div class="single-product-tables">
                             <table>
                                 <tbody>
                                     <tr>
-                                        <td>Scent:</td>
-                                        <td>-</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <table>
-                                <tbody>
-                                    <tr>
-                                        <td>Color:</td>
-                                        <td>-</td>
+                                        <td>Product Code:</td>
+                                        <td><%= raw(@product.product_code) %></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -340,9 +334,9 @@
                         <% end %>
                     </div>
                     <br>
-                    <h4 class="avg-rating">Average Rating</h4>
+                    <!--<h4 class="avg-rating">Average Rating</h4>
                     <div class="average-review-rating" data-score=<%= @average_review %>></div>
-                    <span class="number-of-reviews">From: <%= @product.reviews.count %> reviews </span>
+                    <span class="number-of-reviews">From: <%= @product.reviews.count %> reviews </span>-->
                 </div>
             </div>
         </div>
@@ -491,6 +485,9 @@
 <!-- fly cart ui jquery-->
 <%= javascript_include_tag 'js/jquery-ui.min.js' %>
 
+<!-- jquery raty -->
+<%= javascript_include_tag 'js/jquery.raty'%>
+
 <!-- exitintent jquery-->
 <%= javascript_include_tag 'js/jquery.exitintent.js' %>
 <%= javascript_include_tag 'js/exit.js' %>
@@ -585,9 +582,9 @@
         let index = names.indexOf(name);
 
 
-        $("#rrp").text("KES " + product.product_group.rrp[index]);
-        $("#rrp_price").val(product.product_group.rrp[index]);
-        $("#whole_sale").text("KES " + product.product_group.whole_sale[index]);
+        $("#rrp").text("KES " + parseFloat(product.product_group.rrp[index]).toFixed(2));
+        $("#rrp_price").val(parseFloat(product.product_group.rrp[index]).toFixed(2));
+        $("#whole_sale").text("KES " + parseFloat(product.product_group.whole_sale[index]).toFixed(2));    
         $("#whole_sale_price").val(product.product_group.whole_sale[index]);
         $("#current_moq").val(product.product_group.moq[index]);
         $("#discount").text("Wholesale at: " + product.product_group.moq_description[index]);
@@ -606,4 +603,19 @@
     // $("#to_cart").setEnabled(false)
     
     // location.reload();
+</script>
+
+<script>
+    $('#rating-form').raty({
+        path: '/assets/',
+        scoreName: 'review[rating]'
+    });
+
+    $('.average-review-rating').raty({
+        readOnly: true,
+        score: function() {
+            return $(this).attr('data-score');
+        },
+        path: '/assets/'
+    });
 </script>
