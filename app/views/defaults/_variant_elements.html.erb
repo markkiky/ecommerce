@@ -1,0 +1,25 @@
+<div class="form-group ml-3">
+    <label> <strong> <%= label_tag "Product Description :","Product Description", class: "required" %> </strong> </label>
+    <%= text_field_tag :product_description, nil, class: 'form-control', name: "product[product_group][product_description][]", required: true%>
+</div>
+
+<div class="form-group ml-3">
+    <label> <strong> <%= label_tag "Whole Sale Price :",'Whole Sale Price', class: "required" %> </strong> </label>
+    <%= text_field_tag :whole_sale,nil, class: "form-control input100", required: true , name: "product[product_group][whole_sale][]"  %>
+</div>
+<div class="form-group ml-3">
+    <label> <strong> <%= label_tag "Retail Price :","Retail Price", class: "required" %> </strong> </label>
+    <%= text_field_tag :rrp,nil, class: "form-control input100", required: true , name: "product[product_group][rrp][]"  %>
+</div>
+<div class="form-group ml-3">
+    <label> <strong> <%= label_tag "Minimum Order Quantity(Amount) :","Minimum Order Quantity(Amount)", class: "required" %> </strong> </label>
+    <%= number_field_tag :moq,nil, class: "form-control input100", required: true , name: "product[product_group][moq][]"   %>
+</div>
+<div class="form-group ml-3">
+    <label> <strong> <%= label_tag "Minimum Order Quantity(Description) :","Minimum Order Quantity(Description)", class: "required" %> </strong> </label>
+    <%= text_field_tag :moq_description,nil, class: "form-control input100", required: true , name: "product[product_group][moq_description][]"   %>
+</div>
+<div class="form-group ml-3">
+    <label> <strong> <%= label_tag "Display Symbol :", "Display Symbol",class: "required" %> </strong> </label>
+    <%= text_field_tag :name,nil, class: "form-control input100", required: true , name: "product[product_group][name][]"   %>
+</div>

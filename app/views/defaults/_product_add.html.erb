@@ -1,8 +1,3 @@
-<% if AdminConfig[:shop_number] == "1" %>
-
-<%= render "defaults/product_add" %>
-
-<%else %>
 <!-- page-wrapper Start-->
 <div class="page-wrapper">
 
@@ -107,35 +102,35 @@
                                                 <strong> <%= form.label "Select Category", class: 'required' %> </strong>
                                                 <%= form.collection_select :category_id, @categories, :id, :category_name, {:prompt => "Select Category"}, {:class => "form-control input100", :required => true} %>
                                             </div>
-                                            <div class="form-group col-12 mb-3">
+                                            <div class="form-group col-12 mb-3 d-none">
                                                 <strong> <%= form.label "Select Sub Category"%> </strong>
-                                                <%= select_tag :sub_category_id, options_for_select(@subcategories), :prompt => "Select Sub Category", :class => "form-control input100 d-none" %>
-                                                <%= form.collection_select :sub_category_id, @subcategories, :id, :name, {:prompt => "Select a Sub Category"}, {:class=>"sub_category_selection form-control input100"} %>
+                                                <%# select_tag :sub_category_id, options_for_select(@subcategories), :prompt => "Select Sub Category", :class => "form-control input100 d-none" %>
+                                                <%# form.collection_select :sub_category_id, @subcategories, :id, :name, {:prompt => "Select a Sub Category"}, {:class=>"sub_category_selection form-control input100"} %>
                                             </div>
                                             <div class="form-group col-12 mb-3">
                                                 <label> <strong><%= form.label "Product Name", class: "required" %></strong></label>
                                                 <%= form.text_field :product_name, class: "form-control input100", :prompt => "Enter Products Name", required: true %>
                                             </div>
-                                            <div class="form-group col-12 mb-3">
+                                            <div class="form-group col-12 mb-3 d-none">
                                                 <label> <strong> <%= form.label "Discount Available :", class: "" %> </strong> </label>
-                                                <%= form.check_box :discount_available, class: ""  %>
+                                                <%# form.check_box :discount_available, class: ""  %>
                                             </div>
-                                            <div class="form-group col-4 mb-3">
+                                            <div class="form-group col-4 mb-3 d-none">
                                                 <label> <strong> <%= form.label "Price :", class: "required" %> </strong> </label>
-                                                <%= form.number_field :price, class: "form-control input100", required: true  %>
+                                                <%# form.number_field :price, class: "form-control input100", required: true  %>
                                             </div>
-                                            <div class="form-group col-4 mb-3">
+                                            <div class="form-group col-4 mb-3 d-none">
                                                 <label> <strong> <%= form.label "Discount :", class: "" %> </strong> </label>
-                                                <%= form.text_field :discount, class: "form-control input100"  %>
+                                                <%# form.text_field :discount, class: "form-control input100"  %>
                                             </div>
-                                            <div class="form-group col-4 mb-3">
+                                            <div class="form-group col-4 mb-3 d-none">
                                                 <label> <strong> <%= form.label "New Price :", class: "" %> </strong> </label>
-                                                <%= form.number_field :unit_price, class: "form-control input100"  %>
+                                                <%# form.number_field :unit_price, class: "form-control input100"  %>
                                             </div>
-                                            
-                                            <div class="form-group col-12 mb-3">
+
+                                            <div class="form-group col-12 mb-3 d-none">
                                                 <label for="validationCustomUsername" class="required"> <strong> Year : </strong> </label>
-                                                <%= form.text_field :year, :class => "form-control input100", required: true %>
+                                                <%# form.text_field :year, :class => "form-control input100", required: true %>
                                             </div>
                                             <div class="form-group col-12 mb-3">
                                                 <label class="required"><strong>Total Products :</strong></label>
@@ -161,19 +156,52 @@
                                                     <%= form.text_area :product_description, :cols => 10, :rows => 4, id: "editor1" %>
 
                                                 </div>
-                                                <div class="fileupload d-none">
+                                            </div>
+                                            <div class="fileupload d-none">
 
-                                                    <%# form.label :product_images, "Upload images" %>
-                                                    <%# form.file_field :product_images, multiple: true %>
+                                                <%# form.label :product_images, "Upload images" %>
+                                                <%# form.file_field :product_images, multiple: true %>
 
+                                            </div>
+                                            <div class="variant_elements">
+                                                <div class="form-group ml-3">
+                                                    <label> <strong> <%= form.label "Product Description :", class: "required" %> </strong> </label>
+                                                    <%= form.text_field :product_description, class: "form-control input100", required: true, name: "product[product_group][product_description][]" %>
                                                 </div>
+                                                
+                                                <div class="form-group ml-3">
+                                                    <label> <strong> <%= form.label "Whole Sale Price :", class: "required" %> </strong> </label>
+                                                    <%= form.text_field :whole_sale, class: "form-control input100", required: true , name: "product[product_group][whole_sale][]"  %>
+                                                </div>
+                                                <div class="form-group ml-3">
+                                                    <label> <strong> <%= form.label "Retail Price :", class: "required" %> </strong> </label>
+                                                    <%= form.text_field :rrp, class: "form-control input100", required: true , name: "product[product_group][rrp][]"  %>
+                                                </div>
+                                                <div class="form-group ml-3">
+                                                    <label> <strong> <%= form.label "Minimum Order Quantity(Amount) :", class: "required" %> </strong> </label>
+                                                    <%= form.number_field :moq, class: "form-control input100", required: true , name: "product[product_group][moq][]"   %>
+                                                </div>
+                                                <div class="form-group ml-3">
+                                                    <label> <strong> <%= form.label "Minimum Order Quantity(Description) :", class: "required" %> </strong> </label>
+                                                    <%= form.text_field :moq_description, class: "form-control input100", required: true , name: "product[product_group][moq_description][]"   %>
+                                                </div>
+                                                <div class="form-group ml-3">
+                                                    <label> <strong> <%= form.label "Display Symbol :", class: "required" %> </strong> </label>
+                                                    <%= form.text_field :name, class: "form-control input100", required: true , name: "product[product_group][name][]"   %>
+                                                </div>
+                                                
+                                            </div>
+                                            <div class="form-group col-12 mb-3">
+                                                <%= link_to add_view_path, class: "mt-2 btn btn-warning", id: "add_view", remote: true  do %>
+                                                +
+                                                <%end%>
                                                 <div class="mt-4">
                                                     <%= form.submit "Add Product", class: "btn btn-primary btn-bg" %>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    
+
                                 </div>
                             </div>
                             <% end %>
@@ -230,7 +258,7 @@
 
 <%
 =begin%>
- <script src="../../../resources/js/editor/ckeditor/ckeditor.js"></script>  
+<script src="../../../resources/js/editor/ckeditor/ckeditor.js"></script>
 <%
 =end%>
 
@@ -269,7 +297,7 @@
     var category = document.getElementById("product_category_id")
 
     // removing this temporarily
-    category.addEventListener('change', function (evt) {
+    category.addEventListener('change', function(evt) {
         // alert("reached");
         console.log(evt);
         // debugger
@@ -280,8 +308,7 @@
         // }
 
         // );
-        $.get("/subcategories",
-        {
+        $.get("/subcategories", {
             category_id: evt.target.value
         });
     })
@@ -326,6 +353,18 @@
 
         }
     }
+
+    function addVariantViews() {
+        $.ajax({
+            method: "GET",
+            url: "/add_view",
+            dataType: 'script',
+            format: 'js',
+            data: {
+                receive: "Pokea Kwa Kidero"
+            }
+        })
+    }
 </script>
 
 <script id="template-upload" type="text/javascript">
@@ -348,5 +387,3 @@
 
     // });
 </script>
-
-<%end%>

@@ -75,16 +75,16 @@
                             <h2 id="product_name"><%= @product.product_name %></h2>
 
                             <p>Retail Price</p>
-                            <% if @category.variants.keys.count > 3 %>
-                            <h3 id="rrp"><%= number_to_currency(@category.rrp.first , :unit => ' KES ') %></h3>
+                            <% if @product.product_group.keys.count > 3 %>
+                            <h3 id="rrp"><%= number_to_currency(@product.rrp.first , :unit => ' KES ') %></h3>
                             <%else%>
                             <h3 id="rrp"><%= number_to_currency(@product.price , :unit => ' KES ') %></h3>
                             <%end%>
                             <br />
 
                             <p>WholeSale Price:</p>
-                            <% if @category.variants.keys.count > 3 %>
-                            <h3 id="whole_sale"><%= number_to_currency(@category.whole_sale.first , :unit => ' KES ') %></h3>
+                            <% if @product.product_group.keys.count > 3 %>
+                            <h3 id="whole_sale"><%= number_to_currency(@product.whole_sale.first , :unit => ' KES ') %></h3>
                             <%else%>
                             <h3 id="whole_sale"><%= number_to_currency(@product.price , :unit => ' KES ') %></h3>
                             <%end%>
@@ -112,8 +112,8 @@
                                     <div class="size-box">
                                         <ul class="d-flex">
                                             <%count = 0%>
-                                            <% if @category.name != nil %>
-                                            <% @category.name.each do |name| %>
+                                            <% if @product.name != nil %>
+                                            <% @product.name.each do |name| %>
                                             <li class="variants" id="<%= "variants#{count}"%>"><%= name %></li>
                                             <% count = count + 1 %>
                                             <%end%>
@@ -125,9 +125,9 @@
                                     </div>
                                     <h6 class="product-title">quantity</h6>
                                     <%= form_tag order_items_path, remote: true do %>
-                                    <%= hidden_field_tag :current_moq, @category.moq.first %>
-                                    <%= hidden_field_tag :rrp_price, @category.rrp.first %>
-                                    <%= hidden_field_tag :whole_sale_price, @category.whole_sale.first %>
+                                    <%= hidden_field_tag :current_moq, @product.moq.first %>
+                                    <%= hidden_field_tag :rrp_price, @product.rrp.first %>
+                                    <%= hidden_field_tag :whole_sale_price, @product.whole_sale.first %>
                                     <%= text_field_tag :product_id, @product.id, class: "d-none" %>
                                     
 
@@ -581,16 +581,16 @@
         let name = e.delegateTarget.innerHTML;
 
 
-        let names = category.variants.name;
+        let names = product.product_group.name;
         let index = names.indexOf(name);
 
 
-        $("#rrp").text("KES " + category.variants.rrp[index]);
-        $("#rrp_price").val(category.variants.rrp[index]);
-        $("#whole_sale").text("KES " + category.variants.whole_sale[index]);
-        $("#whole_sale_price").val(category.variants.whole_sale[index]);
-        $("#current_moq").val(category.variants.moq[index]);
-        $("#discount").text("Wholesale at: " + category.variants.moq_description[index]);
+        $("#rrp").text("KES " + product.product_group.rrp[index]);
+        $("#rrp_price").val(product.product_group.rrp[index]);
+        $("#whole_sale").text("KES " + product.product_group.whole_sale[index]);
+        $("#whole_sale_price").val(product.product_group.whole_sale[index]);
+        $("#current_moq").val(product.product_group.moq[index]);
+        $("#discount").text("Wholesale at: " + product.product_group.moq_description[index]);
 
 
        
@@ -602,7 +602,7 @@
         // alert("input changed")
     })
     $("#variants0").addClass("active")
-    $("#discount").text("Wholesale at: " + category.variants.moq_description[0])
+    $("#discount").text("Wholesale at: " + product.product_group.moq_description[0])
     // $("#to_cart").setEnabled(false)
     
     // location.reload();

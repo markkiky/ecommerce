@@ -93,13 +93,13 @@ class ProductsController < ApplicationController
   # POST /products
   # POST /products.json
   def create
-    
     @product = current_admin.products.build(product_params)
     # @product.category_id = params[:category_id]
     # @product.size_id = params[:size_id]
     # @product.color_id = params[:color_id]
     
     # byebug
+    @product.product_group = params[:product][:product_group]
     respond_to do |format|
       # byebug
       if @product.save
@@ -168,6 +168,15 @@ class ProductsController < ApplicationController
     puts product_id
 
     @product = Product.find(product_id)
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  # GET /add_view
+  def add_view
+    puts "Adding fields for product catalog reached"
+
     respond_to do |format|
       format.js
     end

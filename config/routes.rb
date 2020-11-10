@@ -69,6 +69,9 @@ Rails.application.routes.draw do
   get "/add_size", to: 'categories#add_size', as: :add_size
   get "/remove_color", to: "categories#remove_color", as: :remove_color
 
+  # Add Variants ajax
+  get "/add_view", to: 'products#add_view', as: :add_view
+
   # devise_for :customers
   resources :customers
   resources :homes
