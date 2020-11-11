@@ -97,7 +97,7 @@
                                             <a href="product-page(no-sidebar).html">
                                                 <h6><%= product.product_name %></h6>
                                             </a>
-                                            <h4><%= number_to_currency(product.price, :unit => ' KES ') %></h4>
+                                            <h4><%= number_to_currency(product.rrp.first, :unit => ' KES ') %></h4>
                                         </div>
                                     </div>
                                 <% end %>
@@ -227,7 +227,7 @@
                                                                 </a>
                                                                 <p><%= product.product_description %>
                                                                 </p>
-                                                                <h4><%= number_to_currency(product.price, :unit => ' KES ') %></h4>
+                                                                <h4><%= number_to_currency(product.rrp.first, :unit => ' KES ') %></h4>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -268,7 +268,7 @@
                                                             </a>
                                                             <p><%= product.product_description%>
                                                             </p>
-                                                            <h4><%= number_to_currency(product.price, :unit => ' KES ') %></h4>
+                                                            <h4><%= number_to_currency(product.rrp.first, :unit => ' KES ') %></h4>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -308,7 +308,7 @@
                                                             </a>
                                                             <p><%= product.product_description %>
                                                             </p>
-                                                            <h4><%= number_to_currency(product.price, :unit => ' KES ') %></h4>
+                                                            <h4><%= number_to_currency(product.rrp.first, :unit => ' KES ') %></h4>
                                                         </div>
                                                     </div>
                                                 </div>
