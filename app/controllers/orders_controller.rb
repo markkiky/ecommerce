@@ -235,9 +235,10 @@ class OrdersController < ApplicationController
       response_json = JSON.parse(response.read_body)
       if response_json["success"]
         # push sent
-
+        puts "Push sent"
       else
         # push not sent
+        puts "Push not sent at this point"
       end
     rescue Exception => ex
       puts "#{ex.class}: #{ex.message}"

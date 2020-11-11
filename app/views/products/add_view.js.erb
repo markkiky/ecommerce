@@ -1,2 +1,9 @@
-// alert("Reached")
+
+// increment the current row id
+var url = $("#add_view").attr('href');
+var previous_row = url.match(/\d+/)
+var next_row = parseInt(previous_row) + 1
+var new_url = url.slice(0,-1) + next_row
+
+$("#add_view").attr('href', new_url)
 $('.variant_elements').append("<%= j render(:partial => 'defaults/variant_elements') %>");

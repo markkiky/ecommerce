@@ -82,9 +82,13 @@ class ProductsController < ApplicationController
 
   # GET /products/1/edit
   def edit
+    # console
     @category = Category.where(:id => @product.category_id)
     @categories = Category.all
     @subcategories = SubCategory.where(:category_id => @product.category_id)
+    @no_of_variants = @product.moq.count
+    # byebug
+
     # @sizes = Size.all.map{ |s| [s.size_type, s.id] }
     # @colors = Color.all.map{ |l| [l.color_type, l.id] }
     # @data_id = 1
@@ -99,7 +103,9 @@ class ProductsController < ApplicationController
     # @product.color_id = params[:color_id]
     
     # byebug
-    @product.product_group = params[:product][:product_group]
+    if AdminConfig[:shop_number] == "1"
+      @product.product_group = params[:product][:product_group]
+    end
     respond_to do |format|
       # byebug
       if @product.save
@@ -125,8 +131,11 @@ class ProductsController < ApplicationController
   # PATCH/PUT /products/1.json
   def update
     # @product.category_id = params[:category_id]
-    @product.size_id = params[:size_id]
-    @product.color_id = params[:color_id]
+    # @product.size_id = params[:size_id]
+    # @product.color_id = params[:color_id]
+    if AdminConfig[:shop_number] == "1"
+      @product.product_group = params[:product][:product_group]
+    end
     respond_to do |format|
       if @product.update(product_params)
         format.html { redirect_to admin_products_path, notice: 'Product was successfully updated.' }
@@ -176,7 +185,15 @@ class ProductsController < ApplicationController
   # GET /add_view
   def add_view
     puts "Adding fields for product catalog reached"
+    @count = params[:row_id].to_i + 1
+    respond_to do |format|
+      format.js
+    end
+  end
 
+  def remove_view
+    puts "Removing field already added"
+    @count = params[:row_id].to_i 
     respond_to do |format|
       format.js
     end

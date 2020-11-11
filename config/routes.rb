@@ -71,6 +71,7 @@ Rails.application.routes.draw do
 
   # Add Variants ajax
   get "/add_view", to: 'products#add_view', as: :add_view
+  get "/remove_view", to: 'products#remove_view', as: :remove_view
 
   # devise_for :customers
   resources :customers

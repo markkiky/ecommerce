@@ -23,7 +23,7 @@
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="page-header-left">
-                                <h3>Add Product
+                                <h3>Edit Product
                                     <small><%= AdminConfig[:app_name] %> Admin panel</small>
                                 </h3>
                             </div>
@@ -32,7 +32,7 @@
                             <ol class="breadcrumb pull-right">
                                 <li class="breadcrumb-item"><a href="<%= root_url %>"><i data-feather="home"></i></a></li>
                                 <li class="breadcrumb-item">Physical</li>
-                                <li class="breadcrumb-item active">Add Product</li>
+                                <li class="breadcrumb-item active">Edit Product</li>
                             </ol>
                         </div>
                     </div>
@@ -46,57 +46,50 @@
                     <div class="col-sm-12">
                         <div class="card">
                             <div class="card-header">
-                                <h5>Add Product</h5>
+                                <h5>Edit Product</h5>
                             </div>
-                            <%= form_with scope: :product, url: products_path, local: true do |form| %>
+                            <%= form_with scope: :product, url: "/products/#{@product.id}", method: :PATCH, local: true do |form| %>
                             <div class="card-body">
                                 <div class="row product-adding">
-                                    <div class="col-lg-5 col-md-5 col-sm-12 pr-2 d-none">
+                                    <div class="col-lg-5 col-md-5 col-sm-12 pr-2">
                                         <div class="add-product">
                                             <div class="row">
-                                                <div class="col-xl-9 xl-50 col-sm-6 col-9 d-none">
-                                                    <img src="../resources/images/pro3/1.jpg" alt="" class="img-fluid image_zoom_1 blur-up lazyloaded" id="preview_image">
+                                                <div class="col-xl-9 xl-50 col-sm-6 col-9">
+                                                    <% if @product.images.attached? %>
+                                                    <%= image_tag @product.images[0], class: "img-fluid image_zoom_1 blur-up lazyloaded", alt: "", id: "big_image" %>
+                                                    <%else%>
+                                                    <%= image_tag 'default_profile', class: "img-fluid image_zoom_1 blur-up lazyloaded", alt: "", id: "big_image" %>
+                                                    <%end%>
                                                 </div>
-                                                <div class="col-xl-12 xl-50 col-sm-12 col-12">
-                                                    <ul class="file-upload-product">
+                                                <div class="col-xl-3 xl-50 col-sm-6 col-3">
+                                                    <ul class="" id="side_gallery">
+                                                        <% if @product.images.attached? %>
+                                                        <% count = 0 %>
+                                                        <% @product.images.each do |image| %>
+                                                        <% count += 1 %>
                                                         <li>
-                                                            <%# form.label "Upload Products", class: 'required' %>
-                                                            <br>
-                                                            <%# form.file_field :images, multiple: true %>
-                                                        </li>
-                                                        <!--<li>
-                                                            <div class="box-input-file">
-                                                                <%# if @product.images.attached? %>
-                                                                <%# image_tag  "filename_with_extension" %>
-                                                                <%#else%>
-                                                                <%# form.file_field :images, class: "upload" %><i class="fa fa-plus"></i>
-                                                                <%#end%>
+                                                            <div class="box-input-file mb-5">
+                                                                <%= image_tag  image, onClick: "setBigImage()", "data-id": count, class: "img-fluid blur-up lazyload mb-1 " %>
                                                             </div>
+                                                        </li>
+                                                        <%end%>
+                                                        <% puts count %>
+                                                        <%end%>
 
-                                                        </li>
-                                                        <li>
-                                                            <div class="box-input-file"><%# form.file_field :images, multiple: true, class: "upload" %><i class="fa fa-plus"></i></div>
-                                                        </li>
-                                                        <li>
-                                                            <div class="box-input-file"><%# form.file_field :images, multiple: true, class: "upload" %><i class="fa fa-plus"></i></div>
-                                                        </li>
-                                                        <li>
-                                                            <div class="box-input-file"><%# form.file_field :images, multiple: true, class: "upload" %><i class="fa fa-plus"></i></div>
-                                                        </li>
-                                                        <li>
-                                                            <div class="box-input-file"><%# form.file_field :images, multiple: true, class: "upload" %><i class="fa fa-plus"></i></div>
-                                                        </li>-->
                                                     </ul>
                                                 </div>
+
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-12 pl-2">
                                         <div class="form row">
+
+
                                             <div class="form-group col-12 mb-3">
-                                                <strong> <%= form.label "Upload Products", class: 'required' %> </strong>
+                                                <strong> <%= form.label "Upload New Images", class: '' %> </strong>
                                                 <br>
-                                                <%= form.file_field :images, multiple: true, class: " btn", required: true %>
+                                                <%= form.file_field :images, multiple: true, class: " btn", required: false %>
                                             </div>
                                             <div class="form-group col-12 mb-3">
                                                 <strong> <%= form.label "Select Category", class: 'required' %> </strong>
@@ -166,44 +159,63 @@
                                             <%# Here I am  %>
 
                                             <div class="variant_elements col-12">
-                                                <div class="row">
-                                                    <div class="form-group col-sm-12 col-lg-6">
-                                                        <label> <strong> <%= form.label "Product Description :", class: "required" %> </strong> </label>
-                                                        <%= form.text_field :product_description, class: "form-control input100", required: true, name: "product[product_group][product_description][]" %>
-                                                    </div>
+                                                <% looper = 0 %>
+                                                <% while @no_of_variants > looper  do %>
+                                                <div id="<%= "row#{looper}"%>">
 
-                                                    <div class="form-group col-sm-12 col-lg-6">
-                                                        <label> <strong> <%= form.label "Whole Sale Price :", class: "required" %> </strong> </label>
-                                                        <%= form.text_field :whole_sale, class: "form-control input100", required: true , name: "product[product_group][whole_sale][]"  %>
-                                                    </div>
-                                                    <div class="form-group col-sm-12 col-lg-6">
-                                                        <label> <strong> <%= form.label "Retail Price :", class: "required" %> </strong> </label>
-                                                        <%= form.text_field :rrp, class: "form-control input100", required: true , name: "product[product_group][rrp][]"  %>
-                                                    </div>
-                                                    <div class="form-group col-sm-12 col-lg-6">
-                                                        <label> <strong> <%= form.label "Minimum Order Amount:", class: "required" %> </strong> </label>
-                                                        <%= form.number_field :moq, class: "form-control input100", required: true , name: "product[product_group][moq][]"   %>
-                                                    </div>
-                                                    <div class="form-group col-sm-12 col-lg-6">
-                                                        <label> <strong> <%= form.label "Minimum Order Description :", class: "required" %> </strong> </label>
-                                                        <%= form.text_field :moq_description, class: "form-control input100", required: true , name: "product[product_group][moq_description][]"   %>
-                                                    </div>
-                                                    <div class="form-group col-sm-12 col-lg-6">
-                                                        <label> <strong> <%= form.label "Display Symbol :", class: "required" %> </strong> </label>
-                                                        <%= form.text_field :name, class: "form-control input100", required: true , name: "product[product_group][name][]"   %>
+                                                    <hr>
+                                                    <h3>Catalog Item <%# looper %></h3>
+                                                    <div class="row">
+
+                                                        <div class="form-group col-sm-12 col-lg-6">
+                                                            <label> <strong> <%= label_tag "Product Description :","Product Description", class: "required" %> </strong> </label>
+                                                            <%= text_field_tag :product_description, @product.product_description[looper], class: 'form-control', name: "product[product_group][product_description][]", required: true%>
+                                                        </div>
+
+                                                        <div class="form-group col-sm-12 col-lg-6">
+                                                            <label> <strong> <%= label_tag "Whole Sale Price :",'Whole Sale Price', class: "required" %> </strong> </label>
+                                                            <%= text_field_tag :whole_sale, @product.whole_sale[looper], class: "form-control input100", required: true , name: "product[product_group][whole_sale][]"  %>
+                                                        </div>
+                                                        <div class="form-group col-sm-12 col-lg-6">
+                                                            <label> <strong> <%= label_tag "Retail Price :","Retail Price", class: "required" %> </strong> </label>
+                                                            <%= text_field_tag :rrp, @product.rrp[looper], class: "form-control input100", required: true , name: "product[product_group][rrp][]"  %>
+                                                        </div>
+                                                        <div class="form-group col-sm-12 col-lg-6">
+                                                            <label> <strong> <%= label_tag "Minimum Order Quantity(Amount) :","Minimum Order Quantity(Amount)", class: "required" %> </strong> </label>
+                                                            <%= number_field_tag :moq, @product.moq[looper], class: "form-control input100", required: true , name: "product[product_group][moq][]"   %>
+                                                        </div>
+                                                        <div class="form-group col-sm-12 col-lg-6">
+                                                            <label> <strong> <%= label_tag "Minimum Order Quantity(Description) :","Minimum Order Quantity(Description)", class: "required" %> </strong> </label>
+                                                            <%= text_field_tag :moq_description, @product.moq_description[looper], class: "form-control input100", required: true , name: "product[product_group][moq_description][]"   %>
+                                                        </div>
+                                                        <div class="form-group col-sm-12 col-lg-6">
+                                                            <label> <strong> <%= label_tag "Display Symbol :", "Display Symbol",class: "required" %> </strong> </label>
+                                                            <%= text_field_tag :name, @product.name[looper] , class: "form-control input100", required: true , name: "product[product_group][name][]"   %>
+                                                        </div>
+                                                        <% if looper == 0 %>
+
+                                                        <%else%>
+                                                        <div class="form-group col-12">
+                                                            <%= link_to remove_view_path(row_id: looper), class: "mt-2 btn btn-danger float-right", id: "remove_view", "data-confirm": "Are you sure?" , remote: true  do %>
+                                                            -Remove-
+                                                            <%end%>
+                                                        </div>
+                                                        <%end%>
                                                     </div>
                                                 </div>
+                                                <% looper = looper + 1 %>
+                                                <%end%>
 
                                             </div>
 
                                             <%# Here I am  %>
 
                                             <div class="form-group col-12 mb-3">
-                                                <%= link_to add_view_path(row_id: 1), class: "mt-2 btn btn-warning float-right", id: "add_view", remote: true  do %>
+                                                <%= link_to add_view_path(row_id: looper), class: "mt-2 btn btn-warning float-right", id: "add_view", remote: true  do %>
                                                 +Add+
                                                 <%end%>
                                                 <div class="mt-4">
-                                                    <%= form.submit "Add Product", class: "btn btn-primary btn-bg mt-4" %>
+                                                    <%= form.submit "Edit Product", class: "btn btn-primary btn-bg mt-4" %>
                                                 </div>
                                             </div>
                                         </div>
@@ -254,21 +266,24 @@
 <!-- form validation js-->
 <%= javascript_include_tag 'js/dashboard/form-validation-custom.js' %>
 
-<%
-=begin%>
 <script>
     window.CKEDITOR_BASEPATH = '/assets/js/ckeditor/';
 </script>
+<!-- ckeditor js-->
+<%= javascript_include_tag 'js/ckeditor/ckeditor.js' %>
+<%= javascript_include_tag 'js/ckeditor/ckeditor/config.js' %>
+<%= javascript_include_tag 'js/ckeditor/config.js' %>
+
+
+<%
+=begin%>
+<script src="../../../resources/js/editor/ckeditor/ckeditor.js"></script>
 <%
 =end%>
-<!-- ckeditor js-->
-<%# javascript_include_tag 'js/ckeditor/ckeditor.js' %>
-<%# javascript_include_tag 'js/ckeditor/ckeditor/config.js' %>
-<%# javascript_include_tag 'js/ckeditor/config.js' %>
 
-<%# javascript_include_tag 'js/ckeditor/styles.js' %>
-<%# javascript_include_tag 'js/ckeditor/adapters/jquery.js' %>
-<%# javascript_include_tag 'js/ckeditor/ckeditor.custom.js' %>
+<%= javascript_include_tag 'js/ckeditor/styles.js' %>
+<%= javascript_include_tag 'js/ckeditor/adapters/jquery.js' %>
+<%= javascript_include_tag 'js/ckeditor/ckeditor.custom.js' %>
 
 <!-- Zoom js-->
 <%= javascript_include_tag 'js/jquery.elevatezoom.js' %>
@@ -369,25 +384,22 @@
             }
         })
     }
-    
-    $(document).ready(function(){
-       reloadPage();
-        function reloadPage(){
-             (function()
-            {
-            if( window.localStorage )
-            {
-                if( !localStorage.getItem('firstLoad') )
-                {
-                localStorage['firstLoad'] = true;
-                window.location.reload();
-                }  
-                else
-                localStorage.removeItem('firstLoad');
-            }
+
+    $(document).ready(function() {
+        reloadPage();
+
+        function reloadPage() {
+            (function() {
+                if (window.localStorage) {
+                    if (!localStorage.getItem('firstLoad')) {
+                        localStorage['firstLoad'] = true;
+                        window.location.reload();
+                    } else
+                        localStorage.removeItem('firstLoad');
+                }
             })();
         }
-       
+
     });
 </script>
 
