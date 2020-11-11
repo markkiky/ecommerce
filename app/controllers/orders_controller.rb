@@ -220,7 +220,10 @@ class OrdersController < ApplicationController
     phone = params[:phone]
     order_id = params[:id]
     @order = Order.find(order_id)
+    order_total = @order.order_subtotal.to_s
+    order_total = order_total.to_i
     @order_id = @order.id
+    # byebug
     begin
       url = URI(AdminConfig["payme"])
 
@@ -228,7 +231,7 @@ class OrdersController < ApplicationController
       https.use_ssl = true
 
       request = Net::HTTP::Post.new(url)
-      form_data = [["function", "CustomerPayBillOnlinePush"], ["PayBillNumber", AdminConfig["paybill"]], ["Amount", @order.order_subtotal.to_s], ["PhoneNumber", phone], ["AccountReference", @order.order_number], ["TransactionDesc", @order.order_number], ["FullNames", "- - -"]]
+      form_data = [["function", "CustomerPayBillOnlinePush"], ["PayBillNumber", AdminConfig["paybill"]], ["Amount", order_total.to_s], ["PhoneNumber", phone], ["AccountReference", @order.order_number], ["TransactionDesc", @order.order_number], ["FullNames", "- - -"]]
       request.set_form form_data, "multipart/form-data"
       response = https.request(request)
       puts response.read_body
