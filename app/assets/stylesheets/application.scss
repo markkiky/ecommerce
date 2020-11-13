@@ -459,3 +459,17 @@ input[type="number"] {
   content:" *";
   color: red;
 }
+
+.slider-mine-nav{
+  width: 800px !important;
+}
+
+.slider-mine-nav > .slick-list > .slick-track > .slick-slide {
+  width: 65px !important;
+  margin: 5px !important;
+}
+
+// .slider-mine-nav > .slick-list > .slick-track > .slick-slide > .variants{
+//   display: flex !important;
+//   align-content: center !;
+// }

@@ -1,35 +1,4 @@
-# SQLite. Versions 3.8.0 and up are supported.
-#   gem install sqlite3
-#
-#   Ensure the SQLite 3 gem is defined in your Gemfile
-#   gem 'sqlite3'
-#
-default: &default
-  adapter: mysql2
-  database: melon_coco
-  host: localhost
-  username: root
-  timeout: 5000
 
-development:
-  <<: *default
-  database: melon_coco_dev
-
-# Warning: The database defined as "test" will be erased and
-# re-generated from your development database when you run "rake".
-# Do not set this db to the same as development or production.
-test:
-  <<: *default
-  database: melon_coco_test
-
-production:
-  <<: *default
-  database: melon_coco_prod
-# SQLite. Versions 3.8.0 and up are supported.
-#   gem install sqlite3
-
-#   Ensure the SQLite 3 gem is defined in your Gemfile
-#   gem 'sqlite3'
 
 default: &default
   adapter: postgresql

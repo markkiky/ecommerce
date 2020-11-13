@@ -1,4 +1,5 @@
 class Product < ApplicationRecord
+    include ActiveStorageSupport::SupportForBase64
     belongs_to :admin
     belongs_to :category
     # belongs_to :size
@@ -13,7 +14,8 @@ class Product < ApplicationRecord
     
     
     has_many_attached :images
-    store_accessor :product_group, :moq, :product_description, :rrp, :whole_sale, :moq_description, :name
+    has_many_base64_attached :active_images
+    store_accessor :product_group, :moq, :product_description, :rrp, :whole_sale, :moq_description, :name, :product_image, :image_base64
 
     # validate :image_presence
     # has_many_base64_attached :product_images

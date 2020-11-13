@@ -43,6 +43,7 @@ class ProductsController < ApplicationController
 
     gon.category = @category
     gon.product = @product
+    gon.images = @product.images
     if @product.reviews.blank?
       @average_review = 0
    else
@@ -105,7 +106,9 @@ class ProductsController < ApplicationController
     # byebug
     if AdminConfig[:shop_number] == "1"
       @product.product_group = params[:product][:product_group]
+      # @product.image_base64 = Base64.strict_encode64(@product.product_group["product_image"][0].to_s)
     end
+    # byebug
     respond_to do |format|
       # byebug
       if @product.save
@@ -130,12 +133,16 @@ class ProductsController < ApplicationController
   # PATCH/PUT /products/1
   # PATCH/PUT /products/1.json
   def update
+  
     # @product.category_id = params[:category_id]
     # @product.size_id = params[:size_id]
     # @product.color_id = params[:color_id]
+    
     if AdminConfig[:shop_number] == "1"
       @product.product_group = params[:product][:product_group]
+      # byebug
     end
+    # byebug
     respond_to do |format|
       if @product.update(product_params)
         format.html { redirect_to admin_products_path, notice: 'Product was successfully updated.' }
@@ -208,6 +215,6 @@ class ProductsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def product_params
-    params.require(:product).permit(:product_id, :sku, :id_sku, :vendor_product_id, :product_name, :product_description, :supplier_id, :category_id, :quantity_per_unit, :price, :unit_price, :msrp, :available_size, :available_colors, :size, :color, :discount, :unit_weight, :units_in_stock, :units_on_order, :reorder_level, :product_available, :discount_available, :current_order, :note, :ranking, :product_code, :product_quantity, :size_id, :color_id, images: [], color_ids: [], size_ids: [], product_group: [])
+    params.require(:product).permit(:product_id, :sku, :id_sku, :vendor_product_id, :product_name, :product_description, :supplier_id, :category_id, :quantity_per_unit, :price, :unit_price, :msrp, :available_size, :available_colors, :size, :color, :discount, :unit_weight, :units_in_stock, :units_on_order, :reorder_level, :product_available, :discount_available, :current_order, :note, :ranking, :product_code, :product_quantity, :size_id, :color_id, images: [], color_ids: [], size_ids: [], product_group: [], active_images: [])
   end
 end

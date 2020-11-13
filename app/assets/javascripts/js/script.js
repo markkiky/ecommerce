@@ -852,6 +852,41 @@
         });
     }
 
+    if ($(window).width() > 575) {
+        $('.slider-mine-nav').slick({
+            vertical: false,
+            verticalSwiping: true,
+            slidesToShow: 5,
+            slidesToScroll: 5,
+            asNavFor: '.product-right-slick',
+            arrows: false,
+            infinite: false,
+            dots: false,
+            centerMode: false,
+            focusOnSelect: true
+        });
+    } else {
+        $('.slider-mine-nav').slick({
+            vertical: false,
+            verticalSwiping: false,
+            slidesToShow: 5,
+            slidesToScroll: 5,
+            asNavFor: '.product-right-slick',
+            arrows: false,
+            infinite: false,
+            centerMode: false,
+            dots: false,
+            focusOnSelect: true,
+            responsive: [{
+                breakpoint: 576,
+                settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 1
+                }
+            }]
+        });
+    }
+
 
     /*=====================
      14.Header z-index js

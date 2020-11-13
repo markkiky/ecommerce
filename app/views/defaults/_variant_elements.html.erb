@@ -29,6 +29,11 @@
             <label> <strong> <%= label_tag "Display Symbol :", "Display Symbol",class: "required" %> </strong> </label>
             <%= text_field_tag :name,nil, class: "form-control input100", required: true , name: "product[product_group][name][]"   %>
         </div>
+        <div class="form-group col-sm-12 col-lg-6">
+            <label> <strong> <%= label_tag "Insert Image :", "Insert Image",class: "required" %> </strong> </label>
+            <%# file_field_tag :image, class: "form-control input100", required: true , name: "product[images][]"   %>
+            <%= file_field_tag :images, multiple: false, class: " btn", required: true, name: "product[images][]" %>
+        </div>
         <div class="form-group col-12">
             <%= link_to remove_view_path(row_id: @count), class: "mt-2 btn btn-danger float-right", id: "remove_view", remote: true  do %>
             -Remove-

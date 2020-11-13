@@ -116,10 +116,15 @@
                                         <ul class="d-flex">
                                             <%count = 0%>
                                             <% if @product.name != nil %>
-                                            <% @product.name.each do |name| %>
-                                            <li class="variants" id="<%= "variants#{count}"%>"><%= name %></li>
-                                            <% count = count + 1 %>
-                                            <%end%>
+                                            <div class="slider-mine-nav">
+                                                <% @product.name.each do |name| %>
+
+                                                <li class="variants " id="<%= "variants#{count}"%>"><%= name %></li>
+
+
+                                                <% count = count + 1 %>
+                                                <%end%>
+                                            </div>
                                             <%end%>
                                         </ul>
                                     </div>
@@ -132,7 +137,7 @@
                                     <%= hidden_field_tag :rrp_price, @product.rrp.first %>
                                     <%= hidden_field_tag :whole_sale_price, @product.whole_sale.first %>
                                     <%= text_field_tag :product_id, @product.id, class: "d-none" %>
-                                    
+
 
                                     <div class="qty-box">
                                         <div class="input-group">
@@ -150,9 +155,9 @@
                                 </div>
                                 <div class="product-buttons">
                                     <%= button_to order_items_path(:product_id => @product.id), { :class => "btn btn-solid ", 'data-toggle' => 'modal', 'data-target' => '#addtocart', id: "to_cart" } do %>
-                                     add to cart 
+                                    add to cart
                                     <% end %>
-                                    
+
                                 </div>
                             </div>
                             <% end %>
@@ -300,7 +305,7 @@
                 </ul>
                 <div class="tab-content nav-material" id="top-tabContent">
                     <div class="tab-pane fade show active" id="top-home" role="tabpanel" aria-labelledby="top-home-tab">
-                        <p><%= raw(@product.product_description) %> </p>
+                        <p id='product_description'><%= @product.product_description.first %> </p>
                     </div>
                     <div class="tab-pane fade" id="top-profile" role="tabpanel" aria-labelledby="profile-top-tab">
                         <div class="single-product-tables">
@@ -556,6 +561,7 @@
     var color_buttons = document.getElementsByClassName("product-colors")
     var category = gon.category;
     var product = gon.product;
+    var images = gon.images;
     console.log(color_buttons)
 
     for (var i = 0; i < color_buttons.length; i++) {
@@ -567,7 +573,6 @@
         // alert("reached");
         console.log("Color Changed: Make an action here")
     }
-    
 
     $(".variants").on('click', function(e) {
         // debugger
@@ -581,27 +586,31 @@
         let names = product.product_group.name;
         let index = names.indexOf(name);
 
+        var x = document.getElementsByClassName("slick-slide slick-current slick-active");
+        $('*[data-slick-index=' + index + ']')
+        // debugger
 
         $("#rrp").text("KES " + parseFloat(product.product_group.rrp[index]).toFixed(2));
         $("#rrp_price").val(parseFloat(product.product_group.rrp[index]).toFixed(2));
-        $("#whole_sale").text("KES " + parseFloat(product.product_group.whole_sale[index]).toFixed(2));    
+        $("#whole_sale").text("KES " + parseFloat(product.product_group.whole_sale[index]).toFixed(2));
         $("#whole_sale_price").val(product.product_group.whole_sale[index]);
         $("#current_moq").val(product.product_group.moq[index]);
         $("#discount").text("Wholesale at: " + product.product_group.moq_description[index]);
+        $("#product_description").text(product.product_group.product_description[index]);
 
 
-       
+
     })
-    $(".input-group-prepend").on('click', function(e){
+    $(".input-group-prepend").on('click', function(e) {
         // alert("quantity changed")
     })
-    $("#quantity").on("change keyup paste", function(e){
+    $("#quantity").on("change keyup paste", function(e) {
         // alert("input changed")
     })
     $("#variants0").addClass("active")
     $("#discount").text("Wholesale at: " + product.product_group.moq_description[0])
     // $("#to_cart").setEnabled(false)
-    
+
     // location.reload();
 </script>
 
