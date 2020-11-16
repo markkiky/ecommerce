@@ -579,6 +579,7 @@
         $(".variants").removeClass("active")
         $("#" + e.currentTarget.id).addClass("active")
         // alert(e.delegateTarget)
+        debugger
         console.log(e);
         let name = e.delegateTarget.innerHTML;
 
@@ -601,6 +602,12 @@
 
 
     })
+    $(".slick-slide").on('click', function (e) {
+        // debugger
+        change_variant(e.currentTarget.dataset["slickIndex"])
+        // alert(e.currentTarget.dataset["slickIndex"])
+    })
+    
     $(".input-group-prepend").on('click', function(e) {
         // alert("quantity changed")
     })
@@ -612,6 +619,22 @@
     // $("#to_cart").setEnabled(false)
 
     // location.reload();
+
+    function change_variant(id){
+        $(".variants").removeClass("active")
+        $("#variants" + id).addClass("active")
+        // alert(e.delegateTarget)
+        let index = id
+
+        $("#rrp").text("KES " + parseFloat(product.product_group.rrp[index]).toFixed(2));
+        $("#rrp_price").val(parseFloat(product.product_group.rrp[index]).toFixed(2));
+        $("#whole_sale").text("KES " + parseFloat(product.product_group.whole_sale[index]).toFixed(2));
+        $("#whole_sale_price").val(product.product_group.whole_sale[index]);
+        $("#current_moq").val(product.product_group.moq[index]);
+        $("#discount").text("Wholesale at: " + product.product_group.moq_description[index]);
+        $("#product_description").text(product.product_group.product_description[index]);
+
+    }
 </script>
 
 <script>
