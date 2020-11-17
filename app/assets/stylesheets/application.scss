@@ -465,8 +465,13 @@ input[type="number"] {
 }
 
 .slider-mine-nav > .slick-list > .slick-track > .slick-slide {
-  width: 65px !important;
+  width: 58px !important;
+  height: 58px !important;
   margin: 5px !important;
+}
+
+.variants {
+  padding-top: 18px !important;
 }
 
 // .slider-mine-nav > .slick-list > .slick-track > .slick-slide > .variants{

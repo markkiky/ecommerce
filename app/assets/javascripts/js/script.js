@@ -863,7 +863,7 @@
             infinite: false,
             dots: false,
             centerMode: false,
-            focusOnSelect: true
+            focusOnSelect: false
         });
     } else {
         $('.slider-mine-nav').slick({
@@ -876,7 +876,7 @@
             infinite: false,
             centerMode: false,
             dots: false,
-            focusOnSelect: true,
+            focusOnSelect: false,
             responsive: [{
                 breakpoint: 576,
                 settings: {
