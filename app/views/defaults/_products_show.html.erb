@@ -629,10 +629,12 @@
     // location.reload();
 
     function change_variant(id){
+        console.log("id is: " + id)
+        let index = Math.abs(id)
         $(".variants").removeClass("active")
-        $("#variants" + id).addClass("active")
+        $("#variants" + index).addClass("active")
         // alert(e.delegateTarget)
-        let index = id
+        
 
         $("#rrp").text("KES " + parseFloat(product.product_group.rrp[index]).toFixed(2));
         $("#rrp_price").val(parseFloat(product.product_group.rrp[index]).toFixed(2));

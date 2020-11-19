@@ -863,12 +863,12 @@
             infinite: false,
             dots: false,
             centerMode: false,
-            focusOnSelect: false
+            focusOnSelect: true
         });
     } else {
         $('.slider-mine-nav').slick({
             vertical: false,
-            verticalSwiping: false,
+            verticalSwiping: true,
             slidesToShow: 5,
             slidesToScroll: 5,
             asNavFor: '.product-right-slick',
@@ -876,14 +876,14 @@
             infinite: false,
             centerMode: false,
             dots: false,
-            focusOnSelect: false,
-            responsive: [{
-                breakpoint: 576,
-                settings: {
-                    slidesToShow: 3,
-                    slidesToScroll: 1
-                }
-            }]
+            focusOnSelect: true
+            // responsive: [{
+            //     breakpoint: 576,
+            //     settings: {
+            //         slidesToShow: 3,
+            //         slidesToScroll: 1
+            //     }
+            // }]
         });
     }
 
