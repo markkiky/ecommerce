@@ -631,6 +631,10 @@
     function change_variant(id){
         console.log("id is: " + id)
         let index = Math.abs(id)
+        // check if index is greater than the available array and always reset it back
+        if (index >= product.product_group.rrp.length){
+            index = 0;
+        }
         $(".variants").removeClass("active")
         $("#variants" + index).addClass("active")
         // alert(e.delegateTarget)
