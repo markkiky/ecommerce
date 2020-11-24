@@ -15,11 +15,12 @@ class ShoppingCart < ApplicationRecord
     order.items.sum(:quantity)
   end
 
-  def add_item(product_id:, quantity:, price:)
+  def add_item(product_id:, quantity:, price:, variant_id: )
     product = Product.find(product_id)
 
     order_item = order.items.find_or_initialize_by(
       product_id: product_id,
+      variant_id: variant_id
     )
 
     order_item.price = price
@@ -29,6 +30,49 @@ class ShoppingCart < ApplicationRecord
       order_item.save
       update_sub_total!
     end
+  end
+
+  def update_item(product_id:, quantity: 1, variant_id: )
+    product = Product.find(product_id)
+
+    order_item = order.items.find_or_initialize_by(
+      product_id: product_id,
+      variant_id: variant_id
+    )
+
+    order_item.price = product.price
+    order_item.quantity = quantity
+
+    ActiveRecord::Base.transaction do
+      order_item.update
+      update_sub_total!
+    end
+  end
+
+  
+
+  def remove_item(id:)
+    ActiveRecord::Base.transaction do
+      order.items.destroy(id)
+      update_sub_total!
+    end
+  end
+
+  def update_sub_total!
+    order.order_subtotal = order.items.sum("quantity * price")
+    order.save
+  end
+
+  def remove_item(id:)
+    ActiveRecord::Base.transaction do
+      order.items.destroy(id)
+      update_sub_total!
+    end
+  end
+
+  def update_sub_total!
+    order.order_subtotal = order.items.sum("quantity * price")
+    order.save
   end
 
   def add_item_old(product_id:, quantity: 1)
@@ -47,7 +91,7 @@ class ShoppingCart < ApplicationRecord
     end
   end
 
-  def update_item(product_id:, quantity: 1)
+  def update_item_old(product_id:, quantity: 1)
     product = Product.find(product_id)
 
     order_item = order.items.find_or_initialize_by(
@@ -61,45 +105,5 @@ class ShoppingCart < ApplicationRecord
       order_item.update
       update_sub_total!
     end
-  end
-
-  def remove_item(id:)
-    ActiveRecord::Base.transaction do
-      order.items.destroy(id)
-      update_sub_total!
-    end
-  end
-
-  def update_sub_total!
-    order.order_subtotal = order.items.sum("quantity * price")
-    order.save
-  end
-
-  def update_item(product_id:, quantity: 1)
-    product = Product.find(product_id)
-
-    order_item = order.items.find_or_initialize_by(
-      product_id: product_id,
-    )
-
-    order_item.price = product.price
-    order_item.quantity = quantity
-
-    ActiveRecord::Base.transaction do
-      order_item.update
-      update_sub_total!
-    end
-  end
-
-  def remove_item(id:)
-    ActiveRecord::Base.transaction do
-      order.items.destroy(id)
-      update_sub_total!
-    end
-  end
-
-  def update_sub_total!
-    order.order_subtotal = order.items.sum("quantity * price")
-    order.save
   end
 end

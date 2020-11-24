@@ -3,7 +3,7 @@
     <div class="media">
         <% if item.product.images.attached? %>
         <div>
-            <a href="/products/<%= item.product.id %>"><%= image_tag item.product.images[0] if item.product.images.length > 0 %></a>
+            <a href="/products/<%= item.product.id %>"><%= image_tag item.product.images[item.variant_id.to_i] if item.product.images.length > 0 %></a>
         </div>
         <% else %>
         <div>

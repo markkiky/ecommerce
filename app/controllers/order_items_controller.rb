@@ -10,6 +10,7 @@ class OrderItemsController < ApplicationController
         whole_sale_price = params["whole_sale_price"].to_i
         quantity = params["quantity"].to_i
         price = nil
+        @variant_id = params['variant_id']
 
         if quantity > moq
             # use wholesale 
@@ -23,9 +24,10 @@ class OrderItemsController < ApplicationController
         end
 
         current_cart.add_item(
-        product_id: params[:product_id],
-        quantity: params[:quantity].to_i,
-        price: price
+            product_id: params[:product_id],
+            quantity: params[:quantity].to_i,
+            price: price,
+            variant_id: @variant_id
         )
     end
 

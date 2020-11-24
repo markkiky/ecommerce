@@ -136,6 +136,7 @@
                                     <%= hidden_field_tag :current_moq, @product.moq.first %>
                                     <%= hidden_field_tag :rrp_price, @product.rrp.first %>
                                     <%= hidden_field_tag :whole_sale_price, @product.whole_sale.first %>
+                                    <%= number_field_tag :variant_id, 0, class: "d-none" %>
                                     <%= text_field_tag :product_id, @product.id, class: "d-none" %>
 
 
@@ -606,6 +607,7 @@
         $("#current_moq").val(product.product_group.moq[index]);
         $("#discount").text("Wholesale at: " + product.product_group.moq_description[index]);
         $("#product_description").text(product.product_group.product_description[index]);
+        $("#variant_id").val(index)
 
 
 
@@ -647,6 +649,7 @@
         $("#current_moq").val(product.product_group.moq[index]);
         $("#discount").text("Wholesale at: " + product.product_group.moq_description[index]);
         $("#product_description").text(product.product_group.product_description[index]);
+        $("#variant_id").val(index)
 
     }
 </script>

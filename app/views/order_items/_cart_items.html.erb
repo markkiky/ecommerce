@@ -1,36 +1,3 @@
-
-
-<body>
-
-
-    <!-- header start -->
-    <%= render "layouts/header" %>
-    <!-- header end -->
-
-
-    <!-- breadcrumb start -->
-    <div class="breadcrumb-section">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-6">
-                    <div class="page-title">
-                        <h2>cart</h2>
-                    </div>
-                </div>
-                <div class="col-sm-6">
-                    <nav aria-label="breadcrumb" class="theme-breadcrumb">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="<%= root_url %>">Home</a></li>
-                            <li class="breadcrumb-item active">cart</li>
-                        </ol>
-                    </nav>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- breadcrumb End -->
-
-
     <!--section start-->
     <section class="cart-section section-b-space">
         <div class="container">
@@ -51,7 +18,7 @@
                         <tbody>
                             <tr>
                                 <td>
-                                    <a href="/products/<%= item.product.id %>"><%= image_tag item.product.images[0] if item.product.images.length > 0 %></a>
+                                    <a href="/products/<%= item.product.id %>"><%= image_tag item.product.images[item.variant_id.to_i] if item.product.images.length > 0 %></a>
                                 </td>
                                 <td><a href="#"> <%= item.product.product_name %></a>
                                     <div class="mobile-cart-content row">
@@ -117,52 +84,3 @@
         </div>
     </section>
     <!--section end-->
-   <%= render "layouts/tawk" %>
-
-
-    <!-- footer start -->
-    <%= render "layouts/footer" %>
-    <!-- footer end -->
-
-
-    <!-- tap to top start -->
-    <div class="tap-top">
-        <div><i class="fa fa-angle-double-up"></i></div>
-    </div>
-
-    <!-- latest jquery-->
-    <%= javascript_include_tag 'js/jquery-3.3.1.min.js' %>
-
-    <!-- menu js-->
-    <%= javascript_include_tag 'js/menu.js' %>
-
-    <!-- lazyload js-->
-    <%= javascript_include_tag 'js/lazysizes.min.js' %>
-
-    <!-- popper js-->
-    <%= javascript_include_tag 'js/popper.min.js' %>
-
-    <!-- slick js-->
-    <%= javascript_include_tag 'js/slick.js' %>
-
-    <!-- Bootstrap js-->
-    <%= javascript_include_tag 'js/bootstrap.js' %>
-
-    <!-- Bootstrap Notification js-->
-    <%= javascript_include_tag 'js/bootstrap-notify.min.js' %>
-
-    <!-- Theme js-->
-    <%= javascript_include_tag 'js/script.js' %>
-
-    <script>
-        function openSearch() {
-            document.getElementById("search-overlay").style.display = "block";
-        }
-
-        function closeSearch() {
-            document.getElementById("search-overlay").style.display = "none";
-        }
-    </script>
-</body>
-
-</html>s
