@@ -16516,7 +16516,7 @@ body.dark {
     margin-right: 0; }
   .service-block + .service-block {
     border-left: 0;
-    margin-top: 20px; }
+    margin-top: 0; }
   .service-block:last-child .media .media-body p {
     margin-bottom: 5px; }
   .partition2 {
