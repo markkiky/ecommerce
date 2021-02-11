@@ -460,3 +460,59 @@ input[type="number"] {
 .email {
   text-transform: lowercase;
 }
+
+.pg-body:before { content: ""; display: block; clear: both; }
+
+
+
+.user-info { border: 1px solid #d7d9db; margin-top: 60px; margin-bottom: 60px; width: 100%; }
+@media all and (max-width: 768px) { .user-info { display: block; width: 100%; border: none; }
+  .user-info:after { content: ""; display: block; width: 100%; clear: both; height: 0; }
+  .user-info > thead, .user-info > tbody { display: block; width: 100%; max-width: 100%; }
+  .user-info > thead > tr, .user-info > tbody > tr { display: block; width: 100%; max-width: 100%; }
+  .user-info > thead > tr > td, .user-info > thead > tr th, .user-info > tbody > tr > td, .user-info > tbody > tr th { display: block; width: 100% !important; max-width: 100% !important; border: 1px solid #d7d9db; clear: both; float: left; }
+  .user-info > thead > tr > td .wellcome, .user-info > thead > tr > td .last, .user-info > thead > tr th .wellcome, .user-info > thead > tr th .last, .user-info > tbody > tr > td .wellcome, .user-info > tbody > tr > td .last, .user-info > tbody > tr th .wellcome, .user-info > tbody > tr th .last { border-left: none; }
+  .user-info > thead > tr > td.picture, .user-info > thead > tr th.picture, .user-info > tbody > tr > td.picture, .user-info > tbody > tr th.picture { border-bottom: none; } }
+.user-info .picture { text-align: center; width: 145px; min-width: 145px; max-width: 145px; }
+.user-info .picture .img-cover { display: inline-block; margin: 0; margin-top: 34px; width: 75px; }
+.user-info .picture .name { font-size: 12px; margin-top: 10px; margin-bottom: 28px; text-transform: uppercase;}
+.user-info .picture .change-picture { margin-bottom: 19px; }
+.user-info .picture .change-picture i { display: block; text-align: center; }
+.user-info .picture .change-picture a { color: #0f1c97; }
+.user-info .picture .change-picture a:hover { color: #737880; }
+.user-info .wellcome { border-left: 1px solid #d7d9db; border-bottom: 1px solid #d7d9db; padding-top: 37px; padding-bottom: 40px; }
+.user-info .wellcome h4 { margin-top: 0; margin-bottom: 5px; }
+.user-info .wellcome h4 span { color: #0f1c97; }
+.user-info .wellcome .my-orders { font-size: 15px; font-weight: 600; margin-bottom: 3px; }
+.user-info .wellcome .view-cart { text-align: center; }
+@media all and (max-width: 768px) { .user-info .wellcome .view-cart { text-align: left; } }
+.user-info .wellcome .view-cart .btn { margin-top: 3px; }
+.user-info .last { border-left: 1px solid #d7d9db; width: 100%; padding-top: 20px; padding-bottom: 8px; }
+.user-info .last p span { color: #0f1c97; margin-left: 10px; }
+.user-info .last p span.price { font-size: 14px; font-weight: 600; color: #212224; }
+
+.left-menu { min-width: 145px; text-align: center; margin-bottom: 40px; }
+.left-menu div { width: 145px; height: 125px; background-color: #f5f5f5; text-align: center; font-size: 14px; padding-top: 40px; position: relative; color: #212224; -moz-transition: color 0.2s; -o-transition: color 0.2s; -webkit-transition: color 0.2s; transition: color 0.2s; }
+.left-menu div:hover { color: #0f1c97; }
+@media all and (max-width: 992px) { .left-menu div { display: block; width: 100%; height: 70px; padding: 10px; } }
+.left-menu div:not(:last-child) { border-bottom: 1px solid #d7d9db; }
+@media all and (max-width: 992px) { .left-menu div:not(:last-child) { border: none; border-bottom: 1px solid #d7d9db; } }
+.left-menu div i { font-size: 1.7em; }
+.left-menu div.active { background-color: #0f1c97; color: #fff; }
+.left-menu div.active:hover { color: #212224; }
+.left-menu div.active:after { content: ""; display: block; position: absolute; height: 0; width: 0; border: 10px solid transparent; border-left-color: #0f1c97; right: -20px; top: 50%; -moz-transform: translateY(-50%); -ms-transform: translateY(-50%); -webkit-transform: translateY(-50%); transform: translateY(-50%); }
+@media all and (max-width: 992px) { .left-menu div.active:after { display: none; } }
+
+.btn {
+  background-color: #0f1c97;
+}
+.btn-sec-col {
+  color: #fff;
+  margin-left: 16px;
+}
+@media all and (min-width: 768px) { .col-sm-pull-right { float: right; } }
+
+.col-xs-12 {
+    width: 100%;
+    float: left;
+}

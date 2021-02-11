@@ -25,7 +25,7 @@
                                     </li>
                                 </ul>
                                 <% elsif %>
-                                <%= current_customer.first_name %> <%= current_customer.last_name %>
+                                <a href="<%= edit_customer_registration_path %>" style="color: #fff;"><%= current_customer.first_name %> <%= current_customer.last_name %></a>
                                 <ul class="onhover-show-div">
                                     <li>
                                         <%= link_to 'Log Out', destroy_customer_session_path, method: :delete %>
@@ -120,6 +120,9 @@
                                             </li>-->
                                             <li>
                                                 <a href="<%= contact_path %>">contact</a>
+                                            </li>
+                                            <li>
+                                                <a href="<%= edit_customer_registration_path %>">my account </a>
                                             </li>
                                         </ul>
                                     </nav>

@@ -25,8 +25,8 @@
                                 </li>
 
                             </ul>
-                            <%elsif %>
-                            <%= current_customer.first_name %> <%= current_customer.last_name %>
+                            <% elsif %>
+                                <a href="<%= edit_customer_registration_path%>"><%= current_customer.first_name %> <%= current_customer.last_name %></a>
                             <ul class="onhover-show-div">
 
                                 <li>
@@ -98,6 +98,10 @@
                                             <li>
                                                 <a href="<%= contact_path %>">contact</a>
                                             </li>
+                                            <li>
+                                                <a href="<%= edit_customer_registration_path %>">my account</a>
+                                            </li>
+
                                 </ul>
                             </nav>
                         </div>

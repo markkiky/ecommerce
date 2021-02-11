@@ -1,16 +1,117 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<%= render "layouts/header"%>
+<!-- breadcrumb start -->
+<div class="breadcrumb-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="page-title">
+                    <h2>my account</h2>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <nav aria-label="breadcrumb" class="theme-breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">my account</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
 
-<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= f.error_notification %>
+<div class="pg-body">
+      <div class="container">
+         <div class="row">
+            <div class="container">
+               <table class="user-info">
+                  <tr>
+                     <td class="picture">
+                        <div class="img-cover"><%= image_tag 'av_2' %></div>
 
-  <div class="form-inputs">
-    <%= f.input :email, required: true, autofocus: true %>
+                        <h6 class="name"><%= current_customer.first_name %> <%= current_customer.last_name %></h6>
+                        <div class="change-picture">
+                           <i class="fa fa-camera-retro"></i>
+                           <a href="#">Change picture</a>
+                        </div>
+                     </td>
+                     <td>
+                        <div class="col-xs-12 wellcome">
+                           <div class="col-xs-12 col-sm-6 col-md-5 col-lg-4">
+                              <h4><% if Time.now.strftime("%H") <= "11" %> Good Morning <% elsif Time.now.strftime("%H") > "11" && Time.now.strftime("%H") <= "17" %> Good Afternoon <% else %> Good Evening  <% end %> <span><%= current_customer.first_name %> </span></h4>
+                              <p>Welcome to your account. Here you can 
+                              manage all of your personal information.</p>
+                           </div>
+                           <div class="col-lg-5 col-xs-12 col-sm-6 pull-right">
+                              <div class="row">
+                                 <div class="col-xs-12 col-sm-6">
+                                    <p class="my-orders">My Orders:</p>
+                                    <p>You have <%= pluralize(current_cart.items_count, 'item') %> item in your cart</p>
+                                 </div>
+                                  <% if current_cart.order.items.empty? %>
+                                      <div class="col-xs-12 col-sm-6 view-cart">
+                                             <%= link_to "SHOP NOW", products_path, :class => "btn btn-sec-col" %>
+                                      </div>
+                                         <% else %>
+                                      <div class="col-xs-12 col-sm-6 view-cart">
+                                             <%= link_to cart_path, :class => "btn btn-sec-col" do %>  <i class="ti-shopping-cart"></i>&nbsp;&nbsp;VIEW CART <% end %>
+                                      </div>
+                                  <% end %>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="col-xs-12 last">
+                           <div class="col-xs-12 col-sm-6 col-md-5 col-lg-4">
+                              <p>Last loged on:<span>   19.06.2016 – 10:23 pm</span></p>
+                           </div>
+                           <div class="col-lg-5 col-xs-12 col-sm-6 pull-right">
+                              <div class="row">
+                                 <p class="col-xs-12">Last item ordered:<span>  Majestic Beecroft Sweater</span>  <span class="price">$800</span></p>
+                              </div>
+                           </div>
+                        </div>
+                     </td>
+                  </tr>
+               </table>
+            </div>
+         </div>
+         <div class="row">
+            <div class="col-xs-12 col-md-2 left-menu">
+               <a href="account.html"><div class="active"><i class="fa fa-user-o"></i><br><span>YOUR PROFILE</span></div></a>
+               <a href="wishlist.html"><div><i class="fa fa-heart-o"></i><br><span>WISHLIST</span></div></a>
+               <a href="order-history.html"><div><i class="fa fa-clock-o"></i><br><span>HISTORY</span></div></a>
+            </div>
+            <div class="col-md-10 col-sm-12 col-xs-12">
+                <h3>PERSONAL DETAIL</h3>
+                    <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+                        <%= f.error_notification %>
+                        <div class="form-row">
+                            <div class="col-md-6">
+                                <label for="name">First Name</label>
+                                    <%= f.input :first_name, required: true, autofocus: true %>
 
-    <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="email">Last Name</label>
+                                    <%= f.input :last_name, required: true, autofocus: true %>
+
+                            </div>
+                            <div class="col-md-6">
+                                <label for="review">Phone number</label>
+                                <%= f.input :phone, required: true, autofocus: true %>
+
+                            </div>
+                            <div class="col-md-6">
+                                <label for="email">Email</label>
+                                <%= f.input :email, required: true, autofocus: true %>
+
+                            </div>
+                              <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
       <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
     <% end %>
 
-    <%= f.input :password,
+                        </div>
+                         <%= f.input :password,
                 hint: "leave it blank if you don't want to change it",
                 required: false,
                 input_html: { autocomplete: "new-password" } %>
@@ -21,15 +122,61 @@
                 hint: "we need your current password to confirm your changes",
                 required: true,
                 input_html: { autocomplete: "current-password" } %>
-  </div>
 
-  <div class="form-actions">
+
+  </div>
+  
+  <div class="col-md-6">
     <%= f.button :submit, "Update" %>
   </div>
-<% end %>
 
 <h3>Cancel my account</h3>
 
 <p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
+                    <% end %>
+            </div>   
+         </div>
+      </div>
+   </div>
+<!-- breadcrumb End -->
 
-<%= link_to "Back", :back %>
+
+
+<!-- footer start -->
+    <%= render 'layouts/footer' %>
+<!-- footer end -->
+
+ 
+<!-- latest jquery-->
+    <%= javascript_include_tag 'js/jquery-3.3.1.min.js' %>
+
+<!-- menu js-->
+    <%= javascript_include_tag 'js/menu.js' %>
+
+<!-- lazyload js-->
+    <%= javascript_include_tag 'js/lazysizes.min.js' %>
+
+<!-- popper js-->
+    <%= javascript_include_tag 'js/popper.min.js' %>
+
+<!-- slick js-->
+    <%= javascript_include_tag 'js/slick.js' %>
+
+<!-- Bootstrap js-->
+    <%= javascript_include_tag 'js/bootstrap.js' %>
+
+<!-- Bootstrap Notification js-->
+    <%= javascript_include_tag 'js/bootstrap-notify.min.js' %>
+
+<!-- Theme js-->
+    <%= javascript_include_tag 'js/script.js' %>
+
+<script>
+    function openSearch() {
+        document.getElementById("search-overlay").style.display = "block";
+    }
+
+    function closeSearch() {
+        document.getElementById("search-overlay").style.display = "none";
+    }
+</script>
