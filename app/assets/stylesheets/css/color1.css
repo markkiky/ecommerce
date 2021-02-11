@@ -16510,7 +16510,7 @@ body.dark {
   .service-block .media {
     display: block;
     text-align: center;
-    padding-top: 0;
+    padding-top: 8px;
     padding-bottom: 0; }
   .service-block svg {
     margin-right: 0; }
