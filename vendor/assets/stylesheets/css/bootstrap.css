@@ -217,6 +217,10 @@ input {
 button,
 select {
   text-transform: none; 
+}
+
+select {
+  text-transform: none;
   width: 100%;
   padding: 0 22px;
   cursor: pointer;
@@ -228,6 +232,7 @@ select {
   -o-appearance: none;
   -ms-appearance: none;
 }
+
 
 button,
 html [type="button"],

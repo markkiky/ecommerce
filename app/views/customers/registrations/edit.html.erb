@@ -45,7 +45,7 @@
                            <div class="col-lg-5 col-xs-12 col-sm-6 pull-right">
                               <div class="row">
                                  <div class="col-xs-12 col-sm-6">
-                                    <p class="my-orders">My Orders:</p>
+                                    <p class="my-orders"><b>My Orders:</b></p>
                                     <p>You have <%= pluralize(current_cart.items_count, 'item') %> item in your cart</p>
                                  </div>
                                   <% if current_cart.order.items.empty? %>
@@ -77,9 +77,9 @@
          </div>
          <div class="row">
             <div class="col-xs-12 col-md-2 left-menu">
-               <a href="account.html"><div class="active"><i class="fa fa-user-o"></i><br><span>YOUR PROFILE</span></div></a>
-               <a href="wishlist.html"><div><i class="fa fa-heart-o"></i><br><span>WISHLIST</span></div></a>
-               <a href="order-history.html"><div><i class="fa fa-clock-o"></i><br><span>HISTORY</span></div></a>
+               <a href="<%= edit_customer_registration_path %>"><div class="active"><i class="fa fa-user-o"></i><br><span>YOUR PROFILE</span></div></a>
+               <a href="<%= wishlists_path %>"><div><i class="fa fa-heart-o"></i><br><span>WISHLIST</span></div></a>
+               <a href="<%= order_history_path %>"><div><i class="fa fa-clock-o"></i><br><span>HISTORY</span></div></a>
             </div>
             <div class="col-md-10 col-sm-12 col-xs-12 register-page">
                 <div class="theme-card">

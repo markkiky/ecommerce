@@ -1,5 +1,4 @@
 
-<body>
 
 
     <!-- header start -->
@@ -30,21 +29,77 @@
     <!-- breadcrumb End -->
 
 
-    <!--section start-->
-    <section class="wishlist-section section-b-space">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-12">
-                <% if current_customer.wishlists.count == 0 %>
-                <div class="row cart-buttons wishlist-grid--empty-list">
-                    <div class="col-12">
-                            <div class="text-center">
+<div class="pg-body">
+    <div class="container">
+        <div class="row">
+            <div class="container">
+               <table class="user-info">
+                  <tr>
+                     <td class="picture">
+                        <div class="img-cover"><%= image_tag 'av_2' %></div>
+
+                        <h6 class="name"><%= current_customer.first_name %> <%= current_customer.last_name %></h6>
+                        <div class="change-picture">
+                           <i class="fa fa-camera-retro"></i>
+                           <a href="#">Change picture</a>
+                        </div>
+                     </td>
+                     <td>
+                        <div class="col-xs-12 wellcome">
+                           <div class="col-xs-12 col-sm-6 col-md-5 col-lg-4">
+                              <h4><% if Time.now.strftime("%H") <= "11" %> Good Morning <% elsif Time.now.strftime("%H") > "11" && Time.now.strftime("%H") <= "17" %> Good Afternoon <% else %> Good Evening  <% end %> <span><%= current_customer.first_name %> </span></h4>
+                              <p>Welcome to your account. Here you can 
+                              manage all of your personal information.</p>
+                           </div>
+                           <div class="col-lg-5 col-xs-12 col-sm-6 pull-right">
+                              <div class="row">
+                                 <div class="col-xs-12 col-sm-6">
+                                    <p class="my-orders"><b>My Orders:</b></p>
+                                    <p>You have <%= pluralize(current_cart.items_count, 'item') %> item in your cart</p>
+                                 </div>
+                                  <% if current_cart.order.items.empty? %>
+                                      <div class="col-xs-12 col-sm-6 view-cart">
+                                             <%= link_to "SHOP NOW", products_path, :class => "btn btn-sec-col" %>
+                                      </div>
+                                         <% else %>
+                                      <div class="col-xs-12 col-sm-6 view-cart">
+                                             <%= link_to cart_path, :class => "btn btn-sec-col" do %>  <i class="ti-shopping-cart"></i>&nbsp;&nbsp;VIEW CART <% end %>
+                                      </div>
+                                  <% end %>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="col-xs-12 last">
+                           <div class="col-xs-12 col-sm-6 col-md-5 col-lg-4">
+                              <p>Last loged on:<span>   19.06.2016 – 10:23 pm</span></p>
+                           </div>
+                           <div class="col-lg-5 col-xs-12 col-sm-6 pull-right">
+                              <div class="row">
+                                 <p class="col-xs-12">Last item ordered:<span>  Majestic Beecroft Sweater</span>  <span class="price">$800</span></p>
+                              </div>
+                           </div>
+                        </div>
+                     </td>
+                  </tr>
+               </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-md-2 left-menu">
+               <a href="<%= edit_customer_registration_path %>"><div><i class="fa fa-user-o"></i><br><span>YOUR PROFILE</span></div></a>
+               <a href="<%= wishlists_path %>"><div class="active"><i class="fa fa-heart-o"></i><br><span>WISHLIST</span></div></a>
+               <a href="<%= order_history_path %>"><div><i class="fa fa-clock-o"></i><br><span>HISTORY</span></div></a>
+            </div>
+            <div class="col-md-10 col-sm-12 wishlist-section">
+               <h6 class="account-table-head">YOUR WISHLIST</h6>
+                 <% if current_customer.wishlists.count == 0 %>
+                <div class="cart-buttons wishlist-grid--empty-list">
+                    <div class="text-center">
                             <%= image_tag 'empty-search.jpg', :alt => "Wishlist loading" %>
                             <h5 class="title-font mb-3 empty-list--text " data-trans-key="general.wishlist.empty_wishlist">Your wish list is currently empty.</h5>
                             <a href="<%= root_url %>" class="btn btn-solid">Start Shopping</a>
-                            </div>
-                        </div>
-                        </div>
+                    </div>
+                </div>
                  <% else %>
                     <table class="table cart-table table-responsive-xs">
                         <thead>
@@ -74,12 +129,6 @@
                                         </div>
                                         <div class="col-xs-3">
                                             <h2 class="td-color"><a href="/wishlists/<%= wishlist.id %>" class="icon mr-3" data-method="delete" id="wishlist_destroy" data-remote="true"></i> </a>
-                                                <br><br>
-                                                <%= form_tag order_items_path, remote: true do %>
-                                                <%= hidden_field_tag :product_id, wishlist.product.id %>
-                                                <%= hidden_field_tag :quantity, 1 %>
-                                                <%= button_to order_items_path(:product_id => wishlist.product.id), :class => "cart" do %><i class="ti-shopping-cart"></i><% end %>
-                                                <% end %>
                                             </h2>
                                         </div>
                                     </div>
@@ -92,7 +141,8 @@
                                 </td>
                                 <td>
                                     <a href="/wishlists/<%= wishlist.id %>" class="icon mr-3" data-method="delete" id="wishlist_destroy" data-remote="true"><i class="ti-close"></i></a>
-                                    <br><br>
+                                </td>
+                                <td class="d-none">
                                     <%= form_tag order_items_path, remote: true do %>
                                     <%= hidden_field_tag :product_id, wishlist.product.id %>
                                     <%= hidden_field_tag :quantity, 1 %>
@@ -103,15 +153,12 @@
                         </tbody>
                         <% end %>
                     </table>
-                </div>
-            </div>
-            <div class="row wishlist-buttons">
-                <div class="col-12"><a href="<%= root_url %>" class="btn btn-solid">continue shopping</a> <a href="<%= checkout_path %>" class="btn btn-solid">check out</a></div>
             </div>
             <% end %>
         </div>
-    </section>
-    <!--section end-->
+    </div>
+</div>
+
 
     
     <!-- render tawk live chat -->
@@ -162,6 +209,3 @@
             document.getElementById("search-overlay").style.display = "none";
         }
     </script>
-</body>
-
-</html>
