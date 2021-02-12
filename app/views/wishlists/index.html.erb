@@ -37,8 +37,11 @@
                   <tr>
                      <td class="picture">
                         <div class="img-cover"><%= image_tag 'av_2' %></div>
-
-                        <h6 class="name"><%= current_customer.first_name %> <%= current_customer.last_name %></h6>
+                        <% if current_customer == nil %>
+                            <h6 class="name"> User Name </h6>
+                        <% else %>
+                            <h6 class="name"><%= current_customer.first_name %> <%= current_customer.last_name %></h6>
+                        <% end %>
                         <div class="change-picture">
                            <i class="fa fa-camera-retro"></i>
                            <a href="#">Change picture</a>
@@ -71,11 +74,15 @@
                         </div>
                         <div class="col-xs-12 last">
                            <div class="col-xs-12 col-sm-6 col-md-5 col-lg-4">
-                              <p>Last loged on:<span>   19.06.2016 – 10:23 pm</span></p>
+                                <p>Last loged on:<span><%= current_customer.last_sign_in_at ? current_customer.last_sign_in_at.in_time_zone("Nairobi").strftime("%d.%m.%Y - %H:%M %P") : "---" %></span></p>
                            </div>
                            <div class="col-lg-5 col-xs-12 col-sm-6 pull-right">
                               <div class="row">
-                                 <p class="col-xs-12">Last item ordered:<span>  Majestic Beecroft Sweater</span>  <span class="price">$800</span></p>
+                                <% if current_customer.orders.last != nil %>
+                                        <p class="col-xs-12">Last item ordered: <span><%= current_customer.orders.last.items.first.product.product_name %></span> <span class="price"><%= number_to_currency(current_customer.orders.last["order_subtotal"].to_s, unit: ' KES ') %></span></p>
+                                    <% else %>
+                                        <p class="col-xs-12"> Last item ordered: <b> No items ordered! </b> </p> 
+                                <% end %>
                               </div>
                            </div>
                         </div>
@@ -153,7 +160,7 @@
                         </tbody>
                         <% end %>
                     </table>
-            </div>
+                </div>
             <% end %>
         </div>
     </div>

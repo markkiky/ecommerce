@@ -212,6 +212,9 @@ class OrdersController < ApplicationController
     @customer = Customer.find(customer_id)
   end
 
+  def order_history
+  end
+
   def destroy
     @order.destroy
   end

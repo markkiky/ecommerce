@@ -11,7 +11,7 @@
             <div class="col-sm-6">
                 <nav aria-label="breadcrumb" class="theme-breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                        <li class="breadcrumb-item"><a href="<%= root_path %>">Home</a></li>
                         <li class="breadcrumb-item active" aria-current="page">my account</li>
                     </ol>
                 </nav>
@@ -28,8 +28,11 @@
                   <tr>
                      <td class="picture">
                         <div class="img-cover"><%= image_tag 'av_2' %></div>
-
-                        <h6 class="name"><%= current_customer.first_name %> <%= current_customer.last_name %></h6>
+                        <% if current_customer == nil %>
+                            <h6 class="name"> User Name </h6>
+                        <% else %>
+                            <h6 class="name"><%= current_customer.first_name %> <%= current_customer.last_name %></h6>
+                        <% end %>
                         <div class="change-picture">
                            <i class="fa fa-camera-retro"></i>
                            <a href="#">Change picture</a>
@@ -62,11 +65,15 @@
                         </div>
                         <div class="col-xs-12 last">
                            <div class="col-xs-12 col-sm-6 col-md-5 col-lg-4">
-                              <p>Last loged on:<span>   19.06.2016 – 10:23 pm</span></p>
+                              <p>Last loged on:<span><%= current_customer.last_sign_in_at ? current_customer.last_sign_in_at.in_time_zone("Nairobi").strftime("%d.%m.%Y - %H:%M %P") : "---" %></span></p>
                            </div>
                            <div class="col-lg-5 col-xs-12 col-sm-6 pull-right">
                               <div class="row">
-                                 <p class="col-xs-12">Last item ordered:<span>  Majestic Beecroft Sweater</span>  <span class="price">$800</span></p>
+                                <% if current_customer.orders.last != nil %>
+                                        <p class="col-xs-12">Last item ordered: <span><%= current_customer.orders.last.items.first.product.product_name %></span> <span class="price"><%= number_to_currency(current_customer.orders.last["order_subtotal"].to_s, unit: ' KES ') %></span></p>
+                                    <% else %>
+                                        <p class="col-xs-12"> Last item ordered: <b> No items ordered! </b> </p> 
+                                <% end %>
                               </div>
                            </div>
                         </div>
@@ -102,6 +109,25 @@
                             <div class="form_group">
                                 <b><%= f.label :email %></b>
                                 <%= f.email_field :email, required: true, autofocus: true, :class => "form-control" %>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                        <h3 class="checkout-title">car details</h3>
+                            <div class="form-group">
+                                <b><%= f.label :car_name %></b>
+                                <%= f.text_field :car_name, required: true, :class => "form-control" %>
+                            </div>
+                            <div class="form-group">
+                                <b><%= f.label :car_make %></b>
+                                <%= f.text_field :car_make, required: true, :class => "form-control" %>
+                            </div>
+                            <div class="form-group">
+                                <b><%= f.label :car_year %></b>
+                                <%= f.select :car_year,  options_for_select(["2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020"]), required: true, :class => "form-control" %>
+                            </div>
+                            <div class="form_group">
+                                <b><%= f.label :chassis_number %></b>
+                                <%= f.text_field :chassis_number, required: true, :class => "form-control" %>
                             </div>
                         </div>
                     </div>

@@ -28,6 +28,10 @@ class CreateCustomers < ActiveRecord::Migration[6.0]
       t.string :shipping_region
       t.string :shipping_postal_code
       t.string :shipping_country
+      t.string :car_name
+      t.string :car_make
+      t.string :car_year
+      t.string :chassis_number
 
       t.timestamps
     end
