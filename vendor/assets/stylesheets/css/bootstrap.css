@@ -216,7 +216,18 @@ input {
 
 button,
 select {
-  text-transform: none; }
+  text-transform: none; 
+  width: 100%;
+  padding: 0 22px;
+  cursor: pointer;
+  height: 45px;
+  border: 1px solid #dddddd;
+  background: url(../images/dropdown.png) no-repeat 95%;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -o-appearance: none;
+  -ms-appearance: none;
+}
 
 button,
 html [type="button"],

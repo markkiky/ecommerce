@@ -485,7 +485,7 @@ input[type="number"] {
 .user-info .wellcome h4 span { color: #0f1c97; }
 .user-info .wellcome .my-orders { font-size: 15px; font-weight: 600; margin-bottom: 3px; }
 .user-info .wellcome .view-cart { text-align: center; }
-@media all and (max-width: 768px) { .user-info .wellcome .view-cart { text-align: left; } }
+@media all and (max-width: 768px) { .user-info .wellcome .view-cart { text-align: center; } }
 .user-info .wellcome .view-cart .btn { margin-top: 3px; }
 .user-info .last { border-left: 1px solid #d7d9db; width: 100%; padding-top: 20px; padding-bottom: 8px; }
 .user-info .last p span { color: #0f1c97; margin-left: 10px; }
@@ -503,10 +503,8 @@ input[type="number"] {
 .left-menu div.active:after { content: ""; display: block; position: absolute; height: 0; width: 0; border: 10px solid transparent; border-left-color: #0f1c97; right: -20px; top: 50%; -moz-transform: translateY(-50%); -ms-transform: translateY(-50%); -webkit-transform: translateY(-50%); transform: translateY(-50%); }
 @media all and (max-width: 992px) { .left-menu div.active:after { display: none; } }
 
-.btn {
-  background-color: #0f1c97;
-}
 .btn-sec-col {
+  background-color: #0f1c97;
   color: #fff;
   margin-left: 16px;
 }
@@ -515,4 +513,11 @@ input[type="number"] {
 .col-xs-12 {
     width: 100%;
     float: left;
+}
+
+p.col-xs-12  {
+  position: relative;
+  min-height: 1px;
+  padding-left: 15px;
+  padding-right: 15px
 }

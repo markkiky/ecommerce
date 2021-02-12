@@ -81,63 +81,87 @@
                <a href="wishlist.html"><div><i class="fa fa-heart-o"></i><br><span>WISHLIST</span></div></a>
                <a href="order-history.html"><div><i class="fa fa-clock-o"></i><br><span>HISTORY</span></div></a>
             </div>
-            <div class="col-md-10 col-sm-12 col-xs-12">
-                <h3>PERSONAL DETAIL</h3>
-                    <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-                        <%= f.error_notification %>
-                        <div class="form-row">
-                            <div class="col-md-6">
-                                <label for="name">First Name</label>
-                                    <%= f.input :first_name, required: true, autofocus: true %>
-
+            <div class="col-md-10 col-sm-12 col-xs-12 register-page">
+                <div class="theme-card">
+                    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }, :class => "theme-form") do |f| %>
+                    <div class="row">
+                        <div class="col-lg-6">
+                        <h3 class="checkout-title">personal details</h3>
+                            <div class="form-group">
+                                <b><%= f.label :first_name %></b>
+                                <%= f.text_field :first_name, required: true, :class => "form-control" %>
                             </div>
-                            <div class="col-md-6">
-                                <label for="email">Last Name</label>
-                                    <%= f.input :last_name, required: true, autofocus: true %>
-
+                            <div class="form-group">
+                                <b><%= f.label :last_name %></b>
+                                <%= f.text_field :last_name, required: true, :class => "form-control" %>
                             </div>
-                            <div class="col-md-6">
-                                <label for="review">Phone number</label>
-                                <%= f.input :phone, required: true, autofocus: true %>
-
+                            <div class="form-group">
+                                <b><%= f.label :phone %></b>
+                                <%= f.number_field :phone, required: true, :class => "form-control" %>
                             </div>
-                            <div class="col-md-6">
-                                <label for="email">Email</label>
-                                <%= f.input :email, required: true, autofocus: true %>
-
+                            <div class="form_group">
+                                <b><%= f.label :email %></b>
+                                <%= f.email_field :email, required: true, autofocus: true, :class => "form-control" %>
                             </div>
-                              <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-      <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
-    <% end %>
-
                         </div>
-                         <%= f.input :password,
-                hint: "leave it blank if you don't want to change it",
-                required: false,
-                input_html: { autocomplete: "new-password" } %>
-    <%= f.input :password_confirmation,
-                required: false,
-                input_html: { autocomplete: "new-password" } %>
-    <%= f.input :current_password,
-                hint: "we need your current password to confirm your changes",
-                required: true,
-                input_html: { autocomplete: "current-password" } %>
+                    </div>
+                    <div class="row mt-5">
+                        <div class="col-lg-6">
+                            <h3> billing address </h3>
+                            <div class="form-group">
+                                <b><%= f.label :billing_address %></b>
+                                <%= f.text_field :billing_address, required: true, :class => "form-control" %>
+                            </div>
+                             <div class="form-group">
+                                <b><%= f.label :billing_postal_code %></b>
+                                <%= f.number_field :billing_postal_code, required: true, type: "number", :class => "form-control" %>
+                            </div>
+                            <div class="form-group">
+                                <b><%= f.label :billing_country %></b>
+                                <%= f.select :billing_country, options_for_select(["Kenya", "Uganda", "Tanzania"]), :class => "form-control" %>
+                            </div>
+                            <div class="form-group">
+                                <b><%= f.label :billing_city %></b>
+                                <%= f.text_field :billing_city, :class => "form-control" %>
+                            </div>
+                        </div>
 
-
-  </div>
-  
-  <div class="col-md-6">
-    <%= f.button :submit, "Update" %>
-  </div>
-
-<h3>Cancel my account</h3>
-
-<p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
-                    <% end %>
+                        <div class="col-lg-6">
+                            <h3> shipping address </h3>
+                            <div class="form-group">
+                                <b><%= f.label :shipping_address %></b>
+                                <%= f.text_field :shipping_address, required: true, :class => "form-control" %>
+                            </div>
+                             <div class="form-group">
+                                <b><%= f.label :shipping_postal_code %></b>
+                                <%= f.number_field :shipping_postal_code, required: true, type: "number", :class => "form-control" %>
+                            </div>
+                            <div class="form-group">
+                                <b><%= f.label :shipping_country %></b>
+                                <%= f.select :shipping_country, options_for_select(["Kenya", "Uganda", "Tanzania"]), :class => "form-control" %>
+                            </div>
+                            <div class="form-group">
+                                <b><%= f.label :shipping_city %></b>
+                                <%= f.text_field :shipping_city, :class => "form-control" %>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group mt-2">
+                        <b><%= f.label :current_password %></b> <i>(we need your current password to confirm your changes)</i><br />
+                        <%= f.password_field :current_password, require: true, autocomplete: "current-password", :class => "form-control" %>
+                    </div>
+                </div>
+                    <div class="row mt-2 mb-2">
+                        <div class="col-12">
+                            <%= f.submit "Save Settings", :class => "btn btn-solid" %>
+                        </div>
+                    </div>
+                <% end %>
             </div>   
          </div>
       </div>
    </div>
+</div>
 <!-- breadcrumb End -->
 
 
