@@ -1,20 +1,21 @@
-<%# render "layouts/admins/choose_payment_modal" %>
+
 <!-- page-wrapper Start-->
+ <%= stylesheet_link_tag "css/datatables" %>
 <div class="page-wrapper">
 
     <!-- Page Header Start-->
-    <%= render 'layouts/admin_header' %>
+    <%= render "layouts/admin_header" %>
     <!-- Page Header Ends -->
 
     <!-- Page Body Start-->
     <div class="page-body-wrapper">
 
         <!-- Page Sidebar Start-->
-        <%= render 'layouts/admin_sidebar' %>
+        <%= render "layouts/admin_sidebar" %>
         <!-- Page Sidebar Ends-->
 
         <!-- Right sidebar Start-->
-        <%= render 'layouts/admins/admin_right_sidebar' %>
+        <%= render "layouts/admins/admin_right_sidebar" %>
         <!-- Right sidebar Ends-->
 
         <div class="page-body">
@@ -31,7 +32,7 @@
                             <div class="col-lg-6">
                                 <div class="page-header-left">
                                     <h3>Orders
-                                        <small><%= AdminConfig[:app_name]%> Admin panel</small>
+                                        <small><%= AdminConfig[:app_name] %> Admin panel</small>
                                     </h3>
                                 </div>
                             </div>
@@ -59,7 +60,7 @@
                                 <div style="float: right;">
                                     <%= link_to admin_order_path, :class => "btn btn-primary", remote: true do %>
                                     Place Order
-                                    <%end%>
+                                    <% end %>
                                 </div>
                             </div>
                             <div class="card-body order-datatable">
@@ -85,7 +86,7 @@
                                             <td><%= order.order_number %></td>
                                             <td>
                                                 <div class="d-flex">
-                                                    <%= link_to order_path(order.id), class: "product_images", remote: true do%>
+                                                    <%= link_to order_path(order.id), class: "product_images", remote: true do %>
                                                         <u> View Products </u>
                                                     <% end %>
                                                 </div>
@@ -95,28 +96,28 @@
                                             <td><span class="badge badge-success"><%= order.order_status %></span></td>
                                             <% if order.order_date != nil %>
                                             <td><%= order.order_date.to_date %></td>
-                                            <%else%>
+                                            <% else %>
                                             <td><%= order.created_at.to_date %></td>
-                                            <%end%>
+                                            <% end %>
                                             <% if order.order_total != nil %>
                                             <td><%= order.order_total %></td>
-                                            <%else%>
+                                            <% else %>
                                             <td><%= order.order_subtotal %></td>
-                                            <%end%>
+                                            <% end %>
                                             <td>
                                                <button type="button" class="btn btn-primary d-none" data-toggle="modal" data-target="#chooseModalCenter">
                                                     Pay
                                                 </button>
                                                 <% if order.customer_id == nil %>
-                                                    <%= link_to  choose_payment_path(order.id), :remote => true do %>
+                                                    <%= link_to choose_payment_path(order.id), :remote => true, class: "btn btn-primary" do %>
                                                     Pay
-                                                    <%end %>
-                                                <%end%>
+                                                    <% end %>
+                                                <% end %>
                                                 
                                                 
                                             </td>
                                         </tr>
-                                        <%end%>
+                                        <% end %>
                                     </tbody>
                                 </table>
                             </div>
@@ -129,7 +130,7 @@
         </div>
 
         <!-- footer start-->
-        <%= render 'layouts/admin_footer' %>
+        <%= render "layouts/admin_footer" %>
         <!-- footer end-->
 
     </div>
@@ -137,33 +138,33 @@
 </div>
 
 <!-- latest jquery-->
-<%= javascript_include_tag 'js/jquery-3.3.1.min.js' %>
+<%= javascript_include_tag "js/jquery-3.3.1.min.js" %>
 
 <!-- Bootstrap js-->
-<%= javascript_include_tag 'js/popper.min.js' %>
-<%= javascript_include_tag 'js/bootstrap.js' %>
+<%= javascript_include_tag "js/popper.min.js" %>
+<%= javascript_include_tag "js/bootstrap.js" %>
 
-<%= javascript_include_tag 'js/icons/feather-icon/feather.min.js' %>
-<%= javascript_include_tag 'js/icons/feather-icon/feather-icon.js' %>
+<%= javascript_include_tag "js/icons/feather-icon/feather.min.js" %>
+<%= javascript_include_tag "js/icons/feather-icon/feather-icon.js" %>
 
 <!-- Sidebar jquery-->
-<%= javascript_include_tag 'js/sidebar-menu' %>
+<%= javascript_include_tag "js/sidebar-menu" %>
 
 <!-- Datatable js-->
-<%= javascript_include_tag 'js/datatables/jquery.dataTables.min.js' %>
-<%= javascript_include_tag 'js/datatables/custom-basic' %>
+<%= javascript_include_tag "js/datatables/jquery.dataTables.min.js" %>
+<%= javascript_include_tag "js/datatables/custom-basic" %>
 
 <!--Customizer admin-->
-<%= javascript_include_tag 'js/admin-customizer.js' %>
+<%= javascript_include_tag "js/admin-customizer.js" %>
 
 <!-- lazyload js-->
-<%= javascript_include_tag 'js/lazysizes.min.js' %>
+<%= javascript_include_tag "js/lazysizes.min.js" %>
 
 <!--right sidebar js-->
-<%= javascript_include_tag 'js/chat-menu.js' %>
+<%= javascript_include_tag "js/chat-menu.js" %>
 
 <!--script admin-->
-<%= javascript_include_tag 'js/admin-script' %>
+<%= javascript_include_tag "js/admin-script" %>
 
 <script>
     var ordersTable = null
@@ -173,39 +174,11 @@
        
     });
 
-    $('.product_images').on("click", function(e) {
-        
-        // var url = e.delegateTarget.href
-        // $.ajax({
-        //     method: "GET",
-        //     url: url,
-        //     dataType: 'script',
-        //     format: "js",
-        //     data: {
-        //         // product_id: url
-        //     }
-        // })
-
-    })
-
-    $(document).ready(function(){
-       reloadPage();
-        function reloadPage(){
-             (function()
-            {
-            if( window.localStorage )
-            {
-                if( !localStorage.getItem('firstLoad') )
-                {
-                localStorage['firstLoad'] = true;
-                window.location.reload();
-                }  
-                else
-                localStorage.removeItem('firstLoad');
-            }
-            })();
-        }
-       
+   document.addEventListener("turbolinks:load", function() {
+  if($('[id^=DataTables_Table]').length == 0) {
+    $('.datatable').DataTable({
+      "pagingType": "full_numbers"
     });
-
+  }
+});
 </script>

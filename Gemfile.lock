@@ -60,10 +60,16 @@ GEM
       zeitwerk (~> 2.2, >= 2.2.2)
     addressable (2.7.0)
       public_suffix (>= 2.0.2, < 5.0)
+    autoprefixer-rails (10.2.4.0)
+      execjs
     bcrypt (3.1.13)
     bindex (0.8.1)
     bootsnap (1.4.8)
       msgpack (~> 1.0)
+    bootstrap (4.6.0)
+      autoprefixer-rails (>= 9.1.0)
+      popper_js (>= 1.14.3, < 2)
+      sassc-rails (>= 2.0.0)
     builder (3.2.4)
     business_time (0.9.3)
       activesupport (>= 3.2.0)
@@ -117,6 +123,7 @@ GEM
       ruby-vips (>= 2.0.17, < 3)
     jbuilder (2.10.0)
       activesupport (>= 5.0.0)
+    jquery-datatables (1.10.20)
     jquery-fileupload-rails (0.4.7)
       actionpack (>= 3.1)
       railties (>= 3.1)
@@ -197,6 +204,7 @@ GEM
     orm_adapter (0.5.0)
     polyamorous (2.3.2)
       activerecord (>= 5.2.1)
+    popper_js (1.16.0)
     public_suffix (4.0.5)
     puma (4.3.6)
       nio4r (~> 2.0)
@@ -355,6 +363,7 @@ PLATFORMS
 DEPENDENCIES
   active_storage_base64
   bootsnap (>= 1.4.2)
+  bootstrap (~> 4.0)
   business_time
   byebug
   capybara (>= 2.15)
@@ -365,6 +374,7 @@ DEPENDENCIES
   gon (~> 6.4)
   image_processing (~> 1.2)
   jbuilder (~> 2.7)
+  jquery-datatables
   jquery-fileupload-rails (~> 0.4.7)
   jquery-rails
   listen (~> 3.2)
@@ -403,4 +413,4 @@ RUBY VERSION
    ruby 2.6.0p0
 
 BUNDLED WITH
-   2.1.4
+   2.2.5

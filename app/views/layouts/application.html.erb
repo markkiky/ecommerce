@@ -1,4 +1,4 @@
-<%# action_cable_meta_tag %>
+<% # action_cable_meta_tag %>
 <%= include_gon %>
 <% if admin_signed_in? %>
 <!DOCTYPE html>
@@ -14,9 +14,9 @@
     <meta name="keywords" content="admin template, Multikart admin template, dashboard template, flat admin template, responsive admin template, web app">
     <meta name="author" content="pixelstrap">
 
-    <%= favicon_link_tag 'logo-green-horizontal.svg' %>
+    <%= favicon_link_tag "logo-green-horizontal.svg" %>
 
-    <title><%= "#{AdminConfig[:app_name]} Admin "%></title>
+    <title><%= "#{AdminConfig[:app_name]} Admin " %></title>
 
     <!-- Google font-->
     <link href="https://fonts.googleapis.com/css?family=Work+Sans:100,200,300,400,500,600,700,800,900" rel="stylesheet">
@@ -24,8 +24,9 @@
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
 
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag "application" %>
+    <%= javascript_include_tag "application", 'data-turbolinks-track': "reload" %>
+    <%= javascript_pack_tag "application", 'data-turbolinks-track': "reload" %>
 
     <%= stylesheet_link_tag "css/color1.css" %>
 
@@ -36,49 +37,66 @@
     <%= stylesheet_link_tag "css/flag-icon.css" %>
 
     <!-- ico-font-->
-    <%= stylesheet_link_tag 'css/icofont.css' %>
+    <%= stylesheet_link_tag "css/icofont.css" %>
 
     <!-- Themify icon -->
-    <%= stylesheet_link_tag 'css/themify-icons' %>
+    <%= stylesheet_link_tag "css/themify-icons" %>
 
     <!-- Prism css-->
-    <%= stylesheet_link_tag 'css/prism' %>
+    <%= stylesheet_link_tag "css/prism" %>
 
     <!-- Chartist css -->
-    <%= stylesheet_link_tag 'css/chartist' %>
+    <%= stylesheet_link_tag "css/chartist" %>
 
     <!-- Bootstrap css-->
-    <%= stylesheet_link_tag 'css/bootstrap' %>
-    <%= stylesheet_link_tag 'css/bootstrap-select.min.css'%>
+    <%= stylesheet_link_tag "css/bootstrap" %>
+    <%= stylesheet_link_tag "css/bootstrap-select.min.css" %>
 
     <!-- App css-->
-    <%= stylesheet_link_tag 'css/admin' %>
+    <%= stylesheet_link_tag "css/admin" %>
 
     <!-- Cropper css -->
-    <%# stylesheet_link_tag 'cropper' %>
+    <% # stylesheet_link_tag 'cropper' %>
 
     <!-- JsonEditor css -->
-    <%= stylesheet_link_tag 'jsoneditor/dist/jsoneditor' %>
+    <%= stylesheet_link_tag "jsoneditor/dist/jsoneditor" %>
 
     <!-- jquery widgets -->
-    <%# stylesheet_link_tag "" %>
+    <% # stylesheet_link_tag "" %>
 
     <!-- file upload -->
-    <%= stylesheet_link_tag 'jquery.fileupload' %>
-
+    <%= stylesheet_link_tag "jquery.fileupload" %>
+       <style>
+    .alert {
+        position: absolute !important;
+        right: 0px;
+        top: 0px;
+        width: 25%;
+        z-index: 1000;
+    }
+    </style>
     
 
       
 </head>
 
 <body>
-    <% if notice %>
-    <p class="alert alert-success"><%= notice %>porn</p>
+   <% if notice %>
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <%= notice %>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
     <% end %>
     <% if alert %>
-    <p class="alert alert-danger"><%= alert %></p>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <%= alert %>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
     <% end %>
-    
     <%= yield %>
 
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
@@ -99,8 +117,8 @@
     <%= csp_meta_tag %>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag "application", media: "all", 'data-turbolinks-track': "reload" %>
+    <%= javascript_pack_tag "application", 'data-turbolinks-track': "reload" %>
 
     <!--Google font-->
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900" rel="stylesheet">
@@ -126,9 +144,9 @@
     <%= stylesheet_link_tag "css/color1.css" %>
 
     <!-- Cropper css -->
-    <%# stylesheet_link_tag 'cropper' %>
+    <% # stylesheet_link_tag 'cropper' %>
 
-    <%= favicon_link_tag 'logo-green-horizontal.png' %>
+    <%= favicon_link_tag "logo-green-horizontal.png" %>
 </head>
 
 <body>
@@ -140,17 +158,17 @@
     <p class="alert alert-danger"><%= alert %></p>
     <% end %>
     <!-- Render Payments modal -->
-    <%= render 'layouts/payment_modal' %>
+    <%= render "layouts/payment_modal" %>
 
     <!-- Render Theme setting btn -->
-    <%# render "layouts/theme_setting" %>
+    <% # render "layouts/theme_setting" %>
     <%= yield %>
 
     <% if AdminConfig["shop_number"] == "1" %>
     <%= render "layouts/tawk" %>
-    <%else%>
-    <%= render 'layouts/whatsapp' %>
-    <%end%>
+    <% else %>
+    <%= render "layouts/whatsapp" %>
+    <% end %>
 
 </body>
 
@@ -158,4 +176,4 @@
 </html>
 
 
-<%end%>
+<% end %>

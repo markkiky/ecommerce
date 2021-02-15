@@ -26,6 +26,14 @@ Rails.application.routes.draw do
   devise_scope :admin do
     get "/admins", to: "devise/registrations#new"
     get "/admins/sign_out" => "devise/sessions#destroy"
+    get "/admins/list", to: "admins#index", as: :admins_list
+    get "/admins/list/:id", to: "admins#show", as: :show_admin
+    get "/admins/new", to: "admins#add_admin", as: :add_admin
+    post "/admins/create", to: "admins#create_admin"
+
+    get "/customers/list/:id", to: "admins#show_customer", as: :show_customer
+    get "/customers/new", to: "admins#add_customer", as: :add_customer
+    post "/customers/create", to: "admins#create_customer"
   end
   get "/change_image", to: "products#change_product"
   root "homes#index"

@@ -12,10 +12,10 @@
 Role.create!(title: "NCCGSUPERUSER")
 
 # create sizes
-Size.create!(size_type: "green", admin_id: 1)
+# Size.create!(size_type: "green", admin_id: 1)
 
 # create colors
-Color.create!(color_type: 'red', admin_id: 1)
+# Color.create!(color_type: 'red', admin_id: 1)
 
 # create app inits
 ApiUrl.create(:key => "paybill", :value => "175555")
@@ -34,4 +34,4 @@ ApiUrl.create(:key => "app_instagram", :value => "https://www.instagram.com/uaea
 ApiUrl.create(:key => "default_url_options", :value => "localhost:3000")
 ApiUrl.create(:key => "mpesa_error_detection", :value => "6")
 ApiUrl.create(:key => "shop_number", :value => "2")
-ApiUrl.create(:key => 'whatsapp_contact', :value => '0721954217')
+ApiUrl.create(:key => "whatsapp_contact", :value => "0721954217")

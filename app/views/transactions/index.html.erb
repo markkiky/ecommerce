@@ -1,16 +1,16 @@
-
+ <%= stylesheet_link_tag "css/datatables" %>
 <!-- page-wrapper Start-->
 <div class="page-wrapper">
 
     <!-- Page Header Start-->
-    <%= render 'layouts/admin_header' %>
+    <%= render "layouts/admin_header" %>
     <!-- Page Header Ends -->
 
     <!-- Page Body Start-->
     <div class="page-body-wrapper">
 
         <!-- Page Sidebar Start-->
-        <%= render 'layouts/admin_sidebar' %>
+        <%= render "layouts/admin_sidebar" %>
         <!-- Page Sidebar Ends-->
 
         <!-- Right sidebar Start-->
@@ -76,27 +76,27 @@
 
                                             <% if transaction.date != nil %>
                                             <td><%= transaction.date.to_date %></td>
-                                            <%else%>
+                                            <% else %>
                                             <td><%= transaction.created_at.to_date %></td>
-                                            <%end%>
+                                            <% end %>
 
                                             <% if transaction.amount != nil %>
                                             <td><%= transaction.amount %></td>
-                                            <%else%>
+                                            <% else %>
                                             <td><%= transaction.amount %></td>
-                                            <%end%>
+                                            <% end %>
 
                                             <td>
                                                 <div class='actions row-actions'>
 
                                                     <%= link_to transaction_path(transaction.id), remote: true, class: "show" do %>
                                                         <span><i class="fa fa-eye" aria-hidden="true"></i></span>
-                                                    <%end%>
+                                                    <% end %>
 
                                                 </div>
                                             </td>
                                         </tr>
-                                        <%end%>
+                                        <% end %>
                                     </tbody>
                                 </table>
                             </div>
@@ -109,7 +109,7 @@
         </div>
 
         <!-- footer start-->
-        <%= render 'layouts/admin_footer' %>
+        <%= render "layouts/admin_footer" %>
         <!-- footer end-->
 
     </div>
@@ -117,34 +117,34 @@
 </div>
 
 <!-- latest jquery-->
-<%= javascript_include_tag 'js/jquery-3.3.1.min.js' %>
+<%= javascript_include_tag "js/jquery-3.3.1.min.js" %>
 
 <!-- Bootstrap js-->
-<%= javascript_include_tag 'js/popper.min.js' %>
-<%= javascript_include_tag 'js/bootstrap.js' %>
+<%= javascript_include_tag "js/popper.min.js" %>
+<%= javascript_include_tag "js/bootstrap.js" %>
 
 <!-- feather icon js-->
-<%= javascript_include_tag 'js/icons/feather-icon/feather.min.js' %>
-<%= javascript_include_tag 'js/icons/feather-icon/feather-icon.js' %>
+<%= javascript_include_tag "js/icons/feather-icon/feather.min.js" %>
+<%= javascript_include_tag "js/icons/feather-icon/feather-icon.js" %>
 
 <!-- Sidebar jquery-->
-<%= javascript_include_tag 'js/sidebar-menu' %>
+<%= javascript_include_tag "js/sidebar-menu" %>
 
 <!-- Datatable js-->
-<%= javascript_include_tag 'js/datatables/jquery.dataTables.min.js' %>
-<%= javascript_include_tag 'js/datatables/custom-basic' %>
+<%= javascript_include_tag "js/datatables/jquery.dataTables.min.js" %>
+<%= javascript_include_tag "js/datatables/custom-basic" %>
 
 <!--Customizer admin-->
-<%= javascript_include_tag 'js/admin-customizer.js' %>
+<%= javascript_include_tag "js/admin-customizer.js" %>
 
 <!-- lazyload js-->
-<%= javascript_include_tag 'js/lazysizes.min.js' %>
+<%= javascript_include_tag "js/lazysizes.min.js" %>
 
 <!--right sidebar js-->
-<%= javascript_include_tag 'js/chat-menu.js' %>
+<%= javascript_include_tag "js/chat-menu.js" %>
 
 <!--script admin-->
-<%= javascript_include_tag 'js/admin-script' %>
+<%= javascript_include_tag "js/admin-script" %>
 
 <script>
     var ordersTable = null

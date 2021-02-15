@@ -12,6 +12,10 @@ gem 'business_time'
 gem 'jquery-rails'
 gem 'cropper-rails'
 
+# bootstrap
+gem 'bootstrap', '~> 4.0'
+gem 'jquery-datatables'
+
 gem 'gon', '~> 6.4'
 
 #simple form for 
