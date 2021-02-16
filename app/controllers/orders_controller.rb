@@ -120,6 +120,10 @@ class OrdersController < ApplicationController
       @customer.billing_postal_code = params[:customer][:billing_postal_code]
       @customer.delivery_option = params[:customer][:delivery_option]
       @customer.pick_up_option = params[:customer][:pick_up_option]
+      @customer.car_make = params[:customer][:car_make]
+      @customer.car_name = params[:customer][:car_name]
+      @customer.car_year = params[:customer][:car_year]
+      @customer.chassis_number = params[:customer][:chassis_number]
 
       @customer.save!
     elsif current_customer == nil
@@ -140,6 +144,10 @@ class OrdersController < ApplicationController
         @customer.billing_postal_code = params[:customer][:billing_postal_code]
         @customer.delivery_option = params[:customer][:delivery_option]
         @customer.pick_up_option = params[:customer][:pick_up_option]
+        @customer.car_make = params[:customer][:car_make]
+        @customer.car_name = params[:customer][:car_name]
+        @customer.car_year = params[:customer][:car_year]
+        @customer.chassis_number = params[:customer][:chassis_number]
         @customer.save!
         @order.customer_id = @customer.id
       else
@@ -158,6 +166,10 @@ class OrdersController < ApplicationController
         @customer.billing_postal_code = params[:customer][:billing_postal_code]
         @customer.delivery_option = params[:customer][:delivery_option]
         @customer.pick_up_option = params[:customer][:pick_up_option]
+        @customer.car_make = params[:customer][:car_make]
+        @customer.car_name = params[:customer][:car_name]
+        @customer.car_year = params[:customer][:car_year]
+        @customer.chassis_number = params[:customer][:chassis_number]
         @customer.password = "123456"
         @customer.save!
         @order.customer_id = @customer.id
