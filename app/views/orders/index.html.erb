@@ -166,19 +166,4 @@
 <!--script admin-->
 <%= javascript_include_tag "js/admin-script" %>
 
-<script>
-    var ordersTable = null
-    $(document).ready(function() {
-        ordersTable = $("#basic-1").DataTable();
-        // alert(ordersTable);
-       
-    });
-
-   document.addEventListener("turbolinks:load", function() {
-  if($('[id^=DataTables_Table]').length == 0) {
-    $('.datatable').DataTable({
-      "pagingType": "full_numbers"
-    });
-  }
-});
-</script>
+<%= javascript_include_tag "tables" %>

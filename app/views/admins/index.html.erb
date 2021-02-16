@@ -112,7 +112,6 @@
 
 </div>
 
-<
 
 <%= javascript_include_tag "js/icons/feather-icon/feather.min.js" %>
 <%= javascript_include_tag "js/icons/feather-icon/feather-icon.js" %>
@@ -136,28 +135,4 @@
 <!--script admin-->
 <%= javascript_include_tag "js/admin-script" %>
 
-<script>
-var ordersTable = null
-    $(document).ready(function() {
-        ordersTable = $("#basic-1").DataTable();
-        // alert(ordersTable);
-       
-    });
-    var users_table = null
-    document.addEventListener("turbolinks:load", function () {
-        // debugger
-         users_table = $('#basic-1').DataTable()
-    })
-    document.addEventListener("turbolinks:before-cache", function () {
-        // debugger
-         if ($('#basic-1_wrapper').length == 1)
-            users_table.destroy()
-    })
-  
-    
-
-   
-    
-
-
-</script>
+<%= javascript_include_tag "tables" %>

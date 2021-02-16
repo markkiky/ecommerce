@@ -146,13 +146,4 @@
 <!--script admin-->
 <%= javascript_include_tag "js/admin-script" %>
 
-<script>
-    var ordersTable = null
-    $(document).ready(function() {
-        ordersTable = $("#basic-1").DataTable({
-            // alert('databale found');
-            // console.log("656565")
-        });
-        //   PopulateItemsTable();
-    });
-</script>
+<%= javascript_include_tag "tables" %>

@@ -23,10 +23,11 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
 
-
-    <%= stylesheet_link_tag "application" %>
-    <%= javascript_include_tag "application", 'data-turbolinks-track': "reload" %>
+     <%= stylesheet_link_tag "application" %>
     <%= javascript_pack_tag "application", 'data-turbolinks-track': "reload" %>
+   
+    <%= javascript_include_tag "application", 'data-turbolinks-track': "reload" %>
+    
 
     <%= stylesheet_link_tag "css/color1.css" %>
 
@@ -56,47 +57,25 @@
     <%= stylesheet_link_tag "css/admin" %>
 
     <!-- Cropper css -->
-    <% # stylesheet_link_tag 'cropper' %>
+    
 
     <!-- JsonEditor css -->
     <%= stylesheet_link_tag "jsoneditor/dist/jsoneditor" %>
 
-    <!-- jquery widgets -->
-    <% # stylesheet_link_tag "" %>
+  
 
     <!-- file upload -->
     <%= stylesheet_link_tag "jquery.fileupload" %>
-       <style>
-    .alert {
-        position: absolute !important;
-        right: 0px;
-        top: 0px;
-        width: 25%;
-        z-index: 1000;
-    }
-    </style>
+
+    <%= stylesheet_link_tag "notice_and_alerts" %>
+     
     
 
       
 </head>
 
 <body>
-   <% if notice %>
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-        <%= notice %>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-    <% end %>
-    <% if alert %>
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        <%= alert %>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-    <% end %>
+    <%= render "layouts/notice_and_alerts" %>
     <%= yield %>
 
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>

@@ -49,16 +49,12 @@ class OrdersController < ApplicationController
   end
 
   def admin_payment
-    
-    if params["payment-group"] == 'mpesa'
-
-    elsif  params["payment-group"] == 'card'
-
-    elsif  params["payment-group"] == 'cash'
-
+    if params["payment-group"] == "mpesa"
+    elsif params["payment-group"] == "card"
+    elsif params["payment-group"] == "cash"
     end
-    @payment_group = params['payment-group']
-    
+    @payment_group = params["payment-group"]
+
     respond_to do |format|
       format.js
     end
@@ -85,16 +81,20 @@ class OrdersController < ApplicationController
   # Submits admin order into orders
   # POST /admin_order
   def create_admin_order
-    puts params
-    @order = Order.new(:order_number => Order.counter, :order_date => Time.now, :order_status => "pending_payment", :order_subtotal => params[:price])
-    @order.save
+    begin
+      puts params
+      @order = Order.new(:order_number => Order.counter, :order_date => Time.now, :order_status => "pending_payment", :order_subtotal => (params[:price].to_i * params[:quantity].to_i))
+      @order.save
 
-    OrderItem.create(:order_id => @order.id, :product_id => params[:products], :price => params[:price], :quantity => params[:quantity])
-    gon.order = @order
-    gon.order_date = @order.order_date.to_s
-    respond_to do |format|
-      format.html
-      format.js
+      OrderItem.create(:order_id => @order.id, :product_id => params[:products], :price => params[:price], :quantity => params[:quantity])
+      gon.order = @order
+      gon.order_date = @order.order_date.to_s
+    rescue => exception
+      flash[:alert] = exception
+      redirect_to orders_path
+    else
+      flash[:notice] = "Order Placed Successfully"
+      redirect_to orders_path
     end
   end
 
@@ -329,7 +329,6 @@ class OrdersController < ApplicationController
                   break
                 end
               end
-              
             else
               if response_json["data"]["callback_returned"] == "PENDING"
                 sleep(@@mpesa_retry)
@@ -362,7 +361,7 @@ class OrdersController < ApplicationController
       gon.status = "failed"
       gon.order_id = params[:id]
     end
-    
+
     respond_to do |format|
       format.js
     end
@@ -388,7 +387,7 @@ class OrdersController < ApplicationController
         # Create a new transaction for the received data
         # check if order exists
         # if order = Order.where(:order_number => payment_data["ref"])
-        
+
         transaction_params = {
           "paybill_number" => payment_data["account_to"],
           "phone_number" => payment_data["account_from"],
@@ -424,14 +423,12 @@ class OrdersController < ApplicationController
     end
   end
 
-
   def save_payment(order_id, response_json)
-    
     if Order.where(:order_number => params[:AccountReference]).exists?
       order = Order.where(:order_number => params[:AccountReference]).last
       @transaction.order_id = order.id
-      @transaction.save! 
-      
+      @transaction.save!
+
       order.payment_date = Date.today()
       order.transaction_id = @transaction.id
       if order.payment_status == "Unpaid"
@@ -442,7 +439,7 @@ class OrdersController < ApplicationController
           order.payment_status = "Paid"
           order.paid = true
         elsif balance > 0
-          order.payment_status = 'part'
+          order.payment_status = "part"
         end
       elsif order.payment_status == "part"
         balance = order.reducing_balance - amount
@@ -451,14 +448,14 @@ class OrdersController < ApplicationController
           order.payment_status = "Paid"
           order.paid = true
         elsif balance > 0
-          order.payment_status = 'part'
+          order.payment_status = "part"
         end
       elsif order.payment_status == "Paid"
         balance = order.reducing_balance - amount
         order.reducing_balance = balance
       end
 
-      # send order received email 
+      # send order received email
       customer_id = order.customer_id.to_i
       @customer = Customer.find(customer_id)
       # send email notification
@@ -466,7 +463,6 @@ class OrdersController < ApplicationController
       # broadcast to mpesa channel
       # ActionCable.server.broadcast "mpesa_channel_#{order.id}", phone: params[:PhoneNumber], transaction_code: params[:MpesaReceiptNumber], paybill: params[:PayBillNumber]
     else
-      
     end
   end
 

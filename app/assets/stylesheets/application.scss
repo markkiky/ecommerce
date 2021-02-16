@@ -11,7 +11,8 @@
  * It is generally better to create a new file per style scope.
  *
  */
-// @import "bootstrap";
+@import "bootstrap";
+@import "datatables";
 // @import "../../../vendor/assets/stylesheets/css/*";
 // @import "../../../app/assets/stylesheets/css/*";
 // @import "../../../app/assets/stylesheets/scss/*";
@@ -523,3 +524,5 @@ p.col-xs-12  {
   padding-left: 15px;
   padding-right: 15px
 }
+
+

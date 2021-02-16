@@ -78,6 +78,7 @@
 //= link js/parallax-effect.js
 //= link js/footer-reveal.min.js
 //= link js/price-range.js
+ //= link tables.js
 
 
 //= link cropper.js
