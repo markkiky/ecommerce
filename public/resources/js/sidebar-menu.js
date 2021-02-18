@@ -71,8 +71,8 @@ $( ".sidebar-menu" ).find( "li" ).removeClass("active");
 var current = window.location.pathname
 $(".sidebar-menu>li a").filter(function() {
 
-  // console.log(window.location.pathname);
-  // console.log($(this).attr("href"));
+  console.log(window.location.pathname);
+  console.log($(this).attr("href"));
 
   var link = $(this).attr("href");
   if(link){

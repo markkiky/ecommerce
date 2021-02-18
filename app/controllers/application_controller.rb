@@ -8,22 +8,24 @@ class ApplicationController < ActionController::Base
   def current_cart
     @current_cart ||= ShoppingCart.new(token: cart_token)
   end
+
   helper_method :current_cart
 
-  
   def wishlist_text
     return @wishlist_exists ? "Remove from Wishlist" : "Add to Wishlist"
-  end    
- helper_method :wishlist_text
-  
+  end
+
+  helper_method :wishlist_text
+
   private
 
-    def current_user
-        @current_user ||= Customer.find_by(id: session[:user_id])
-    end
-    helper_method :current_user
+  def current_user
+    @current_user ||= Customer.find_by(id: session[:user_id])
+  end
 
-  #generate cart token  
+  helper_method :current_user
+
+  #generate cart token
   def cart_token
     return @cart_token unless @cart_token.nil?
 
@@ -34,9 +36,8 @@ class ApplicationController < ActionController::Base
   protected
 
   def configure_permitted_parameters
-    attributes = [:first_name, :last_name, :phone, :billing_address, :billing_postal_code, :billing_country, :billing_city, :shipping_address, :shipping_postal_code, :shipping_country, :shipping_city, :car_name, :car_make, :car_year, :chassis_number, [:avatar]]
+    attributes = [:first_name, :last_name, :phone, :billing_address, :billing_postal_code, :billing_country, :billing_city, :shipping_address, :shipping_postal_code, :shipping_country, :shipping_city, :car_name, :car_make, :car_year, :chassis_number, :avatar]
     devise_parameter_sanitizer.permit :sign_up, keys: attributes
     devise_parameter_sanitizer.permit :account_update, keys: attributes
   end
-
 end

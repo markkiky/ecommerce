@@ -1,5 +1,5 @@
 // RTl & Ltr
-$('<div class="btn-light custom-theme">RTL</div>').appendTo($('body'));
+// $('<div class="btn-light custom-theme">RTL</div>').appendTo($('body'));
 (function() {
 })();
 //live customizer js

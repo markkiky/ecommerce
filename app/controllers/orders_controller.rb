@@ -83,7 +83,7 @@ class OrdersController < ApplicationController
   def create_admin_order
     begin
       puts params
-      @order = Order.new(:order_number => Order.counter, :order_date => Time.now, :order_status => "pending_payment", :order_subtotal => (params[:price].to_i * params[:quantity].to_i))
+      @order = Order.new(:order_number => Order.counter, :order_date => Time.now, :order_status => "pending_payment", :order_subtotal => (params[:price].to_i * params[:quantity].to_i), :admin_id => current_admin.id)
       @order.save
 
       OrderItem.create(:order_id => @order.id, :product_id => params[:products], :price => params[:price], :quantity => params[:quantity])

@@ -107,6 +107,7 @@ Rails.application.routes.draw do
   get "/get_price", to: "orders#get_price"
   post "/admin/place_order", to: "orders#create_admin_order", as: :admin_place_order
   get "/order_history", to: "orders#order_history", as: :order_history
+  get "admin_order_history", to: "admins#admin_order_history", as: :admin_order_history
 
   #search path
   get "search", to: "products#search"

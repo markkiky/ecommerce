@@ -57,4 +57,7 @@ class AdminsController < ApplicationController
       redirect_to admins_list_path
     end
   end
+
+  def admin_order_history
+  end
 end
