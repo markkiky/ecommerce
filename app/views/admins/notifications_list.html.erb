@@ -1,0 +1,152 @@
+
+<!-- page-wrapper Start-->
+ <%= stylesheet_link_tag "css/datatables" %>
+<div class="page-wrapper">
+
+    <!-- Page Header Start-->
+    <%= render "layouts/admin_header" %>
+    <!-- Page Header Ends -->
+
+    <!-- Page Body Start-->
+    <div class="page-body-wrapper">
+
+        <!-- Page Sidebar Start-->
+        <%= render "layouts/admin_sidebar" %>
+        <!-- Page Sidebar Ends-->
+
+        <!-- Right sidebar Start-->
+        <%= render "layouts/admins/admin_right_sidebar" %>
+        <!-- Right sidebar Ends-->
+
+        <div class="page-body">
+
+            <!-- Right sidebar Start-->
+            <!-- Right sidebar Ends-->
+
+            <div class="page-body">
+
+                <!-- Container-fluid starts-->
+                <div class="container-fluid">
+                    <div class="page-header">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="page-header-left">
+                                    <h3>Messages
+                                        <small><%= AdminConfig[:app_name] %> Admin panel</small>
+                                    </h3>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <ol class="breadcrumb pull-right">
+                                    <li class="breadcrumb-item"><a href="<%= root_url %>"><i data-feather="home"></i></a></li>
+                                    <li class="breadcrumb-item">Messages</li>
+                                    <li class="breadcrumb-item active">Notifications</li>
+                                </ol>
+                            </div>
+                        </div>
+                       
+                    </div>
+                </div>
+            
+            <!-- Container-fluid Ends-->
+
+            <!-- Container-fluid starts-->
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>Notifications</h5>
+                                <div style="float: right;">
+                                    <%= link_to admin_order_path, :class => "btn btn-primary d-none", remote: true do %>
+                                    Place Order
+                                    <% end %>
+                                </div>
+                            </div>
+                            <div class="card-body order-datatable">
+                                <table class="display" id="basic-1">
+                                    <thead>
+                                        <tr>
+                                            <th class="">No</th>
+                                            <th>Customer Name</th>
+                                            <th>Phone Number</th>
+                                            <th>Email</th>
+                                            <th>Subject</th>
+                                            
+                                            <th>Date</th>
+                                           
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% count = 0 %>
+                                        <% @notifications.reverse.each do |notification| %>
+                                        <tr>
+                                            <td class=""><%= count += 1 %></td>
+                                            <td><%= notification.notification_first_name %> <%= notification.notification_last_name %></td>
+                                            <td>
+                                                <%= notification.notification_phone_number %>
+                                            </td>
+                                            
+                                            <td><%= notification.notification_email %></td>
+                                            <td><span class="badge badge-success"><%= notification.notification_subject %></span></td>
+                                            
+                                            <td><%= notification.created_at %></td>
+                                            
+                                            
+                                            <td>
+                                                <%= link_to notification_show_path(id: notification.id), :remote => false, class: "btn btn-primary" do %>
+                                                    View Message
+                                                <% end %>
+                                            </td>
+                                        </tr>
+                                        <% end %>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Container-fluid Ends-->
+
+        </div>
+
+        <!-- footer start-->
+        <%= render "layouts/admin_footer" %>
+        <!-- footer end-->
+
+    </div>
+
+</div>
+
+<!-- latest jquery-->
+<%= javascript_include_tag "js/jquery-3.3.1.min.js" %>
+
+<!-- Bootstrap js-->
+<%= javascript_include_tag "js/popper.min.js" %>
+<%= javascript_include_tag "js/bootstrap.js" %>
+
+<%= javascript_include_tag "js/icons/feather-icon/feather.min.js" %>
+<%= javascript_include_tag "js/icons/feather-icon/feather-icon.js" %>
+
+<!-- Sidebar jquery-->
+<%= javascript_include_tag "js/sidebar-menu" %>
+
+<!-- Datatable js-->
+<%= javascript_include_tag "js/datatables/jquery.dataTables.min.js" %>
+<%= javascript_include_tag "js/datatables/custom-basic" %>
+
+<!--Customizer admin-->
+<%= javascript_include_tag "js/admin-customizer.js" %>
+
+<!-- lazyload js-->
+<%= javascript_include_tag "js/lazysizes.min.js" %>
+
+<!--right sidebar js-->
+<%= javascript_include_tag "js/chat-menu.js" %>
+
+<!--script admin-->
+<%= javascript_include_tag "js/admin-script" %>
+
+<%= javascript_include_tag "tables" %>

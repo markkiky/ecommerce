@@ -180,8 +180,10 @@ ActiveRecord::Schema.define(version: 2021_02_18_091801) do
     t.string "notification_first_name"
     t.string "notification_last_name"
     t.string "notification_phone_number"
+    t.string "notification_subject"
     t.string "notification_email"
     t.text "notification_message"
+    t.boolean "notification_read", default: false
   end
 
   create_table "order_items", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|

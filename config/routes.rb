@@ -139,4 +139,9 @@ Rails.application.routes.draw do
   delete "/delete_subcategory", to: "categories#delete_subcategory", as: :delete_subcategory
 
   get "/years", to: "homes#get_years", as: :get_years
+
+  # notification routes
+  get "notifications", to: "admins#notifications_list", as: :notifications
+  get "notifications/:id", to: "admins#notification_show", as: :notification_show
+  get "media_delete", to: "admins#media_delete", as: :media_delete
 end

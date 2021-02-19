@@ -10,6 +10,7 @@
 
 # Create roles
 Role.create!(title: "NCCGSUPERUSER")
+Admin.create(email: "mark@nouveta.tech", password: "123456", role_id: "1")
 
 # create sizes
 # Size.create!(size_type: "green", admin_id: 1)

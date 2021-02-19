@@ -1,7 +1,7 @@
 <div class="page-main-header">
     <div class="main-header-right row">
         <div class="main-header-left d-lg-none">
-            <div class="logo-wrapper"><%= image_tag "logo-green-horizontal"  %></div>
+            <div class="logo-wrapper"><%= image_tag "logo-green-horizontal" %></div>
         </div>
         <div class="mobile-sidebar">
             <div class="media-body text-right switch-sm">
@@ -25,10 +25,11 @@
                         <li><a href="#" data-lng="en"><i class="flag-icon flag-icon-is"></i> English</a></li>
                     </ul>
                 </li>
-                <li class="onhover-dropdown"><i data-feather="bell"></i><span class="badge badge-pill badge-primary pull-right notification-badge"><%= Home.all.count %></span>
+                <li class="onhover-dropdown"><i data-feather="bell"></i><span class="badge badge-pill badge-primary pull-right notification-badge"><%= Home.where(notification_read: false).count %></span>
                     <ul class="notification-dropdown onhover-show-div p-0">
-                        <li>Notification <span class="badge badge-pill badge-primary pull-right"><%= Home.all.count %></span></li>
-                        <% Home.all.each do | notification | %>
+                        <li>Notification <span class="badge badge-pill badge-primary pull-right"><%= Home.where(notification_read: false).count %></span></li>
+                        <% Home.where(notification_read: false).each do |notification| %>
+                        <%= link_to notification_show_path(notification.id) do %>
                         <li>
                             <div class="media">
                                 <div class="media-body">
@@ -38,7 +39,13 @@
                             </div>
                         </li>
                         <% end %>
-                        <li class="txt-dark"><a href="#">All</a> notification</li>
+                        <% end %>
+                        <li class="txt-dark">
+                            <%= link_to notifications_path do %>
+                                All notification
+                            <% end %>
+                        
+                        </li>
                     </ul>
                 </li>
                 <li class="onhover-dropdown">
