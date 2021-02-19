@@ -17010,9 +17010,9 @@ body.dark {
         -ms-flex-align: center;
             align-items: center; }
   .cart-section .cart-table thead th:nth-last-child(-n + 4) {
-    display: none; }
+    display: block; }
   .cart-section tbody tr td:nth-last-child(-n + 4) {
-    display: none; }
+    display: block; }
   .cart-section tbody tr td .mobile-cart-content {
     display: -webkit-box;
     display: -ms-flexbox;

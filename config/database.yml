@@ -8,8 +8,6 @@ default: &default
   adapter: mysql2
   database: melon_coco
   host: localhost
-  username: mark
-  password: hotspot.com
   timeout: 5000
 
 development:

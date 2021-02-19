@@ -504,7 +504,7 @@ input[type="number"] {
 .left-menu div.active { background-color: #0f1c97; color: #fff; }
 .left-menu div.active:hover { color: #212224; }
 .left-menu div.active:after { content: ""; display: block; position: absolute; height: 0; width: 0; border: 10px solid transparent; border-left-color: #0f1c97; right: -20px; top: 50%; -moz-transform: translateY(-50%); -ms-transform: translateY(-50%); -webkit-transform: translateY(-50%); transform: translateY(-50%); }
-@media all and (max-width: 992px) { .left-menu div.active:after { display: none; } }
+// @media all and (max-width: 992px) { .left-menu div.active:after { display: none; } }
 
 .btn-sec-col {
   background-color: #0f1c97;

@@ -15968,7 +15968,7 @@ body.dark {
   .cart-section tbody tr td {
     min-width: 135px; }
     .cart-section tbody tr td:last-child {
-      display: none; }
+      text-align: center;}
   .cart-section .cart-buttons > div:last-child {
     padding-right: 15px; }
   .cart-section tfoot tr td {
@@ -17028,9 +17028,10 @@ body.dark {
         -ms-flex-align: center;
             align-items: center; }
   .cart-section .cart-table thead th:nth-last-child(-n + 4) {
-    display: none; }
+    text-align: center; }
   .cart-section tbody tr td:nth-last-child(-n + 4) {
-    display: none; }
+    text-align: center;
+   }
   .cart-section tbody tr td .mobile-cart-content {
     display: -webkit-box;
     display: -ms-flexbox;
