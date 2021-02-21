@@ -1,4 +1,4 @@
- <%= render 'layouts/header' %>
+ <%= render "layouts/header" %>
  <!-- breadcrumb start -->
  <div class="breadcrumb-section">
      <div class="container">
@@ -36,7 +36,7 @@
                                 <h6>Phone</h6>
                              </div>
                              <div class="media-body">
-                                 <p><%= AdminConfig[:app_phone]%></p>
+                                 <p><%= AdminConfig[:app_phone] %></p>
                              </div>
                          </li>
                          <li>
@@ -60,7 +60,7 @@
                                  <h6>Email</h6>
                              </div>
                              <div class="media-body">
-                                 <p><%= AdminConfig[:app_email]%></p>
+                                 <p><%= AdminConfig[:app_email] %></p>
                              </div>
                          </li>
                      </ul>
@@ -81,7 +81,7 @@
                      </div>
                      <div class="col-md-6"> <br>
                         <b><label for="review">Phone number</label></b>
-                         <%= form.number_field :notification_phone_number, :class => "form-control", :placeholder => "Phone Number"%>
+                         <%= form.number_field :notification_phone_number, :class => "form-control", :placeholder => "Phone Number" %>
                      </div>
                      <div class="col-md-6"> <br>
                          <b><label for="email">Email</label></b>
@@ -91,6 +91,8 @@
                         <b><label for="review">Write Your Message</label></b>
                         <%= form.text_area :notification_message, required: true, :class => "form-control", :rows => 6, :placeholder => "Write your Message" %>
                      </div>
+                  
+                     <%= form.file_field :images, multiple: true, class: "", required: false %>
                      <div class="col-md-12"> <br> 
                          <%= form.submit "Send Your Message", :class => "btn btn-solid" %>
                      </div>
@@ -103,36 +105,36 @@
  <!--Section ends-->
 
  <!-- render tawk live chat -->
-    <%# <%= render "layouts/tawk" %> 
+    <% # <%= render "layouts/tawk" %> 
 
 <!-- footer start -->
-    <%= render 'layouts/footer' %>
+    <%= render "layouts/footer" %>
 <!-- footer end -->
 
  
 <!-- latest jquery-->
-    <%= javascript_include_tag 'js/jquery-3.3.1.min.js' %>
+    <%= javascript_include_tag "js/jquery-3.3.1.min.js" %>
 
 <!-- menu js-->
-    <%= javascript_include_tag 'js/menu.js' %>
+    <%= javascript_include_tag "js/menu.js" %>
 
 <!-- lazyload js-->
-    <%= javascript_include_tag 'js/lazysizes.min.js' %>
+    <%= javascript_include_tag "js/lazysizes.min.js" %>
 
 <!-- popper js-->
-    <%= javascript_include_tag 'js/popper.min.js' %>
+    <%= javascript_include_tag "js/popper.min.js" %>
 
 <!-- slick js-->
-    <%= javascript_include_tag 'js/slick.js' %>
+    <%= javascript_include_tag "js/slick.js" %>
 
 <!-- Bootstrap js-->
-    <%= javascript_include_tag 'js/bootstrap.js' %>
+    <%= javascript_include_tag "js/bootstrap.js" %>
 
 <!-- Bootstrap Notification js-->
-    <%= javascript_include_tag 'js/bootstrap-notify.min.js' %>
+    <%= javascript_include_tag "js/bootstrap-notify.min.js" %>
 
 <!-- Theme js-->
-    <%= javascript_include_tag 'js/script.js' %>
+    <%= javascript_include_tag "js/script.js" %>
 
 <script>
     function openSearch() {

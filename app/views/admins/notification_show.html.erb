@@ -1,0 +1,164 @@
+
+<!-- page-wrapper Start-->
+ <%= stylesheet_link_tag "css/datatables" %>
+<div class="page-wrapper">
+
+    <!-- Page Header Start-->
+    <%= render "layouts/admin_header" %>
+    <!-- Page Header Ends -->
+
+    <!-- Page Body Start-->
+    <div class="page-body-wrapper">
+
+        <!-- Page Sidebar Start-->
+        <%= render "layouts/admin_sidebar" %>
+        <!-- Page Sidebar Ends-->
+
+        <!-- Right sidebar Start-->
+        <%= render "layouts/admins/admin_right_sidebar" %>
+        <!-- Right sidebar Ends-->
+
+        <div class="page-body">
+
+            <!-- Right sidebar Start-->
+            <!-- Right sidebar Ends-->
+
+            <div class="page-body">
+
+                <!-- Container-fluid starts-->
+                <div class="container-fluid">
+                    <div class="page-header">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="page-header-left">
+                                    <h3>Messages
+                                        <small><%= AdminConfig[:app_name] %> Admin panel</small>
+                                    </h3>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <ol class="breadcrumb pull-right">
+                                    <li class="breadcrumb-item"><a href="<%= root_url %>"><i data-feather="home"></i></a></li>
+                                    <li class="breadcrumb-item">Messages</li>
+                                    <li class="breadcrumb-item active">Notifications</li>
+                                </ol>
+                            </div>
+                        </div>
+                       
+                    </div>
+                </div>
+            
+            <!-- Container-fluid Ends-->
+
+            <!-- Container-fluid starts-->
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>Client Message</h5>
+                               
+                            </div>
+                            <div class="card-body order-datatable">
+                                <p><b>Customer Name </b></p>
+                                <p><%= @home.notification_first_name %> <%= @home.notification_last_name %> </p>
+                                <p><b> Message </b></p>
+                                <p><%= @home.notification_message %></p>
+                                 <h5><u>Uploaded Media</u></h5>
+                                <table class="display" id="basic-1">
+                                    <thead>
+                                        <tr>
+                                            <th class="">No</th>
+                                            <th>Content Type</th>
+                                            <th>Size</th>
+                                            <th>Preview</th>
+                                            <th>Downloadable</th>
+                                            
+                                            <th>Date Uploaded</th>
+                                           
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% count = 0 %>
+                                        <% @media.reverse.each do |media| %>
+                                        <tr>
+                                            <td class=""><%= count += 1 %></td>
+                                            <td><%= media.content_type %> </td>
+                                            <td>
+                                                <%= number_to_human_size(media.byte_size) %>
+                                            </td>
+                                            
+                                            <td><%= media.representable? %></td>
+                                            <td>
+                                                <% if media.representable? %>
+                                                    <%= link_to rails_blob_path(media, disposition: "attachment") do %>
+                                                    <%= image_tag media.representation(resize_to_limit: [100, 100]) %>
+                                                    <% end %>
+                                                <% else %>
+                                                    <%= link_to rails_blob_path(media, disposition: "attachment") do %>
+                                                    <%= image_tag "not_found.jpeg", alt: "Download file", :style => "width: 100px; height: 100px" %>
+                                                    <% end %>
+                                                <% end %>
+                                            
+                                            </td>
+                                            
+                                            <td><%= media.created_at %></td>
+                                            
+                                            
+                                            <td>
+                                                <%= link_to media_delete_path(media: media, id: @home.id), :remote => false, class: "btn btn-primary" do %>
+                                                    Delete
+                                                <% end %>
+                                            </td>
+                                        </tr>
+                                        <% end %>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Container-fluid Ends-->
+
+        </div>
+
+        <!-- footer start-->
+        <%= render "layouts/admin_footer" %>
+        <!-- footer end-->
+
+    </div>
+
+</div>
+
+<!-- latest jquery-->
+<%= javascript_include_tag "js/jquery-3.3.1.min.js" %>
+
+<!-- Bootstrap js-->
+<%= javascript_include_tag "js/popper.min.js" %>
+<%= javascript_include_tag "js/bootstrap.js" %>
+
+<%= javascript_include_tag "js/icons/feather-icon/feather.min.js" %>
+<%= javascript_include_tag "js/icons/feather-icon/feather-icon.js" %>
+
+<!-- Sidebar jquery-->
+<%= javascript_include_tag "js/sidebar-menu" %>
+
+<!-- Datatable js-->
+<%= javascript_include_tag "js/datatables/jquery.dataTables.min.js" %>
+<%= javascript_include_tag "js/datatables/custom-basic" %>
+
+<!--Customizer admin-->
+<%= javascript_include_tag "js/admin-customizer.js" %>
+
+<!-- lazyload js-->
+<%= javascript_include_tag "js/lazysizes.min.js" %>
+
+<!--right sidebar js-->
+<%= javascript_include_tag "js/chat-menu.js" %>
+
+<!--script admin-->
+<%= javascript_include_tag "js/admin-script" %>
+
+<%= javascript_include_tag "tables" %>

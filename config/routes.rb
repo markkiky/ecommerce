@@ -107,6 +107,7 @@ Rails.application.routes.draw do
   get "/get_price", to: "orders#get_price"
   post "/admin/place_order", to: "orders#create_admin_order", as: :admin_place_order
   get "/order_history", to: "orders#order_history", as: :order_history
+  get "admin_order_history", to: "admins#admin_order_history", as: :admin_order_history
 
   #search path
   get "search", to: "products#search"
@@ -138,4 +139,9 @@ Rails.application.routes.draw do
   delete "/delete_subcategory", to: "categories#delete_subcategory", as: :delete_subcategory
 
   get "/years", to: "homes#get_years", as: :get_years
+
+  # notification routes
+  get "notifications", to: "admins#notifications_list", as: :notifications
+  get "notifications/:id", to: "admins#notification_show", as: :notification_show
+  get "media_delete", to: "admins#media_delete", as: :media_delete
 end

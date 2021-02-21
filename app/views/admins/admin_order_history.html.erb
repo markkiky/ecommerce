@@ -1,0 +1,203 @@
+
+<!-- page-wrapper Start-->
+<div class="page-wrapper">
+
+    <!-- Page Header Start-->
+    <%= render "layouts/admin_header" %>
+    <!-- Page Header Ends -->
+
+    <!-- Page Body Start-->
+    <div class="page-body-wrapper">
+
+        <!-- Page Sidebar Start-->
+        <%= render "layouts/admin_sidebar" %>
+        <div class="page-body">
+
+            <!-- Container-fluid starts-->
+            <div class="container-fluid">
+                <div class="page-header">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="page-header-left">
+                                <h3>Profile
+                                    <small><%= AdminConfig[:app_name] %> Admin panel</small>
+                                </h3>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <ol class="breadcrumb pull-right">
+                                <li class="breadcrumb-item"><a href="<%= root_url %>"><i data-feather="home"></i></a></li>
+                                <li class="breadcrumb-item">Settings</li>
+                                <li class="breadcrumb-item active">Profile</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Container-fluid Ends-->
+    <!-- Container-fluid starts-->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="container">
+               <table class="user-info">
+                  <tr>
+                     <td class="picture">
+                        <div class="img-cover"><%= image_tag current_admin.avatar_thumbnail, :style => "width: 80px; height: 82px", id: "preview" %></div>
+                        <% if current_admin == nil %>
+                            <h6 class="name"> User Name </h6>
+                        <% else %>
+                            <h6 class="name"><%= current_admin.first_name %> <%= current_admin.last_name %></h6>
+                        <% end %>
+                        <div class="change-picture d-none">
+                           <i class="fa fa-camera-retro"></i>
+                           <a href="#">Change picture</a>
+                        </div>
+                     </td>
+                     <td>
+                        <div class="col-xs-12 wellcome">
+                           <div class="col-xs-12 col-sm-6 col-md-5 col-lg-4">
+                              <h4><% if Time.now.strftime("%H") <= "11" %> Good Morning <% elsif Time.now.strftime("%H") > "11" && Time.now.strftime("%H") <= "17" %> Good Afternoon <% else %> Good Evening  <% end %> <span><%= current_admin.first_name %> </span></h4>
+                              <p>Welcome to your account. Here you can 
+                              manage all of your personal information.</p>
+                           </div>
+                           <div class="col-lg-5 col-xs-12 col-sm-6 pull-right">
+                              <div class="row">
+                                 <div class="col-xs-12 col-sm-6 d-none">
+                                    <p class="my-orders"><b>My Orders:</b></p>
+                                    <p>You have <%= pluralize(current_cart.items_count, "item") %> item in your cart</p>
+                                 </div>
+                                  <% if current_cart.order.items.empty? %>
+                                      <div class="col-xs-12 col-sm-6 view-cart">
+                                             <%= link_to "Place Order", orders_path, :class => "btn btn-sec-col" %>
+                                      </div>
+                                         <% else %>
+                                      <div class="col-xs-12 col-sm-6 view-cart">
+                                             <%= link_to cart_path, :class => "btn btn-sec-col" do %>  <i class="ti-shopping-cart"></i>&nbsp;&nbsp;VIEW CART <% end %>
+                                      </div>
+                                  <% end %>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="col-xs-12 last">
+                           <div class="col-xs-12 col-sm-6 col-md-5 col-lg-4">
+                                <p>Last loged on:<span><%= current_admin.last_sign_in_at ? current_admin.last_sign_in_at.in_time_zone("Nairobi").strftime("%d.%m.%Y - %H:%M %P") : "---" %></span></p>
+                           </div>
+                           <div class="col-lg-5 col-xs-12 col-sm-6 pull-right">
+                              <div class="row">
+                               <% if current_admin.orders.last != nil %>
+                                        <p class="col-xs-12">Last item sold: <span><%= current_admin.orders.last.items.first.product.product_name %></span> <span class="price"><%= number_to_currency(current_admin.orders.last["order_subtotal"].to_s, unit: " KES ") %></span></p>
+                                    <% else %>
+                                        <p class="col-xs-12"> Last item sold: <b> No items ordered! </b> </p> 
+                                <% end %>
+                              </div>
+                           </div>
+                        </div>
+                     </td>
+                  </tr>
+               </table>
+            </div>
+        </div>
+         <div class="row">
+            <div class="col-xs-12 col-md-2 left-menu">
+               <a href="<%= edit_admin_registration_path %>"><div><i class="fa fa-user-o"></i><br><span>YOUR PROFILE</span></div></a>
+               
+               <a href="<%= admin_order_history_path %>"><div class="active"><i class="fa fa-clock-o"></i><br><span>HISTORY</span></div></a>
+            </div>
+
+            <div class="col-md-10 col-sm-12 col-xs-12 cart-section">
+                  <h6 class="account-table-head">Order History</h6>
+                  <div class="table_block table-responsive clearfix" id="order-detail-content">
+                      <table class="table table-bordered" id="cart_summary">
+                          <thead>
+                              <tr>
+                                  <th colspan="2" class="cart_product first_item">PRODUCT NAME</th>
+                                  <th>ORDER NO</th>
+                                  <th>ORDER DATE</th>
+                                  <th>STATUS</th>
+                                  <th>PAID VIA</th>
+                                  <th class="cart_unit item">TOTAL AMOUNT</th>
+                              </tr>
+                          </thead>
+                          <tbody class="dropdown-product-list">
+                              <% current_admin.orders.each do |order| %>
+                              <tr class="cart_item first_item address_0 odd dd-product-group">
+                                  <td>
+                                    <% order.items.each do |item| %>
+                                      <a href="/products/<%= item.product.id %>">
+                                          <!--<img alt="Faded Short Sleeve T-shirts" src="images/prd-1.jpg">-->
+                                            <% if item.product.images.attached? %>
+                                                <a href="/products/<%= item.product.id %>"><%= image_tag item.product.images[0] if item.product.images.length > 0 %></a>
+                                            <% end %>
+                                      </a>
+                                    <% end %>
+                                  </td>
+                                  <td>
+                                      <% order.items.each do |item| %>
+                                      <p class="product-name">
+                                          <a href="/products/<%= item.product.id %>" style="color: #0f1c97;"> <%= item.product.product_name %> </a>
+                                           - Qty (<%= item.quantity %>) .
+                                      </p>        
+                                      <% end %>  
+                                      <!--<small>Size: <span>XL</span></small>
+                                      <small>Color: <span>Red</span></small>
+                                      <small>Product Code: <span>12658472</span></small>-->
+                                  </td>
+                                  <td data-title="ORDER NO">
+                                      <%= order.order_number %>
+                                  </td>
+                                  <td data-title="ORDER DATE">
+                                      <%= order.created_at.to_date %>
+                                  </td>
+                                  <td data-title="STATUS">
+                                      <%= order.order_status %>
+                                  </td>
+                                  <td data-title="PAID VIA">
+                                      <%= order.payment_method %>
+                                  </td>
+                                  <td data-title="PRICE" class="cart_unit">
+                                        <h2><%= number_to_currency(order.order_subtotal, unit: " KES ") %></h2>
+                                  </td>
+                              </tr>
+                              <% end %>
+                          </tbody>
+                      </table>
+                  </div>
+
+        </div>
+    </div>
+    <!-- Container-fluid Ends-->
+<!-- footer start-->
+        <%= render "layouts/admin_footer" %>
+        <!-- footer end-->
+    </div>
+
+  
+<!-- latest jquery-->
+<%= javascript_include_tag "js/jquery-3.3.1.min.js" %>
+
+<!-- Bootstrap js-->
+<%= javascript_include_tag "js/popper.min.js" %>
+<%= javascript_include_tag "js/bootstrap.js" %>
+
+<!-- feather icon js-->
+<%= javascript_include_tag "js/icons/feather-icon/feather.min.js" %>
+<%= javascript_include_tag "js/icons/feather-icon/feather-icon.js" %>
+
+<!-- Sidebar jquery-->
+<%= javascript_include_tag "js/sidebar-menu.js" %>
+
+<!-- Datatable js-->
+<%= javascript_include_tag "js/datatables/jquery.dataTables.min.js" %>
+<%= javascript_include_tag "js/datatables/custom-basic.js" %>
+
+<!--Customizer admin-->
+<%= javascript_include_tag "js/admin-customizer.js" %>
+
+<!-- lazyload js-->
+<%= javascript_include_tag "js/lazysizes.min.js" %>
+
+<!--right sidebar js-->
+<%= javascript_include_tag "js/chat-menu.js" %>
+
+<!--script admin-->
+<%= javascript_include_tag "js/admin-script.js" %>

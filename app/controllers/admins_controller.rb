@@ -57,4 +57,36 @@ class AdminsController < ApplicationController
       redirect_to admins_list_path
     end
   end
+
+  def admin_order_history
+  end
+
+  def notifications_list
+    @notifications = Home.all
+  end
+
+  def notification_show
+    @home = Home.find(params[:id])
+    @home.update(
+      notification_read: true,
+    )
+    puts @home.notification_email
+    @media = @home.images
+    # byebug
+    # console
+  end
+
+  def media_delete
+    begin
+      # byebug
+      @media = ActiveStorage::Attachment.find(params[:media])
+      @media.purge
+    rescue => exception
+      flash[:alert] = exception
+      redirect_to notification_show_path(id: params[:id])
+    else
+      flash[:notice] = "Media deleted Successfully"
+      redirect_to notification_show_path(id: params[:id])
+    end
+  end
 end

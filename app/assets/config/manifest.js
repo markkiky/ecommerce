@@ -81,6 +81,7 @@
  //= link tables.js
 
 
+
 //= link cropper.js
 //= link cropper.css
 //= link jsoneditor/dist/jsoneditor.min.js
