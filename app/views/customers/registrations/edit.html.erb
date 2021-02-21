@@ -27,15 +27,18 @@
                <table class="user-info">
                   <tr>
                      <td class="picture">
-                        <div class="img-cover"><%= image_tag 'av_2' %></div>
+                        <% if current_customer %>
+                              <div class="img-cover"><%= image_tag (current_customer.avatar_thumbnail) %></div>
+                        <% end %>
                         <% if current_customer == nil %>
                             <h6 class="name"> User Name </h6>
                         <% else %>
                             <h6 class="name"><%= current_customer.first_name %> <%= current_customer.last_name %></h6>
                         <% end %>
                         <div class="change-picture">
-                           <i class="fa fa-camera-retro"></i>
-                           <a href="#">Change picture</a>
+                            <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }, :class => "theme-form", multipart: true) do |f| %>
+                                <i class="fa fa-camera-retro"></i><a>Change picture</a>
+                                <%= f.file_field :avatar, label: "Change Picture", :style => "display: none;" %>
                         </div>
                      </td>
                      <td>
@@ -90,7 +93,6 @@
             </div>
             <div class="col-md-10 col-sm-12 col-xs-12 register-page">
                 <div class="theme-card">
-                    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }, :class => "theme-form") do |f| %>
                     <div class="row">
                         <div class="col-lg-6">
                         <h3 class="checkout-title">personal details</h3>

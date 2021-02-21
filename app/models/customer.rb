@@ -4,10 +4,12 @@ class Customer < ApplicationRecord
   devise :database_authenticatable, :registerable, :trackable,
          :recoverable, :rememberable, :validatable
         #  :omniauthable, omniauth_providers: [:facebook, :google_oauth2, :twitter]
+        after_commit :add_default_avatar, on: %i[update]
          
   has_many :orders
   has_many :wishlists
   has_many :reviews
+  has_one_attached :avatar
 
   validates :first_name, :presence => true
   validates :last_name, :presence => true
@@ -22,6 +24,14 @@ class Customer < ApplicationRecord
   #     user
   #   end
   # end
+
+  def avatar_thumbnail
+    if avatar.attached?
+       avatar.variant(resize: "80x82!").processed
+    else 
+       "/no_profile.png"
+    end
+ end 
 
   # Auth function for google
   def self.from_omniauth(auth)
@@ -38,5 +48,22 @@ class Customer < ApplicationRecord
   #   user.password = Devise.friendly_token[0, 20]
   #   end
   # end
+
+  
+  private 
+
+  def add_default_avatar
+    unless avatar.attached?
+      avatar.attach(
+        io: File.open(
+          Rails.root.join(
+            'app', 'assets', 'images', 'no_profile.png'
+          )
+        ), filename: 'no_profile.png',
+        content_type: 'image/png'
+      )
+    end 
+  end 
+  
 end
 

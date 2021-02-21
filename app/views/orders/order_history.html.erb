@@ -26,16 +26,14 @@
                <table class="user-info">
                   <tr>
                      <td class="picture">
-                        <div class="img-cover"><%= image_tag 'av_2' %></div>
+                        <% if current_customer %>
+                              <div class="img-cover"><%= image_tag (current_customer.avatar_thumbnail) %></div>
+                        <% end %>
                         <% if current_customer == nil %>
                             <h6 class="name"> User Name </h6>
                         <% else %>
                             <h6 class="name"><%= current_customer.first_name %> <%= current_customer.last_name %></h6>
                         <% end %>
-                        <div class="change-picture">
-                           <i class="fa fa-camera-retro"></i>
-                           <a href="#">Change picture</a>
-                        </div>
                      </td>
                      <td>
                         <div class="col-xs-12 wellcome">
