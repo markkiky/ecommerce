@@ -88,11 +88,17 @@
                          <%= form.email_field :notification_email, required: true, :class => "form-control", :placeholder => "Email" %>
                      </div>
                      <div class="col-md-12"> <br>
+                        <b><label for="subject">Subject</label></b>
+                        <%= form.text_field :notification_subject, required: true, :class => "form-control", :placeholder => "Enter Subject",  :size => "20", :maxlength =>"20", :style => "text-transform:uppercase" %>
+                     </div>
+                     <div class="col-md-12"> <br>
                         <b><label for="review">Write Your Message</label></b>
                         <%= form.text_area :notification_message, required: true, :class => "form-control", :rows => 6, :placeholder => "Write your Message" %>
                      </div>
-                  
-                     <%= form.file_field :images, multiple: true, class: "", required: false %>
+                     <div> <br>
+                        <b><label for="image">Attach an Image</label></b> <br>
+                        <%= form.file_field :images, multiple: true, class: "", required: false %>
+                     </div>
                      <div class="col-md-12"> <br> 
                          <%= form.submit "Send Your Message", :class => "btn btn-solid" %>
                      </div>

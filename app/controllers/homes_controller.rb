@@ -79,7 +79,7 @@ class HomesController < ApplicationController
   private
 
   def notification_params
-    params.require(:home).permit(:notification_first_name, :notification_last_name, :notification_phone_number, :notification_email, :notification_message, images: [])
+    params.require(:home).permit(:notification_first_name, :notification_last_name, :notification_phone_number, :notification_email, :notification_message, :notification_subject, images: [])
   end
 
   def search_params
