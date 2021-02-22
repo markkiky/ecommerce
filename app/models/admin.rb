@@ -20,10 +20,10 @@ class Admin < ApplicationRecord
       if avatar.attached?
         avatar.variant(resize: "150x150!").processed
       else
-        "/default_profile.jpg"
+        "default_profile.jpg"
       end
     rescue => exception
-      "/default_profile.jpg"
+      "default_profile.jpg"
     else
       avatar.variant(resize: "150x150!").processed
     end

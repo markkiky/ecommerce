@@ -87,7 +87,7 @@
                                                 <td><%= user.last_sign_in_at ? user.last_sign_in_at.in_time_zone("Nairobi") : "---" %></td>
                                                 <td>
                                                     <div class='actions row-actions'>
-                                                        <span><a class = "fa fa-user" href="<%= show_customer_path(user.id) %>"></a></span>
+                                                        <span><a class = "fa fa-user" href="<%= show_admin_path(user.id) %>"></a></span>
                                                         <!-- Make a Renewal Button -->
                                                     </div>
                                                 </td>
