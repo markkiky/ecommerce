@@ -36,6 +36,10 @@ ActiveRecord::Schema.define(version: 2021_02_18_091801) do
   create_table "admins", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
+    t.string "first_name"
+    t.string "last_name"
+    t.string "phone"
+    t.integer "role_id"
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -57,8 +61,6 @@ ActiveRecord::Schema.define(version: 2021_02_18_091801) do
     t.boolean "supplier"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "role_id"
-    t.string "name"
     t.index ["email"], name: "index_admins_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
   end
@@ -178,8 +180,10 @@ ActiveRecord::Schema.define(version: 2021_02_18_091801) do
     t.string "notification_first_name"
     t.string "notification_last_name"
     t.string "notification_phone_number"
+    t.string "notification_subject"
     t.string "notification_email"
     t.text "notification_message"
+    t.boolean "notification_read", default: false
   end
 
   create_table "order_items", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|

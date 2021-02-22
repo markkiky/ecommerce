@@ -59,7 +59,16 @@ class SessionsController < ApplicationController
                 redirect_to root_path
                 # auth.extra.raw_info.email
             elsif auth.provider == 'facebook'
-
+                @customer = Customer.from_omniauth(auth)
+                name =  auth.info.name.split
+                @customer.first_name = name.first
+                @customer.last_name = name.last
+                @customer.uid = auth.uid
+                @customer.provider = auth.provider
+                @customer.save!
+                session[:customer_id] = @customer.id
+                sign_in @customer
+                redirect_to root_path
             end
         end
        
