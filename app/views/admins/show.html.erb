@@ -45,7 +45,7 @@
                         <table class="user-info">
                             <tr>
                                 <td class="picture">
-                                    <div class="img-cover"><%= image_tag @customer.avatar_thumbnail, :style => "width: 80px; height: 82px", id: "preview" %></div>
+                                    <div class="img-cover"><%= image_tag @admin.avatar_thumbnail, :style => "width: 80px; height: 82px", id: "preview" %></div>
                                     <% if current_admin == nil %>
                                         <h6 class="name"> User Name </h6>
                                     <% else %>
@@ -86,7 +86,7 @@
                                     </div>
                                     <div class="col-xs-12 last">
                                     <div class="col-xs-12 col-sm-6 col-md-5 col-lg-4">
-                                        <p>Last logged on:<span><%= @customer.last_sign_in_at ? @customer.last_sign_in_at.in_time_zone("Nairobi").strftime("%d.%m.%Y - %H:%M %P") : "---" %></span></p>
+                                        <p>Last logged on:<span><%= @admin.last_sign_in_at ? @admin.last_sign_in_at.in_time_zone("Nairobi").strftime("%d.%m.%Y - %H:%M %P") : "---" %></span></p>
                                     </div>
                                     <div class="col-lg-5 col-xs-12 col-sm-6 pull-right">
                                         <div class="row">
@@ -105,9 +105,9 @@
                 </div>
                 <div class="row">
                     <div class="col-xs-12 col-md-2 left-menu">
-                        <a href="<%= show_customer_path(@customer.id) %>"><div class="active"><i class="fa fa-user-o"></i><br><span>YOUR PROFILE</span></div></a>
+                        <a href="<%= show_admin_path(@admin.id) %>"><div class="active"><i class="fa fa-user-o"></i><br><span>YOUR PROFILE</span></div></a>
                         
-                        <a href="<%= customer_orders_path(@customer.id) %>"><div><i class="fa fa-clock-o"></i><br><span>HISTORY</span></div></a>
+                        <a href="<%= show_admin_orders_path(@admin.id) %>"><div><i class="fa fa-clock-o"></i><br><span>HISTORY</span></div></a>
                     </div>
                     <div class="col-md-10 col-sm-12 col-xs-12 register-page">
                         <div class="theme-card">
@@ -118,47 +118,31 @@
                                     <div class="form-group">
                                         <b><%= f.label :first_name %></b>
                                        
-                                        <p> <%= @customer.first_name %> </p>
+                                        <p> <%= @admin.first_name %> </p>
                                     </div>
                                     <div class="form-group">
                                         <b><%= f.label :last_name %></b>
                                         
-                                        <p> <%= @customer.last_name %> </p>
+                                        <p> <%= @admin.last_name %> </p>
                                     </div>
                                     <div class="form-group">
                                         <b><%= f.label :phone %></b>
                                       
-                                        <p> <%= @customer.phone %> </p>
+                                        <p> <%= @admin.phone %> </p>
                                     </div>
                                     <div class="form_group">
                                         <b><%= f.label :email %></b>
                                        
-                                        <p> <%= @customer.email %> </p>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                <h3 class="checkout-title">Car details</h3>
-                                    <div class="form-group">
-                                        <b><%= f.label :car_name %></b>
-                                       
-                                        <p> <%= @customer.car_name %> </p>
-                                    </div>
-                                    <div class="form-group">
-                                        <b><%= f.label :car_make %></b>
-                                        
-                                        <p> <%= @customer.car_make %> </p>
-                                    </div>
-                                    <div class="form-group">
-                                        <b><%= f.label :car_year %></b>
-                                      
-                                        <p> <%= @customer.car_year %> </p>
+                                        <p> <%= @admin.email %> </p>
                                     </div>
                                     <div class="form_group">
-                                        <b><%= f.label :chassis_number %></b>
+                                        <b><%= f.label :role %></b>
                                        
-                                        <p> <%= @customer.chassis_number %> </p>
+                                        <p> <%= @admin.role.title %> </p>
                                     </div>
+                                
                                 </div>
+                               
                                 
                             </div>
                         

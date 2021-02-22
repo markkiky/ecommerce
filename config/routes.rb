@@ -28,10 +28,12 @@ Rails.application.routes.draw do
     get "/admins/sign_out" => "devise/sessions#destroy"
     get "/admins/list", to: "admins#index", as: :admins_list
     get "/admins/list/:id", to: "admins#show", as: :show_admin
+    get "/admins/list/orders/:id", to: "admins#show_admin_orders", as: :show_admin_orders
     get "/admins/new", to: "admins#add_admin", as: :add_admin
     post "/admins/create", to: "admins#create_admin"
 
     get "/customers/list/:id", to: "admins#show_customer", as: :show_customer
+    get "/customers/list/orders/:id", to: "admins#show_customer_orders", as: :customer_orders
     get "/customers/new", to: "admins#add_customer", as: :add_customer
     post "/customers/create", to: "admins#create_customer"
   end

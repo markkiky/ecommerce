@@ -9,7 +9,7 @@
 # Admin.create!(email: 'markkaris438@gmail.com', password: "123456", owner: true)
 
 # Create roles
-Role.create!(title: "NCCGSUPERUSER")
+Role.create!(title: "Super Admin")
 Admin.create(email: "mark@nouveta.tech", password: "123456", role_id: "1")
 
 # create sizes

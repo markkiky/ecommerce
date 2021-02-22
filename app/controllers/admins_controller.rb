@@ -1,6 +1,5 @@
 class AdminsController < ApplicationController
   before_action :authenticate_admin!
-  console
 
   def dashboard
     @overall_earnings = Transaction.sum(:amount)
@@ -20,10 +19,18 @@ class AdminsController < ApplicationController
     @admin = Admin.find(params[:id])
   end
 
+  def show_admin_orders
+    @admin = Admin.find(params[:id])
+  end
+
   #   Show a particular Customer
   #   GET /customers/list/:id
   def show_customer
-    @customers = Customer.all
+    @customer = Customer.find(params[:id])
+  end
+
+  def show_customer_orders
+    @customer = Customer.find(params[:id])
   end
 
   def add_customer

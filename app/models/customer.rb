@@ -3,9 +3,9 @@ class Customer < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable, :trackable,
          :recoverable, :rememberable, :validatable
-        #  :omniauthable, omniauth_providers: [:facebook, :google_oauth2, :twitter]
-        after_commit :add_default_avatar, on: %i[update]
-         
+  #  :omniauthable, omniauth_providers: [:facebook, :google_oauth2, :twitter]
+  after_commit :add_default_avatar, on: %i[update]
+
   has_many :orders
   has_many :wishlists
   has_many :reviews
@@ -27,11 +27,11 @@ class Customer < ApplicationRecord
 
   def avatar_thumbnail
     if avatar.attached?
-       avatar.variant(resize: "80x82!").processed
-    else 
-       "/no_profile.png"
+      avatar.variant(resize: "80x82!").processed
+    else
+      "no_profile.png"
     end
- end 
+  end
 
   # Auth function for google
   def self.from_omniauth(auth)
@@ -49,21 +49,18 @@ class Customer < ApplicationRecord
   #   end
   # end
 
-  
-  private 
+  private
 
   def add_default_avatar
     unless avatar.attached?
       avatar.attach(
         io: File.open(
           Rails.root.join(
-            'app', 'assets', 'images', 'no_profile.png'
+            "app", "assets", "images", "no_profile.png"
           )
-        ), filename: 'no_profile.png',
-        content_type: 'image/png'
+        ), filename: "no_profile.png",
+        content_type: "image/png",
       )
-    end 
-  end 
-  
+    end
+  end
 end
-
