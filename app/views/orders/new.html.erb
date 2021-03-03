@@ -115,7 +115,7 @@
                                     </ul>
                                     <ul class="sub-total">
                                         <li>Subtotal <span class="count"><%= number_to_currency(current_cart.order_subtotal, unit: ' KES ') %></span></li>
-                                        <li>Delivery Options: <br> <br>
+                                        <li class="d-none">Delivery Options: <br> <br>
                                                 <div class="form-group col-md-12 col-sm-12 col-xs-12">
                                                     <%= f.select :delivery_option, options_for_select(["Instore Pickup: Kshs.0", "Nairobi Area: Kshs.250"]), :id => "instore", :prompt => "Select Shipping" %>
                                                 </div>

@@ -99,6 +99,7 @@ Rails.application.routes.draw do
   patch "/cart/checkout", to: "orders#create"
   post "/cart/checkout", to: "orders#create"
   get "order_success/:id", to: "orders#order_success", as: :order_success
+  get "order_success_admin/:id", to: "admins#order_success_admin", as: :order_success_admin
 
   # order paths
   resources :orders

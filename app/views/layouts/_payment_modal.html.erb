@@ -1,4 +1,3 @@
-
 <!-- Modal -->
 <div class="modal fade" id="paymentModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -30,9 +29,7 @@
         
       </div>
       <div class="modal-footer paid">
-        
-        <a href="sasasasas" id="order_success_btn" class="btn btn-primary"> View Order Details</a>
-        
+        <%= link_to 'View Order Details', order_success_path(@order.id), class: "btn btn-primary" %>
       </div>
     </div>
   </div>

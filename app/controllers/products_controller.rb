@@ -31,7 +31,6 @@ class ProductsController < ApplicationController
   # GET /products/1
   # GET /products/1.json
   def show
-    # console
     if @product.reviews.blank?
       @average_review = 0
     else
