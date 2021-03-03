@@ -1,0 +1,154 @@
+ <!-- page-wrapper Start-->
+<div class="page-wrapper">
+
+    <!-- Page Header Start-->
+    <%= render 'layouts/admin_header' %>
+    <!-- Page Header Ends -->
+
+    <!-- Page Body Start-->
+    <div class="page-body-wrapper">
+
+        <!-- Page Sidebar Start-->
+        <%= render 'layouts/admin_sidebar' %>
+        <!-- Page Sidebar Ends-->
+
+        <!-- Right sidebar Start-->
+
+        <!-- Right sidebar Ends-->
+        <div class="page-body">
+
+            <!-- Container-fluid starts-->
+            <div class="container-fluid">
+                <div class="page-header">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="page-header-left">
+                                <h3>Orders
+                                    <small><%= AdminConfig[:app_name] %> Admin panel</small>
+                                </h3>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <ol class="breadcrumb pull-right">
+                                <li class="breadcrumb-item"><a href="<%= root_url %>"><i data-feather="home"></i></a></li>
+                                <li class="breadcrumb-item">Physical</li>
+                                <li class="breadcrumb-item active">Paid Product</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Container-fluid Ends-->
+
+            <!-- Container-fluid starts-->
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>Add Product</h5>
+                            </div>
+                            <!-- thank-you section start -->
+    <section class="section-b-space light-layout">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="success-text"><i class="fa fa-check-circle" aria-hidden="true"></i>
+                        <h2>thank you</h2>
+                        <p>Payment is successfully processsed </p>
+                        <p>Order ID:<%= @order.order_number %></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Section ends -->
+
+
+    <!-- order-detail section start -->
+    <section class="section-b-space">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="product-order">
+                        <h3>your order details</h3>
+                        <% @order.items.each do |item| %>
+                        <div class="row product-order-detail">
+                            <div class="col-3">
+                            <%= image_tag (item.product.images[0] if item.product.images.length > 0), :class => "img-fluid blur-up lazyload" %>
+                            </div>
+                            <div class="col-3 order_detail">
+                                <div>
+                                    <h4>product name</h4>
+                                    <h5><%= item.product.product_name %></h5>
+                                </div>
+                            </div>
+                            <div class="col-3 order_detail">
+                                <div>
+                                    <h4>quantity</h4>
+                                    <h5><%= item.quantity %></h5>
+                                </div>
+                            </div>
+                            <div class="col-3 order_detail">
+                                <div>
+                                    <h4>price</h4>
+                                    <h5><%= number_to_currency(item.price , :unit => ' KES ') %></h5>
+                                </div>
+                            </div>
+                        </div>
+                        <% end %>
+                        <div class="total-sec">
+                            <ul>
+                                <li>subtotal <span><%= number_to_currency(@order.order_subtotal, :unit => ' KES ') %></span></li>
+                                <li>shipping <span>-</span></li>
+                                <li>tax<span>-</span></li>
+                            </ul>
+                        </div>
+                        <div class="final-total">
+                            <h3>total <span><%= number_to_currency(@order.order_subtotal, :unit => ' KES ') %></span></h3>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- latest jquery-->
+<%= javascript_include_tag "js/jquery-3.3.1.min.js" %>
+
+<!-- Bootstrap js-->
+<%= javascript_include_tag "js/popper.min.js" %>
+<%= javascript_include_tag "js/bootstrap.js" %>
+
+<%= javascript_include_tag "js/icons/feather-icon/feather.min.js" %>
+<%= javascript_include_tag "js/icons/feather-icon/feather-icon.js" %>
+
+<!-- Sidebar jquery-->
+<%= javascript_include_tag "js/sidebar-menu" %>
+
+<!-- Datatable js-->
+<%= javascript_include_tag "js/datatables/jquery.dataTables.min.js" %>
+<%= javascript_include_tag "js/datatables/custom-basic" %>
+
+<!--Customizer admin-->
+<%= javascript_include_tag "js/admin-customizer.js" %>
+
+<!-- lazyload js-->
+<%= javascript_include_tag "js/lazysizes.min.js" %>
+
+<!--right sidebar js-->
+<%= javascript_include_tag "js/chat-menu.js" %>
+
+<!--script admin-->
+<%= javascript_include_tag "js/admin-script" %>

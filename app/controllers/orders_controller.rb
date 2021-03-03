@@ -49,6 +49,7 @@ class OrdersController < ApplicationController
   end
 
   def admin_payment
+    @order = Order.find(params[:id])
     if params["payment-group"] == "mpesa"
     elsif params["payment-group"] == "card"
     elsif params["payment-group"] == "cash"
@@ -102,7 +103,6 @@ class OrdersController < ApplicationController
     # check if order_cart_subtotal is empty
     #  TO DOs
     @order = current_cart.order
-
     if current_customer != nil
       @order.customer_id = current_customer.id
       @customer = current_customer
@@ -126,6 +126,7 @@ class OrdersController < ApplicationController
       @customer.chassis_number = params[:customer][:chassis_number]
 
       @customer.save!
+      @order.save!
     elsif current_customer == nil
       # check customer exists
       if Customer.where(:email => params[:customer][:email]).exists?
@@ -150,6 +151,7 @@ class OrdersController < ApplicationController
         @customer.chassis_number = params[:customer][:chassis_number]
         @customer.save!
         @order.customer_id = @customer.id
+        @order.save!
       else
         @customer = Customer.new
         @customer.first_name = params[:customer][:first_name]
@@ -173,6 +175,7 @@ class OrdersController < ApplicationController
         @customer.password = "123456"
         @customer.save!
         @order.customer_id = @customer.id
+        @order.save!
       end
     end
     if @order.update_attributes(order_params.merge(order_status: "pending_payment", order_number: Order.counter, order_date: Date.today()))
@@ -345,6 +348,12 @@ class OrdersController < ApplicationController
               if response_json["data"]["callback_returned"] == "PENDING"
                 sleep(@@mpesa_retry)
               elsif response_json["data"]["callback_returned"] == "PAID"
+                after_check_payment(@order.id, response_json)
+                if @order.customer_id != nil
+                  render :js => "window.location = '#{order_success_path(@order.id)}'"
+                else
+                  render :js => "window.location = '#{order_success_admin_path(@order.id)}'"
+                end
                 receipt_response = true
               elsif response_json["data"]["callback_returned"] == "UNPAID"
                 receipt_response = true

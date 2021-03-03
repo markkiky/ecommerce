@@ -68,6 +68,10 @@ class AdminsController < ApplicationController
   def admin_order_history
   end
 
+  def order_success_admin
+    @order = Order.find(params[:id])
+  end
+
   def notifications_list
     @notifications = Home.all
   end
