@@ -103,6 +103,8 @@ Rails.application.routes.draw do
 
   # order paths
   resources :orders
+  get "dispatch/:id", to: "orders#dispatcher", as: :dispatcher
+  get "delivered/:id", to: "orders#delivered", as: :delivered
 
   #admin order orders#admin_order
   get "/admin_order", to: "orders#admin_order", as: :admin_order

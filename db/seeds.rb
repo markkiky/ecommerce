@@ -14,6 +14,18 @@ Role.create!(title: "Admin")
 Admin.create(email: "mark@nouveta.tech", password: "123456", role_id: "1")
 Admin.create(email: "markkaris438@gmail.com", password: "123456", role_id: "2")
 
+# Transaction Statuses
+Status.create(name: "unpaid")
+Status.create(name: "partial")
+Status.create(name: "paid")
+Status.create(name: "overpaid")
+
+# Order Statuses
+Status.create(name: "ordered")
+Status.create(name: "ready_to_dispatch")
+Status.create(name: "dispatched")
+Status.create(name: "delivered")
+
 # create sizes
 # Size.create!(size_type: "green", admin_id: 1)
 
