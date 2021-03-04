@@ -154,7 +154,7 @@ class OrdersController < ApplicationController
       @customer.car_name = params[:customer][:car_name]
       @customer.car_year = params[:customer][:car_year]
       @customer.chassis_number = params[:customer][:chassis_number]
-
+      @customer.customer_no = Customer.counter
       @customer.save!
       @order.save!
     elsif current_customer == nil
@@ -179,6 +179,7 @@ class OrdersController < ApplicationController
         @customer.car_name = params[:customer][:car_name]
         @customer.car_year = params[:customer][:car_year]
         @customer.chassis_number = params[:customer][:chassis_number]
+        @customer.customer_no = Customer.counter
         @customer.save!
         @order.customer_id = @customer.id
         @order.save!
@@ -203,6 +204,7 @@ class OrdersController < ApplicationController
         @customer.car_year = params[:customer][:car_year]
         @customer.chassis_number = params[:customer][:chassis_number]
         @customer.password = "123456"
+        @customer.customer_no = Customer.counter
         @customer.save!
         @order.customer_id = @customer.id
         @order.save!
