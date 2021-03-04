@@ -122,15 +122,18 @@
                                     <%# raw(@product.product_description) %>
 
                                 </div>
-                                <div class="border-product d-none">
-                                    <h6 class="product-title">share it</h6>
-                                    <div class="product-icon">
+                                    <h6 class="product-title d-none">share it</h6>
+                                    <div class="product-icon d-none">
                                         <ul class="product-social">
                                             <li><a href="#"><i class="fa fa-facebook"></i></a></li>
                                             <li><a href="#"><i class="fa fa-twitter"></i></a></li>
                                             <li><a href="#"><i class="fa fa-instagram"></i></a></li>
                                             <li><a><i class="fa fa-whatsapp"></i></a></li>
                                         </ul>
+                                        
+                                    </div>
+                                <div class="border-product">
+                                    <div class="product-icon">
                                         <% if customer_signed_in? %>
                                         <% if @wishlist_exists == true %>
                                         <%= link_to wishlists_update_path(product: @product), :class => "wishlist-btn", remote: true do %>
