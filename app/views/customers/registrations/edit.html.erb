@@ -22,6 +22,7 @@
 
 <div class="pg-body">
       <div class="container">
+        <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }, :class => "theme-form", multipart: true) do |f| %>
          <div class="row">
             <div class="container">
                <table class="user-info">
@@ -36,7 +37,6 @@
                             <h6 class="name"><%= current_customer.first_name %> <%= current_customer.last_name %></h6>
                         <% end %>
                         <div class="change-picture">
-                            <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }, :class => "theme-form", multipart: true) do |f| %>
                                 <i class="fa fa-camera-retro"></i><a>Change picture</a>
                                 <%= f.file_field :avatar, label: "Change Picture", :style => "display: none;" %>
                         </div>
@@ -98,38 +98,38 @@
                         <h3 class="checkout-title">personal details</h3>
                             <div class="form-group">
                                 <b><%= f.label :first_name %></b>
-                                <%= f.text_field :first_name, required: true, :class => "form-control" %>
+                                <%= f.text_field :first_name, :class => "form-control" %>
                             </div>
                             <div class="form-group">
                                 <b><%= f.label :last_name %></b>
-                                <%= f.text_field :last_name, required: true, :class => "form-control" %>
+                                <%= f.text_field :last_name, :class => "form-control" %>
                             </div>
                             <div class="form-group">
                                 <b><%= f.label :phone %></b>
-                                <%= f.number_field :phone, required: true, :class => "form-control" %>
+                                <%= f.number_field :phone, :class => "form-control" %>
                             </div>
                             <div class="form_group">
                                 <b><%= f.label :email %></b>
-                                <%= f.email_field :email, required: true, autofocus: true, :class => "form-control" %>
+                                <%= f.email_field :email, :class => "form-control" %>
                             </div>
                         </div>
                         <div class="col-lg-6">
                         <h3 class="checkout-title">car details</h3>
                             <div class="form-group">
                                 <b><%= f.label :car_name %></b>
-                                <%= f.text_field :car_name, required: true, :class => "form-control" %>
+                                <%= f.text_field :car_name, :class => "form-control" %>
                             </div>
                             <div class="form-group">
                                 <b><%= f.label :car_make %></b>
-                                <%= f.text_field :car_make, required: true, :class => "form-control" %>
+                                <%= f.text_field :car_make, :class => "form-control" %>
                             </div>
                             <div class="form-group">
                                 <b><%= f.label :car_year %></b>
-                                <%= f.select :car_year,  options_for_select(["2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020"]), required: true, :class => "form-control" %>
+                                <%= f.select :car_year,  options_for_select(["2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020"]), :class => "form-control" %>
                             </div>
                             <div class="form_group">
                                 <b><%= f.label :chassis_number %></b>
-                                <%= f.text_field :chassis_number, required: true, :class => "form-control" %>
+                                <%= f.text_field :chassis_number, :class => "form-control" %>
                             </div>
                         </div>
                     </div>
@@ -138,11 +138,11 @@
                             <h3> billing address </h3>
                             <div class="form-group">
                                 <b><%= f.label :billing_address %></b>
-                                <%= f.text_field :billing_address, required: true, :class => "form-control" %>
+                                <%= f.text_field :billing_address, :class => "form-control" %>
                             </div>
                              <div class="form-group">
                                 <b><%= f.label :billing_postal_code %></b>
-                                <%= f.number_field :billing_postal_code, required: true, type: "number", :class => "form-control" %>
+                                <%= f.number_field :billing_postal_code, type: "number", :class => "form-control" %>
                             </div>
                             <div class="form-group">
                                 <b><%= f.label :billing_country %></b>
@@ -158,11 +158,11 @@
                             <h3> shipping address </h3>
                             <div class="form-group">
                                 <b><%= f.label :shipping_address %></b>
-                                <%= f.text_field :shipping_address, required: true, :class => "form-control" %>
+                                <%= f.text_field :shipping_address, :class => "form-control" %>
                             </div>
                              <div class="form-group">
                                 <b><%= f.label :shipping_postal_code %></b>
-                                <%= f.number_field :shipping_postal_code, required: true, type: "number", :class => "form-control" %>
+                                <%= f.number_field :shipping_postal_code, type: "number", :class => "form-control" %>
                             </div>
                             <div class="form-group">
                                 <b><%= f.label :shipping_country %></b>
@@ -184,9 +184,9 @@
                             <%= f.submit "Save Settings", :class => "btn btn-solid" %>
                         </div>
                     </div>
-                <% end %>
             </div>   
          </div>
+        <% end %>
       </div>
    </div>
 </div>
