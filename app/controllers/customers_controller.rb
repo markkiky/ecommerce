@@ -26,7 +26,7 @@ class CustomersController < ApplicationController
   # POST /customers.json
   def create
     @customer = Customer.new(customer_params)
-
+    @customer.customer_no = Customer.counter
     respond_to do |format|
       if @customer.save
         format.html { redirect_to new_customer_session_path, notice: 'Details Added successfully' }

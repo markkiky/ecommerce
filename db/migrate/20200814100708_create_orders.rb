@@ -3,6 +3,7 @@ class CreateOrders < ActiveRecord::Migration[6.0]
     create_table :orders do |t|
       t.string :order_id
       t.string :customer_id
+      t.bigint :status_id, default: 5
       t.decimal :order_total
       t.string :order_number
       t.string :payment_id
@@ -18,7 +19,7 @@ class CreateOrders < ActiveRecord::Migration[6.0]
       t.string :err_msg
       t.boolean :fulfilled
       t.boolean :deleted
-      t.boolean :paid
+      t.boolean :paid, default: false
       t.datetime :payment_date
 
       t.timestamps

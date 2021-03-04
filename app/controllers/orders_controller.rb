@@ -16,11 +16,12 @@ class OrdersController < ApplicationController
 
   def index
     @orders = Order.where.not(:order_status => "cart")
-    # @orders.sort_by { |order| [order.order_number, order.order_date] }
-    # @orders.sort
+    console
+
   end
 
   def new
+    # console
     @order = current_cart.order
     if current_customer != nil
       @customer = current_customer
@@ -79,6 +80,35 @@ class OrdersController < ApplicationController
     end
   end
 
+  def dispatcher
+    begin
+      @order = Order.find(params[:id])
+      @order.update(
+        status_id: 7
+      )
+    rescue => exception
+
+    else
+      flash[:notice] = "Order Dispatched"
+      redirect_to orders_path
+    end
+  end
+
+  def delivered
+    begin
+      @order = Order.find(params[:id])
+      @order.update(
+        status_id: 8
+      )
+    rescue => exception
+
+    else
+      flash[:notice] = "Order Delivered"
+      redirect_to orders_path
+    end
+
+  end
+
   # Submits admin order into orders
   # POST /admin_order
   def create_admin_order
@@ -124,7 +154,7 @@ class OrdersController < ApplicationController
       @customer.car_name = params[:customer][:car_name]
       @customer.car_year = params[:customer][:car_year]
       @customer.chassis_number = params[:customer][:chassis_number]
-
+      @customer.customer_no = Customer.counter
       @customer.save!
       @order.save!
     elsif current_customer == nil
@@ -149,6 +179,7 @@ class OrdersController < ApplicationController
         @customer.car_name = params[:customer][:car_name]
         @customer.car_year = params[:customer][:car_year]
         @customer.chassis_number = params[:customer][:chassis_number]
+        @customer.customer_no = Customer.counter
         @customer.save!
         @order.customer_id = @customer.id
         @order.save!
@@ -173,6 +204,7 @@ class OrdersController < ApplicationController
         @customer.car_year = params[:customer][:car_year]
         @customer.chassis_number = params[:customer][:chassis_number]
         @customer.password = "123456"
+        @customer.customer_no = Customer.counter
         @customer.save!
         @order.customer_id = @customer.id
         @order.save!
@@ -184,22 +216,6 @@ class OrdersController < ApplicationController
     else
       render :new
     end
-    # if @order.payment_method == "Mpesa"
-
-    # elsif @order.payment_method == "Cash on Delivery"
-    #     redirect_to order_success_path
-    #     url = URI("http://sna.co.ke/sna_api/index.php")
-    #    http = Net::HTTP.new(url.host, url.port);
-    #    request = Net::HTTP::Post.new(url)
-    #    form_data = [['function', 'sendMessage'],['phoneNumber', @order.client_phone_number],['message', "Hi #{@order.client_name}. Your Order Number #{@order.id} of KES #{@order.order_subtotal.to_i.to_s.reverse.gsub(/...(?=.)/,'\&,').reverse} is being processed."],['senderId', 'COVERAPP'],['username', 'MALISAFI']]
-    #    request.set_form form_data, 'multipart/form-data'
-    #    response = http.request(request)
-    #    puts response.read_body
-
-    # elsif @order.payment_method == "Card"
-    #   redirect_to order_success_path
-    # end
-
   end
 
   def show
@@ -349,7 +365,7 @@ class OrdersController < ApplicationController
                 sleep(@@mpesa_retry)
               elsif response_json["data"]["callback_returned"] == "PAID"
                 after_check_payment(@order.id, response_json)
-                if @order.customer_id != nil
+                if @order.admin_id == nil
                   render :js => "window.location = '#{order_success_path(@order.id)}'"
                 else
                   render :js => "window.location = '#{order_success_admin_path(@order.id)}'"

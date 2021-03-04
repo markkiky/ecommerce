@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_18_091801) do
+ActiveRecord::Schema.define(version: 2021_03_04_095529) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -119,6 +119,7 @@ ActiveRecord::Schema.define(version: 2021_02_18_091801) do
 
   create_table "customers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "customer_id"
+    t.string "customer_no"
     t.string "first_name"
     t.string "last_name"
     t.string "customer_class"
@@ -200,6 +201,7 @@ ActiveRecord::Schema.define(version: 2021_02_18_091801) do
   create_table "orders", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "order_id"
     t.string "customer_id"
+    t.bigint "status_id", default: 5
     t.decimal "order_total", precision: 10
     t.string "order_number"
     t.string "transaction_id"
@@ -315,6 +317,12 @@ ActiveRecord::Schema.define(version: 2021_02_18_091801) do
     t.string "category_id"
   end
 
+  create_table "statuses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "sub_categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
     t.string "category_id"
@@ -325,6 +333,7 @@ ActiveRecord::Schema.define(version: 2021_02_18_091801) do
   create_table "transactions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "transaction_id"
     t.string "order_id"
+    t.bigint "status_id", default: 1
     t.string "full_names"
     t.decimal "amount", precision: 10
     t.string "phone_number"

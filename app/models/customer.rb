@@ -13,17 +13,29 @@ class Customer < ApplicationRecord
 
   validates :first_name, :presence => true
   validates :last_name, :presence => true
-  # class << self
-  #   def from_omniauth(auth_hash)
-  #     user = find_or_create_by(uid: auth_hash['uid'], provider: auth_hash['provider'])
-  #     user.name = auth_hash['info']['name']
-  #     user.location = auth_hash['info']['location']
-  #     user.image_url = auth_hash['info']['image']
-  #     user.url = auth_hash['info']['urls']['Twitter']
-  #     user.save!
-  #     user
-  #   end
-  # end
+  
+  def self.counter
+    @customers = Customer.all
+    prefix = "UAE"
+    if @customers.count < 1
+        count = "1"
+        customer_no = "#{prefix}##{count.rjust(3,"0")}"
+        return customer_no
+    else
+        last = Customer.last
+        if last.customer_no != nil
+            count = last.customer_no.split(//).last(3).join.to_i
+            count = count + 1
+            count = count.to_s
+            customer_no = "#{prefix}##{count.rjust(3,"0")}"
+        else
+            count = last.id
+            count = count.to_s
+            customer_no = "#{prefix}##{count.rjust(3,"0")}"
+            return customer_no
+        end
+    end
+end
 
   def avatar_thumbnail
     if avatar.attached?
@@ -41,13 +53,7 @@ class Customer < ApplicationRecord
       user.password = SecureRandom.hex
     end
   end
-  # def self.create_from_provider_data(provider_data)
-  #   where(provider: provider_data.provider, uid: provider_data.uid).first_or_create do | user |
-  #   user.first_name = provider_data.info.name
-  #   user.email = provider_data.info.email
-  #   user.password = Devise.friendly_token[0, 20]
-  #   end
-  # end
+ 
 
   private
 

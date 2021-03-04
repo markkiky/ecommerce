@@ -70,6 +70,7 @@
                                             <th class="">No</th>
                                             <th>Order Id</th>
                                             <th>Product</th>
+                                            <th>Transaction Code</th>
                                             <th>Payment Status</th>
                                             <th>Payment Method</th>
                                             <th>Order Status</th>
@@ -91,30 +92,38 @@
                                                     <% end %>
                                                 </div>
                                             </td>
+                                            <td>
+                                                <%= order.transactions.count == 0 ? "" : order.transactions.last.transaction_code %>
+                                            </td>
                                             <td><span class="badge badge-secondary"><%= order.payment_status %></span></td>
                                             <td><%= order.payment_method %></td>
-                                            <td><span class="badge badge-success"><%= order.order_status %></span></td>
+                                            <td><span class="badge badge-success"><%= Status.find_by(id: order.status_id).name %></span></td>
                                             <% if order.order_date != nil %>
                                             <td><%= order.order_date.to_date %></td>
                                             <% else %>
                                             <td><%= order.created_at.to_date %></td>
                                             <% end %>
                                             <% if order.order_total != nil %>
-                                            <td><%= order.order_total %></td>
+                                            <td><%= number_to_currency(order.order_total, unit: "KES ") %></td>
                                             <% else %>
-                                            <td><%= order.order_subtotal %></td>
+                                            <td><%= number_to_currency(order.order_subtotal, unit: "KES ") %></td>
                                             <% end %>
                                             <td>
-                                               <button type="button" class="btn btn-primary d-none" data-toggle="modal" data-target="#chooseModalCenter">
-                                                    Pay
-                                                </button>
-                                                <% if order.customer_id == nil %>
+                                                <% if order.paid == false || order.paid == nil %>
                                                     <%= link_to choose_payment_path(order.id), :remote => true, class: "btn btn-primary" do %>
                                                     Pay
                                                     <% end %>
                                                 <% end %>
-                                                
-                                                
+                                                <% if order.paid == true && order.status_id == 5%>
+                                                    <%= link_to dispatcher_path(order.id), :remote => false do %>
+                                                        <i class="fa fa-paper-plane"></i>
+                                                    <%end%>
+                                                <%end%>
+                                                <% if order.paid == true && order.status_id == 7 %>
+                                                    <%= link_to delivered_path(order.id), :remote => false do %>
+                                                        <i class="fa fa-check" aria-hidden="true"></i>                                                       
+                                                    <%end%>
+                                                <%end%>
                                             </td>
                                         </tr>
                                         <% end %>

@@ -39,7 +39,7 @@ class AdminsController < ApplicationController
   # POST /customers/create
   def create_customer
     begin
-      @customer = Customer.create!(first_name: params["first_name"], last_name: params["last_name"], phone: params["phone"], email: params["email"], password: params["password"])
+      @customer = Customer.create!(first_name: params["first_name"], last_name: params["last_name"], phone: params["phone"], email: params["email"], password: params["password"], customer_no: Customer.counter)
     rescue => exception
       flash[:alert] = exception
       redirect_to add_customer_path
