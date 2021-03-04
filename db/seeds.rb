@@ -10,7 +10,9 @@
 
 # Create roles
 Role.create!(title: "Super Admin")
+Role.create!(title: "Admin")
 Admin.create(email: "mark@nouveta.tech", password: "123456", role_id: "1")
+Admin.create(email: "markkaris438@gmail.com", password: "123456", role_id: "2")
 
 # create sizes
 # Size.create!(size_type: "green", admin_id: 1)
