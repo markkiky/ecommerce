@@ -29,7 +29,7 @@
                   <tr>
                      <td class="picture">
                         <% if current_customer %>
-                              <div class="img-cover"><%= image_tag (current_customer.avatar_thumbnail) %></div>
+                              <div class="img-cover"><%= image_tag (current_customer.avatar_thumbnail), :id => "output" %></div>
                         <% end %>
                         <% if current_customer == nil %>
                             <h6 class="name"> User Name </h6>
@@ -37,8 +37,8 @@
                             <h6 class="name"><%= current_customer.first_name %> <%= current_customer.last_name %></h6>
                         <% end %>
                         <div class="change-picture">
-                                <i class="fa fa-camera-retro"></i><a>Change picture</a>
-                                <%= f.file_field :avatar, label: "Change Picture", :style => "display: none;" %>
+                            <input type="file" accept="image/*" name="customer[avatar]" id="customer_avatar" onchange="loadFile(event)" class="form-control d-none">
+                            <i class="fa fa-camera-retro"></i><label for="customer_avatar"  style="cursor: pointer; color: #0f1c97;">Change picture</label>
                         </div>
                      </td>
                      <td>
@@ -231,4 +231,11 @@
     function closeSearch() {
         document.getElementById("search-overlay").style.display = "none";
     }
+
+// change avatar (add-profile pic)
+var loadFile = function(event) {
+  var image = document.getElementById('output');
+  image.src = URL.createObjectURL(event.target.files[0]);
+};
+
 </script>
