@@ -16,7 +16,10 @@
             <% if current_admin.roles.where("title LIKE ? ", "dashboard").present? %>
                 <li><a class="sidebar-header" href="<%= admin_dashboard_path %>"><i data-feather="home"></i><span>Dashboard</span></a></li>
             <%end%>
+            <% if current_admin.roles.where("title LIKE ? ", "brands").present? %>
              <li><a class="sidebar-header" href="<%= categories_path %>"><i data-feather="life-buoy"></i><span>Categories</span></a></li>
+             <%end%>
+             <% if current_admin.roles.where("title LIKE ? ", "products").present? %>
              <li><a class="sidebar-header" href=""><i data-feather="box"></i><span>Products</span><i class="fa fa-angle-right pull-right"></i></a>
                  <ul class="sidebar-submenu">
                      <li>
@@ -31,13 +34,23 @@
                      </li>
                  </ul>
              </li>
-             
+             <%end%>
+             <% if current_admin.roles.where("title LIKE ? ", "Sales Orders ").present? || current_admin.roles.where("title LIKE ? ", "Sales Transactions").present? || current_admin.roles.where("title LIKE ? ", "Sales Products").present? %>
              <li><a class="sidebar-header" href=""><i data-feather="dollar-sign"></i><span>Sales</span><i class="fa fa-angle-right pull-right"></i></a>
                  <ul class="sidebar-submenu">
+                    <%if current_admin.roles.where("title LIKE ? ", "Sales Orders").present? %>
                      <li><%= link_to orders_path do %><i class="fa fa-circle"></i>Orders<% end %></li>
+                     <%end%>
+                     <%if current_admin.roles.where("title LIKE ? ", "Sales Transactions").present? %>
                      <li><%= link_to transactions_path do %><i class="fa fa-circle"></i>Transactions<% end %></li>
+                     <%end%>
+                     <%if current_admin.roles.where("title LIKE ? ", "Sales Products").present? %>
+                     <li><%= link_to sold_products_path do %><i class="fa fa-circle"></i>Products<% end %></li>
+                     <%end%>
                  </ul>
              </li>
+             <%end%>
+             <% if current_admin.roles.where("title LIKE ? ", "USERS").present? %>
              <li><a class="sidebar-header" href=""><i data-feather="user-plus"></i><span>Users</span><i class="fa fa-angle-right pull-right"></i></a>
                  <ul class="sidebar-submenu">
                      <li>
@@ -54,13 +67,16 @@
                      <%end%>
                  </ul>
              </li>
+             <%end%>
              <li>
                 <a class="sidebar-header" href=""><i data-feather="settings"></i><span>Settings</span><i class="fa fa-angle-right pull-right"></i></a>
                  <ul class="sidebar-submenu">
                      <li><%= link_to edit_admin_registration_path do %><i class="fa fa-circle"></i>Profile<% end %></li>
                  </ul>
              </li>
+             <% if current_admin.roles.where("title LIKE ? ", "notifications").present? %>
              <li><a class="sidebar-header" href="<%= notifications_path %>"><i data-feather="home"></i><span>Notifications</span></a></li>
+             <%end%>
          </ul>
      </div>
  </div>

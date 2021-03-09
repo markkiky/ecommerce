@@ -1,5 +1,4 @@
-
- <%= stylesheet_link_tag "css/datatables" %>
+<%= stylesheet_link_tag "css/datatables" %>
 <!-- page-wrapper Start-->
 <div class="page-wrapper">
 
@@ -70,7 +69,7 @@
                                                 <th>Last Name</th>
                                                 <th>Phone Number </th>
                                                 <th>Email</th>
-                                                <th>Role</th>
+                                                
                                                 <th>Last Login</th>
                                                 <th>Actions</th>
                                         </thead>
@@ -83,7 +82,7 @@
                                                 <td><%= user.last_name %></td>
                                                 <td><%= user.phone %></td>
                                                 <td><%= user.email %></td>
-                                                <td><%= user.role.title %></td>
+                                                
                                                 <td><%= user.last_sign_in_at ? user.last_sign_in_at.in_time_zone("Nairobi") : "---" %></td>
                                                 <td>
                                                     <div class='actions row-actions'>

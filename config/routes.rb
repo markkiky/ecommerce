@@ -36,6 +36,7 @@ Rails.application.routes.draw do
     get "/customers/list/orders/:id", to: "admins#show_customer_orders", as: :customer_orders
     get "/customers/new", to: "admins#add_customer", as: :add_customer
     post "/customers/create", to: "admins#create_customer"
+    get "/logout", to: "sessions#destroy"
   end
   get "/change_image", to: "products#change_product"
   root "homes#index"
@@ -81,7 +82,7 @@ Rails.application.routes.draw do
   get "/choose_payment/:id", to: "orders#choose_payment", as: :choose_payment
   post "/choose_payment/:id", to: "orders#admin_payment", as: :admin_payment
   devise_scope :customer do
-    get "/logout", to: "sessions#destroy"
+    
     get "/users", to: "devise/registrations#new"
   end
   # post '/admin_payment', to: "orders#admin_payment", as: :admin_payment
@@ -113,6 +114,7 @@ Rails.application.routes.draw do
   post "/admin/place_order", to: "orders#create_admin_order", as: :admin_place_order
   get "/order_history", to: "orders#order_history", as: :order_history
   get "admin_order_history", to: "admins#admin_order_history", as: :admin_order_history
+  get "sold/products", to: "admins#sold_product", as: :sold_products
 
   #search path
   get "search", to: "products#search"

@@ -24,14 +24,14 @@ class SessionsController < ApplicationController
     end
 
     def destroy
-        
         if current_admin != nil
-            sign_out @current_admin
+            sign_out current_admin
             flash[:success] = 'See you!'
             redirect_to new_admin_session_path
         else
-            flash[:success] = "Failed to log you out"
-            redirect_to root_path
+            sign_out current_admin
+            flash[:success] = "Logged Out"
+            redirect_to new_admin_session_path
         end
     end
 
