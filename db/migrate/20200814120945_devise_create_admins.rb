@@ -41,6 +41,9 @@ class DeviseCreateAdmins < ActiveRecord::Migration[6.0]
       t.boolean :shipper
       t.boolean :supplier
 
+      t.boolean :otp_confirmed, default: false
+      t.string :otp
+
       t.timestamps null: false
     end
 

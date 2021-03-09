@@ -1,4 +1,5 @@
 class SessionsController < ApplicationController
+    
     def create
         if auth != nil
             if auth.provider == "google_oauth2"

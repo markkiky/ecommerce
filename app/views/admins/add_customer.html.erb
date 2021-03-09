@@ -88,30 +88,46 @@
                                     <div class="tab-pane fade active show" id="account" role="tabpanel" aria-labelledby="account-tab">
                                         <% # <form class="needs-validation user-add" novalidate=""> %>
                                         <%= form_with url: "/customers/create", method: :post, class: "needs-validation user-add" do |form| %>
-                                            <h4>Account Details</h4>
-                                            <div class="form-group row">
-                                                <label for="validationCustom0" class="col-xl-3 col-md-4"><span>*</span> First Name</label>
-                                                <input class="form-control col-xl-8 col-md-7" id="validationCustom0" type="text" required="" name='first_name'>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label for="validationCustom1" class="col-xl-3 col-md-4"><span>*</span> Last Name</label>
-                                                <input class="form-control col-xl-8 col-md-7" id="validationCustom1" type="text" required="", name="last_name">
-                                            </div>
-                                             <div class="form-group row">
-                                                <label for="validationCustom5" class="col-xl-3 col-md-4"><span>*</span> Phone Number</label>
-                                                <input class="form-control col-xl-8 col-md-7" id="validationCustom5" type="text" required="", name="phone">
-                                            </div>
-                                            <div class="form-group row">
-                                                <label for="validationCustom2" class="col-xl-3 col-md-4"><span>*</span> Email</label>
-                                                <input class="form-control col-xl-8 col-md-7" id="validationCustom2" type="text" required=""name="email">
-                                            </div>
-                                            <div class="form-group row">
-                                                <label for="validationCustom3" class="col-xl-3 col-md-4"><span>*</span> Password</label>
-                                                <input class="form-control col-xl-8 col-md-7" id="validationCustom3" type="password" required="" name="password">
-                                            </div>
-                                            <div class="form-group row">
-                                                <label for="validationCustom4" class="col-xl-3 col-md-4"><span>*</span> Confirm Password</label>
-                                                <input class="form-control col-xl-8 col-md-7" id="validationCustom4" type="password" required="" name="confirm_password">
+                                            <div class="row">
+                                                <div class="col-lg-6 col-sm-12">
+                                                    <h4>Account Details</h4>
+                                                    <div class="form-group" style="padding-top: 0.5rem;">
+                                                        <label for="validationCustom0"><span>*</span> First Name</label>
+                                                        <input class="form-control" id="validationCustom0" type="text" required="" name='first_name'>
+                                                    </div>
+                                                    <div class="form-group" style="padding-top: 0.5rem;">
+                                                        <label for="validationCustom1"><span>*</span> Last Name</label>
+                                                        <input class="form-control" id="validationCustom1" type="text" required="", name="last_name">
+                                                    </div>
+                                                    <div class="form-group" style="padding-top: 0.5rem;">
+                                                        <label for="validationCustom5"><span>*</span> Phone Number</label>
+                                                        <input class="form-control" id="validationCustom5" type="text" required="", name="phone">
+                                                    </div>
+                                                    <div class="form-group" style="padding-top: 0.5rem;">
+                                                        <label for="validationCustom2"><span>*</span> Email</label>
+                                                        <input class="form-control" id="validationCustom2" type="text" required=""name="email">
+                                                    </div>
+                                                    
+                                                </div>
+                                                <div class="col-lg-6 col-sm-12">
+                                                    <h4> Car Details </h4>
+                                                     <div class="form-group" style="padding-top: 0.5rem;">
+                                                        <label for="validationCustom0"><span>*</span> Car Make</label>
+                                                        <input class="form-control" id="validationCustom0" type="text" required="" name='car_make'>
+                                                    </div>
+                                                    <div class="form-group" style="padding-top: 0.5rem;">
+                                                        <label for="validationCustom1"><span>*</span> Car Model</label>
+                                                        <input class="form-control" id="validationCustom1" type="text" required="", name="car_model">
+                                                    </div>
+                                                    <div class="form-group" style="padding-top: 0.5rem;">
+                                                        <label for="validationCustom5"><span>*</span> Car Year</label>
+                                                        <input class="form-control" id="validationCustom5" type="text" required="", name="car_year">
+                                                    </div>
+                                                    <div class="form-group" style="padding-top: 0.5rem;">
+                                                        <label for="validationCustom2"><span>*</span> Chassis Number</label>
+                                                        <input class="form-control" id="validationCustom2" type="text" required=""name="chassis_number">
+                                                    </div>      
+                                                <div>
                                             </div>
                                             <div class="pull-right">
                                                 <button type="submit" class="btn btn-primary">Save</button>

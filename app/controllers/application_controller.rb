@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  require 'securerandom'
   before_action :configure_permitted_parameters, if: :devise_controller?
   skip_before_action :verify_authenticity_token
 
@@ -33,6 +34,36 @@ class ApplicationController < ActionController::Base
     @cart_token = session[:cart_token]
   end
 
+  def customer_confirm
+
+    if current_customer == nil
+
+    else
+      if current_customer.otp_confirmed == false
+        redirect_to customer_edit_password_path
+      else
+
+      end
+
+    end
+
+  end
+
+  def admin_confirm
+
+    if current_admin == nil
+
+    else
+      if current_admin.otp_confirmed == false
+        # redirect_to admin_edit_password_path
+      else
+
+      end
+
+    end
+
+  end
+  
   protected
 
   def configure_permitted_parameters

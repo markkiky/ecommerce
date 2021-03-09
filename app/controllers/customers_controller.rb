@@ -62,6 +62,32 @@ class CustomersController < ApplicationController
     end
   end
 
+  def edit_password
+    @customer = current_customer
+  end
+
+  def update_password
+    # byebug
+    begin
+      if params["password"] == params["password_confirmation"]
+        current_customer.update(
+          password: params["password"],
+          otp_confirmed: true
+        )
+        # sign_in current_customer  
+      else
+        raise "Password Confirmation error"
+      end
+      
+    rescue => exception
+      flash[:alert] = "Failed to change Password"
+      redirect_to customer_edit_password_path
+    else
+      flash[:success] = "Password Changed successfully"
+      redirect_to new_customer_session_path
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_customer

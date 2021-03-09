@@ -78,6 +78,7 @@ Rails.application.routes.draw do
   resources :customers
   resources :homes
   devise_for :customers, :path => "users"
+  # devise_for :customers, :controllers => { :sessions => "custom_sessions" }
 
   get "/choose_payment/:id", to: "orders#choose_payment", as: :choose_payment
   post "/choose_payment/:id", to: "orders#admin_payment", as: :admin_payment
@@ -151,4 +152,13 @@ Rails.application.routes.draw do
   get "notifications", to: "admins#notifications_list", as: :notifications
   get "notifications/:id", to: "admins#notification_show", as: :notification_show
   get "media_delete", to: "admins#media_delete", as: :media_delete
+
+  # edit password
+  get "password/update", to: "customers#edit_password", as: :customer_edit_password
+  get "admins/password/update", to: "admins#edit_password", as: :admin_edit_password
+
+  # update password
+  post "password/update", to: "customers#update_password"
+  post "admins/password/update", to: "admins#update_password"
+
 end

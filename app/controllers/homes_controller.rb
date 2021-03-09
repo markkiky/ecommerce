@@ -1,4 +1,6 @@
 class HomesController < ApplicationController
+  before_action :customer_confirm
+  
   def index
     @notifications = Home.all
     # console

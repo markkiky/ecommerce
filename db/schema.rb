@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_08_090551) do
+ActiveRecord::Schema.define(version: 2021_03_09_080024) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -65,6 +65,8 @@ ActiveRecord::Schema.define(version: 2021_03_08_090551) do
     t.boolean "vendor"
     t.boolean "shipper"
     t.boolean "supplier"
+    t.boolean "otp_confirmed", default: false
+    t.string "otp"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_admins_on_email", unique: true
@@ -74,6 +76,16 @@ ActiveRecord::Schema.define(version: 2021_03_08_090551) do
   create_table "api_urls", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "key"
     t.string "value"
+  end
+
+  create_table "cars", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "customer_id"
+    t.string "car_make"
+    t.string "car_model"
+    t.string "car_year"
+    t.string "chassis_number"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -152,6 +164,8 @@ ActiveRecord::Schema.define(version: 2021_03_08_090551) do
     t.string "shipping_region"
     t.string "shipping_postal_code"
     t.string "shipping_country"
+    t.boolean "otp_confirmed", default: false
+    t.string "otp"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "encrypted_password", default: "", null: false
