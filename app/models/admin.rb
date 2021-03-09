@@ -4,7 +4,9 @@ class Admin < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  belongs_to :role
+  has_many :admin_roles
+  has_many :roles, through: :admin_roles
+  
   has_many :categories
   has_many :colors
   has_many :sizes

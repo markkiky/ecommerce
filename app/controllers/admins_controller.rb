@@ -2,6 +2,7 @@ class AdminsController < ApplicationController
   before_action :authenticate_admin!
 
   def dashboard
+    console
     @overall_earnings = Transaction.sum(:amount)
     @mpesa_earnings = Transaction.where(:payment_mode => "MPESA").sum(:amount)
     @card_earnings = Transaction.where(:payment_mode => "CARD").sum(:amount)
@@ -55,7 +56,10 @@ class AdminsController < ApplicationController
 
   def create_admin
     begin
-      @admin = Admin.create!(first_name: params["first_name"], last_name: params["last_name"], phone: params["phone"], email: params["email"], password: params["password"], role_id: params["role_id"])
+      @admin = Admin.create!(first_name: params["first_name"], last_name: params["last_name"], phone: params["phone"], email: params["email"], password: params["password"])
+      params["role_ids"].each do |role_id|
+        @admin_role = AdminRole.make(@admin.id, role_id)
+      end
     rescue => exception
       flash[:alert] = exception
       redirect_to add_admin_path

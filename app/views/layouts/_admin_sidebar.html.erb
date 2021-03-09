@@ -10,10 +10,12 @@
                  <% end %>
              </div>
              <h6 class="mt-3 f-14"><%= current_admin.email %></h6>
-             <p><%= current_admin.role.title %></p>
+             <p><%# current_admin.role.title %></p>
          </div>
          <ul class="sidebar-menu">
-             <li><a class="sidebar-header" href="<%= admin_dashboard_path %>"><i data-feather="home"></i><span>Dashboard</span></a></li>
+            <% if current_admin.roles.where("title LIKE ? ", "dashboard").present? %>
+                <li><a class="sidebar-header" href="<%= admin_dashboard_path %>"><i data-feather="home"></i><span>Dashboard</span></a></li>
+            <%end%>
              <li><a class="sidebar-header" href="<%= categories_path %>"><i data-feather="life-buoy"></i><span>Categories</span></a></li>
              <li><a class="sidebar-header" href=""><i data-feather="box"></i><span>Products</span><i class="fa fa-angle-right pull-right"></i></a>
                  <ul class="sidebar-submenu">
@@ -43,7 +45,7 @@
                          <i class="fa fa-circle"></i>Customers List</a>
                          <% end %>
                      </li>
-                     <% if current_admin.role_id == 1 %>
+                     <% if current_admin.roles.where("title LIKE ? ", "sales orders").present? %>
                      <li>
                          <%= link_to admins_list_path do %>
                          <i class="fa fa-circle"></i>Admins List</a>

@@ -74,16 +74,11 @@
                                             </div>
                                             <div class="form-group row">
                                                 <label for="validationCustom5" class="col-xl-3 col-md-4"><span>*</span> Admin Role</label>
-                                                <select class=" form-control col-xl-8 col-md-7" title="Branch" data-live-search="true" name="role_id" required> 
-                                                    <option value="">-- Select Role --</option>
-                                                    <% @roles.each do |role| %>
-                                                        <option value="<%= role["id"] %>"><%= role["title"] %></option>
-                                                    <% end %>
-                                            
-                                            
-                                                </select>
-                                               
+                                                <span class="col-xl-8 col-md-7">
+                                                    <%= collection_check_boxes(:admin, :role_ids, Role.all, :id, :title, { },id: "roles", name: "role_ids[]", class: "ml-3 mr-1") %>
+                                                </span>
                                             </div>
+                                            
                                             <div class="form-group row">
                                                 <label for="validationCustom2" class="col-xl-3 col-md-4"><span>*</span> Email</label>
                                                 <input class="form-control col-xl-8 col-md-7" id="validationCustom2" type="text" required=""name="email">
@@ -97,7 +92,7 @@
                                                 <input class="form-control col-xl-8 col-md-7" id="validationCustom4" type="password" required="" name="confirm_password">
                                             </div>
                                             <div class="pull-right">
-                                                <button type="submit" class="btn btn-primary">Save</button>
+                                                <button type="submit" id="submit_form" class="btn btn-primary">Save</button>
                                             </div>
                                         <% end %>
                                     </div>
@@ -298,3 +293,15 @@
 <!--form validation js-->
 <%= javascript_include_tag "js/dashboard/form-validation-custom.js" %>
 
+<script>
+   $('#submit_form').click(function() {
+      checked = $("input[type=checkbox]:checked").length;
+
+      if(!checked) {
+        alert("You must check at least one admin role.");
+        return false;
+      }
+
+    });
+
+</script>

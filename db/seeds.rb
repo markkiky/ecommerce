@@ -9,10 +9,18 @@
 # Admin.create!(email: 'markkaris438@gmail.com', password: "123456", owner: true)
 
 # Create roles
-Role.create!(title: "Super Admin")
-Role.create!(title: "Admin")
-Admin.create(email: "mark@nouveta.tech", password: "123456", role_id: "1")
-Admin.create(email: "markkaris438@gmail.com", password: "123456", role_id: "2")
+Role.create!(title: "Dashboard")
+Role.create!(title: "Brands")
+Role.create!(title: "Products")
+Role.create!(title: "Sales Orders")
+Role.create!(title: "Sales Transactions")
+Role.create!(title: "Sales Products")
+Role.create!(title: "Notifications")
+Admin.create(email: "mark@nouveta.tech", password: "123456")
+AdminRole.make(1, 1)
+AdminRole.make(1, 2)
+Admin.create(email: "markkaris438@gmail.com", password: "123456")
+AdminRole.make(2, 1)
 
 # Transaction Statuses
 Status.create(name: "unpaid")
