@@ -22,14 +22,14 @@
 
 <div class="pg-body">
       <div class="container">
-        <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }, :class => "theme-form", multipart: true) do |f| %>
+        <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, multipart: true }, :class => "theme-form") do |f| %>
          <div class="row">
             <div class="container">
                <table class="user-info">
                   <tr>
                      <td class="picture">
                         <% if current_customer %>
-                              <div class="img-cover"><%= image_tag (current_customer.avatar_thumbnail), :id => "output" %></div>
+                              <div class="img-cover"><%= image_tag (resource.avatar_thumbnail if resource.avatar.attached?), :id => "output", :class => "ava-output" %></div>
                         <% end %>
                         <% if current_customer == nil %>
                             <h6 class="name"> User Name </h6>
@@ -38,7 +38,7 @@
                         <% end %>
                         <div class="change-picture">
                             <input type="file" accept="image/*" name="customer[avatar]" id="customer_avatar" onchange="loadFile(event)" class="form-control d-none">
-                            <i class="fa fa-camera-retro"></i><label for="customer_avatar"  style="cursor: pointer; color: #0f1c97;">Change picture</label>
+                            <i class="fa fa-camera-retro"></i><label for="customer_avatar" style="cursor: pointer; color: #0f1c97;">Change picture</label>
                         </div>
                      </td>
                      <td>
