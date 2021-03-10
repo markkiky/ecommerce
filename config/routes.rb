@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   resources :colors
   resources :sizes
   resources :transactions
+  resources :requests
+
   post "transactions/mpesa", to: "transactions#mpesa_transcation_callback", as: :mpesa_callback
   # post 'transactions/card', to: 'transactions#card_transaction_callback', as: :card_callback
   post "transactions/card", to: "transactions#card"

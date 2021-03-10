@@ -1,0 +1,20 @@
+<h1>Requests</h1>
+
+<table class="responsive nowrap table table-hover" id="dttb-requests" data-sort="true" data-source="<%= url_for(format: :json)%>">
+  <thead>
+    <tr>
+      <th data-data="request_first_name">Request first name</th>
+      <th data-data="request_last_name">Request last name</th>
+      <th data-data="request_phone_number">Request phone number</th>
+      <th data-data="request_email">Request email</th>
+      <th data-data="request_message">Request message</th>
+      <th data-data="request_subject">Request subject</th>
+      <th data-data="url" data-orderable="false" data-class-name="all" data-searchable="false" class="skip-export" width="100px"></th>
+    </tr>
+  </thead>
+
+</table>
+
+<br>
+
+<%= link_to 'New Request', new_request_path %>
