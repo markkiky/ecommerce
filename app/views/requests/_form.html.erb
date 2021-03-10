@@ -1,0 +1,18 @@
+
+<%= simple_form_for(@request) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+  <div class="form-inputs">
+    <%= f.input :request_first_name %>
+    <%= f.input :request_last_name %>
+    <%= f.input :request_phone_number %>
+    <%= f.input :request_email %>
+    <%= f.input :request_message %>
+    <%= f.input :request_subject %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

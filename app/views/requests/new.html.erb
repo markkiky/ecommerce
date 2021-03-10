@@ -1,0 +1,114 @@
+<%= render 'layouts/header' %>
+<!-- breadcrumb start -->
+<div class="breadcrumb-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="page-title">
+                    <h2>new request</h2>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <nav aria-label="breadcrumb" class="theme-breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="<%= root_url %>">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">new request</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- breadcrumb End -->
+
+<!--section start-->
+<section class="register-page section-b-space">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h3>new request</h3>
+                <div class="theme-card">
+                    <%= form_with scope: :request, url: requests_path, local: true do |f| %>
+                        <div class="form-row">
+                            <div class="col-md-6">
+                                <b><label for="name">First Name</label></b>
+                                <%= f.text_field :request_first_name,  class: "form-control", placeholder: "First Name", required: true %>
+                            </div>
+                            <div class="col-md-6">
+                                <b><label for="name">Last Name</label></b>
+                                <%= f.text_field :request_last_name,  class: "form-control", placeholder: "Last Name", required: true %>
+                            </div>
+                             <div class="col-md-6"><br>
+                                <b><label for="phone">Phone Number</label></b>
+                                <%= f.number_field :request_phone_number,  class: "form-control", placeholder: "Phone Number" %>
+                            </div>
+                             <div class="col-md-6"><br>
+                                <b><label for="email">Email</label></b>
+                                <%= f.email_field :request_email,  class: "form-control", placeholder: "Email", required: true %>
+                            </div>
+                            <div class="col-md-12"><br>
+                                <b><label for="subject">Subject</label></b>
+                                <%= f.text_field :request_subject, required: true, :class => "form-control", :placeholder => "Enter Subject",  :size => "20", :maxlength =>"20", :style => "text-transform:uppercase" %>
+                            </div>
+                            <div class="col-md-12"><br>
+                                <b><label for="review">Write Your Message</label></b>
+                                <%= f.text_area :request_message, required: true, :class => "form-control", :rows => 6, :placeholder => "Write your Message" %>
+                            </div>
+                            <div class="col-md-12"><br>
+                                <b><label for="image">Attach an Image</label></b> <br>
+                                <%= f.file_field :images, multiple: true, class: "", required: false %>
+                            </div> 
+                            <div class="col-md-12"><br> 
+                                <%= f.submit "Send Your Request", :class => "btn btn-solid" %>
+                            </div>
+                        </div>
+                    
+                    <% end %>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>    
+<!--Section ends-->
+
+<!-- render tawk live chat -->
+<%# <%= render "layouts/tawk" %>
+
+<%= render 'layouts/footer' %>
+
+<!-- latest jquery-->
+<%= javascript_include_tag 'js/jquery-3.3.1.min.js' %>
+
+<!-- menu js-->
+<%= javascript_include_tag 'js/menu.js' %>
+
+<!-- lazyload js-->
+<%= javascript_include_tag 'js/lazysizes.min.js' %>
+
+<!-- popper js-->
+<%= javascript_include_tag 'js/popper.min.js' %>
+
+<!-- slick js-->
+<%= javascript_include_tag 'js/slick.js' %>
+
+<!-- Bootstrap js-->
+<%= javascript_include_tag 'js/bootstrap.js' %>
+
+<!-- Bootstrap Notification js-->
+<%= javascript_include_tag 'js/bootstrap-notify.min.js' %>
+
+<!-- Theme js-->
+<%= javascript_include_tag 'js/script.js' %>
+
+
+<script>
+    function openSearch() {
+        document.getElementById("search-overlay").style.display = "block";
+    }
+
+    function closeSearch() {
+        doc
+        ument.getElementById("search-overlay").style.display = "none";
+    }
+    
+</script>

@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Request first name:</strong>
+  <%= @request.request_first_name %>
+</p>
+
+<p>
+  <strong>Request last name:</strong>
+  <%= @request.request_last_name %>
+</p>
+
+<p>
+  <strong>Request phone number:</strong>
+  <%= @request.request_phone_number %>
+</p>
+
+<p>
+  <strong>Request email:</strong>
+  <%= @request.request_email %>
+</p>
+
+<p>
+  <strong>Request message:</strong>
+  <%= @request.request_message %>
+</p>
+
+<p>
+  <strong>Request subject:</strong>
+  <%= @request.request_subject %>
+</p>
+
+<%= link_to 'Edit', edit_request_path(@request) %> |
+<%= link_to 'Back', requests_path %>
