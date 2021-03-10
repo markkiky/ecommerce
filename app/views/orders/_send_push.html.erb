@@ -1,0 +1,31 @@
+<%= include_gon %>
+
+<script>
+    $('#mpesaNumberModal').modal("hide");
+
+    $("#mpesaModal").modal("show");
+    var order_id = <%= @order_id %>;
+    var response = gon.response
+
+    if (response != null){
+        console.log("checking Payment")
+        $.ajax({
+            method: "GET",
+            url: "/check_payment/" + order_id,
+            dataType: 'script',
+            format: "js",
+            data: {
+                order_id: order_id
+            }
+        })
+    }else {
+        console.log("No ppaymen")
+        $.ajax({
+            method: "GET",
+            url: "/push_responder/" + order_id,
+            dataType: 'script',
+            format: "js",
+            
+        })
+    }
+</script>

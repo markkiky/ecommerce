@@ -1,14 +1,2 @@
+$('.container').append("<%= j render(:partial => 'send_push') %>");
 
-$('#mpesaNumberModal').modal("hide");
-
-$("#mpesaModal").modal("show");
-var order_id = <%= @order_id %>;
-$.ajax({
-    method: "GET",
-    url: "/check_payment/" + order_id,
-    dataType: 'script',
-    format: "js",
-    data: {
-        order_id: order_id
-    }
-})

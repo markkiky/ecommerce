@@ -16,5 +16,6 @@ module Ecommerce
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
     config.exceptions_app = self.routes
+    config.autoload_paths += %W(#{config.root}/app/classes #{config.root}/app/services)
   end
 end

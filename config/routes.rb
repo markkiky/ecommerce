@@ -49,6 +49,7 @@ Rails.application.routes.draw do
 
   get "payment/:id", to: "orders#order_payment", as: :order_payment
   post "/mpesa_push/:id", to: "orders#send_push", as: :send_push
+  get "/push_responder/:id", to: "orders#push_responder"
 
   get "/check_payment/:id", to: "orders#check_payment", as: :check_payment
 

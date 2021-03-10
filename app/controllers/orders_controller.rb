@@ -8,15 +8,13 @@ class OrdersController < ApplicationController
   @@mpesa_retry = 2
 
   before_action :authenticate_admin!, only: [:index, :show]
-  # before_action :authenticate_customer!, only: [:new, :create]
-
   before_action :set_order, only: [:show]
 
   # after_action :check_payment, only: [:send_push]
 
   def index
     @orders = Order.where.not(:order_status => "cart")
-    console
+    # console
 
   end
 
@@ -252,33 +250,25 @@ class OrdersController < ApplicationController
 
   def send_push
     phone = params[:phone]
-    order_id = params[:id]
-    @order = Order.find(order_id)
-    @order_id = @order.id
+    @order_id = params[:id]
+    @order = Order.find(@order_id)
+    @order.phone_number = phone
     begin
-      url = URI(AdminConfig["payme"])
-
-      https = Net::HTTP.new(url.host, url.port)
-      https.use_ssl = true
-
-      request = Net::HTTP::Post.new(url)
-      form_data = [["function", "CustomerPayBillOnlinePush"], ["PayBillNumber", AdminConfig["paybill"]], ["Amount", @order.order_subtotal.to_s], ["PhoneNumber", phone], ["AccountReference", @order.order_number], ["TransactionDesc", @order.order_number], ["FullNames", "- - -"]]
-      request.set_form form_data, "multipart/form-data"
-      response = https.request(request)
-      puts response.read_body
-      response_json = JSON.parse(response.read_body)
-      if response_json["success"]
-        # push sent
-
-      else
-        # push not sent
-      end
+      @response = PushSender.call(@order)
+      gon.response = @response
     rescue Exception => ex
       puts "#{ex.class}: #{ex.message}"
     end
-    render :file => "orders/send_push.js.erb"
+    respond_to do |format|
+      format.js
+    end
+  end
 
-    # check_payment(order_id)
+  def push_responder
+    @order = Order.find(params[:id])
+    respond_to do |format|
+      format.js
+    end
   end
 
   # GET All MPESA Transactions for a particular paybill with date
@@ -323,81 +313,10 @@ class OrdersController < ApplicationController
 
   def check_payment
     @order = Order.find(params[:id])
-    begin
-      url = URI("https://payme.revenuesure.co.ke/api/index.php")
-
-      https = Net::HTTP.new(url.host, url.port)
-      https.use_ssl = true
-
-      request = Net::HTTP::Post.new(url)
-      form_data = [["function", "checkPaymentVerification"], ["account_reference", @order.order_number]]
-      request.set_form form_data, "multipart/form-data"
-
-      response_json = nil
-      begin
-        # receipt_response = OpenStruct.new(success: false, response: nil, errors: "No payment Found")
-        Timeout.timeout(@@mpesa_timeout) do
-          receipt_response = false
-          while receipt_response == false
-            # receipt_response = BillerManager::BillerReceiptGettor.call(@reference_bill)
-            # puts receipt_response
-            response = https.request(request)
-            # puts response.read_body
-
-            response_json = JSON.parse(response.read_body)
-            # byebug
-            puts response_json
-            if response_json["success"] == false
-              count = 0
-              while response_json["success"] == false
-                count += 1
-                response = https.request(request)
-                # puts response.read_body
-                response_json = JSON.parse(response.read_body)
-                sleep(@@mpesa_retry)
-                if count > AdminConfig[:mpesa_error_detection].to_i
-                  receipt_response = true
-                  break
-                end
-              end
-            else
-              if response_json["data"]["callback_returned"] == "PENDING"
-                sleep(@@mpesa_retry)
-              elsif response_json["data"]["callback_returned"] == "PAID"
-                after_check_payment(@order.id, response_json)
-                if @order.admin_id == nil
-                  render :js => "window.location = '#{order_success_path(@order.id)}'"
-                else
-                  render :js => "window.location = '#{order_success_admin_path(@order.id)}'"
-                end
-                receipt_response = true
-              elsif response_json["data"]["callback_returned"] == "UNPAID"
-                receipt_response = true
-              end
-            end
-          end
-          raise Timeout::Error
-        end
-      rescue Timeout::Error
-        puts "Timed out now: "
-        if response_json["success"]
-          gon.response_json = response_json
-          gon.status = response_json["data"]["callback_returned"].downcase
-          gon.order_id = params[:id]
-        else
-          gon.response_json = "Failed to send push request"
-          gon.status = "404"
-          gon.order_id = params[:id]
-        end
-        # order_controller = OrdersController.new
-        after_check_payment(@order.id, response_json)
-      end
-    rescue Exception => ex
-      puts "#{ex.class}: #{ex.message}"
-      gon.response_json = ex.message
-      gon.status = "failed"
-      gon.order_id = params[:id]
-    end
+    @response = CheckPayment.call(@order)
+    gon.response_json = @response.response_json
+    gon.status = @response.status
+    gon.order_id = @response.order_id
 
     respond_to do |format|
       format.js
