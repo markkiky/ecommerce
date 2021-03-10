@@ -67,6 +67,11 @@ class HomesController < ApplicationController
 
   def new
     @notificaton = Home.new
+    if current_customer != nil 
+      @customer = current_customer 
+    elsif current_customer == nil
+      @customer = Customer.new
+    end    
   end
 
   def create
