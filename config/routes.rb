@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :shipping_addresses
+  resources :billing_addresses
   require "sidekiq/web"
   require "sidekiq-status/web"
   mount Sidekiq::Web, at: "/sidekiq"

@@ -54,7 +54,7 @@
              <li><a class="sidebar-header" href=""><i data-feather="user-plus"></i><span>Users</span><i class="fa fa-angle-right pull-right"></i></a>
                  <ul class="sidebar-submenu">
                      <li>
-                         <%= link_to customers_path do %>
+                         <%= link_to customers_path do %>hbellome
                          <i class="fa fa-circle"></i>Customers List</a>
                          <% end %>
                      </li>
@@ -75,7 +75,7 @@
                  </ul>
              </li>
              <% if current_admin.roles.where("title LIKE ? ", "notifications").present? %>
-             <li><a class="sidebar-header" href="<%= notifications_path %>"><i data-feather="home"></i><span>Notifications</span></a></li>
+             <li><a class="sidebar-header" href="<%= notifications_path %>"><i data-feather="bell"></i><span>Notifications</span></a></li>
              <%end%>
          </ul>
      </div>

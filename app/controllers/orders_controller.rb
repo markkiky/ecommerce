@@ -130,89 +130,99 @@ class OrdersController < ApplicationController
   def create
     # check if order_cart_subtotal is empty
     #  TO DOs
+    
     @order = current_cart.order
+    if @order.order_subtotal != 0
+      
+    
     if current_customer != nil
-      @order.customer_id = current_customer.id
-      @customer = current_customer
-      @customer.first_name = params[:customer][:first_name]
-      @customer.last_name = params[:customer][:last_name]
-      # @customer.email = params[:customer][:email]
-      @customer.phone = params[:customer][:phone]
-      @customer.county = params[:customer][:county]
-      @customer.shipping_address = params[:customer][:shipping_address]
-      @customer.shipping_city = params[:customer][:shipping_city]
-      @customer.shipping_postal_code = params[:customer][:shipping_postal_code]
-      @customer.billing_address = params[:customer][:billing_address]
-      @customer.billing_country = params[:customer][:billing_country]
-      @customer.billing_city = params[:customer][:billing_city]
-      @customer.billing_postal_code = params[:customer][:billing_postal_code]
-      @customer.delivery_option = params[:customer][:delivery_option]
-      @customer.pick_up_option = params[:customer][:pick_up_option]
-      @customer.car_make = params[:customer][:car_make]
-      @customer.car_name = params[:customer][:car_name]
-      @customer.car_year = params[:customer][:car_year]
-      @customer.chassis_number = params[:customer][:chassis_number]
-      @customer.customer_no = Customer.counter
-      @customer.save!
-      @order.save!
+      @customer.update_attributes(
+        first_name: params[:customer][:first_name],
+        last_name: params[:customer][:last_name],
+        email: params[:customer][:email],
+        phone: params[:customer][:phone]
+      )
+      @customer.billing_addresses.first.update_attributes(
+        address: params[:customer][:billing_address],
+        city: params[:customer][:billing_city],
+        country: params[:customer][:billing_country],
+        postal_code: params[:customer][:billing_postal_code],
+      )
+      @customer.shipping_addresses.first.update_attributes(
+        address: params[:customer][:shipping_address],
+        city: params[:customer][:shipping_city],
+        country: params[:customer][:shipping_country],
+        postal_code: params[:customer][:shipping_postal_code],
+      )
     elsif current_customer == nil
       # check customer exists
       if Customer.where(:email => params[:customer][:email]).exists?
+
         @customer = Customer.where(:email => params[:customer][:email]).last
-        @customer.first_name = params[:customer][:first_name]
-        @customer.last_name = params[:customer][:last_name]
-        @customer.email = params[:customer][:email]
-        @customer.phone = params[:customer][:phone]
-        @customer.county = params[:customer][:county]
-        @customer.shipping_address = params[:customer][:shipping_address]
-        @customer.shipping_city = params[:customer][:shipping_city]
-        @customer.shipping_postal_code = params[:customer][:shipping_postal_code]
-        @customer.billing_address = params[:customer][:billing_address]
-        @customer.billing_country = params[:customer][:billing_country]
-        @customer.billing_city = params[:customer][:billing_city]
-        @customer.billing_postal_code = params[:customer][:billing_postal_code]
-        @customer.delivery_option = params[:customer][:delivery_option]
-        @customer.pick_up_option = params[:customer][:pick_up_option]
-        @customer.car_make = params[:customer][:car_make]
-        @customer.car_name = params[:customer][:car_name]
-        @customer.car_year = params[:customer][:car_year]
-        @customer.chassis_number = params[:customer][:chassis_number]
-        @customer.customer_no = Customer.counter
-        @customer.save!
-        @order.customer_id = @customer.id
-        @order.save!
+        @customer.update_attributes(
+          first_name: params[:customer][:first_name],
+          last_name: params[:customer][:last_name],
+          email: params[:customer][:email],
+          phone: params[:customer][:phone]
+        )
+        @customer.billing_addresses.create(
+          address: params[:customer][:billing_address],
+          city: params[:customer][:billing_city],
+          country: params[:customer][:billing_country],
+          postal_code: params[:customer][:billing_postal_code],
+        )
+        @customer.shipping_addresses.create(
+          address: params[:customer][:shipping_address],
+          city: params[:customer][:shipping_city],
+          country: params[:customer][:shipping_country],
+          postal_code: params[:customer][:shipping_postal_code],
+        )
       else
-        @customer = Customer.new
-        @customer.first_name = params[:customer][:first_name]
-        @customer.last_name = params[:customer][:last_name]
-        @customer.email = params[:customer][:email]
-        @customer.phone = params[:customer][:phone]
-        @customer.county = params[:customer][:county]
-        @customer.shipping_address = params[:customer][:shipping_address]
-        @customer.shipping_city = params[:customer][:shipping_city]
-        @customer.shipping_postal_code = params[:customer][:shipping_postal_code]
-        @customer.billing_address = params[:customer][:billing_address]
-        @customer.billing_country = params[:customer][:billing_country]
-        @customer.billing_city = params[:customer][:billing_city]
-        @customer.billing_postal_code = params[:customer][:billing_postal_code]
-        @customer.delivery_option = params[:customer][:delivery_option]
-        @customer.pick_up_option = params[:customer][:pick_up_option]
-        @customer.car_make = params[:customer][:car_make]
-        @customer.car_name = params[:customer][:car_name]
-        @customer.car_year = params[:customer][:car_year]
-        @customer.chassis_number = params[:customer][:chassis_number]
-        @customer.password = "123456"
-        @customer.customer_no = Customer.counter
-        @customer.save!
-        @order.customer_id = @customer.id
-        @order.save!
+        # Creating New Customer
+        password = SecureRandom.hex(6)
+        @customer = @order.create_customer(
+          first_name: params[:customer][:first_name],
+          last_name: params[:customer][:last_name],
+          phone: params[:customer][:phone],
+          email: params[:customer][:email],
+          customer_no: Customer.counter,
+          password: password,
+          otp: password
+        )
+        # @customer.cars.create(
+        #   car_make: params["car_make"],
+        #   car_model: params["car_model"],
+        #   car_year: params["car_year"],
+        #   chassis_number: params["chassis_number"]
+        # )
+        @customer.billing_addresses.create(
+          address: params[:customer][:billing_address],
+          city: params[:customer][:billing_city],
+          country: params[:customer][:billing_country],
+          postal_code: params[:customer][:billing_postal_code],
+        )
+        @customer.shipping_addresses.create(
+          address: params[:customer][:shipping_address],
+          city: params[:customer][:shipping_city],
+          country: params[:customer][:shipping_country],
+          postal_code: params[:customer][:shipping_postal_code],
+        )
+        # send welcome email with otp
+        CustomerMailer.with(id: @customer.id).welcome_email.deliver_later
       end
     end
-    if @order.update_attributes(order_params.merge(order_status: "pending_payment", order_number: Order.counter, order_date: Date.today()))
+    if @order.update_attributes(order_params.merge(order_status: "pending_payment",customer_id: @customer.id, order_number: Order.counter, order_date: Date.today()))
+      @order.items.each do |loo|
+
+      end
       session[:cart_token] = nil
       redirect_to order_payment_path(@order.id)
     else
       render :new
+    end
+  else
+    flash[:alert] = "Cart is empty"
+      redirect_to products_path
     end
   end
 
@@ -264,12 +274,12 @@ class OrdersController < ApplicationController
     end
   end
 
-  def push_responder
-    @order = Order.find(params[:id])
-    respond_to do |format|
-      format.js
-    end
-  end
+  # def push_responder
+  #   @order = Order.find(params[:id])
+  #   respond_to do |format|
+  #     format.js
+  #   end
+  # end
 
   # GET All MPESA Transactions for a particular paybill with date
   # POST /get_transactions
@@ -313,16 +323,87 @@ class OrdersController < ApplicationController
 
   def check_payment
     @order = Order.find(params[:id])
-    @response = CheckPayment.call(@order)
-    gon.response_json = @response.response_json
-    gon.status = @response.status
-    gon.order_id = @response.order_id
+    begin
+      url = URI("https://payme.revenuesure.co.ke/api/index.php")
+
+      https = Net::HTTP.new(url.host, url.port)
+      https.use_ssl = true
+
+      request = Net::HTTP::Post.new(url)
+      form_data = [["function", "checkPaymentVerification"], ["account_reference", @order.order_number]]
+      request.set_form form_data, "multipart/form-data"
+
+      response_json = nil
+      begin
+        # receipt_response = OpenStruct.new(success: false, response: nil, errors: "No payment Found")
+        Timeout.timeout(@@mpesa_timeout) do
+          receipt_response = false
+          while receipt_response == false
+            # receipt_response = BillerManager::BillerReceiptGettor.call(@reference_bill)
+            # puts receipt_response
+            response = https.request(request)
+            # puts response.read_body
+
+            response_json = JSON.parse(response.read_body)
+            # byebug
+            puts response_json
+            if response_json["success"] == false
+              count = 0
+              while response_json["success"] == false
+                count += 1
+                response = https.request(request)
+                response_json = JSON.parse(response.read_body)
+                sleep(@@mpesa_retry)
+                if count > AdminConfig[:mpesa_error_detection].to_i
+                  receipt_response = true
+                  break
+                end
+              end
+            else
+              if response_json["data"]["callback_returned"] == "PENDING"
+                # check transactions
+                sleep(@@mpesa_retry)
+              elsif response_json["data"]["callback_returned"] == "PAID"
+                after_check_payment(@order.id, response_json)
+                if @order.admin_id == nil
+                  render :js => "window.location = '#{order_success_path(@order.id)}'"
+                else
+                  render :js => "window.location = '#{order_success_admin_path(@order.id)}'"
+                end
+                receipt_response = true
+              elsif response_json["data"]["callback_returned"] == "UNPAID"
+                receipt_response = true
+              end
+            end
+          end
+          raise Timeout::Error
+        end
+      rescue Timeout::Error
+        puts "Timed out now: "
+        if response_json["success"]
+          gon.response_json = response_json
+          gon.status = response_json["data"]["callback_returned"].downcase
+          gon.order_id = params[:id]
+        else
+          # check transactions. If still not paid
+          gon.response_json = "Failed to send push request"
+          gon.status = "404"
+          gon.order_id = params[:id]
+        end
+        # order_controller = OrdersController.new
+        after_check_payment(@order.id, response_json)
+      end
+    rescue Exception => ex
+      puts "#{ex.class}: #{ex.message}"
+      gon.response_json = ex.message
+      gon.status = "failed"
+      gon.order_id = params[:id]
+    end
 
     respond_to do |format|
       format.js
     end
   end
-
   #
   def after_check_payment(order_id, response_json)
     # Things to return declaration

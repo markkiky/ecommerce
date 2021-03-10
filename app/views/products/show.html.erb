@@ -8,8 +8,6 @@
 <!-- header start -->
 <%= render 'layouts/header' %>
 <!-- header end -->
-
-
     <!-- breadcrumb start -->
     <div class="breadcrumb-section">
         <div class="container">
@@ -37,6 +35,8 @@
     <section>
         <div class="collection-wrapper">
             <div class="container">
+                <%# form_with order_items_path, remote: true, :html => { :onsubmit => "submitForm()" do %>
+                <%= form_with url: "/cart/items", :id => "cart_form" do |form|%>
                 <div class="row">
                     <div class="col-lg-5 col-sm-10 col-xs-12">
                         <div class="product-right-slick">
@@ -103,19 +103,19 @@
                                 </ul>
                                 <div class="product-description ">
                                     <div class="border-product">
-                                        <h6 class="product-title">quantity</h6>
-                                        <%= form_tag order_items_path, remote: true do %>
+                                        <h6 class="product-title">In Stock: <%= @product.product_quantity %></h6>
+                                        
                                         <%= hidden_field_tag :product_id, @product.id %>
                                         <div class="qty-box">
                                             <div class="input-group"><span class="input-group-prepend"><button type="button" class="btn quantity-left-minus" data-type="minus" data-field=""><i class="ti-angle-left"></i></button> </span>
-                                                <%= number_field_tag :quantity, 1, min: 1, :class => "form-control input-number" %><span class="input-group-prepend"><button type="button" class="btn quantity-right-plus" data-type="plus" data-field=""><i class="ti-angle-right"></i></button></span>
+                                                <%= number_field_tag :quantity, 1, min: 1, max: @product.product_quantity,  :class => "form-control input-number" %><span class="input-group-prepend"><button type="button" class="btn quantity-right-plus" data-type="plus" data-field=""><i class="ti-angle-right"></i></button></span>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="product-buttons">
-                                        <%= button_to order_items_path(:product_id => @product.id), { :class => "btn btn-solid", 'data-toggle' => 'modal', 'data-target' => '#addtocart' } do %> add to cart <% end %> </div>
+                                        <%= button_to order_items_path(:product_id => @product.id), { :class => "btn btn-solid" } do %> add to cart <% end %> </div>
                                     </div>
-                                <% end %>
+                               
                                 <div class="border-product d-none">
                                     <h6 class="product-title">product details</h6>
 
@@ -135,17 +135,17 @@
                                 <div class="border-product">
                                     <div class="product-icon">
                                         <% if customer_signed_in? %>
-                                        <% if @wishlist_exists == true %>
-                                        <%= link_to wishlists_update_path(product: @product), :class => "wishlist-btn", remote: true do %>
-                                        <i class="fa fa-heart" style="color:#0f1c97;"></i><span id="wishlist_link" class="title-font" style="color:#0f1c97;">Remove from Wishlist</span>
-                                        <% end %>
+                                            <% if @wishlist_exists == true %>
+                                                <%= link_to wishlists_update_path(product: @product), :class => "wishlist-btn", remote: true do %>
+                                                    <i class="fa fa-heart" style="color:#0f1c97;"></i><span id="wishlist_link" class="title-font" style="color:#0f1c97;">Remove from Wishlist</span>
+                                                <% end %>
+                                            <% else %>
+                                                <%= link_to wishlists_update_path(product: @product), :class => "wishlist-btn", remote: true do %>
+                                                <i class="fa fa-heart" style="color:#0f1c97;"></i><span id="wishlist_link" class="title-font" style="color:#0f1c97; ">Add To WishList</span>
+                                                <% end %>
+                                            <% end %>
                                         <% else %>
-                                        <%= link_to wishlists_update_path(product: @product), :class => "wishlist-btn", remote: true do %>
-                                        <i class="fa fa-heart" style="color:#0f1c97;"></i><span id="wishlist_link" class="title-font" style="color:#0f1c97; ">Add To WishList</span>
-                                        <% end %>
-                                        <% end %>
-                                        <% else %>
-                                        <a href="<%= new_customer_session_path %>" class="wishlist-btn" style="color:#000;"><i class="fa fa-heart"></i><span class="title-font">Add To WishList</span></a>
+                                            <a href="<%= new_customer_session_path %>" class="wishlist-btn" style="color:#000;"><i class="fa fa-heart"></i><span class="title-font">Add To WishList</span></a>
                                         <% end %>
                                     </div>
                                 </div>
@@ -187,53 +187,10 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-4 d-none">
-                            <div class="product-right product-form-box">
-                                <h3><%= number_to_currency(@product.price, :unit => ' KES ') %></h3>
-                                <ul class="color-variant">
-                                    <li class="bg-light0"></li>
-                                    <li class="bg-light1"></li>
-                                    <li class="bg-light2"></li>
-                                </ul>
-                                <div class="product-description border-product">
-                                    <h6 class="product-title">select size</h6>
-                                    <div class="modal fade" id="sizemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog modal-dialog-centered" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">Sheer Straight Kurta</h5>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                                </div>
-                                                <div class="modal-body"><img src="../resources/images/size-chart.jpg" alt="" class="img-fluid blur-up lazyload"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="size-box">
-                                        <ul>
-                                            <li class="active"><a href="#">s</a></li>
-                                            <li><a href="#">m</a></li>
-                                            <li><a href="#">l</a></li>
-                                            <li><a href="#">xl</a></li>
-                                        </ul>
-                                    </div>
-                                    <h6 class="product-title">quantity</h6>
-                                    <p> Pia mimi</p>
-                                    <%= form_tag order_items_path, remote: true do %>
-                                    <%= hidden_field_tag :product_id, @product.id %>
-                                    <div class="qty-box">
-                                        <div class="input-group"><span class="input-group-prepend"><button type="button" class="btn quantity-left-minus" data-type="minus" data-field=""><i class="ti-angle-left"></i></button> </span>
-                                            <!--<input type="text" name="quantity" class="form-control input-number" value="1"> <span class="input-group-prepend"><button type="button" class="btn quantity-right-plus" data-type="plus" data-field=""><i class="ti-angle-right"></i></button></span></div>-->
-                                            <%= number_field_tag :quantity, 1, min: 1, :class => "form-control input-number" %><span class="input-group-prepend"><button type="button" class="btn quantity-right-plus" data-type="plus" data-field=""><i class="ti-angle-right"></i></button></span></div>
-                                    </div>
-                                    <!--<div class="product-buttons"><a href="#" data-toggle="modal" data-target="#addtocart" class="btn btn-solid">add to cart</a><a href="#" class="btn btn-solid">buy now</a></div>    -->
-                                </div>
-                                <div class="product-buttons">
-                                    <%= button_to order_items_path(:product_id => @product.id), { :class => "btn btn-solid", 'data-toggle' => 'modal', 'data-target' => '#addtocart' } do %> add to cart <% end %> </div>
-                            </div>
-                            <% end %>
-                        </div>
+                       
                     </div>
                 </div>
+                <% end %>
             </div>
         </div>
     </section>
@@ -518,35 +475,44 @@
     </script>
 
     <script>
-        var color_buttons = document.getElementsByClassName("product-colors")
-        console.log(color_buttons)
+        // var color_buttons = document.getElementsByClassName("product-colors")
+        // console.log(color_buttons)
 
-        for (var i = 0; i < color_buttons.length; i++) {
-            let color = color_buttons[i].attributes.value.value;
-            color_buttons[i].addEventListener('click', color_changed, true);
-        }
+        // for (var i = 0; i < color_buttons.length; i++) {
+        //     let color = color_buttons[i].attributes.value.value;
+        //     color_buttons[i].addEventListener('click', color_changed, true);
+        // }
 
-        function color_changed() {
-            // alert("reached");
-            console.log("Color Changed: Make an action here")
-        }
-        $(document).ready(function() {
-            reloadPage();
+        // function color_changed() {
+        //     // alert("reached");
+        //     console.log("Color Changed: Make an action here")
+        // }
+        // $(document).ready(function() {
+        //     reloadPage();
 
-            function reloadPage() {
-                (function() {
-                    if (window.localStorage) {
-                        if (!localStorage.getItem('firstLoad')) {
-                            localStorage['firstLoad'] = true;
-                            window.location.reload();
-                        } else
-                            localStorage.removeItem('firstLoad');
-                    }
-                })();
+        //     function reloadPage() {
+        //         (function() {
+        //             if (window.localStorage) {
+        //                 if (!localStorage.getItem('firstLoad')) {
+        //                     localStorage['firstLoad'] = true;
+        //                     window.location.reload();
+        //                 } else
+        //                     localStorage.removeItem('firstLoad');
+        //             }
+        //         })();
+        //     }
+
+        // });
+        
+        var available_products = "<%= @available_products %>"
+        $("#cart_form").submit(function(event) {
+            if (Number($("#quantity").val()) <= Number(available_products) ){
+                $("#addtocart").modal("show")
+            }else{
+                event.preventDefault();
+                alert("Desired Quanitites are not available")
+                return false
             }
-
         });
-
-        // location.reload();
     </script>
 <%end%>

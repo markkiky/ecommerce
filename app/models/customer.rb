@@ -10,6 +10,8 @@ class Customer < ApplicationRecord
   has_many :wishlists
   has_many :reviews
   has_many :cars
+  has_many :billing_addresses
+  has_many :shipping_addresses
   has_one_attached :avatar
 
   validates :first_name, :presence => true

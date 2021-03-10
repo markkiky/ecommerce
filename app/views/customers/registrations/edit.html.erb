@@ -75,7 +75,11 @@
                            <div class="col-lg-5 col-xs-12 col-sm-6 pull-right">
                               <div class="row">
                                 <% if current_customer.orders.last != nil %>
+                                        <% if current_customer.orders.last.items.count > 0  %>
                                         <p class="col-xs-12">Last item ordered: <span><%= current_customer.orders.last.items.first.product.product_name %></span> <span class="price"><%= number_to_currency(current_customer.orders.last["order_subtotal"].to_s, unit: ' KES ') %></span></p>
+                                        <%else%>
+                                        <p class="col-xs-12">Last item ordered:<b> No items ordered! </b></p>
+                                        <%end%>
                                     <% else %>
                                         <p class="col-xs-12"> Last item ordered: <b> No items ordered! </b> </p> 
                                 <% end %>

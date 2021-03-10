@@ -1,6 +1,7 @@
 class Order < ApplicationRecord
     has_many :items, class_name: 'OrderItem'
     has_many :transactions, class_name: "Transaction"
+    belongs_to :customer, optional: true
     attr_accessor :phone_number
 
     def self.counter

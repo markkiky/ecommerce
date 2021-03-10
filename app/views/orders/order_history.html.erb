@@ -46,7 +46,7 @@
                               <div class="row">
                                  <div class="col-xs-12 col-sm-6">
                                     <p class="my-orders"><b>My Orders:</b></p>
-                                    <p>You have <%= pluralize(current_cart.items_count, 'item') %> item in your cart</p>
+                                    <p>You have <%= pluralize(current_cart.items_count, 'item') %> in your cart</p>
                                  </div>
                                   <% if current_cart.order.items.empty? %>
                                       <div class="col-xs-12 col-sm-6 view-cart">
@@ -67,7 +67,11 @@
                            <div class="col-lg-5 col-xs-12 col-sm-6 pull-right">
                               <div class="row">
                                <% if current_customer.orders.last != nil %>
+                                         <% if current_customer.orders.last.items.count > 0  %>
                                         <p class="col-xs-12">Last item ordered: <span><%= current_customer.orders.last.items.first.product.product_name %></span> <span class="price"><%= number_to_currency(current_customer.orders.last["order_subtotal"].to_s, unit: ' KES ') %></span></p>
+                                        <%else%>
+                                        <p class="col-xs-12">Last item ordered:<b> No items ordered! </b></p>
+                                        <%end%>
                                     <% else %>
                                         <p class="col-xs-12"> Last item ordered: <b> No items ordered! </b> </p> 
                                 <% end %>
@@ -101,7 +105,7 @@
                               </tr>
                           </thead>
                           <tbody class="dropdown-product-list">
-                              <% current_customer.orders.each do |order| %>
+                              <% current_customer.orders.where.not(:order_status => "cart").each do |order| %>
                               <tr class="cart_item first_item address_0 odd dd-product-group">
                                   <td>
                                     <% order.items.each do |item| %>

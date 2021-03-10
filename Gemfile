@@ -93,6 +93,8 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'rails_db'
+  gem 'solargraph'
+  gem 'htmlbeautifier'
   #real favicon gem
    gem 'rails_real_favicon'
 end
