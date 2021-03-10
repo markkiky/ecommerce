@@ -32,19 +32,19 @@
                         <div class="form-row">
                             <div class="col-md-6">
                                 <b><label for="name">First Name</label></b>
-                                <%= f.text_field :request_first_name,  class: "form-control", placeholder: "First Name", required: true %>
+                                <%= f.text_field :request_first_name,  class: "form-control", placeholder: "First Name", required: true, value: @customer.first_name %>
                             </div>
                             <div class="col-md-6">
                                 <b><label for="name">Last Name</label></b>
-                                <%= f.text_field :request_last_name,  class: "form-control", placeholder: "Last Name", required: true %>
+                                <%= f.text_field :request_last_name,  class: "form-control", placeholder: "Last Name", required: true, value: @customer.last_name %>
                             </div>
                              <div class="col-md-6"><br>
                                 <b><label for="phone">Phone Number</label></b>
-                                <%= f.number_field :request_phone_number,  class: "form-control", placeholder: "Phone Number" %>
+                                <%= f.number_field :request_phone_number,  class: "form-control", placeholder: "Phone Number", value: @customer.phone %>
                             </div>
                              <div class="col-md-6"><br>
                                 <b><label for="email">Email</label></b>
-                                <%= f.email_field :request_email,  class: "form-control", placeholder: "Email", required: true %>
+                                <%= f.email_field :request_email,  class: "form-control", placeholder: "Email", required: true, value: @customer.email %>
                             </div>
                             <div class="col-md-12"><br>
                                 <b><label for="subject">Subject</label></b>

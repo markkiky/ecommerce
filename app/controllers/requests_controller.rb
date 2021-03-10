@@ -15,6 +15,11 @@ class RequestsController < ApplicationController
   # GET /requests/new
   def new
     @request = Request.new
+    if current_customer != nil 
+      @customer = current_customer 
+    elsif current_customer == nil
+      @customer = Customer.new
+    end    
   end
 
   # GET /requests/1/edit
