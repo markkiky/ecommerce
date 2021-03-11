@@ -41,120 +41,122 @@
             <div class="container-fluid">
              <%= form_with url: "#" do |f| %>
                 <div class="row">
-                    <div class="container">
-                        <table class="user-info">
-                            <tr>
-                                <td class="picture">
-                                    <div class="img-cover"><%= image_tag @admin.avatar_thumbnail, :style => "width: 80px; height: 82px", id: "preview" %></div>
-                                    <% if current_admin == nil %>
-                                        <h6 class="name"> User Name </h6>
-                                    <% else %>
-                                        <h6 class="name"><%= current_admin.first_name %> <%= current_admin.last_name %></h6>
-                                    <% end %>
-                                    <%= f.file_field :avatar, multiple: false, class: "d-none", required: false %>
-                                    
-                                    <div class="fileUpload change-picture d-none" id="uploadImageDiv">
-                                        <i class="fa fa-camera-retro"></i>
-                                         <a href="#" > Change picture </a>
-                                        <input id="uploadBtn" type="file" class="upload" />
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="col-xs-12 wellcome">
-                                    <div class="col-xs-12 col-sm-6 col-md-5 col-lg-4">
-                                        <h4><% if Time.now.strftime("%H") <= "11" %> Good Morning <% elsif Time.now.strftime("%H") > "11" && Time.now.strftime("%H") <= "17" %> Good Afternoon <% else %> Good Evening  <% end %> <span><%= current_admin.first_name %> </span></h4>
-                                        <p>Welcome to your account. Here you can 
-                                        manage all of your personal information.</p>
-                                    </div>
-                                    <div class="col-lg-5 col-xs-12 col-sm-6 pull-right">
-                                        <div class="row">
-                                            <div class="col-xs-12 col-sm-6 d-none">
-                                                <p class="my-orders"><b>My Orders:</b></p>
-                                                <p>You have <%= pluralize(current_cart.items_count, "item") %> item in your cart</p>
-                                            </div>
-                                            <% if current_cart.order.items.empty? %>
-                                                <div class="col-xs-12 col-sm-6 view-cart">
-                                                       <%= link_to "Place Order", orders_path, :class => "btn btn-sec-col" %>
-                                                </div>
-                                                    <% else %>
-                                                <div class="col-xs-12 col-sm-6 view-cart">
-                                                        <%= link_to cart_path, :class => "btn btn-sec-col" do %>  <i class="ti-shopping-cart"></i>&nbsp;&nbsp;VIEW CART <% end %>
-                                                </div>
-                                            <% end %>
-                                        </div>
-                                    </div>
-                                    </div>
-                                    <div class="col-xs-12 last">
-                                    <div class="col-xs-12 col-sm-6 col-md-5 col-lg-4">
-                                        <p>Last logged on:<span><%= @admin.last_sign_in_at ? @admin.last_sign_in_at.in_time_zone("Nairobi").strftime("%d.%m.%Y - %H:%M %P") : "---" %></span></p>
-                                    </div>
-                                    <div class="col-lg-5 col-xs-12 col-sm-6 pull-right">
-                                        <div class="row">
-                                            <% if current_admin.orders.last != nil %>
-                                                    <p class="col-xs-12">Last item sold: <span><%= current_admin.orders.last.items.first.product.product_name %></span> <span class="price"><%= number_to_currency(current_admin.orders.last["order_subtotal"].to_s, unit: " KES ") %></span></p>
-                                                <% else %>
-                                                    <p class="col-xs-12"> Last item sold: <b> No items ordered! </b> </p> 
-                                            <% end %>
-                                        </div>
-                                    </div>
-                                    </div>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-12 col-md-2 left-menu">
-                        <a href="<%= show_admin_path(@admin.id) %>"><div class="active"><i class="fa fa-user-o"></i><br><span>YOUR PROFILE</span></div></a>
-                        
-                        <a href="<%= show_admin_orders_path(@admin.id) %>"><div><i class="fa fa-clock-o"></i><br><span>HISTORY</span></div></a>
-                    </div>
-                    <div class="col-md-10 col-sm-12 col-xs-12 register-page">
-                        <div class="theme-card">
-                           
-                            <div class="row">
-                                <div class="col-lg-6">
-                                <h3 class="checkout-title">personal details</h3>
-                                    <div class="form-group">
-                                        <b><%= f.label :first_name %></b>
-                                       
-                                        <p> <%= @admin.first_name %> </p>
-                                    </div>
-                                    <div class="form-group">
-                                        <b><%= f.label :last_name %></b>
-                                        
-                                        <p> <%= @admin.last_name %> </p>
-                                    </div>
-                                    <div class="form-group">
-                                        <b><%= f.label :phone %></b>
-                                      
-                                        <p> <%= @admin.phone %> </p>
-                                    </div>
-                                    <div class="form_group">
-                                        <b><%= f.label :email %></b>
-                                       
-                                        <p> <%= @admin.email %> </p>
-                                    </div>
-                                    <div class="form_group">
-                                        <b><%= f.label :role %></b>
-                                       
-                                        <p> <%= @admin.role.title %> </p>
-                                    </div>
-                                
-                                </div>
-                               
-                                
+                    <div class="col-xs-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>Admin Details</h5>
                             </div>
-                        
+                            <div class="card-body">
+                                <div class="tab">
+                                    <a href="#" class="admin_profile" data-remote = "true"><div class="active"><i class="fa fa-user-o"></i><span>ADMIN PROFILE</span></div></a>
+                                    <a href="#" class="admin_history" data-remote = "true"><div class=""><i class="fa fa-clock-o"></i><span>HISTORY</span></div></a>
+                            </div>
+                            <div id="admin_profile" class="col-md-10 col-xs-12 register-page">
+                                <div class="theme-card">
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                        <h3 class="checkout-title">personal details</h3>
+                                            <div class="form-group">
+                                                <b><%= f.label :first_name %></b>
+                                            
+                                                <p> <%= @admin.first_name %> </p>
+                                            </div>
+                                            <div class="form-group">
+                                                <b><%= f.label :last_name %></b>
+                                                
+                                                <p> <%= @admin.last_name %> </p>
+                                            </div>
+                                            <div class="form-group">
+                                                <b><%= f.label :phone %></b>
+                                            
+                                                <p> <%= @admin.phone %> </p>
+                                            </div>
+                                            <div class="form_group">
+                                                <b><%= f.label :email %></b>
+                                            
+                                                <p> <%= @admin.email %> </p>
+                                            </div>
+                                            <div class="form_group">
+                                                <b><%= f.label :role %></b>
+                                            
+                                                <!--<p> <%# @admin.role.title %> </p>-->
+                                            </div>
+                                        
+                                        </div> 
+                                </div>
+                            </div>
+                <div id="admin_history" class="col-md-10 col-sm-12 col-xs-12 cart-section d-none">
+                  <h6 class="account-table-head">Order History</h6>
+                  <div class="table_block table-responsive clearfix" id="order-detail-content">
+                      <table class="table table-bordered" id="cart_summary">
+                          <thead>
+                              <tr>
+                                  <th colspan="2" class="cart_product first_item">PRODUCT NAME</th>
+                                  <th>ORDER NO</th>
+                                  <th>ORDER DATE</th>
+                                  <th>STATUS</th>
+                                  <th>PAID VIA</th>
+                                  <th class="cart_unit item">TOTAL AMOUNT</th>
+                              </tr>
+                          </thead>
+                          <tbody class="dropdown-product-list">
+                            <% if current_admin.orders.empty? %>
+                                <p>Order history empty</p>
+                              <% current_admin.orders.each do |order| %>
+                              <tr class="cart_item first_item address_0 odd dd-product-group">
+                                  <td>
+                                    <% order.items.each do |item| %>
+                                      <a href="/products/<%= item.product.id %>">
+                                          <!--<img alt="Faded Short Sleeve T-shirts" src="images/prd-1.jpg">-->
+                                            <% if item.product.images.attached? %>
+                                                <a href="/products/<%= item.product.id %>"><%= image_tag item.product.images[0] if item.product.images.length > 0 %></a>
+                                            <% end %>
+                                      </a>
+                                    <% end %>
+                                  </td>
+                                  <td>
+                                      <% order.items.each do |item| %>
+                                      <p class="product-name">
+                                          <a href="/products/<%= item.product.id %>" style="color: #0f1c97;"> <%= item.product.product_name %> </a>
+                                           - Qty (<%= item.quantity %>) .
+                                      </p>        
+                                      <% end %>  
+                                      <!--<small>Size: <span>XL</span></small>
+                                      <small>Color: <span>Red</span></small>
+                                      <small>Product Code: <span>12658472</span></small>-->
+                                  </td>
+                                  <td data-title="ORDER NO">
+                                      <%= order.order_number %>
+                                  </td>
+                                  <td data-title="ORDER DATE">
+                                      <%= order.created_at.to_date %>
+                                  </td>
+                                  <td data-title="STATUS">
+                                      <%= order.order_status %>
+                                  </td>
+                                  <td data-title="PAID VIA">
+                                      <%= order.payment_method %>
+                                  </td>
+                                  <td data-title="PRICE" class="cart_unit">
+                                        <h2><%= number_to_currency(order.order_subtotal, unit: " KES ") %></h2>
+                                  </td>
+                              </tr>
+                              <% end %>
+                              <% end %>
+                          </tbody>
+                      </table>
+                  </div>
+        </div>
                             <div class="form-group mt-2">
                                 
                             </div>
                         </div>
                             
-                        
+                        </div>
                     </div>   
                 </div>
                 <% end %>
+             </div>
             </div>
             <!-- Container-fluid Ends-->
         </div>
@@ -198,19 +200,21 @@
 <%= javascript_include_tag "js/admin-script.js" %>
 
 <script>
-var admin_avatar = document.getElementById("admin_avatar")
+$(document).ready(function(){
 
-document.getElementById("uploadBtn").onchange = function () {
-    // debugger
-    FileList.length = 0
-    // admin_avatar.value = ""
-    admin_avatar.files = document.getElementById("uploadBtn").files
-    readURL(admin_avatar);
-    document.getElementById("uploadBtn").value = ""
+    $('.admin_profile').on('click', function(){
+        $('#admin_profile').removeClass('d-none');
+        $('#admin_history').addClass('d-none');
+    
+    });
 
-    $("#uploadImageDiv").addClass("d-none");
-  
-};
+    $('.admin_history').on('click', function(){
+        $('#admin_history').removeClass('d-none');
+        $('#admin_profile').addClass('d-none');
+   
+    });
+
+});
 
 function readURL(input) {
     // debugger
