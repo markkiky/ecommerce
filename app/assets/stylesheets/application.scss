@@ -529,3 +529,29 @@ p.col-xs-12  {
   width: 80%;
   height: 82%;
 }
+
+.tab {
+  overflow: hidden;
+}
+
+.tab a {
+  text-decoration: none;
+  float: left;
+  color: #000;
+  padding: 14px 16px;
+  transition: 0.3s;
+  font-size: large;
+}
+
+.tab a:hover {
+  color: #0f1c97;
+}
+
+a .active {
+  border-bottom: 2px solid #0f1c97;
+}
+
+.tab span {
+  padding: 6px;
+}
+
