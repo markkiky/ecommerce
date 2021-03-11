@@ -30,14 +30,12 @@
                <table class="user-info">
                   <tr>
                      <td class="picture">
-                        <% if current_customer %>
-                              <div class="img-cover"><%= image_tag (resource.avatar_thumbnail if resource.avatar.attached?), :id => "output", :class => "ava-output" %></div>
-                        <% end %>
-                        <% if current_customer == nil %>
-                            <h6 class="name"> User Name </h6>
+                        <% if current_customer.avatar.attached? %>
+                            <div class="img-cover"><%= image_tag current_customer.avatar, :id => "output", :class => "ava-output" %></div>
                         <% else %>
-                            <h6 class="name"><%= current_customer.first_name %> <%= current_customer.last_name %></h6>
+                            <div class="img-cover"><%= image_tag resource.avatar_thumbnail, :id => "output", :class => "ava-output" %></div>
                         <% end %>
+                        <h6 class="name"><%= current_customer.first_name %> <%= current_customer.last_name %></h6>
                         <div class="change-picture">
                             <input type="file" accept="image/*" name="customer[avatar]" id="customer_avatar" onchange="loadFile(event)" class="form-control d-none">
                             <i class="fa fa-camera-retro"></i><label for="customer_avatar" style="cursor: pointer; color: #0f1c97;">Change picture</label>
