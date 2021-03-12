@@ -1,5 +1,6 @@
 <li>
-  <div class="media"><%= image_tag 'avtar.jpg', :alt => "Avatar image", :width => "65px", :height => "65px", :style => "margin-right: 20px;" %>
+  <div class="media">
+    <%= image_tag review.customer.avatar,:alt => "Avatar image", :width => "65px", :height => "65px", :style => "margin-right: 20px; border-radius: 100%;" %>
     <div class="media-body">
       <h6><%= review.customer.first_name %> <%= review.customer.last_name %> <span>( <%= review.created_at.strftime("%d %B %Y at %H:%M%p") %> )</span></h6>
       <div class="review-rating" data-score="<%= review.rating %>"></div> 
