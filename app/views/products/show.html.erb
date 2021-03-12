@@ -91,7 +91,7 @@
                             <div class="product-right product-description-box">
                                 <h2><%= @product.product_name %></h2>
                                 <div class="average-review-rating" data-score=<%= @average_review %>></div>
-                                <a href="<%= product_reviews_path(@product.id) %>"><span class="number-of-reviews">From: <%= @product.reviews.count %> reviews </span> </a>
+                                <a href="<%= product_reviews_path(@product.id) %>"><span class="number-of-reviews">From: <%= pluralize(@product.reviews.count, "review") %></span> </a>
                                 <div class="border-product">
                                 </div>
                                 <h3><%= number_to_currency(@product.price , :unit => ' KES ') %></h3>
@@ -298,7 +298,13 @@
                             </div>
                         </div>
                         <div class="product-detail">
-                            <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
+                            <div class="rating">
+                                <div class="average-review-rating home" data-score=<%= product.reviews.average(:rating) %>>
+                                </div>
+                                <a href="<%= product_reviews_path(product.id) %>">
+                                <span class="number-of-reviews-home">(<%= product.reviews.count %>)</span>
+                                </a>
+                            </div>
                             <a href="product-page(no-sidebar).html">
                                 <h6><%= product.product_name %></h6>
                             </a>

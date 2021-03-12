@@ -555,3 +555,32 @@ a .active {
   padding: 6px;
 }
 
+.home {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-left: 4px;
+}
+
+.rating a{
+    display: flex;
+    margin: 10px;
+    justify-content: center;
+    flex-direction: row-reverse;
+}
+
+.rating{
+  display: flex;
+  flex-direction: row;
+}
+
+.product-info{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.number-of-reviews-home {
+  font-size: 12px;
+
+}

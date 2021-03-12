@@ -54,7 +54,13 @@
                                 <a href="/products/<%= prod.id %>"><%= image_tag (prod.images[0] if prod.images.length > 0) , :class => "img-fluid blur-up lazyload bg-img" %></a>
                             </div>
                         <div class="product-detail">
-                            <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
+                            <div class="rating">
+                                <div class="average-review-rating home" data-score=<%= prod.reviews.average(:rating) %>>
+                                </div>
+                                <a href="<%= product_reviews_path(prod.id) %>">
+                                    <span class="number-of-reviews-home">(<%= prod.reviews.count %>)</span>
+                                </a>
+                            </div>
                             <a href="product-page(no-sidebar).html">
                                 <h6><%= prod.product_name %></h6>
                             </a>
@@ -86,6 +92,9 @@
     <!-- latest jquery-->
     <%= javascript_include_tag 'js/jquery-3.3.1.min.js' %>
 
+    <!-- jquery raty -->
+    <%= javascript_include_tag 'js/jquery.raty'%>
+
     <!-- menu js-->
     <%= javascript_include_tag 'js/menu.js' %>
 
@@ -106,6 +115,16 @@
 
     <!-- Theme js-->
     <%= javascript_include_tag 'js/script.js' %>
+
+    <script>
+            $('.average-review-rating').raty({
+            readOnly: true,
+            score: function() {
+                return $(this).attr('data-score');
+            },
+            path: '/assets/'
+            });
+    </script>
 
     <script>
         function openSearch() {

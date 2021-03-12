@@ -221,7 +221,13 @@
                                                         </div>
                                                         <div class="product-detail">
                                                             <div>
-                                                                <div class="rating"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></div>
+                                                                <div class="rating">
+                                                                    <div class="average-review-rating home" data-score=<%= product.reviews.average(:rating) %>>
+                                                                    </div>
+                                                                <a href="<%= product_reviews_path(product.id) %>">
+                                                                <span class="number-of-reviews-home">(<%= pluralize(product.reviews.count, "review") %>)</span>
+                                                                </a>
+                                                                </div>
                                                                 <a href="product-page(no-sidebar).html">
                                                                     <h6><%= product.product_name %></h6>
                                                                 </a>
@@ -296,6 +302,9 @@
     <!-- latest jquery-->
     <%= javascript_include_tag 'js/jquery-3.3.1.min.js' %>
 
+    <!-- jquery raty  -->
+    <%= javascript_include_tag 'js/jquery.raty.js' %>
+
     <!-- menu js-->
     <%= javascript_include_tag 'js/menu.js' %>
 
@@ -320,6 +329,15 @@
     <!-- Theme js-->
     <%= javascript_include_tag 'js/script.js' %>
 
+     <script>
+            $('.average-review-rating').raty({
+            readOnly: true,
+            score: function() {
+                return $(this).attr('data-score');
+            },
+            path: '/assets/'
+            });
+    </script>
     <script>
         function openSearch() {
             document.getElementById("search-overlay").style.display = "block";
