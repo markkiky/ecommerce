@@ -61,7 +61,7 @@
                                     <span class="number-of-reviews-home">(<%= prod.reviews.count %>)</span>
                                 </a>
                             </div>
-                            <a href="product-page(no-sidebar).html">
+                            <a href="/products/<%= prod.id %>">
                                 <h6><%= prod.product_name %></h6>
                             </a>
                             <h4><%= number_to_currency(prod.price, :unit => ' KES ') %></h4>
