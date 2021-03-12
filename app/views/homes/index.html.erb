@@ -449,13 +449,8 @@
                                         <% end %>
                                         <div class="media-body align-self-center">
                                             <div class="rating">
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
                                             </div>
-                                            <a href="product-page(no-sidebar).html">
+                                            <a href="/products/<%= product.id %>">
                                                 <h6><%= product.product_name %></h6>
                                             </a>
                                             <h4><%= number_to_currency(product.price, :unit => ' KES ') %></h4>
@@ -473,11 +468,6 @@
                                         <% end %>
                                         <div class="media-body align-self-center">
                                             <div class="rating">
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
                                             </div>
                                             <a href="/products/<%= product.id %>">
                                                 <h6><%= product.product_name %></h6>
