@@ -25,9 +25,9 @@
                         <li><a href="#" data-lng="en"><i class="flag-icon flag-icon-is"></i> English</a></li>
                     </ul>
                 </li>
-                <li class="onhover-dropdown"><i data-feather="bell"></i><span class="badge badge-pill badge-primary pull-right notification-badge"><%= Home.where(notification_read: false).count %></span>
+                <li class="onhover-dropdown"><i data-feather="bell"></i><span class="badge badge-pill badge-primary pull-right notification-badge"><%= Home.where(notification_read: false).count + Request.where(request_read: false).count %></span>
                     <ul class="notification-dropdown onhover-show-div p-0">
-                        <li>Notification <span class="badge badge-pill badge-primary pull-right"><%= Home.where(notification_read: false).count %></span></li>
+                        <li>Notification <span class="badge badge-pill badge-primary pull-right"><%= Home.where(notification_read: false).count + Request.where(request_read: false).count %></span></li>
                         <% Home.where(notification_read: false).each do |notification| %>
                         <%= link_to notification_show_path(notification.id) do %>
                         <li>
@@ -40,6 +40,7 @@
                         </li>
                         <% end %>
                         <% end %>
+                        
                         <li class="txt-dark">
                             <%= link_to notifications_path do %>
                                 All notification

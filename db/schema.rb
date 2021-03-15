@@ -10,11 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< Updated upstream
-ActiveRecord::Schema.define(version: 2021_03_10_094013) do
-=======
-ActiveRecord::Schema.define(version: 2021_03_10_135859) do
->>>>>>> Stashed changes
+ActiveRecord::Schema.define(version: 2021_03_15_054852) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -324,6 +320,7 @@ ActiveRecord::Schema.define(version: 2021_03_10_135859) do
     t.string "request_email"
     t.string "request_message"
     t.string "request_subject"
+    t.boolean "request_read", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
