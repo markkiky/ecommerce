@@ -121,6 +121,10 @@ Rails.application.routes.draw do
   get "/order_history", to: "orders#order_history", as: :order_history
   get "admin_order_history", to: "admins#admin_order_history", as: :admin_order_history
   get "sold/products", to: "admins#sold_product", as: :sold_products
+  get "customer/:id/admin_order", to: "orders#admin_customer_order", as: :admin_customer_order
+  post "customer/:id/admin_order", to: "orders#admin_customer_order_post"
+  get "customer/:id/admin_order/modal", to: "orders#admin_customer_order_modal"
+  post "customer/:id/confirm_order", to: "orders#confirm_order", as: :confirm_order
 
   #search path
   get "search", to: "products#search"

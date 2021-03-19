@@ -1,4 +1,4 @@
-
+<%= render 'layouts/orders/admin_customer_cart' %>
 <!-- page-wrapper Start-->
  <%= stylesheet_link_tag "css/datatables" %>
 <div class="page-wrapper">
@@ -31,9 +31,10 @@
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="page-header-left">
-                                    <h3>Ordered Products
+                                    <h3>Orders
                                         <small><%= AdminConfig[:app_name] %> Admin panel</small>
                                     </h3>
+                                   
                                 </div>
                             </div>
                             <div class="col-lg-6">
@@ -56,53 +57,35 @@
                     <div class="col-sm-12">
                         <div class="card">
                             <div class="card-header">
-                                <h5>Manage Products</h5>
-                                <div style="float: right;">
-                                    <%= link_to admin_order_path, :class => "btn btn-primary", remote: true do %>
-                                    Place Order
-                                    <% end %>
+                                <h5>Manage Order</h5>
+                                 <div style="float: right;">
+                                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#adminCart">
+                                    Confirm Order
+                                </button>
                                 </div>
                             </div>
                             <div class="card-body order-datatable">
                                 <table class="display" id="basic-1">
                                     <thead>
                                         <tr>
-                                            <th class="">No</th>
                                             <th>Product Name</th>
-                                            <th>Product Price</th>
-                                            <th>Product Selling Price</th>
-                                            <th>Order</th>
-                                            <th>Order Status</th>
-                                            <th>Payment Method</th>
-                                            <th>Date</th>
-                                            <th>Make</th>
-                                            <th>Model</th>
-                                            <th>Product Code</th>
-                                            <th>Year</th>
-                                            
-                                            
+                                            <th>Available quantity</th>
+                                            <th>Price</th>
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <% count = 0 %>
-                                        <% @order_items.reverse.each do |order_item| %>
+                                        <% @products.each do |product| %>
                                         <tr>
-                                            <td class=""><%= count += 1 %></td>
-                                            <td><%= order_item.product.product_name %></td>
-                                            <td><%= number_to_currency(order_item.product.price, unit: "KES ") %></td>
-                                            <td><%= number_to_currency(order_item.price, unit: "KES ") %></td>
-                                            <td><%= order_item.order.order_number %></td>
-                                            <td><%= Status.find_by(id: order_item.order.status_id).name %> </td>
-                                            <td><%= order_item.order.payment_method %></td>
-                                            <td><%= order_item.created_at %></td>
-                                            <td><%= order_item.product.category.category_name %></td>
-                                            <td><%= order_item.product.sub_category.name %></td>
-                                            <td><%= order_item.product.product_code %></td>
-                                            <td><%= order_item.product.year %></td>
-                                            
+                                            <td><%= product.product_name%> </td>
+                                            <td><%= product.product_quantity%> </td>
+                                            <td><%= product.price %></td>
                                             <td>
-                                                
+                                                <!-- Button trigger modal -->
+                                                <button type="button" class="btn btn-primary" onclick= "addProduct(<%= product.id %>)">
+                                                    Order Product
+                                                </button>
                                             </td>
                                         </tr>
                                         <% end %>
@@ -155,3 +138,17 @@
 <%= javascript_include_tag "js/admin-script" %>
 
 <%= javascript_include_tag "tables" %>
+
+<script>
+    function addProduct(product_id) {
+        console.log(product_id)
+        
+        $.ajax({
+        url: "/customer/" + product_id + "/admin_order/modal",
+        type: "get",
+        data: "",
+        
+        })
+    }
+
+</script>

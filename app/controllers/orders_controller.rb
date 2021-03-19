@@ -38,6 +38,66 @@ class OrdersController < ApplicationController
     end
   end
 
+  # get 
+  def admin_customer_order
+    @products = Product.all
+    @customer = Customer.find_by(id: params[:id])
+    @order = Order.find_by(id: session["customer_#{params["id"]}"])
+
+  end
+
+  # get 
+  # displays modal
+  def admin_customer_order_modal
+    @product = Product.find(params[:id])
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  # post 
+  # submits form modal
+  def admin_customer_order_post
+    # byebug
+    @customer = Customer.find(params[:id])
+    if session["customer_#{@customer.id}"] == nil
+      @order = Order.create!(
+        customer_id: @customer.id,
+        order_number: Order.counter,
+        order_date: DateTime.now,
+        order_subtotal: params[:quantity].to_i * params[:price].to_i
+      )
+      # byebug
+      @order_item = OrderItem.create(
+        quantity: params["quantity"],
+        price: params["price"],
+        product_id: params["product_id"],
+        order_id: @order.id
+      )
+      session["customer_#{@customer.id}"] = @order.id
+    else
+      @order = Order.find_by(id: session["customer_#{@customer.id}"])
+      # byebug
+      @order_item = OrderItem.find_or_create_by(order_id: @order.id, product_id: params["product_id"])
+      @order_item.update(
+        quantity: params["quantity"],
+        price: params["price"],
+      )
+    end
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def confirm_order
+    @customer = Customer.find(params[:id])
+    session.delete("customer_#{@customer.id}")
+
+    flash[:notice] = "Order Confirmed"
+    redirect_to orders_path
+  end
+
   def choose_payment
     # byebug
     @order = Order.find(params[:id])

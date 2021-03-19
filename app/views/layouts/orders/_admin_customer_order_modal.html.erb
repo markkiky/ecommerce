@@ -1,0 +1,27 @@
+<!-- Modal -->
+<%= form_with url: "", method: :post, local: false do %>
+<div class="modal fade" id="addProductModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <%= hidden_field_tag 'product_id', @product.id  %>
+        <label for="quantity">Quantity:</label>
+        <input id="quantity" name="quantity" type="number" max="<%= @product.product_quantity %>" required />
+        <label for="price">Price:</label>
+        <input id="price" name="price" type="text" required/>
+       
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Add Item</button>
+      </div>
+    </div>
+  </div>
+</div>
+ <%end%>

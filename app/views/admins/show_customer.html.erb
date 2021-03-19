@@ -45,131 +45,142 @@
                         <div class="card">
                             <div class="card-header">
                                 <h5>Show Customer Details</h5>
+                                <div style="float: right;">
+                                    <%= link_to admin_customer_order_path(@customer.id), :class => "btn btn-primary", remote: false do %>
+                                        Place Order 
+                                    <% end %>
+                                </div>
                             </div>
+                           
                             <div class="card-body">
                                 <div class="tab">
-                                    <a href="#" class="customer_profile" data-remote = "true"><div class="active"><i class="fa fa-user-o"></i><span>PROFILE</span></div></a>
-                                    <a href="#" class="customer_history" data-remote = "true"><div class=""><i class="fa fa-clock-o"></i><span>HISTORY</span></div></a>
+                                    <a href="#profile" class="customer_profile tab-link" data-remote = "true">
+                                      <div class="active"><i class="fa fa-user-o"></i><span>PROFILE</span></div>
+                                    </a>
+                                    <a href="#history" class="customer_history tab-link" data-remote = "true">
+                                        <div class=""><i class="fa fa-clock-o"></i><span>HISTORY</span></div>
+                                    </a>
                                 </div>
-                            <div id="profile" class="col-md-10 col-xs-12 register-page">
-                                <div class="theme-card">
-                                    <div class="row">
-                                        <div class="col-lg-6">
-                                        <h3 class="checkout-title">personal details</h3>
-                                            <div class="form-group">
-                                                <b><%= f.label :first_name %></b>
-                                            
-                                                <p> <%= @customer.first_name %> </p>
-                                            </div>
-                                            <div class="form-group">
-                                                <b><%= f.label :last_name %></b>
+                                <div>
+                                    <div id="profile" class="col-md-10 col-xs-12 register-page">
+                                        <div class="theme-card">
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                <h3 class="checkout-title">personal details</h3>
+                                                    <div class="form-group">
+                                                        <b><%= f.label :first_name %></b>
+                                                    
+                                                        <p> <%= @customer.first_name %> </p>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <b><%= f.label :last_name %></b>
+                                                        
+                                                        <p> <%= @customer.last_name %> </p>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <b><%= f.label :phone %></b>
+                                                    
+                                                        <p> <%= @customer.phone %> </p>
+                                                    </div>
+                                                    <div class="form_group">
+                                                        <b><%= f.label :email %></b>
+                                                    
+                                                        <p> <%= @customer.email %> </p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                <h3 class="checkout-title">Car details</h3>
+                                                    <div class="form-group">
+                                                        <b><%= f.label :car_name %></b>
+                                                    
+                                                        <p> <%= @customer.car_name %> </p>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <b><%= f.label :car_make %></b>
+                                                        
+                                                        <p> <%= @customer.car_make %> </p>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <b><%= f.label :car_year %></b>
+                                                    
+                                                        <p> <%= @customer.car_year %> </p>
+                                                    </div>
+                                                    <div class="form_group">
+                                                        <b><%= f.label :chassis_number %></b>
+                                                    
+                                                        <p> <%= @customer.chassis_number %> </p>
+                                                    </div>
+                                                </div>
                                                 
-                                                <p> <%= @customer.last_name %> </p>
                                             </div>
-                                            <div class="form-group">
-                                                <b><%= f.label :phone %></b>
-                                            
-                                                <p> <%= @customer.phone %> </p>
-                                            </div>
-                                            <div class="form_group">
-                                                <b><%= f.label :email %></b>
-                                            
-                                                <p> <%= @customer.email %> </p>
+                                        
+                                            <div class="form-group mt-2">
+                                                
                                             </div>
                                         </div>
-                                        <div class="col-lg-6">
-                                        <h3 class="checkout-title">Car details</h3>
-                                            <div class="form-group">
-                                                <b><%= f.label :car_name %></b>
                                             
-                                                <p> <%= @customer.car_name %> </p>
-                                            </div>
-                                            <div class="form-group">
-                                                <b><%= f.label :car_make %></b>
-                                                
-                                                <p> <%= @customer.car_make %> </p>
-                                            </div>
-                                            <div class="form-group">
-                                                <b><%= f.label :car_year %></b>
-                                            
-                                                <p> <%= @customer.car_year %> </p>
-                                            </div>
-                                            <div class="form_group">
-                                                <b><%= f.label :chassis_number %></b>
-                                            
-                                                <p> <%= @customer.chassis_number %> </p>
-                                            </div>
-                                        </div>
                                         
-                                    </div>
-                                
-                                    <div class="form-group mt-2">
-                                        
-                                    </div>
-                                </div>
-                                    
-                                
-                            </div>   
-                        <div id="history" class="col-md-10 col-sm-12 col-xs-12 cart-section d-none">
-                        <h6 class="account-table-head">Order History</h6>
-                        <div class="table_block table-responsive clearfix" id="order-detail-content">
-                            <table class="table table-bordered" id="cart_summary">
-                                <thead>
-                                    <tr>
-                                        <th colspan="2" class="cart_product first_item">PRODUCT NAME</th>
-                                        <th>ORDER NO</th>
-                                        <th>ORDER DATE</th>
-                                        <th>STATUS</th>
-                                        <th>PAID VIA</th>
-                                        <th class="cart_unit item">TOTAL AMOUNT</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="dropdown-product-list">
-                                    <% @customer.orders.each do |order| %>
-                                    <tr class="cart_item first_item address_0 odd dd-product-group">
-                                        <td>
-                                            <% order.items.each do |item| %>
-                                            <a href="/products/<%= item.product.id %>">
-                                                <!--<img alt="Faded Short Sleeve T-shirts" src="images/prd-1.jpg">-->
-                                                    <% if item.product.images.attached? %>
-                                                        <a href="/products/<%= item.product.id %>"><%= image_tag item.product.images[0] if item.product.images.length > 0 %></a>
+                                    </div>   
+                                    <div id="history" class="col-md-10 col-sm-12 col-xs-12 cart-section d-none">
+                                        <h6 class="account-table-head">Order History</h6>
+                                        <div class="table_block table-responsive clearfix" id="order-detail-content">
+                                            <table class="table table-bordered" id="cart_summary">
+                                                <thead>
+                                                    <tr>
+                                                        <th colspan="2" class="cart_product first_item">PRODUCT NAME</th>
+                                                        <th>ORDER NO</th>
+                                                        <th>ORDER DATE</th>
+                                                        <th>STATUS</th>
+                                                        <th>PAID VIA</th>
+                                                        <th class="cart_unit item">TOTAL AMOUNT</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody class="dropdown-product-list">
+                                                    <% @customer.orders.each do |order| %>
+                                                    <tr class="cart_item first_item address_0 odd dd-product-group">
+                                                        <td>
+                                                            <% order.items.each do |item| %>
+                                                            <a href="/products/<%= item.product.id %>">
+                                                                <!--<img alt="Faded Short Sleeve T-shirts" src="images/prd-1.jpg">-->
+                                                                    <% if item.product.images.attached? %>
+                                                                        <a href="/products/<%= item.product.id %>"><%= image_tag item.product.images[0] if item.product.images.length > 0 %></a>
+                                                                    <% end %>
+                                                            </a>
+                                                            <% end %>
+                                                        </td>
+                                                        <td>
+                                                            <% order.items.each do |item| %>
+                                                            <p class="product-name">
+                                                                <a href="/products/<%= item.product.id %>" style="color: #0f1c97;"> <%= item.product.product_name %> </a>
+                                                                - Qty (<%= item.quantity %>) .
+                                                            </p>        
+                                                            <% end %>  
+                                                            <!--<small>Size: <span>XL</span></small>
+                                                            <small>Color: <span>Red</span></small>
+                                                            <small>Product Code: <span>12658472</span></small>-->
+                                                        </td>
+                                                        <td data-title="ORDER NO">
+                                                            <%= order.order_number %>
+                                                        </td>
+                                                        <td data-title="ORDER DATE">
+                                                            <%= order.created_at.to_date %>
+                                                        </td>
+                                                        <td data-title="STATUS">
+                                                            <%= order.order_status %>
+                                                        </td>
+                                                        <td data-title="PAID VIA">
+                                                            <%= order.payment_method %>
+                                                        </td>
+                                                        <td data-title="PRICE" class="cart_unit">
+                                                                <h2><%= number_to_currency(order.order_subtotal, unit: " KES ") %></h2>
+                                                        </td>
+                                                    </tr>
                                                     <% end %>
-                                            </a>
-                                            <% end %>
-                                        </td>
-                                        <td>
-                                            <% order.items.each do |item| %>
-                                            <p class="product-name">
-                                                <a href="/products/<%= item.product.id %>" style="color: #0f1c97;"> <%= item.product.product_name %> </a>
-                                                - Qty (<%= item.quantity %>) .
-                                            </p>        
-                                            <% end %>  
-                                            <!--<small>Size: <span>XL</span></small>
-                                            <small>Color: <span>Red</span></small>
-                                            <small>Product Code: <span>12658472</span></small>-->
-                                        </td>
-                                        <td data-title="ORDER NO">
-                                            <%= order.order_number %>
-                                        </td>
-                                        <td data-title="ORDER DATE">
-                                            <%= order.created_at.to_date %>
-                                        </td>
-                                        <td data-title="STATUS">
-                                            <%= order.order_status %>
-                                        </td>
-                                        <td data-title="PAID VIA">
-                                            <%= order.payment_method %>
-                                        </td>
-                                        <td data-title="PRICE" class="cart_unit">
-                                                <h2><%= number_to_currency(order.order_subtotal, unit: " KES ") %></h2>
-                                        </td>
-                                    </tr>
-                                    <% end %>
-                                </tbody>
-                            </table>
-                        </div>
-
-                </div>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                <div>
                         </div>
                     </div>
                 </div>
@@ -219,17 +230,22 @@
 <script>
 $(document).ready(function(){
 
-    $('.customer_profile').on('click', function(){
-        $('#profile').removeClass('d-none');
-        $('#history').addClass('d-none');
+    $('.tab-link').on('click', function(){
+        $(this).children().addClass("active");
+        $(this).siblings().children().removeClass('active');
+        var a_href = $(this).attr('href');
+        $(a_href).removeClass('d-none');
+        $(a_href).siblings().addClass('d-none');
     
     });
 
-    $('.customer_history').on('click', function(){
-        $('#history').removeClass('d-none');
-        $('#profile').addClass('d-none');
+    // $('.customer_history').on('click', function(){
+    //     $('.customer_history').children().addClass("active")
+    //     $('.customer_profile').children().removeClass("active")
+    //     $('#history').removeClass('d-none');
+    //     $('#profile').addClass('d-none');
    
-    });
+    // });
 
 });
 
