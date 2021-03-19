@@ -144,4 +144,10 @@ class AdminsController < ApplicationController
       redirect_to notification_show_path(id: params[:id])
     end
   end
+
+  def sold_product
+    # @orders = Order.all
+    
+    @order_items = OrderItem.all
+  end
 end
