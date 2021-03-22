@@ -40,4 +40,15 @@ class Order < ApplicationRecord
 
         return order_number
     end
+
+    # deducts inventory after order is processsed
+    def self.handle_inventory(order_id)
+        @order = Order.find(order_id)
+
+        @order.items.each do |item|
+            item.product.update(
+                product_quantity: item.product.product_quantity - item.quantity
+            )
+        end
+    end
 end

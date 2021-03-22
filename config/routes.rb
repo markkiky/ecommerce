@@ -125,6 +125,7 @@ Rails.application.routes.draw do
   post "customer/:id/admin_order", to: "orders#admin_customer_order_post"
   get "customer/:id/admin_order/modal", to: "orders#admin_customer_order_modal"
   post "customer/:id/confirm_order", to: "orders#confirm_order", as: :confirm_order
+  get "customer/:id/cart", to: "orders#admin_customer_cart"
 
   #search path
   get "search", to: "products#search"

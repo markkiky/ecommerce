@@ -59,7 +59,7 @@
                             <div class="card-header">
                                 <h5>Manage Order</h5>
                                  <div style="float: right;">
-                                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#adminCart">
+                                 <button type="button" class="btn btn-primary" onclick="showCart(<%= @customer.id %>)">
                                     Confirm Order
                                 </button>
                                 </div>
@@ -144,11 +144,21 @@
         console.log(product_id)
         
         $.ajax({
-        url: "/customer/" + product_id + "/admin_order/modal",
-        type: "get",
-        data: "",
+            url: "/customer/" + product_id + "/admin_order/modal",
+            type: "get",
+            data: "",
         
         })
     }
 
+    function showCart(customer_id) {
+        console.log(customer_id)
+        
+        $.ajax({
+            url: "/customer/" + customer_id+ "/cart",
+            type: "get",
+            data: "",
+        
+        }) 
+    }
 </script>

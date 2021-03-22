@@ -22,8 +22,8 @@
                     <% @order.items.each do |item| %>
                     <tr>
                         <td><%= item.product.product_name %></td>
-                        <td><%= number_to_currency(item.product.price, unit: "KES ") %></td>
-                        <td><%= item.product.product_quantity %></td>
+                        <td><%= number_to_currency(item.price, unit: "KES ") %></td>
+                        <td><%= item.quantity %></td>
                     </tr>
                     <% end %>
                 </tbody>

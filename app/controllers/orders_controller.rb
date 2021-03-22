@@ -78,7 +78,7 @@ class OrdersController < ApplicationController
     else
       @order = Order.find_by(id: session["customer_#{@customer.id}"])
       # byebug
-      @order_item = OrderItem.find_or_create_by(order_id: @order.id, product_id: params["product_id"])
+      @order_item = OrderItem.find_or_create_by(order_id: @order.id, product_id: params["product_id"].to_i)
       @order_item.update(
         quantity: params["quantity"],
         price: params["price"],
@@ -92,10 +92,34 @@ class OrdersController < ApplicationController
 
   def confirm_order
     @customer = Customer.find(params[:id])
-    session.delete("customer_#{@customer.id}")
+    # byebug
+    @order = Order.find_by(id: session["customer_#{@customer.id}"])
+    
+    if @order == nil
+      flash[:alert] = "No Order present"
+      redirect_to orders_path
 
-    flash[:notice] = "Order Confirmed"
-    redirect_to orders_path
+    else
+      @order.update(
+        order_subtotal: @order.items.sum(:price),
+        order_status: "pending_payment"
+      )
+      session.delete("customer_#{@customer.id}")
+      # update order
+  
+  
+      flash[:notice] = "Order Confirmed"
+      redirect_to orders_path
+    end
+   
+  end
+
+  def admin_customer_cart
+    @customer = Customer.find(params[:id])
+    @order = Order.find_by(id: session["customer_#{@customer.id}"])
+    respond_to do |format|
+      format.js
+    end
   end
 
   def choose_payment
@@ -133,6 +157,7 @@ class OrdersController < ApplicationController
     product_id = params[:product_id]
     @product = Product.find(product_id)
     @price = @product.price
+    @product_quantity = @product.product_quantity
     respond_to do |format|
       format.js
     end
@@ -196,24 +221,43 @@ class OrdersController < ApplicationController
       
     
     if current_customer != nil
+      @customer = current_customer
       @customer.update_attributes(
         first_name: params[:customer][:first_name],
         last_name: params[:customer][:last_name],
         email: params[:customer][:email],
         phone: params[:customer][:phone]
       )
-      @customer.billing_addresses.first.update_attributes(
-        address: params[:customer][:billing_address],
-        city: params[:customer][:billing_city],
-        country: params[:customer][:billing_country],
-        postal_code: params[:customer][:billing_postal_code],
-      )
-      @customer.shipping_addresses.first.update_attributes(
-        address: params[:customer][:shipping_address],
-        city: params[:customer][:shipping_city],
-        country: params[:customer][:shipping_country],
-        postal_code: params[:customer][:shipping_postal_code],
-      )
+      if @customer.billing_addresses.count < 1
+        @customer.billing_addresses.create(
+          address: params[:customer][:billing_address],
+          city: params[:customer][:billing_city],
+          country: params[:customer][:billing_country],
+          postal_code: params[:customer][:billing_postal_code],
+        )
+      else
+        @customer.billing_addresses.first.update_attributes(
+          address: params[:customer][:billing_address],
+          city: params[:customer][:billing_city],
+          country: params[:customer][:billing_country],
+          postal_code: params[:customer][:billing_postal_code],
+        )
+      end
+      if @customer.shipping_addresses.count < 1
+        @customer.shipping_addresses.create(
+          address: params[:customer][:shipping_address],
+          city: params[:customer][:shipping_city],
+          country: params[:customer][:shipping_country],
+          postal_code: params[:customer][:shipping_postal_code],
+        )
+      else
+        @customer.shipping_addresses.first.update_attributes(
+          address: params[:customer][:shipping_address],
+          city: params[:customer][:shipping_city],
+          country: params[:customer][:shipping_country],
+          postal_code: params[:customer][:shipping_postal_code],
+        )
+      end
     elsif current_customer == nil
       # check customer exists
       if Customer.where(:email => params[:customer][:email]).exists?
@@ -480,7 +524,7 @@ class OrdersController < ApplicationController
       elsif transaction_data["callback_returned"] == "PAID"
         puts "PAID"
         # Saving Payment
-        payment_data = response_json["data2"]
+        payment_data = response_json["data"]
         # Create a new transaction for the received data
         # check if order exists
         # if order = Order.where(:order_number => payment_data["ref"])
@@ -502,6 +546,7 @@ class OrdersController < ApplicationController
 
         @order.update(:payment_status => "paid", :reducing_balance => 0, :payment_method => "MPESA", :order_status => "payment_received", :payment_date => @transaction.date, :paid => true)
         # save_payment(order_id, response_json)
+        RemoveStockJob.perform_later(@order.id)
 
         # ActionCable.server.broadcast "test_channel", message: "Payment Received"
         # TestChannel.broadcast_to(current_customer, message: "Payment Received", status: "paid")

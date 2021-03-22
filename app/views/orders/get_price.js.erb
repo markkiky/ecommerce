@@ -1,5 +1,9 @@
 $("#price").remove();
+$("#quantity").remove();
 var price = <%= @price %>
+var quantity = <%= @product_quantity %>
 console.log(price)
 //$(".products").remove();
+
 $('.price').append("<%= j render(:partial => 'layouts/admins/price') %>");
+$('.quantity').append("<%= j render(:partial => 'layouts/admins/quantity') %>");
