@@ -12,19 +12,19 @@
                 <div class="form">
                     <div class="form-group">
                         <label>Select Category</label>
-                        <%= select_tag :category_id, options_for_select(@categories), :prompt => "Select Category", :class => "form-control digits col-xl-8 col-sm-7" %>
+                        <%= select_tag :category_id, options_for_select(@categories), :prompt => "Select Category", :class => "form-control digits col-xl-8 col-sm-7", required: true %>
                     </div>
                     <div class="form-group products">
                         <label>Select Product</label>
-                        <%= select_tag :products, raw("<option>Select Product</option>"), :class => "form-control digits col-xl-8 col-sm-7" %>
+                        <%= select_tag :products, raw("<option>Select Product</option>"), :class => "form-control digits col-xl-8 col-sm-7" , required: true%>
                     </div>
                     <div class="form-group price">
-                        <label>Add Price</label>
-                        <%= number_field_tag :price %>
+                        <label>Price</label>
+                        <%= number_field_tag :price, nil ,  class: "form-control digits col-xl-8 col-sm-7", required: true %>
                     </div>
-                    <div class="qty-box quantity">
-                        <label>Add Quantity</label>
-                        <%= number_field_tag :quantity, 1, min: 1%>
+                    <div class="form-group quantity">
+                        <label>Set Quantity</label>
+                        <%= number_field_tag :quantity, 1, min: 1, class: "form-control digits col-xl-8 col-sm-7", required: true %>
                     </div>
 
                     <!--<button class="mt-2 btn btn-warning d-none" id="add_color">+</button>-->

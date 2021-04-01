@@ -39,12 +39,12 @@
 
             <!-- Container-fluid starts-->
             <div class="container-fluid">
-             <%= form_with url: "#" do |f| %>
+                <%= form_with url: "#" do |f| %>
                 <div class="row">
                     <div class="col-xs-12">
                         <div class="card">
                             <div class="card-header">
-                                <h5>Show Customer Details</h5>
+                                <h5>Customer Details</h5>
                                 <div style="float: right;">
                                     <%= link_to admin_customer_order_path(@customer.id), :class => "btn btn-primary", remote: false do %>
                                         Place Order 
@@ -91,24 +91,24 @@
                                                 <div class="col-lg-6">
                                                 <h3 class="checkout-title">Car details</h3>
                                                     <div class="form-group">
-                                                        <b><%= f.label :car_name %></b>
+                                                        <b><%= f.label :car_make %></b>
                                                     
-                                                        <p> <%= @customer.car_name %> </p>
+                                                        <p> <%= @customer.cars.length > 0 ? @customer.cars.first.car_make : nil %> </p>
                                                     </div>
                                                     <div class="form-group">
-                                                        <b><%= f.label :car_make %></b>
+                                                        <b><%= f.label :car_model %></b>
                                                         
-                                                        <p> <%= @customer.car_make %> </p>
+                                                        <p> <%=  @customer.cars.length > 0 ? @customer.cars.first.car_model : nil%> </p>
                                                     </div>
                                                     <div class="form-group">
                                                         <b><%= f.label :car_year %></b>
                                                     
-                                                        <p> <%= @customer.car_year %> </p>
+                                                        <p> <%=  @customer.cars.length > 0 ? @customer.cars.first.car_year : nil %> </p>
                                                     </div>
                                                     <div class="form_group">
                                                         <b><%= f.label :chassis_number %></b>
                                                     
-                                                        <p> <%= @customer.chassis_number %> </p>
+                                                        <p> <%=  @customer.cars.length > 0 ? @customer.cars.first.chassis_number : nil %> </p>
                                                     </div>
                                                 </div>
                                                 
@@ -155,9 +155,7 @@
                                                                 - Qty (<%= item.quantity %>) .
                                                             </p>        
                                                             <% end %>  
-                                                            <!--<small>Size: <span>XL</span></small>
-                                                            <small>Color: <span>Red</span></small>
-                                                            <small>Product Code: <span>12658472</span></small>-->
+                                                           
                                                         </td>
                                                         <td data-title="ORDER NO">
                                                             <%= order.order_number %>
@@ -181,12 +179,13 @@
                                         </div>
                                     </div>
                                 <div>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <% end %>
             </div>
-            </div>
+            
             <!-- Container-fluid Ends-->
         </div>
 
@@ -194,6 +193,7 @@
         <%= render "layouts/admin_footer" %>
         <!-- footer end-->
     </div>
+</div>
 
   
 <!-- latest jquery-->

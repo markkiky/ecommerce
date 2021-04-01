@@ -1,9 +1,8 @@
 <%= include_gon %>
 
 <script>
-    $('#mpesaNumberModal').modal("hide");
-
-    $("#mpesaModal").modal("show");
+    $("#mpesaModal").modal("hide");
+    $("#mpesaPushSentModal").modal("show");
     var order_id = <%= @order_id %>;
     var response = gon.response
 

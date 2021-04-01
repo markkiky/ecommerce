@@ -55,7 +55,7 @@ class ApplicationController < ActionController::Base
 
     else
       if current_admin.otp_confirmed == false
-        # redirect_to admin_edit_password_path
+        redirect_to admin_edit_password_path
       else
 
       end

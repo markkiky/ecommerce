@@ -1,6 +1,6 @@
 class AdminsController < ApplicationController
   before_action :authenticate_admin!
-  before_action :admin_confirm
+  before_action :admin_confirm, except: [:edit_password, :update_password]
 
   def dashboard
     # console
@@ -50,7 +50,7 @@ class AdminsController < ApplicationController
           password: params["password"],
           otp_confirmed: true
         )
-        # sign_in current_customer  
+        # sign_in current_admin
       else
         raise "Password Confirmation error"
       end

@@ -13,3 +13,7 @@ function close_payment_modal(){
 function close_mpesa_modal(){
     $("#mpesaModal").modal("hide");
 }
+
+function close_mpesa_push_sent(){
+    $("#mpesaPushSentModal").modal("hide");
+}

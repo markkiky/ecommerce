@@ -77,8 +77,12 @@
                                                 <p> <%= @admin.email %> </p>
                                             </div>
                                             <div class="form_group">
-                                                <b><%= f.label :role %></b>
-                                            
+                                                <b><%= f.label :roles %></b>
+                                                <br>
+                                                <% @admin.roles.each do |role| %>
+                                                    <li> <%= role.title %></li>
+                                                    <br>
+                                                <%end%>
                                                 <!--<p> <%# @admin.role.title %> </p>-->
                                             </div>
                                         
