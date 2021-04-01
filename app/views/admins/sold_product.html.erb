@@ -96,8 +96,8 @@
                                             <td><%= Status.find_by(id: order_item.order.status_id).name %> </td>
                                             <td><%= order_item.order.payment_method %></td>
                                             <td><%= order_item.created_at %></td>
-                                            <td><%= order_item.product.category.category_name %></td>
-                                            <td><%= order_item.product.sub_category.name %></td>
+                                            <td><%=  order_item.product.category ? order_item.product.category.category_name : "" %></td>
+                                            <td><%= order_item.product.sub_category ? order_item.product.sub_category.name : ""  %></td>
                                             <td><%= order_item.product.product_code %></td>
                                             <td><%= order_item.product.year %></td>
                                             
