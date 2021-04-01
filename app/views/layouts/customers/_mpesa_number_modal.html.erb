@@ -1,5 +1,6 @@
 <%# stylesheet_link_tag "mpesa_modal" %>
 <!-- Modal -->
+
 <div class="modal fade" id="mpesaNumberModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
@@ -10,7 +11,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <%= form_with url: send_push_path, id: 'send_push'  do |f| %>								
+      <%= form_with url: send_push_path, id: 'send_push',  :html => {:onsubmit => "sent_push()"}  do |f| %>								
             <div class="col-12 p-5 pb-10">
     
                 <div class="form-group">
@@ -47,9 +48,13 @@
     </div>
   </div>
 </div>
-
+ 
 <script>
-
+  $('#try').fadeOut();
+  function sent_push(params) {
+    $('#mpesaNumberModal').modal("hide");
+    $("#mpesaModal").modal("show")
+  }
 
 
 </script>

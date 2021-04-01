@@ -7,6 +7,7 @@ var payment_group ="<%= @payment_group %>"
 
 if(payment_group == 'mpesa'){
     $('.page-body').append("<%= j render(:partial => 'layouts/customers/mpesa_number_modal') %>");
+    $('.page-body').append("<%= j render(:partial => 'layouts/customers/mpesa_push_sent_modal') %>");
     $('.page-body').append("<%= j render(:partial => 'layouts/customers/mpesa_modal') %>");
     $('.page-body').append("<%= j render(:partial => 'layouts/payment_modal') %>");
     $("#chooseModalCenter").modal("hide")

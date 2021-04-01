@@ -57,7 +57,7 @@
                                             <th>Full Names</th>
 
                                             <th>Payment Mode</th>
-
+                                            <th>Transaction Code</th>
 
                                             <th>Date</th>
                                             <th>Total</th>
@@ -72,7 +72,7 @@
                                             <td><%= transaction.full_names %></td>
 
                                             <td><span class="badge badge-secondary"><%= transaction.payment_mode %></span></td>
-
+                                            <td><%= transaction.transaction_code %> </td>
 
                                             <% if transaction.date != nil %>
                                             <td><%= transaction.date.to_date %></td>
