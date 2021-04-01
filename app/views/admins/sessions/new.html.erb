@@ -158,7 +158,7 @@
                                         <div class="custom-control custom-checkbox mr-sm-2">
                                             <%= f.check_box :remember_me, as: :boolean if devise_mapping.rememberable? %>
                                             <label>Remember me</label>
-                                            <a href="#" class="btn btn-default forgot-pass">lost your password</a>
+                                            <%= link_to "Lost your password?", new_admin_password_path, :class => "btn btn-default forgot-pass" %>
                                         </div>
                                     </div>
                                     <div class="form-button">
