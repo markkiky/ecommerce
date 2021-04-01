@@ -43,6 +43,10 @@
                     <div class="field">
                         <%= f.check_box :remember_me %>
                         <%= f.label :remember_me %>
+
+                        <div class="pass-link">
+                            <%= link_to  "Forgot password?", new_customer_password_path %>
+                        </div>
                     </div>
                     <% end %>
 
@@ -118,8 +122,7 @@
     }
 
     function closeSearch() {
-        doc
-        ument.getElementById("search-overlay").style.display = "none";
+        document.getElementById("search-overlay").style.display = "none";
     }
     
 </script>
