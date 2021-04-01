@@ -1,27 +1,90 @@
-<h2>Change your password</h2>
+<%= devise_error_messages!%>
+<%= render "layouts/header" %>
 
-<%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
-  <%= f.error_notification %>
+<!-- breadcrumb start -->
+    <div class="breadcrumb-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="page-title">
+                        <h2>change your password</h2>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <nav aria-label="breadcrumb" class="theme-breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="<%= root_path %>">Home</a></li>
+                            <li class="breadcrumb-item"><a href="/users/sign_in">login</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">change your password</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- breadcrumb End -->
 
-  <%= f.input :reset_password_token, as: :hidden %>
-  <%= f.full_error :reset_password_token %>
 
-  <div class="form-inputs">
-    <%= f.input :password,
-                label: "New password",
-                required: true,
-                autofocus: true,
-                hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
-                input_html: { autocomplete: "new-password" } %>
-    <%= f.input :password_confirmation,
-                label: "Confirm your new password",
-                required: true,
-                input_html: { autocomplete: "new-password" } %>
-  </div>
+    <!--section start-->
+    <section class="pwd-page section-b-space">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 offset-lg-3">
+                    <h2>Change Your Password</h2>
+                    <p>Sorry to hear you're having trouble logging into our site. We can help you get straight back into your account.</p>
+                    <%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put, class: "theme-form" }) do |f| %>
+                        <div class="form-row">
+                            <div class="col-md-12">
+                              <%= f.input :reset_password_token, as: :hidden %>
+                              <%= f.full_error :reset_password_token %>
 
-  <div class="form-actions">
-    <%= f.button :submit, "Change my password" %>
-  </div>
-<% end %>
+                              <%= f.password_field :password,  required: true, autofocus: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length), autocomplete: "new-password", :class => "form-control", :placeholder => "New Password" %>
 
-<%= render "customers/shared/links" %>
+                              <%= f.password_field :password_confirmation,  required: true, autocomplete: "new-password", :class => "form-control", :placeholder => "Confirm New Password" %>
+                            </div>
+                            <%= f.submit "Change my password", :class => "btn btn-solid" %>
+                        </div>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--Section ends-->
+
+<%= render "layouts/footer" %>
+
+<!-- latest jquery-->
+<%= javascript_include_tag 'js/jquery-3.3.1.min.js' %>
+
+<!-- menu js-->
+<%= javascript_include_tag 'js/menu.js' %>
+
+<!-- lazyload js-->
+<%= javascript_include_tag 'js/lazysizes.min.js' %>
+
+<!-- popper js-->
+<%= javascript_include_tag 'js/popper.min.js' %>
+
+<!-- slick js-->
+<%= javascript_include_tag 'js/slick.js' %>
+
+<!-- Bootstrap js-->
+<%= javascript_include_tag 'js/bootstrap.js' %>
+
+<!-- Bootstrap Notification js-->
+<%= javascript_include_tag 'js/bootstrap-notify.min.js' %>
+
+<!-- Theme js-->
+<%= javascript_include_tag 'js/script.js' %>
+
+
+<script>
+    function openSearch() {
+        document.getElementById("search-overlay").style.display = "block";
+    }
+
+    function closeSearch() {
+        document.getElementById("search-overlay").style.display = "none";
+    }
+    
+</script>

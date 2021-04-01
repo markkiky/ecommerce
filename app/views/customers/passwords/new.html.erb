@@ -1,18 +1,86 @@
-<h2>Forgot your password?</h2>
+<%= devise_error_messages!%>
+<%= render "layouts/header" %>
 
-<%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-  <%= f.error_notification %>
+<!-- breadcrumb start -->
+    <div class="breadcrumb-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="page-title">
+                        <h2>forgot password</h2>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <nav aria-label="breadcrumb" class="theme-breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="<%= root_path %>">Home</a></li>
+                            <li class="breadcrumb-item"><a href="/users/sign_in">login</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">forgot password</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- breadcrumb End -->
 
-  <div class="form-inputs">
-    <%= f.input :email,
-                required: true,
-                autofocus: true,
-                input_html: { autocomplete: "email" } %>
-  </div>
 
-  <div class="form-actions">
-    <%= f.button :submit, "Send me reset password instructions" %>
-  </div>
-<% end %>
+    <!--section start-->
+    <section class="pwd-page section-b-space">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 offset-lg-3">
+                    <h2>Trouble Logging In?</h2>
+                    <p>Enter your email and we'll send you a link to get back into your account.</p>
+                    <%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post, class: "theme-form"}) do |f| %>
+                        <div class="form-row">
+                            <div class="col-md-12">
+                            <%= f.email_field :email, required: true, autofocus: true, input_html: { autocomplete: "email" } , :class => "form-control", :placeholder => "Enter Your Email" %>
+                            </div>
+                            <%= f.submit "Send me reset password instructions", :class => "btn btn-solid" %>
+                        </div>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--Section ends-->
 
-<%= render "customers/shared/links" %>
+<%= render "layouts/footer" %>
+
+<!-- latest jquery-->
+<%= javascript_include_tag 'js/jquery-3.3.1.min.js' %>
+
+<!-- menu js-->
+<%= javascript_include_tag 'js/menu.js' %>
+
+<!-- lazyload js-->
+<%= javascript_include_tag 'js/lazysizes.min.js' %>
+
+<!-- popper js-->
+<%= javascript_include_tag 'js/popper.min.js' %>
+
+<!-- slick js-->
+<%= javascript_include_tag 'js/slick.js' %>
+
+<!-- Bootstrap js-->
+<%= javascript_include_tag 'js/bootstrap.js' %>
+
+<!-- Bootstrap Notification js-->
+<%= javascript_include_tag 'js/bootstrap-notify.min.js' %>
+
+<!-- Theme js-->
+<%= javascript_include_tag 'js/script.js' %>
+
+
+<script>
+    function openSearch() {
+        document.getElementById("search-overlay").style.display = "block";
+    }
+
+    function closeSearch() {
+        doc
+        ument.getElementById("search-overlay").style.display = "none";
+    }
+    
+</script>

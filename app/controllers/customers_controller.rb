@@ -70,10 +70,19 @@ class CustomersController < ApplicationController
     # byebug
     begin
       if params["password"] == params["password_confirmation"]
-        current_customer.update(
-          password: params["password"],
-          otp_confirmed: true
-        )
+        if current_customer.customer_no == nil
+            current_customer.update(
+              customer_no: Customer.counter,
+              password: params["password"],
+              otp_confirmed: true
+            )
+        else
+          current_customer.update(
+            password: params["password"],
+            otp_confirmed: true
+          )
+        end
+        
         # sign_in current_customer  
       else
         raise "Password Confirmation error"
