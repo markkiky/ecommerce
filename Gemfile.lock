@@ -215,6 +215,9 @@ GEM
     parallel (1.20.1)
     parser (3.0.0.0)
       ast (~> 2.4.1)
+    passenger (6.0.8)
+      rack
+      rake (>= 0.8.1)
     polyamorous (2.3.2)
       activerecord (>= 5.2.1)
     popper_js (1.16.0)
@@ -430,6 +433,7 @@ DEPENDENCIES
   omniauth-facebook
   omniauth-google-oauth2
   omniauth-twitter
+  passenger (>= 5.0.25)
   puma (~> 4.1)
   rails (~> 6.0.3, >= 6.0.3.2)
   rails_db

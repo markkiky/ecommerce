@@ -68,6 +68,7 @@ gem 'slim'
 gem 'redis', '~> 4.0'
 # Use Active Model has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
+gem "passenger", ">= 5.0.25", require: "phusion_passenger/rack_handler"
 
 # Use Active Storage variant
 gem 'image_processing', '~> 1.2'
