@@ -12,7 +12,7 @@
             <div class="modal-body">
                 <div>
                     <h6><strong>Order Number.</strong></h6>
-                    <p><%= @transaction.order_id %></p>
+                    <p><%= @order.order_number %></p>
                     <hr>
 
                     <div class="row">
@@ -33,7 +33,7 @@
 
 
                     <h6><strong>Brief Description</strong></h6>
-                    <p><%= @transaction.message %></p>
+                    <p><%= @order.items.first.product.product_name  %></p>
 
                     <hr>
                     <div class="row">

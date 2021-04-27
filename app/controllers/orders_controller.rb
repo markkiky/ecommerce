@@ -542,7 +542,7 @@ class OrdersController < ApplicationController
           "payment_mode" => payment_data["payment_mode"],
         }
         @transaction = Transaction.new(transaction_params)
-        @transaction.save
+        @transaction.save!
 
         @order.update(:payment_status => "paid", :reducing_balance => 0, :payment_method => "MPESA", :order_status => "payment_received", :payment_date => @transaction.date, :paid => true)
         # save_payment(order_id, response_json)

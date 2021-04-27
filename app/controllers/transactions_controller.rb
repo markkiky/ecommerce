@@ -12,7 +12,7 @@ class TransactionsController < ApplicationController
   # GET /transactions/1
   # GET /transactions/1.json
   def show
-    
+    @order = @transaction.order
     respond_to do |format|
       format.html
       format.js
